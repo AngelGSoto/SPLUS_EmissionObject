@@ -1,0 +1,335 @@
+* Find  SPLUS Halpha Emitters
+:PROPERTIES:
+:ID:       
+:END:
+
+** Motivation
+I want to know the population of H\alpha emitter in SPLUS DR3 and described what kind of objects they are.
+
+*** Previously papers related
+
++ Drew paper.
+
+#+BEGIN_SRC bibtex
+
+@article{Drew:2005,
+    author = {Drew, Janet E. and Greimel, R. and Irwin, M. J. and Aungwerojwit, A. and Barlow, M. J. and Corradi, R. L. M. and Drake, J. J. and Gänsicke, B. T. and Groot, P. and Hales, A. and Hopewell, E. C. and Irwin, J. and Knigge, C. and Leisy, P. and Lennon, D. J. and Mampaso, A. and Masheder, M. R. W. and Matsuura, M. and Morales-Rueda, L. and Morris, R. A. H. and Parker, Q. A. and Phillipps, S. and Rodriguez-Gil, P. and Roelofs, G. and Skillen, I. and Sokoloski, J. L. and Steeghs, D. and Unruh, Y. C. and Viironen, K. and Vink, J. S. and Walton, N. A. and Witham, A. and Wright, N. and Zijlstra, A. A. and Zurita, A.},
+    title = "{The INT Photometric Hα Survey of the Northern Galactic Plane (IPHAS)}",
+    journal = {Monthly Notices of the Royal Astronomical Society},
+    volume = {362},
+    number = {3},
+    pages = {753-776},
+    year = {2005},
+    month = {09},
+    abstract = "{The Isaac Newton Telescope (INT) Photometric Hα Survey of the Northern Galactic Plane 
+                (IPHAS) is a 1800-deg2 CCD survey of the northern Milky Way spanning the latitude range -5^$\degree$ \\&lt; b \\&lt; + 5° 
+                and reaching down to r′≃ 20 (10s). Representative observations and an assessment of point-source data from IPHAS, 
+                now underway, are presented. The data obtained are Wide Field Camera images in the Hα narrow-band, and Sloan r′ 
+                and i′ broad-band filters. We simulate IPHAS (r′- H$\alpha$, r′- i′) point-source colours using a spectrophotometric 
+                library of stellar spectra and available filter transmission profiles: this defines the expected colour properties of (i) 
+                solar metallicity stars, without Hα emission, and (ii) emission-line stars. Comparisons with observations of fields 
+                in Aquila show that the simulations of normal star colours reproduce the observations well for all spectral types 
+                earlier than M. A further comparison between colours synthesized from long-slit flux-calibrated spectra and IPHAS 
+                photometry for six objects in a Taurus field confirms the reliability of the pipeline calibration. Spectroscopic 
+                follow-up of a field in Cepheus shows that sources lying above the main stellar locus in the (r′− Hα, r′−i′) plane 
+                are confirmed to be emission-line objects with very few failures. In this same field, examples of Hα deficit objects 
+                (a white dwarf and a carbon star) are shown to be readily distinguished by their IPHAS colours. The role IPHAS can play 
+                in studies of spatially resolved northern Galactic nebulae is discussed briefly and illustrated by a continuum-subtracted 
+                mosaic image of Shajn 147 (a supernova remnant, 3° in diameter). The final catalogue of IPHAS point sources will 
+                contain photometry on about 80 million objects. Used on its own, or in combination with near-infrared photometric 
+                catalogues, IPHAS is a major resource for the study of stellar populations making up the disc of the Milky Way. 
+                The eventual yield of new northern emission-line objects from IPHAS is likely to be an order of magnitude increase 
+                on the number already known.}",
+    issn = {0035-8711},
+    doi = {10.1111/j.1365-2966.2005.09330.x},
+    url = {https://doi.org/10.1111/j.1365-2966.2005.09330.x},
+    eprint = {https://academic.oup.com/mnras/article-pdf/362/3/753/2986007/362-3-753.pdf},}
+
+#+END_SRC
+
++ Witham et el. (2006) report on the properties of 71 known cataclysmic variables (CVs) in photometric 
+  H\alpha emission-line surveys.  
+  + https://ui.adsabs.harvard.edu/abs/2006MNRAS.369..581W/abstract
+
++ Witham et el. (2008) present a catalogue of point-sources H\alpha emission objects identified in IPHAS.
+  + https://ui.adsabs.harvard.edu/abs/2008MNRAS.384.1277W/abstract
+
++ Scaringi et al. (2013) present the first results of an ongoing spectroscopic follow-up programme of blue-H\alpha-excess sources within 
+  the Kepler field of view in order to identify new cataclysmic variables.
+  + https://ui.adsabs.harvard.edu/abs/2013MNRAS.428.2207S/abstract
+
++ Wevers et al. (2017) paper present a catalog of H$\alpha$ emitters candidates.  
+  + https://ui.adsabs.harvard.edu/abs/2017MNRAS.466..163W/abstract 
+
++ Škoda et al. (2020) using deep learning found new emission line objects.
+  + https://ui.adsabs.harvard.edu/abs/2020A%26A...643A.122S/abstract
+
+* Looking for Halpha emitters using color criteria and database
+By inspecting the position of Splus synthetic photometry known emission line objects
+in the (r-Ha)vs(r-i) color color diagram. I have divided the location of them in two zone.
+Zone 2 is the region with high probability of being real emission line objects (ELO)
+there are not contamination by main-sequence, and giant stars and WD (see, file:Fig-SPLUS-viironen.pdf).
+Zone are populated by main-sequence, DWs and ELOs. These last have probably very small H\alpha excess.
+
+*** Possible methods to find for ELO
+For the zone 2, I think is just necessary apply a color criterion based in the position of the
+known ELOs.
+The zone 1: Here is most complicated due to the presence of MS and WD stars. 
+Witham carry out an initial straight line least-squares fit toall objects in each magnitude bin.
+I propose to use unsupervised machine learning to do that.
+
+** Change
+I decided to apply the criteria all data. I selected objects with very good photometry: errors minors and equal than 0.2 in all bands, flats in J0660, r and i  minor and equal than 2.0. 
+At the moment I apply FWHM <= 2.0.
+
+**** DBSCAN
+
+The DBSCAN approach works on a very similar principle as grid-based methods. However,
+unlike grid-based methods, the density characteristics of data points are used to merge them
+into clusters. Therefore, the individual data points in dense regions are used as building
+blocks after classifying them on the basis of their density.
+The density of a data point is defined by the number of points that lie within a radius
+Eps of that point (including the point itself). The densities of these spherical regions are
+used to classify the data points into core, border, or noise points. These notions are defined
+as follows:
+
+1. Core point: A data point is defined as a core point, if it contains 4 at least τ data points.
+
+2. Border point: A data point is defined as a border point, if it contains less than τ points,
+   but it also contains at least one core point within a radius Eps.
+
+***** DBSCAN with Python Scikit-Learn
+
+Some examples using DBSCAN algorithms:
+ + [[file:Notebook/DBSCAN testing.ipynb]]
+ + [[file:Notebook/K-distance graph to find the value of epsilon and other clustering algorithms .ipynb]] 
+
+
+***** DBSCAN Parameter Estimation 
+
+Source: https://medium.com/@tarammullin/dbscan-parameter-estimation-ff8330e3a3bd
+Focus on estimating DBSCAN’s two parameters:
+
+1. Minimum samples (“MinPts”): the fewest number of points required to form a cluster
+2. \epsilon (epsilon or “eps”): the maximum distance two points can be from one another while still belonging to the same cluster
+
++ Minimum Samples (“MinPts”)
+  There is no automatic way to determine the MinPts value for DBSCAN. Ultimately, the MinPts value should be set using domain knowledge and familiarity with the data set. From some research I’ve done, 
+  here are a few rules of thumb for selecting the MinPts value:
+
+    + The larger the data set, the larger the value of MinPts should be
+    + If the data set is noisier, choose a larger value of MinPts
+    + Generally, MinPts should be greater than or equal to the dimensionality of the data set
+    + For 2-dimensional data, use DBSCAN’s default value of MinPts = 4 (Ester et al., 1996).
+    + If your data has more than 2 dimensions, choose MinPts = 2*dim, where dim = the dimensions of your data set (Sander et al., 1998).
+
++ Epsilon (\epsilon)
+  After you select your MinPts value, you can move on to determining ε. One technique to automatically determine the optimal \epsilon value 
+  is described here. This technique calculates the average distance between each point and its k-nearest neighbors, 
+  where k = the MinPts value you selected. 
+  The average k-distances are then plotted in ascending order on a k-distance graph. 
+  You’ll find the optimal value for \epsilon at the point of maximum curvature (i.e. where the graph has the greatest slope).
+
+
+**** OPTICS
+
+Put information here...
+
+Some sources:
+ + https://www.machinecurve.com/index.php/2020/12/15/performing-optics-clustering-with-python-and-scikit-learn/
+
+... For this reason, OPTICS is preferable over DBSCAN when your clusters have varying density. In other cases, the choice for algorithm does not really matter.
+
+***** OPTICS with Python Scikit-Learn
+
+Some examples using OPTICS algorithms:
+ + [[OPTICS Demo.ipynb]]
+ + 
+ 
+**** Some conclusions
+
+I tested with JPLUS data, consult:
+   [[file:../../JPLUS/emission_objects.org]]
+
+I tried unsupervised machine learning to find the locus of Main sequence and Giant stars: 
++ I first try DBSCAN but no worked very well due to it falls with varying density. Many mini cluster were found and this dint make sense.
++ I tried OPTICS algorithm to find the MS and Giant locus. It works better than DBSCAN when we have data with varying density and don't need 
+  to introduce the \epsilon parameter. The problem is take long take executing.  
++ Finally I try we HDBSCAN works very well. I made several test to find the best parameters that allow to better clustering.  
+
+**** HDBSCAN
+
+***** Test different parameters
+
+#+BEGIN_SRC test hdbscan
++ min_samples=20, min_cluster_size=60 -> Estimated number of clusters: 4
+                                         Estimated number of cluster points 0: 85
+                                         Estimated number of cluster points 1: 129
+                                         Estimated number of cluster points 2: 1167500
+                                         Estimated number of noise points: 37670
+
++ min_samples=20, min_cluster_size=70 -> Estimated number of clusters: 4
+                                         Estimated number of cluster points 0: 85
+                                         Estimated number of cluster points 1: 129
+                                         Estimated number of cluster points 2: 1167500
+                                         Estimated number of noise points: 37670
+
++ min_samples=20, min_cluster_size=80 -> Estimated number of clusters: 3
+                                         Estimated number of cluster points 0: 85
+                                         Estimated number of cluster points 1: 129
+                                         Estimated number of cluster points 2: 1190902
+                                         Estimated number of noise points: 14344
+
++ min_samples=20, min_cluster_size=90 -> Estimated number of clusters: 2
+                                         Estimated number of cluster points 0: 129
+                                         Estimated number of cluster points 1: 1190902
+                                         Estimated number of cluster points 2: 0
+                                         Estimated number of noise points: 14429
+
++ min_samples=20, min_cluster_size=100 -> Same than min_samples=20, min_cluster_size=90
+#+END_SRC
+
+#+BEGIN_SRC test hdbscan
++ min_samples=30, min_cluster_size=90 -> Cluster 0 172
+                                         Cluster 1 1191735
+                                         Cluster 2 0
+                                         Noise 13553
+
++ min_samples=30, min_cluster_size=70 -> Estimated number of clusters: 3
+                                         Estimated number of cluster points 0: 172
+                                         Estimated number of cluster points 1: 78
+                                         Estimated number of cluster points 2: 1171175
+                                         Estimated number of noise points: 34035
+
++ min_samples=30, min_cluster_size=80 -> Estimated number of clusters: 2
+                                         Estimated number of cluster points 0: 172
+                                         Estimated number of cluster points 1: 1191735
+                                         Estimated number of cluster points 2: 0
+                                         Estimated number of noise points: 13553
+
++ min_samples=30, min_cluster_size=100 -> Estimated number of clusters: 2
+                                          Estimated number of cluster points 0: 172
+                                          Estimated number of cluster points 1: 1191735
+                                          Estimated number of cluster points 2: 0
+                                          Estimated number of noise points: 13553
+
++ min_samples=30, min_cluster_size=60 -> Estimated number of clusters: 3
+                                         Estimated number of cluster points 0: 172
+                                         Estimated number of cluster points 1: 78
+                                         Estimated number of cluster points 2: 1171175
+                                         Estimated number of noise points: 34035
+#+END_SRC
+
+#+BEGIN_SRC test hdbscan
++ min_samples=40, min_cluster_size=60 -> Estimated number of clusters: 2
+                                         Estimated number of cluster points 0: 122
+                                         Estimated number of cluster points 1: 1191359
+                                         Estimated number of cluster points 2: 0
+                                         Estimated number of noise points: 13979
+
++ min_samples=40, min_cluster_size=70 -> Estimated number of clusters: 2
+                                         Estimated number of cluster points 0: 122
+                                         Estimated number of cluster points 1: 1191359
+                                         Estimated number of cluster points 2: 0
+                                         Estimated number of noise points: 13979
+
++ min_samples=40, min_cluster_size=80 -> Estimated number of clusters: 2
+                                         Estimated number of cluster points 0: 122
+                                         Estimated number of cluster points 1: 1191359
+                                         Estimated number of cluster points 2: 0
+                                         Estimated number of noise points: 13979  
+
++ min_samples=40, min_cluster_size=90 -> Same
+#+END_SRC
+-------------------------------------------------------------------------------------
+
+#+BEGIN_SRC test hdbscan
++ min_samples=60, min_cluster_size=100 -> Estimated number of clusters: 4
+                                          Estimated number of cluster points 0: 204
+                                          Estimated number of cluster points 1: 112
+                                          Estimated number of cluster points 2: 263
+                                          Estimated number of noise points: 1153528
+#+END_SRC
+*** How download the data from the SPLUS database? 
+
+IDR3 has 59,738,355 objects.
+
+In agreement with the synthetic photometry, I downloaded the objects from the database with subjective equation: =r - H\alpha > 0.15*(r - i) - 0.4=.
+
+#+BEGIN_SRC sql: query to select objects
+SELECT detection.ID
+FROM idr3.detection_image as detection JOIN idr3.u_band as u ON detection.ID=u.ID 
+JOIN idr3.f378_band as f378 ON detection.ID=f378.ID JOIN idr3.f395_band as f395 ON detection.ID=f395.ID
+JOIN idr3.f410_band as f410 ON detection.ID=f410.ID JOIN idr3.f430_band as f430 ON detection.ID=f430.ID JOIN idr3.g_band as g ON detection.ID=g.ID 
+JOIN idr3.f515_band as f515 ON detection.ID=f515.ID JOIN idr3.r_band as r ON detection.ID=r.ID JOIN idr3.f660_band as f660 ON detection.ID=f660.ID 
+JOIN idr3.i_band as i ON detection.ID=i.ID JOIN idr3.f861_band as f861 ON detection.ID=f861.ID JOIN idr3.z_band as z ON detection.ID=z.ID 
+WHERE R_PStotal <= 21 AND F660_PStotal <= 21 AND I_PStotal <= 21 AND e_U_PStotal <= 0.2 AND e_F378_PStotal <= 0.2 AND e_F395_PStotal <= 0.2 AND e_F410_PStotal <= 0.2 
+AND e_F430_PStotal <= 0.2 AND e_G_PStotal <= 0.2 AND e_F515_PStotal <= 0.2 AND e_R_PStotal <= 0.2 AND e_F660_PStotal <= 0.2 AND e_I_PStotal <= 0.2
+AND e_F861_PStotal <= 0.2 AND e_Z_PStotal <= 0.2 
+AND FWHM < 7.0 AND (R_PStotal - F660_PStotal) >= 0.15*(R_PStotal - I_PStotal) - 0.4
+#+END_SRC
+
+
+The above query take long time. Take 21min.
+The next step is to make matching this Votable using website and ADQL language including the columns desire.
+
+#+BEGIN_SRC sql: query to match with columns desire
+SELECT detection.Field, detection.ID, detection.RA, detection.DEC, detection.FWHM, detection.ISOarea, detection.KRON_RADIUS, 
+detection.nDet_magPStotal, detection.PhotoFlagDet, u.U_PStotal, f378.F378_PStotal, f395.F395_PStotal,
+f410.F410_PStotal, f430.F430_PStotal, g.G_PStotal, f515.F515_PStotal, r.R_PStotal, f660.F660_PStotal, i.I_PStotal, 
+f861.F861_PStotal, z.Z_PStotal, u.e_U_PStotal, f378.e_F378_PStotal, f395.e_F395_PStotal, f410.e_F410_PStotal, f430.e_F430_PStotal, 
+g.e_G_PStotal, f515.e_F515_PStotal, r.e_R_PStotal, f660.e_F660_PStotal, i.e_I_PStotal, f861.e_F861_PStotal, z.e_Z_PStotal 
+FROM TAP_UPLOAD.upload as tap JOIN idr3.detection_image as detection ON tap.ID= detection.ID  JOIN idr3.u_band as u ON tap.ID=u.ID 
+JOIN idr3.f378_band as f378 ON tap.ID=f378.ID JOIN idr3.f395_band as f395 ON tap.ID=f395.ID
+JOIN idr3.f410_band as f410 ON tap.ID=f410.ID JOIN idr3.f430_band as f430 ON tap.ID=f430.ID JOIN idr3.g_band as g ON tap.ID=g.ID 
+JOIN idr3.f515_band as f515 ON tap.ID=f515.ID JOIN idr3.r_band as r ON tap.ID=r.ID JOIN idr3.f660_band as f660 ON tap.ID=f660.ID 
+JOIN idr3.i_band as i ON tap.ID=i.ID JOIN idr3.f861_band as f861 ON tap.ID=f861.ID JOIN idr3.z_band as z ON tap.ID=z.ID 
+#+END_SRC
+
+I got the error:
+: Error message: Error while reading the VOTable "upload": Data read overflow: the limit of 2000 rows has been reached!
+
+Try the initial query include the columns desire.
+
+#+BEGIN_SRC sql: query to select objects
+SELECT detection.Field, detection.ID, detection.RA, detection.DEC, detection.FWHM, detection.ISOarea, detection.KRON_RADIUS, 
+detection.nDet_magPStotal, detection.PhotoFlagDet, u.U_PStotal, f378.F378_PStotal, f395.F395_PStotal,
+f410.F410_PStotal, f430.F430_PStotal, g.G_PStotal, f515.F515_PStotal, r.R_PStotal, f660.F660_PStotal, i.I_PStotal, 
+f861.F861_PStotal, z.Z_PStotal, u.e_U_PStotal, f378.e_F378_PStotal, f395.e_F395_PStotal, f410.e_F410_PStotal, f430.e_F430_PStotal, 
+g.e_G_PStotal, f515.e_F515_PStotal, r.e_R_PStotal, f660.e_F660_PStotal, i.e_I_PStotal, f861.e_F861_PStotal, z.e_Z_PStotal
+FROM idr3.detection_image as detection JOIN idr3.u_band as u ON detection.ID=u.ID 
+JOIN idr3.f378_band as f378 ON detection.ID=f378.ID JOIN idr3.f395_band as f395 ON detection.ID=f395.ID
+JOIN idr3.f410_band as f410 ON detection.ID=f410.ID JOIN idr3.f430_band as f430 ON detection.ID=f430.ID JOIN idr3.g_band as g ON detection.ID=g.ID 
+JOIN idr3.f515_band as f515 ON detection.ID=f515.ID JOIN idr3.r_band as r ON detection.ID=r.ID JOIN idr3.f660_band as f660 ON detection.ID=f660.ID 
+JOIN idr3.i_band as i ON detection.ID=i.ID JOIN idr3.f861_band as f861 ON detection.ID=f861.ID JOIN idr3.z_band as z ON detection.ID=z.ID 
+WHERE R_PStotal <= 21 AND F660_PStotal <= 21 AND I_PStotal <= 21 AND e_U_PStotal <= 0.2 AND e_F378_PStotal <= 0.2 AND e_F395_PStotal <= 0.2 AND e_F410_PStotal <= 0.2 
+AND e_F430_PStotal <= 0.2 AND e_G_PStotal <= 0.2 AND e_F515_PStotal <= 0.2 AND e_R_PStotal <= 0.2 AND e_F660_PStotal <= 0.2 AND e_I_PStotal <= 0.2
+AND e_F861_PStotal <= 0.2 AND e_Z_PStotal <= 0.2 
+AND FWHM < 7.0 AND (R_PStotal - F660_PStotal) >= 0.15*(R_PStotal - I_PStotal) - 0.4
+#+END_SRC
+
+Take 11mins.
+
+I ran the query:
+
+SELECT count(*) FROM idr3.detection_image as detection JOIN idr3.r_band as r ON detection.ID=r.ID JOIN idr3.f660_band as 
+f660 ON detection.ID=f660.ID JOIN idr3.i_band as i ON detection.ID=i.ID 
+WHERE R_PStotal <= 21 AND e_R_PStotal <= 0.2 
+AND e_F660_PStotal <= 0.2 AND e_I_PStotal <= 0.2 AND FWHM < 7.0 AND R_PStotal < 16.0
+
+Take around 45min.
+Results =1251923=.
+
+I found that using the Gustavos database is restricted to get table with 20000 rows.
+
+*** Alternative solution: sqlite
+
+A possible solution is to create a database in my own machine.
+Disadvantage: The file are very large. For instance HYDRA catalog has ~15G in size.
+
+Considering https://github.com/astropy/astropy/pull/4760 for sigma clipping.
+
+*** Change the methodology
+
+Find the locus of MS stars by line fit to all data and apply the methodology from Witham et al. (2006) to select the H\alpha emitters. After apply HDBSCAN to find the locus of MS stars to compare 
+with the other one.   
