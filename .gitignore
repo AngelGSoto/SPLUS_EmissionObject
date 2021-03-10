@@ -7,3 +7,7 @@ HYDRA-HDBcluster0.ecsv
 /#*
 .#*
 *.ecsv
+Fig_spectra/*.pdf
+hydra_Halpha-coorLamost.dat
+hydra_Halpha-coorSloan.dat
+Match_Halpha_starsHdbscan.dat
