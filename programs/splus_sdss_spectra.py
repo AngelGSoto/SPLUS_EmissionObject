@@ -61,7 +61,7 @@ dist_match *= 3600
 
 print("******************************************************")
 print("Coordinate SDSS source:", sdX)
-print("Coordinate Splus source:", spX[ind])
+print("Coordinate SPLUS source:", spX[ind])
 print("******************************************************")
 
 # Data from the SDSS spectra
