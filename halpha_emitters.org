@@ -333,3 +333,19 @@ Considering https://github.com/astropy/astropy/pull/4760 for sigma clipping.
 
 Find the locus of MS stars by line fit to all data and apply the methodology from Witham et al. (2006) to select the H\alpha emitters. After apply HDBSCAN to find the locus of MS stars to compare 
 with the other one.   
+
++ I created my own data base with DR3. After I wrote a script on python to download the data with these criteria: Flags_allFilter <= 2, error_allFilter <= 0.2, and magnitude interval on r-band.
+: python apply_query.py
+
+**** Second phase: Cross-match 
++ Lamost -> 
+  : 18 < r < 20: 77 objects.
+
+
+**** S-spectra
+- I used the r-band (flux = 1.5276700533521494e-16) and  6250.289 Angstrom on Lamost (\norm flux = 60.890064) for spec-56948-EG212551N003203M01_sp03-01. 
+
+- And r-band (5.668481914101377e-17); 6250.289 (flux = 7.9239473); 
+
+- Program:
+: for f in *.fits; do python ../../programs/splus_sdss_spectra.py ${f%.fits} Halpha-DR3_errorsall_flagallf_r16; done
