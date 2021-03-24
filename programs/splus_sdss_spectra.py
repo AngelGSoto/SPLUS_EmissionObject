@@ -42,9 +42,9 @@ table = Table.read(os.path.join(datadir, file_table), format="ascii.ecsv")
 # Coordinates of the SDSS
 ra = hdu[0].header["PLUG_RA"]
 dec = hdu[0].header["PLUG_DEC"]
-lmX = np.empty((1, 2), dtype=np.float64)
-lmX[:, 0] = ra
-lmX[:, 1] = dec
+sdX = np.empty((1, 2), dtype=np.float64)
+sdX[:, 0] = ra
+sdX[:, 1] = dec
 
 # Put in array type Splus table coor
 ra1 = table['RA']
@@ -53,14 +53,14 @@ spX = np.array(list(zip(ra1, dec1)))
 
 # Find the SDSS object on the SPLUS list
 max_radius = 2. / 3600  # 1 arcsec
-dist, ind = crossmatch_angular(lmX, spX, max_radius)
+dist, ind = crossmatch_angular(sdX, spX, max_radius)
 match = ~np.isinf(dist)
 
 dist_match = dist[match]
 dist_match *= 3600
 
 print("******************************************************")
-print("Coordinate SDSS source:", lmX)
+print("Coordinate SDSS source:", sdX)
 print("Coordinate Splus source:", spX[ind])
 print("******************************************************")
 
