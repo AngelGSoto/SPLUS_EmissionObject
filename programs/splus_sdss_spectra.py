@@ -23,7 +23,7 @@ from astroML.crossmatch import crossmatch_angular
 parser = argparse.ArgumentParser(
     description="""Make a spectras""")
 
-parser.add_argument("fileLamost", type=str,
+parser.add_argument("fileSdss", type=str,
                     default="teste-program",
                     help="Name of file, taken the prefix")
 
@@ -32,7 +32,7 @@ parser.add_argument("TableSplus", type=str,
                     help="Name of table, taken the prefix")
 
 cmd_args = parser.parse_args()
-file_spec = cmd_args.fileLamost + ".fits"
+file_spec = cmd_args.fileSdss + ".fits"
 file_table = cmd_args.TableSplus + ".ecsv"
 
 hdu = fits.open(file_spec)
