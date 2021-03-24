@@ -1,5 +1,5 @@
 '''
-This script make the Lamost spectra overlapped the SPLUS photometry
+This script make the SDSS spectra overlapped the SPLUS photometry
 '''
 import astropy.coordinates as coord
 import astropy.units as u
