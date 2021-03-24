@@ -46,7 +46,7 @@ sdX = np.empty((1, 2), dtype=np.float64)
 sdX[:, 0] = ra
 sdX[:, 1] = dec
 
-# Put in array type Splus table coor
+# Put in array type Splus table coordinate
 ra1 = table['RA']
 dec1 = table['DEC']
 spX = np.array(list(zip(ra1, dec1)))
