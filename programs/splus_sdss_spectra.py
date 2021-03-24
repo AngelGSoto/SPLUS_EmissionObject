@@ -51,8 +51,8 @@ ra1 = table['RA']
 dec1 = table['DEC']
 spX = np.array(list(zip(ra1, dec1)))
 
-# Find the SDSS object on the SPLUS list
-max_radius = 2. / 3600  # 1 arcsec
+# Find the SDSS object on the SPLUS list, makes crossmacth
+max_radius = 2. / 3600  # 2 arcsec
 dist, ind = crossmatch_angular(sdX, spX, max_radius)
 match = ~np.isinf(dist)
 
