@@ -52,7 +52,7 @@ dec1 = table['DEC']
 spX = np.array(list(zip(ra1, dec1)))
 
 # Find the the Lamost object on the SPLUS list
-max_radius = 2. / 3600  # 1 arcsec
+max_radius = 2. / 3600  # 2 arcsec
 dist, ind = crossmatch_angular(lmX, spX, max_radius)
 match = ~np.isinf(dist)
 
@@ -127,7 +127,7 @@ for wll, magg, magerr in zip(wl_sp, mag, mag_err):
 fig, ax = plt.subplots(figsize=(12, 5))
 ax.spines["top"].set_visible(False)  
 ax.spines["right"].set_visible(False)
-ax.set(xlim=[3700,9400])
+ax.set(xlim=[3350,9300])
 #plt.ylim(ymin=-50.0,ymax=200)
 ax.set(xlabel='Wavelength $(\AA)$')
 ax.set(ylabel='Normalized flux')
@@ -137,6 +137,7 @@ for wl1, mag, magErr, colors, marker_ in zip(wl_sp, mag, err_, color, marker): #
     F *= factor
     ax.scatter(wl1, F, c = colors, marker=marker_, s=80, zorder=4)
     ax.errorbar(wl1, F, yerr=magErr, marker='.', fmt='.', color=colors, ecolor=colors, elinewidth=3.9, markeredgewidth=3.2, capsize=10)
+ax.axvline(4686, color='r', linewidth=0.3, linestyle='-', zorder = 6, label="He II")
 ax.legend()
 plt.tight_layout()
 asciifile = file_spec.replace(".fits", 

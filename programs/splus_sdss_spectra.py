@@ -137,6 +137,7 @@ for wl1, mag, magErr, colors, marker_ in zip(wl_sp, mag, err_, color, marker): #
     #F *= factor
     ax.scatter(wl1, F, c = colors, marker=marker_, s=80, zorder=4)
     ax.errorbar(wl1, F, yerr=magErr, marker='.', fmt='.', color=colors, ecolor=colors, elinewidth=3.9, markeredgewidth=3.2, capsize=10)
+ax.axvline(4686, color='r', linewidth=0.3, linestyle='-', zorder = 6, label="He II")
 ax.legend()
 plt.tight_layout()
 asciifile = file_spec.replace(".fits", 

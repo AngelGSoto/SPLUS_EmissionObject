@@ -349,3 +349,7 @@ with the other one.
 
 - Program:
 : for f in *.fits; do python ../../programs/splus_sdss_spectra.py ${f%.fits} Halpha-DR3_errorsall_flagallf_r16; done
+
+** Plots for the paper
+
+Add a plot with the surface brightness

@@ -58,8 +58,11 @@ cmd_args = parser.parse_args()
 file_ = cmd_args.fileName + ".csv"
 
 datadir = "catalogs_bins/"
-df = pd.read_csv(os.path.join(datadir, file_))
 
+try:
+    df = pd.read_csv(os.path.join(datadir, file_))
+except FileNotFoundError:
+    df = pd.read_csv(file_)
 
 # Creating the color to creating the diagram from IPHAS
 cx, cy = colour(df, "R_PStotal", "I_PStotal", "R_PStotal", "F660_PStotal")
@@ -88,7 +91,7 @@ print("Iterative fitted model with iterative sigma clipped ", fitted_line_)
 
 # Create DataFrame with the new colums
 colum1 = pd.DataFrame(cx, columns=['r - i'])
-colum2 = pd.DataFrame(cy, columns=['r - Halpha'])
+colum2 = pd.DataFrame(cy, columns=['r - J0660'])
 data = pd.concat([df["RA"], df["DEC"], df["FWHM"], df["R_PStotal"], colum1, colum2], axis=1)
 
 # Estimating parameter for statistical
@@ -110,13 +113,13 @@ ecx, ecy = errormag(df, "e_R_PStotal", "e_I_PStotal", "e_R_PStotal", "e_F660_PSt
 
 # Create DataFrame with the new colums with the errors on the colours
 colum_ri = pd.DataFrame(ecx, columns=['e(r - i)'])
-colum_rh = pd.DataFrame(ecy, columns=['e(r - Halpha)'])
+colum_rh = pd.DataFrame(ecy, columns=['e(r - J0660)'])
 data_final = pd.concat([data, colum_ri, colum_rh], axis=1)
 
 # Applying the criterion 
 C = 4.0 # Is the constant
-crite = C * np.sqrt(sigma_fit**2 + data_final["e(r - Halpha)"]**2) + cy_predic
-mask = data_final["r - Halpha"] >= crite
+crite = C * np.sqrt(sigma_fit**2 + data_final["e(r - J0660)"]**2) + cy_predic
+mask = data_final["r - J0660"] >= crite
 # Applying mask to the data
 data_ha = data_final[mask]
 
@@ -137,7 +140,7 @@ with sns.axes_style('white'):
     plt.tick_params(axis='y', labelsize=35)
 
     scatter = ax1.scatter(
-       data['r - i'], data['r - Halpha'],
+       data['r - i'], data['r - J0660'],
        s=5, 
         color="gray",
        cmap="seismic", alpha = 0.5, zorder=4.0)
