@@ -14,9 +14,10 @@ Match_Halpha_starsHdbscan.dat
 *.csv
 *.fits
 3fiter/Spectra_claudia/*pdf
-3fiter/Spectra_fornax/*pdf
+3fiter/Spectra_fornax/*pdf 
 3filter_flat0/Spectra_16r/*pdf
 3filter_noflat/Spectra_fornax/*pdf
+3fiter/Spectra_fornax3/*pdf
 *.eps
 *.ps
 example.bib
@@ -33,3 +34,6 @@ mnras_guide.pdf
 mnras_guide.tex
 mnras_template.tex
 README.txt
+3filter_noflat/Spectra_fornax/*.pdf
+3filter_noflat/Spectra_fornax3/*pdf
+3filter_noflat/Spectra_NGC3347/*pdf

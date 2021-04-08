@@ -36,7 +36,7 @@ file_spec = cmd_args.fileSdss + ".fits"
 file_table = cmd_args.TableSplus + ".ecsv"
 
 hdu = fits.open(file_spec)
-datadir = "../../"
+datadir = "../"
 table = Table.read(os.path.join(datadir, file_table), format="ascii.ecsv")
 
 # Coordinates of the SDSS
