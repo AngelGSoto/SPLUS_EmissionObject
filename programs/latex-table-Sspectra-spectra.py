@@ -39,4 +39,4 @@ for i, a in zip(range(n), file_list):
 list1.sort()
 list2.sort()
 table_fig = Table([list1, list2],  names=('Spectra 1', 'Spectra 2'), meta={'name': 'first table'})
-table_fig.write('table-apectra.tex', format = "ascii.latex", latexdict=dict(tabletype='longtable*'), caption='Emission line objects', fill_values=[('nan', r'\nodata'), ('0.00', r'\nodata')], overwrite=True) 
+table_fig.write('table-apectra-lamost.tex', format = "ascii.latex", latexdict=dict(tabletype='longtable*'), caption='Emission line objects', fill_values=[('nan', r'\nodata'), ('0.00', r'\nodata')], overwrite=True) 

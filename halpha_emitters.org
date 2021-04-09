@@ -339,7 +339,7 @@ with the other one.
 
 **** Second phase: Cross-match 
 + Lamost -> 
-  : 18 < r < 20: 77 objects.
+  I mede macth with dr6.
 
 
 + Match with sloan. Limited to 1000 rows.
