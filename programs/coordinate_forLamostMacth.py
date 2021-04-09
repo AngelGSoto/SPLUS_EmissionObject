@@ -4,6 +4,7 @@ This is a simply script to make table with the format of Lamost for cross-match.
 from astropy.table import Table
 import numpy as np
 import argparse
+import os
 
 parser = argparse.ArgumentParser(
     description="""Make a table from the S-PLUS catalogs """)
@@ -16,7 +17,8 @@ parser.add_argument("source", type=str,
 cmd_args = parser.parse_args()
 file_ = cmd_args.source + ".ecsv"
 
-tab = Table.read(file_, format="ascii.ecsv")
+datadir = "../"
+tab = Table.read(os.path.join(datadir, file_), format="ascii.ecsv")
 
 n = len(tab["RA"])
 sep = np.linspace(2.0, 2.0, num=n)
