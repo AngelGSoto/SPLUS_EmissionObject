@@ -141,5 +141,5 @@ ax.axvline(4686, color='r', linewidth=0.3, linestyle='-', zorder = 6, label="He 
 ax.legend()
 plt.tight_layout()
 asciifile = file_spec.replace(".fits", 
-                  ".pdf")
+                  "-"+(str(table["ID"][ind]).split("R3.")[-1]).replace(".", "-")+".pdf")
 plt.savefig(asciifile)
