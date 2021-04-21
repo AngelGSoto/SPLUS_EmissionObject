@@ -357,3 +357,31 @@ with the other one.
 Plots with the results
 
 : python ../programs/results.py 
+
+*** Clean the final tables uning ML
+
+** Linear dicriminad analysis
+
+#+BEGIN_SRC results
+
+Shape of array: (419, 12)
+Accuracy score for Testing Dataset =  0.8333333333333334
+Precision score for Testing Dataset =  0.8205128205128205
+Confusion matrix =  (38  7)
+                    ( 7 32)
+Data to classify: (13644, 12)
+13644
+
+#+END_SRC
+
+#+BEGIN_SRC results
+
+Shape of array: (419, 7)
+Accuracy score for Testing Dataset =  0.7976190476190477
+Precision score for Testing Dataset =  0.7948717948717948
+Confusion matrix =  (36  9)
+                    (8 31)
+Data to classify: (13644, 7)
+13644
+
+#+END_SRC
