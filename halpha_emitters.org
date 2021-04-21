@@ -362,6 +362,8 @@ Plots with the results
 
 ** Linear dicriminad analysis
 
+Using linear discriminant alalyis to clean the final sample of H{$\alpha$} emistters:
+
 #+BEGIN_SRC results
 
 Shape of array: (419, 12)
@@ -385,3 +387,4 @@ Data to classify: (13644, 7)
 13644
 
 #+END_SRC
+

@@ -12,7 +12,9 @@ import os
 import glob
 import json
 import matplotlib.patches as mpatches
+from scipy.stats import gaussian_kde
 from pathlib import Path
+from density_scatter import density_scatter
 sns.set_color_codes()
 ROOT_PATH = Path("..")
 
@@ -118,54 +120,63 @@ with sns.axes_style("ticks"):
                                                                                                                                                                  ))
     
     plt.savefig("../paper/Figs/final-emitters.pdf")
-    
+
+#Distribution of Halpha emitters
 with sns.axes_style("ticks"):
     fig = plt.figure(figsize=(14,7))
     ax = fig.add_subplot(1,1,1, projection='aitoff')
-    plt.xlabel(r'$l$')
-    plt.ylabel(r'$b$')
-    ax.xaxis.label.set_fontsize(16)
-    ax.yaxis.label.set_fontsize(16)
-    ax.scatter(l_rad, b_rad, s=1, color='black', alpha=0.2)
-    ax.grid(True)
+    plt.xlabel(r'$l (Gal)$')
+    plt.ylabel(r'$b (Gal)$')
+    ax.xaxis.label.set_fontsize(23)
+    ax.yaxis.label.set_fontsize(23)
+    plt.tick_params(axis='x', labelsize=23) 
+    plt.tick_params(axis='y', labelsize=23)
+    #ax.scatter(l_rad, b_rad, s=1, color='black', alpha=0.2)
+    density_scatter(l_rad, b_rad, ax=ax)
+    ax.grid(True, linestyle='-.', linewidth=0.7)
     #plt.colorbar(image, spacing='uniform', extend='max')
     plt.savefig("../paper/Figs/halpha-emitters-galactic-aitoff.pdf")
 
-
+    # Bar diagram
     fig1, ax1 = plt.subplots(1, 1, figsize=(10, 5), sharex=True)
     sns.distplot(table["r - J0660"], 
-                 norm_hist=True, kde=False, ax=ax1,
-                 bins=100, hist_kws=dict(range=[-3.0, 3.0])
+                 norm_hist=True, kde=True, ax=ax1,
+                 bins=20, hist_kws=dict(range=[-3.0, 3.0], color='r')
                 )
     #ax1.set(xlim=[-0.7, 1.8])
     #ax.legend(loc='upper left')
+    ymax = ax.get_ybound()[1]
     sns.despine()
     plt.savefig("../paper/Figs/distribution-Halpha.pdf")
 
+    # Distribution r - i color
     fig2, ax2 = plt.subplots(1, 1, figsize=(10, 5), sharex=True)
     sns.distplot(table["r - i"], 
-                 norm_hist=True, kde=False, ax=ax2,
-                 bins=100, hist_kws=dict(range=[-3.0, 3.0])
+                 norm_hist=True, kde=True, ax=ax2,
+                 bins=20, hist_kws=dict(range=[-3.0, 3.0], color='r')
                 )
     #ax2.set(xlim=[-0.7, 1.8])
     #ax.legend(loc='upper left')
+    ymax = ax.get_ybound()[1]
     sns.despine()
     plt.savefig("../paper/Figs/distribution-ri.pdf")
 
+    # Distribution  r-mag
     fig3, ax3 = plt.subplots(1, 1, figsize=(10, 5), sharex=True)
     sns.distplot(table["R_PStotal"], 
-                 norm_hist=True, kde=False, ax=ax3,
-                 bins=100)#, hist_kws=dict(range=[-3.0, 3.0])
+                 norm_hist=False, kde=True, ax=ax3,
+                 bins=20)#, hist_kws=dict(range=[-3.0, 3.0])
                 #)
     #ax3.set(xlim=[-0.7, 1.8])
     #ax.legend(loc='upper left')
     sns.despine()
     plt.savefig("../paper/Figs/distribution_r.pdf")
 
+    # Distribution b coordinate
     fig4, ax4 = plt.subplots(1, 1, figsize=(10, 5), sharex=True)
     sns.distplot(b_rad, 
-                 norm_hist=True, kde=False, ax=ax4,
-                 bins=100, hist_kws=dict(range=[-3.0, 3.0])
+                 norm_hist=True, kde=True, ax=ax4,
+                 bins=50, hist_kws=dict(range=[-3.0, 3.0])
                 )
     #ax4.set(xlim=[-0.7, 1.8])
     #ax.legend(loc='upper left')
