@@ -120,7 +120,7 @@ with sns.axes_style("ticks"):
                                                                                                                                                                  ))
     
     plt.savefig("../paper/Figs/final-emitters.pdf")
-
+###################################################################################################################
 #Distribution of Halpha emitters
 with sns.axes_style("ticks"):
     fig = plt.figure(figsize=(14,7))
@@ -136,10 +136,15 @@ with sns.axes_style("ticks"):
     ax.grid(True, linestyle='-.', linewidth=0.7)
     #plt.colorbar(image, spacing='uniform', extend='max')
     plt.savefig("../paper/Figs/halpha-emitters-galactic-aitoff.pdf")
-
+    ##########################
     # Bar diagram
-    fig1, ax1 = plt.subplots(1, 1, figsize=(10, 5), sharex=True)
-    sns.distplot(table["r - J0660"], 
+    fig1, ax1 = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
+    plt.xlabel(r"$r - J0660$", fontsize=33)
+    plt.ylabel(r"Density", fontsize=33)
+    plt.tick_params(axis='x', labelsize=33) 
+    plt.tick_params(axis='y', labelsize=33)
+    r_j0660 = [x for x in table["r - J0660"]]
+    g = sns.distplot(r_j0660, 
                  norm_hist=True, kde=True, ax=ax1,
                  bins=20, hist_kws=dict(range=[-3.0, 3.0], color='r')
                 )
@@ -147,11 +152,17 @@ with sns.axes_style("ticks"):
     #ax.legend(loc='upper left')
     ymax = ax.get_ybound()[1]
     sns.despine()
+    plt.tight_layout()
     plt.savefig("../paper/Figs/distribution-Halpha.pdf")
-
+    ##########################
     # Distribution r - i color
-    fig2, ax2 = plt.subplots(1, 1, figsize=(10, 5), sharex=True)
-    sns.distplot(table["r - i"], 
+    fig2, ax2 = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
+    plt.xlabel(r"$r - i$", fontsize=33)
+    plt.ylabel(r"Density", fontsize=33)
+    plt.tick_params(axis='x', labelsize=33) 
+    plt.tick_params(axis='y', labelsize=33)
+    r_i = [x for x in table["r - i"]]
+    sns.distplot(r_i, 
                  norm_hist=True, kde=True, ax=ax2,
                  bins=20, hist_kws=dict(range=[-3.0, 3.0], color='r')
                 )
@@ -159,26 +170,38 @@ with sns.axes_style("ticks"):
     #ax.legend(loc='upper left')
     ymax = ax.get_ybound()[1]
     sns.despine()
+    plt.tight_layout()
     plt.savefig("../paper/Figs/distribution-ri.pdf")
-
+    #########################
     # Distribution  r-mag
-    fig3, ax3 = plt.subplots(1, 1, figsize=(10, 5), sharex=True)
-    sns.distplot(table["R_PStotal"], 
+    fig3, ax3 = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
+    plt.xlabel(r"$r$", fontsize=33)
+    #plt.ylabel(r"Density", fontsize=28)
+    plt.tick_params(axis='x', labelsize=33) 
+    plt.tick_params(axis='y', labelsize=33)
+    r = [x for x in table["R_PStotal"]]
+    sns.distplot(r, 
                  norm_hist=False, kde=True, ax=ax3,
                  bins=20)#, hist_kws=dict(range=[-3.0, 3.0])
                 #)
     #ax3.set(xlim=[-0.7, 1.8])
     #ax.legend(loc='upper left')
     sns.despine()
+    plt.tight_layout()
     plt.savefig("../paper/Figs/distribution_r.pdf")
-
+    #########################
     # Distribution b coordinate
     fig4, ax4 = plt.subplots(1, 1, figsize=(10, 5), sharex=True)
+    plt.xlabel(r"$b(Gal)$", fontsize=33)
+    plt.ylabel(r"Density", fontsize=33)
+    plt.tick_params(axis='x', labelsize=33) 
+    plt.tick_params(axis='y', labelsize=33)
     sns.distplot(b_rad, 
                  norm_hist=True, kde=True, ax=ax4,
-                 bins=50, hist_kws=dict(range=[-3.0, 3.0])
+                 bins=30, hist_kws=dict(range=[-3.0, 3.0],  color='y')
                 )
     #ax4.set(xlim=[-0.7, 1.8])
     #ax.legend(loc='upper left')
     sns.despine()
+    plt.tight_layout()
     plt.savefig("../paper/Figs/distribution-bgalactic.pdf")

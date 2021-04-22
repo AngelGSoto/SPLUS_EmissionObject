@@ -181,18 +181,32 @@ The S-PLUS survey is a multi-band photometric survey...
 \end{figure*}
 
 \begin{figure*}
-	\includegraphics[width=0.9\linewidth]{Figs/halpha-emitters-galactic-aitoff.pdf}
-    \caption{Emission lines selected...}
-    \label{fig:distribution}
+\includegraphics[width=0.9\linewidth]{Figs/halpha-emitters-galactic-aitoff.pdf}
+\centering
+\llap{\shortstack{%
+        \includegraphics[width=0.25\linewidth, trim=10 10 -40 0]{Figs/distribution-bgalactic.pdf}\\
+        \rule{0ex}{1.8in}%
+      }
+  \rule{1.0in}{0ex}}
+\caption{This is my embedded figure}
 \end{figure*}
 
-\begin{figure}
-  \includegraphics[width=\columnwidth]{Figs/distribution-Halpha.pdf}
-  \includegraphics[width=\columnwidth]{Figs/distribution-ri.pdf}
-  \includegraphics[width=\columnwidth]{Figs/distribution_r.pdf}
+%% \begin{figure*}
+%%   \includegraphics[width=0.9\linewidth]{Figs/halpha-emitters-galactic-aitoff.pdf}
+%%   \llap{\raisebox{4.5cm}{\includegraphics[width=0.25\linewidth, trim=10 10 -40 0]{Figs/distribution-bgalactic.pdf}}}
+%%     \caption{Emission lines selected...}
+%%     \label{fig:distribution}
+%% \end{figure*}
+
+\begin{figure*}
+  \begin{tabular}{l l l}
+  \includegraphics[width=0.7\columnwidth]{Figs/distribution-Halpha.pdf} 
+    \includegraphics[width=0.7\columnwidth]{Figs/distribution-ri.pdf}
+    \includegraphics[width=0.7\columnwidth]{Figs/distribution_r.pdf}
+  \end{tabular}
     \caption{Emission lines selected...}
     \label{fig:diagram-distri}
-\end{figure}
+\end{figure*}
 
 % Example figure
 %% \begin{figure}

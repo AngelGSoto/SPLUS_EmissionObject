@@ -1,6 +1,7 @@
 '''
 Program stolen from: 
 https://stackoverflow.com/questions/20105364/how-can-i-make-a-scatter-plot-colored-by-density-in-matplotlib
+Credit for author there
 '''
 import numpy as np
 import matplotlib.pyplot as plt
@@ -25,7 +26,7 @@ def density_scatter( x , y, ax = None, sort = True, bins = 20, **kwargs )   :
         idx = z.argsort()
         x, y, z = x[idx], y[idx], z[idx]
 
-    ax.scatter( x, y, c=z, **kwargs )
+    ax.scatter(x, y, c=z, **kwargs)
 
     norm = Normalize(vmin = np.min(z), vmax = np.max(z))
     #cbar = fig.colorbar(cm.ScalarMappable(norm = norm), ax=ax)
