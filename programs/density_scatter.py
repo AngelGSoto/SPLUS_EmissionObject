@@ -9,7 +9,7 @@ from matplotlib import cm
 from matplotlib.colors import Normalize 
 from scipy.interpolate import interpn
 
-def density_scatter( x , y, ax = None, sort = True, bins = 20, **kwargs )   :
+def density_scatter(x , y, ax = None, sort = True, bins = 20, **kwargs )   :
     """
     Scatter plot colored by 2d histogram
     """

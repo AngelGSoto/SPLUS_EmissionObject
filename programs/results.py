@@ -75,7 +75,14 @@ for file_name in file_list:
     with open(file_name) as f:
         data = json.load(f)
         plot_mag("F0626_rSDSS", "F0660", "F0769_iSDSS")
+###############################################
+# New colors    ###############################
+###############################################
+m =  (table["e_G_PStotal"] <= 0.2) & (table["e_R_PStotal"] <= 0.2) & (table["e_Z_PStotal"] <= 0.2) 
+zg = table['Z_PStotal'] - table['G_PStotal']
+gr = table['G_PStotal'] - table['R_PStotal']
 
+##############################################
 # Plots
 color_map = plt.cm.Spectral_r
 color_palette = sns.color_palette('Paired', 55)
@@ -87,8 +94,9 @@ with sns.axes_style("ticks"):
     plt.ylabel(r"$r - J0660$", fontsize=35)
     plt.tick_params(axis='x', labelsize=35) 
     plt.tick_params(axis='y', labelsize=35)
-    scat = ax.scatter(table['r - i'], table['r - J0660'], s=15*table["FWHM"], edgecolor='black',
-                             c=table["R_PStotal"], alpha=0.7, zorder = 2, cmap='RdBu_r')
+    maskfw = table["FWHM"] < 240
+    scat = ax.scatter(table['r - i'][maskfw], table['r - J0660'][maskfw], s=5*table["FWHM"][maskfw], edgecolor='black',
+                             c=table["R_PStotal"][maskfw], alpha=0.7, zorder = 2, cmap='RdBu_r')
     #pal = sns.dark_palette("magma", as_cmap=True)
     #pal = sns.cubehelix_palette(as_cmap=True)
     pal = sns.cubehelix_palette(start=1, rot=0, dark=-10, light=50, reverse=True, as_cmap=True)
@@ -104,7 +112,7 @@ with sns.axes_style("ticks"):
         'weight' : 'normal',
         'size'   : 16,
         }
-    cb = fig.colorbar(scat,extend='both', ax=ax).set_label("$r-band$", fontsize=35)
+    cb = fig.colorbar(scat,extend='both', ax=ax).set_label("$r-mag$", fontsize=35)
     #Symbol size indicates outer shell radius
     plt.text(0.01, 0.95, 'Symbol size indicates FWHM',
              transform=ax.transAxes, fontsize=20)
@@ -117,9 +125,35 @@ with sns.axes_style("ticks"):
                             patchB=el,
                             shrinkB=5,
                             connectionstyle="arc3,rad=0.3",
-                                                                                                                                                                 ))
+                                                        ))
     
     plt.savefig("../paper/Figs/final-emitters.pdf")
+    ##########################################################
+    # (g - r) vs (z - g)
+    fig, ax1 = plt.subplots(figsize=(15, 11))
+    ax1.spines["top"].set_visible(False)  
+    ax1.spines["right"].set_visible(False)
+    plt.xlabel(r"$z - g$", fontsize=35)
+    plt.ylabel(r"$g - r$", fontsize=35)
+    plt.tick_params(axis='x', labelsize=35) 
+    plt.tick_params(axis='y', labelsize=35)
+    #scat = ax.scatter(zg, gr, s=15*table["FWHM"], edgecolor='black',
+                             #c=table["R_PStotal"], alpha=0.7, zorder = 2, cmap='RdBu_r')
+    density_scatter(zg[m], gr[m], ax=ax1)
+    pal = sns.cubehelix_palette(start=1, rot=0, dark=-10, light=50, reverse=True, as_cmap=True)
+    #pal = sns.color_palette("Paired", 19, as_cmap=True)
+    #pal = sns.color_palette("bright")
+    #ax2.plot(fit_line, 0.42917 * fit_line - 0.04333, color="k", ls="--")
+    #ax1.set(
+      #xlim=[-15, 15],
+      #ylim=[-15, 15])
+    font = {'family' : 'serif',
+        'color'  : 'darkred',
+        'weight' : 'normal',
+        'size'   : 16,
+        }
+    #cb = fig.colorbar(scat,extend='both', ax=ax).set_label("$r-band$", fontsize=35)   
+    plt.savefig("../paper/Figs/red-blue-colorObjects.pdf")
 ###################################################################################################################
 #Distribution of Halpha emitters
 with sns.axes_style("ticks"):
@@ -205,3 +239,50 @@ with sns.axes_style("ticks"):
     sns.despine()
     plt.tight_layout()
     plt.savefig("../paper/Figs/distribution-bgalactic.pdf")
+    #########################
+    # r vs b (Gal)
+    fig4, ax4 = plt.subplots(1, 1, figsize=(9, 12), sharex=True)
+    plt.xlabel(r"$b(Gal)$", fontsize=33)
+    plt.ylabel(r"r", fontsize=33)
+    plt.tick_params(axis='x', labelsize=33) 
+    plt.tick_params(axis='y', labelsize=33)
+    density_scatter(b_rad, table["R_PStotal"], ax=ax4)
+    #ax4.set(xlim=[-0.7, 1.8])
+    #ax.legend(loc='upper left')
+    sns.despine()
+    plt.tight_layout()
+    plt.savefig("../paper/Figs/bvsr.pdf")
+    #########################
+    # Distribution z - g coordinate
+    fig5, ax5 = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
+    plt.xlabel(r"$z - g$", fontsize=33)
+    plt.ylabel(r"Density", fontsize=33)
+    plt.tick_params(axis='x', labelsize=33) 
+    plt.tick_params(axis='y', labelsize=33)
+    zg = [x for x in zg[m]]
+    sns.distplot(zg, 
+                 norm_hist=True, kde=True, ax=ax5,
+                 bins=30, hist_kws=dict(range=[-3.0, 3.0],  color='y')
+                )
+    #ax4.set(xlim=[-0.7, 1.8])
+    #ax.legend(loc='upper left')
+    sns.despine()
+    plt.tight_layout()
+    plt.savefig("../paper/Figs/distribution-zg.pdf")
+    #########
+    # Distribution z - g coordinate
+    fig5, ax5 = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
+    plt.xlabel(r"$g - r$", fontsize=33)
+    plt.ylabel(r"Density", fontsize=33)
+    plt.tick_params(axis='x', labelsize=33) 
+    plt.tick_params(axis='y', labelsize=33)
+    gr = [x for x in gr[m]]
+    sns.distplot(gr, 
+                 norm_hist=True, kde=True, ax=ax5,
+                 bins=30, hist_kws=dict(range=[-3.0, 3.0],  color='y')
+                )
+    #ax4.set(xlim=[-0.7, 1.8])
+    #ax.legend(loc='upper left')
+    sns.despine()
+    plt.tight_layout()
+    plt.savefig("../paper/Figs/distribution-rg.pdf")
