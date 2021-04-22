@@ -358,6 +358,8 @@ Plots with the results
 
 : python ../programs/results.py 
 
++ What about try a plot r-mag vs b(Gal)?
+
 *** Clean the final tables uning ML
 
 ** Linear dicriminad analysis
