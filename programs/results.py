@@ -262,7 +262,7 @@ with sns.axes_style("ticks"):
     zg = [x for x in zg[m]]
     sns.distplot(zg, 
                  norm_hist=True, kde=True, ax=ax5,
-                 bins=30, hist_kws=dict(range=[-3.0, 3.0],  color='y')
+                 bins=40, hist_kws=dict(range=[-3.0, 3.0],  color='y')
                 )
     #ax4.set(xlim=[-0.7, 1.8])
     #ax.legend(loc='upper left')
@@ -279,7 +279,7 @@ with sns.axes_style("ticks"):
     gr = [x for x in gr[m]]
     sns.distplot(gr, 
                  norm_hist=True, kde=True, ax=ax5,
-                 bins=30, hist_kws=dict(range=[-3.0, 3.0],  color='y')
+                 bins=40, hist_kws=dict(range=[-3.0, 3.0],  color='y')
                 )
     #ax4.set(xlim=[-0.7, 1.8])
     #ax.legend(loc='upper left')
