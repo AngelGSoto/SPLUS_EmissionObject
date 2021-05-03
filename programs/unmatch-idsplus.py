@@ -23,11 +23,12 @@ tab = Table.read(file1, format="ascii.ecsv")
 
 # Table with the IDs
 tab_id = Table.read(file2, format="ascii")
+
 # Making mask and applying
 id1 = tab["ID"]
 id2 = tab_id["ID"]
-mask = np.array([source in id2 for source in id1])
+mask = np.array([not source in id2 for source in id1])
 
 # Save the final file
-asciifile = file2.replace(".dat", "-VisualInspection.ecsv")
+asciifile = file1.replace(".ecsv", "-visualCleaning.ecsv")
 tab[mask].write(asciifile, format="ascii.ecsv", overwrite=True)

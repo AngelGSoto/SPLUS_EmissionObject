@@ -136,6 +136,17 @@ The S-PLUS survey is a multi-band photometric survey...
 \section{Methodology}
 \label{sec:meth}
 
+Witham et el. (2008) present a catalogue of point-sources Hα emission objects identified in IPHAS. 
+
+Appliyng the selection criteria to selecting H$\alpha$ emitters. We used the same procedure in Wevers et al. (2017). The objects with H$\alpha$ excess meet the condition:
+
+ $(r - J0660)_{obs} - (r - J0660)_{fit} \geq C \times \sqrt{\sigma^2_s - \sigma^2_{phot}}$ 
+ 
+where $\sigma_s$ is the root mean squared value of the residuals around
+the fit and $\sigma_{phot}$ is the error on the observed $(r - J0660)$ colour
+
+Firts see an aproximation of the  4$\sigma$ cut away from the ariginal fit.
+
 \begin{figure*}
   \setlength\tabcolsep{0pt}
   \setkeys{Gin}{width=0.5\linewidth}
@@ -205,7 +216,7 @@ The S-PLUS survey is a multi-band photometric survey...
 
 
 \begin{figure}
-	\includegraphics[width=0.9\linewidth, trim=50 115 10 8]{Figs/red-blue-colorObjects.pdf}  \llap{\raisebox{2.9cm}{\includegraphics[width=0.36\linewidth, trim=10 10 -30 0]{Figs/distribution-zg.pdf}}} \lapbox{\raisebox{2.9cm}{\includegraphics[width=0.36\linewidth, trim=52 52 8 8, clip]{Figs/distribution-rg.pdf}}}
+	\includegraphics[width=0.9\linewidth, trim=50 115 10 8]{Figs/red-blue-colorObjects-gr.pdf}  \llap{\raisebox{2.9cm}{\includegraphics[width=0.36\linewidth, trim=10 10 -30 0]{Figs/distribution-zg.pdf}}} \lapbox{\raisebox{2.9cm}{\includegraphics[width=0.36\linewidth, trim=52 52 8 8, clip]{Figs/distribution-rg.pdf}}}
     \caption{Emission lines selected...}
     \label{fig:new-color}
 \end{figure}

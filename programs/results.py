@@ -18,7 +18,7 @@ from density_scatter import density_scatter
 sns.set_color_codes()
 ROOT_PATH = Path("..")
 
-# Reading the json files with synthectic photometry of the star library Pickles, A. J. (1998)
+# Reading the json files with synthectic photometry of the star and giant library Pickles, A. J. (1998)
 def filter_mag(e, s, f1, f2, f3):
     '''
     Calculate the colors using any of set of filters
@@ -153,7 +153,7 @@ with sns.axes_style("ticks"):
         'size'   : 16,
         }
     #cb = fig.colorbar(scat,extend='both', ax=ax).set_label("$r-band$", fontsize=35)   
-    plt.savefig("../paper/Figs/red-blue-colorObjects.pdf")
+    plt.savefig("../paper/Figs/red-blue-colorObjects-gr.pdf")
 ###################################################################################################################
 #Distribution of Halpha emitters
 with sns.axes_style("ticks"):
@@ -285,4 +285,4 @@ with sns.axes_style("ticks"):
     #ax.legend(loc='upper left')
     sns.despine()
     plt.tight_layout()
-    plt.savefig("../paper/Figs/distribution-rg.pdf")
+    plt.savefig("../paper/Figs/distribution-gr.pdf")

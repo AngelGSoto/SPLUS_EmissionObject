@@ -1,4 +1,4 @@
-from astropy.table import Table
+from astropy.table import Table, vstack
 import numpy as np
 import argparse
 import os
@@ -17,17 +17,17 @@ cmd_args = parser.parse_args()
 file1 = cmd_args.table1 + ".ecsv"
 
 cmd_args = parser.parse_args()
-file2 = cmd_args.table2 + ".dat"
+file2 = cmd_args.table2 + ".ecsv"
 
-tab = Table.read(file1, format="ascii.ecsv")
+tab1 = Table.read(file1, format="ascii.ecsv")
 
 # Table with the IDs
-tab_id = Table.read(file2, format="ascii")
-# Making mask and applying
-id1 = tab["ID"]
-id2 = tab_id["ID"]
-mask = np.array([source in id2 for source in id1])
+tab2 = Table.read(file2, format="ascii.ecsv")
+
+
+# Merge the tables
+table_merge = vstack([tab1, tab2])
 
 # Save the final file
-asciifile = file2.replace(".dat", "-VisualInspection.ecsv")
-tab[mask].write(asciifile, format="ascii.ecsv", overwrite=True)
+asciifile = file1.replace(".ecsv", "-Final.ecsv")
+table_merge.write(asciifile, format="ascii.ecsv", overwrite=True)
