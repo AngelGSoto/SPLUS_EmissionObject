@@ -78,9 +78,11 @@ for file_name in file_list:
 ###############################################
 # New colors    ###############################
 ###############################################
-m =  (table["e_G_PStotal"] <= 0.2) & (table["e_R_PStotal"] <= 0.2) & (table["e_Z_PStotal"] <= 0.2) 
+m = (table["e_G_PStotal"] <= 0.2) & (table["e_R_PStotal"] <= 0.2) & (table["e_Z_PStotal"] <= 0.2)
+m1 = (table["e_U_PStotal"] <= 0.2) & (table["e_G_PStotal"] <= 0.2) & (table["e_R_PStotal"] <= 0.2) 
 zg = table['Z_PStotal'] - table['G_PStotal']
 gr = table['G_PStotal'] - table['R_PStotal']
+ug = table['U_PStotal'] - table['G_PStotal']
 
 ##############################################
 # Plots
@@ -137,6 +139,9 @@ with sns.axes_style("ticks"):
     plt.ylabel(r"$g - r$", fontsize=35)
     plt.tick_params(axis='x', labelsize=35) 
     plt.tick_params(axis='y', labelsize=35)
+    ax1.set(
+        xlim=[-6.8, 2.5], ylim=[-3., 5.]
+      )
     #scat = ax.scatter(zg, gr, s=15*table["FWHM"], edgecolor='black',
                              #c=table["R_PStotal"], alpha=0.7, zorder = 2, cmap='RdBu_r')
     density_scatter(zg[m], gr[m], ax=ax1)
@@ -154,6 +159,33 @@ with sns.axes_style("ticks"):
         }
     #cb = fig.colorbar(scat,extend='both', ax=ax).set_label("$r-band$", fontsize=35)   
     plt.savefig("../paper/Figs/red-blue-colorObjects-gr.pdf")
+
+    ##########################################################
+    # (g - r) vs (u - g)
+    fig, ax11 = plt.subplots(figsize=(15, 11))
+    ax11.spines["top"].set_visible(False)  
+    ax11.spines["right"].set_visible(False)
+    plt.xlabel(r"$u - g$", fontsize=35)
+    plt.ylabel(r"$g - r$", fontsize=35)
+    plt.tick_params(axis='x', labelsize=35) 
+    plt.tick_params(axis='y', labelsize=35)
+    #scat = ax.scatter(zg, gr, s=15*table["FWHM"], edgecolor='black',
+                             #c=table["R_PStotal"], alpha=0.7, zorder = 2, cmap='RdBu_r')
+    density_scatter(ug[m1], gr[m1], ax=ax11)
+    pal = sns.cubehelix_palette(start=1, rot=0, dark=-10, light=50, reverse=True, as_cmap=True)
+    #pal = sns.color_palette("Paired", 19, as_cmap=True)
+    #pal = sns.color_palette("bright")
+    #ax2.plot(fit_line, 0.42917 * fit_line - 0.04333, color="k", ls="--")
+    #ax1.set(
+      #xlim=[-15, 15],
+      #ylim=[-15, 15])
+    font = {'family' : 'serif',
+        'color'  : 'darkred',
+        'weight' : 'normal',
+        'size'   : 16,
+        }
+    #cb = fig.colorbar(scat,extend='both', ax=ax).set_label("$r-band$", fontsize=35)   
+    plt.savefig("../paper/Figs/red-blue-colorObjects-ug.pdf")
 ###################################################################################################################
 #Distribution of Halpha emitters
 with sns.axes_style("ticks"):
@@ -252,37 +284,45 @@ with sns.axes_style("ticks"):
     sns.despine()
     plt.tight_layout()
     plt.savefig("../paper/Figs/bvsr.pdf")
-    #########################
+    ###############################################################
     # Distribution z - g coordinate
-    fig5, ax5 = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
+    fig5, ax5 = plt.subplots(1, 1, figsize=(11, 5), sharex=True)
     plt.xlabel(r"$z - g$", fontsize=33)
     plt.ylabel(r"Density", fontsize=33)
     plt.tick_params(axis='x', labelsize=33) 
     plt.tick_params(axis='y', labelsize=33)
+    ax5.set(
+      xlim=[-5.0, 2.5]
+      )
     zg = [x for x in zg[m]]
     sns.distplot(zg, 
                  norm_hist=True, kde=True, ax=ax5,
-                 bins=40, hist_kws=dict(range=[-3.0, 3.0],  color='y')
+                 bins=50, hist_kws=dict(range=[-6.0, 6.0],  color='r')
                 )
     #ax4.set(xlim=[-0.7, 1.8])
     #ax.legend(loc='upper left')
     sns.despine()
     plt.tight_layout()
+    plt.tight_layout()
     plt.savefig("../paper/Figs/distribution-zg.pdf")
-    #########
+    ###############################################################
     # Distribution z - g coordinate
-    fig5, ax5 = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
+    fig6, ax6 = plt.subplots(1, 1, figsize=(11, 5), sharex=True)
     plt.xlabel(r"$g - r$", fontsize=33)
     plt.ylabel(r"Density", fontsize=33)
     plt.tick_params(axis='x', labelsize=33) 
     plt.tick_params(axis='y', labelsize=33)
+    ax6.set(
+      xlim=[-1.5, 2.5]
+      )
     gr = [x for x in gr[m]]
     sns.distplot(gr, 
-                 norm_hist=True, kde=True, ax=ax5,
-                 bins=40, hist_kws=dict(range=[-3.0, 3.0],  color='y')
+                 norm_hist=True, kde=True, ax=ax6,
+                 bins=80, hist_kws=dict(range=[-6.0, 6.0],  color='r')
                 )
     #ax4.set(xlim=[-0.7, 1.8])
     #ax.legend(loc='upper left')
     sns.despine()
     plt.tight_layout()
     plt.savefig("../paper/Figs/distribution-gr.pdf")
+    
