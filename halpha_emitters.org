@@ -365,7 +365,7 @@ Plots with the results
 
 ** Linear dicriminad analysis
 
-Using linear discriminant alalyis to clean the final sample of H{$\alpha$} emistters:
+Using linear discriminant alalyis to clean the final sample of H{$\alpha$} emitters:
 
 #+BEGIN_SRC results
 
@@ -379,6 +379,7 @@ Data to classify: (13644, 12)
 
 #+END_SRC
 
+
 #+BEGIN_SRC results
 
 Shape of array: (419, 7)
@@ -388,13 +389,12 @@ Confusion matrix =  (36  9)
                     (8 31)
 Data to classify: (13644, 7)
 13644
-
 #+END_SRC
 
 ** Things that remain to be done 
-^ Finished the red and blue classification: 
-  + Compare the synthetic color with the observed one.
-  + Compare with statistical technique (Hierarchical models).
++ Finished the red and blue classification: 
+  - Compare the synthetic color with the observed one.
+  - Compare with statistical technique (Hierarchical models).
 
-^ Used the QSOs, stars and galaxy classification.
-^ cross-match SDSS, LAMOST, SIMBAD.
++ Used the QSOs, stars and galaxy classification.
++ cross-match SDSS, LAMOST, SIMBAD.
