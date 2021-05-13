@@ -144,6 +144,11 @@ with sns.axes_style("ticks"):
       )
     #scat = ax.scatter(zg, gr, s=15*table["FWHM"], edgecolor='black',
                              #c=table["R_PStotal"], alpha=0.7, zorder = 2, cmap='RdBu_r')
+    # Limiting the blue and red region
+    x_new = np.linspace(-15.0, 1000, 200)
+    y = 0.35*x_new + 1.5
+
+    ax1.plot(x_new, y, color='k', zorder=100, linestyle='-.')
     density_scatter(zg[m], gr[m], ax=ax1)
     pal = sns.cubehelix_palette(start=1, rot=0, dark=-10, light=50, reverse=True, as_cmap=True)
     #pal = sns.color_palette("Paired", 19, as_cmap=True)
