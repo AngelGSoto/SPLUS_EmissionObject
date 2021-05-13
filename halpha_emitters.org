@@ -1,3 +1,4 @@
+#+TITLE: Halpha-emitters
 * Find  SPLUS Halpha Emitters
 :PROPERTIES:
 :ID:       
@@ -360,7 +361,7 @@ Plots with the results
 
 + What about try a plot r-mag vs b(Gal)?
 
-*** Clean the final tables uning ML
+*** Clean the final tables using ML
 
 ** Linear dicriminad analysis
 
@@ -390,3 +391,10 @@ Data to classify: (13644, 7)
 
 #+END_SRC
 
+** Things that remain to be done 
+^ Finished the red and blue classification: 
+  + Compare the synthetic color with the observed one.
+  + Compare with statistical technique (Hierarchical models).
+
+^ Used the QSOs, stars and galaxy classification.
+^ cross-match SDSS, LAMOST, SIMBAD.
