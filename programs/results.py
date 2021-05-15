@@ -146,7 +146,7 @@ with sns.axes_style("ticks"):
                              #c=table["R_PStotal"], alpha=0.7, zorder = 2, cmap='RdBu_r')
     # Limiting the blue and red region
     x_new = np.linspace(-15.0, 1000, 200)
-    y = 0.35*x_new + 1.5
+    y = 0.45*x_new + 1.48
 
     ax1.plot(x_new, y, color='k', zorder=100, linestyle='-.')
     density_scatter(zg[m], gr[m], ax=ax1)
