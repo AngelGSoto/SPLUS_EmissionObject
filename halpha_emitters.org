@@ -395,6 +395,7 @@ Data to classify: (13644, 7)
 + Finished the red and blue classification: 
   - Compare the synthetic color with the observed one.
   - Compare with statistical techniques (Hierarchical models).
+ #+DONE
 
 + Used the QSOs, stars and galaxy classification.
 + Cross-match SDSS, LAMOST, SIMBAD.
