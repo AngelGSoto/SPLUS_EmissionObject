@@ -398,4 +398,40 @@ Data to classify: (13644, 7)
  #+DONE
 
 + Used the QSOs, stars and galaxy classification.
+  - Tutorial of Liliene about how implement the star, galaxy and QSO classification:
+
+#+BEGIN_SRC tutorial
+1. Baixar última versão do splusdata (3.65)
+pip install --upgrade splusdata
+
+2. No Python:
+from splusdata.features.g_star import ClassifyObj #pode acabar mudando em breve essa parte do "splusdata.features.g_star"
+clf = ClassifyObj(data, model="RF16", return_prob = True, match_irsa=False)
+clf.results #acessa os resultados. Os índices das linhas têm direta correspondência com os índices do dataframe de input. 
+
+ps: vai mudar todo o fluxo em breve na proxima versão do splusdata
+----------------------
+
+data: pandas dataframe que precisa obrigatoriamente ter as seguintes informações
+
+['FWHM_n', 'A', 'B', 'KRON_RADIUS', 'u_iso', 'J0378_iso',
+'J0395_iso','J0410_iso','J0430_iso', 'g_iso','J0515_iso',
+'r_iso','J0660_iso', 'i_iso','J0861_iso', 'z_iso']
+
+as magnitudes precisam estar previamente corrigidas pela extinção
+
+model: ["RF16", "RF18" ou "both"] determina com qual modelo vai ser gerada as classificações.
+"RF16": usa o modelo que leva em consideração apenas os dados do S-PLUS
+"RF18": usa o modelo que leva em consideração os dados do S-PLUS e W1 e W2 do WISE (em magnitude vega) 
+"both": se usar essa opção vai retornar a classificação RF18 para objetos que tem informação no WISE (model_flag == 0), caso contrário vai retornar a classificação por RF16 (model_flag==1). 
+Nota: "RF18" pode retornar um dataframe MENOR que o dataframe de input pois nem todos os objetos terão informação no WISE. Os indíces da linha são mantidos, então se fizer um pd.concat([data, clf.results], axis=1) irá fazer o join das tabelas de forma correta. 
+
+return_prob: [True ou False] se True, determina se irá retornar as probabilidades. Caso contrário, retornará apenas a classe (0: QSO, 1: STAR, 2: GALAXY)
+
+match_irsa: [True ou False] se True, irá fazer query do ALLWISE catalogue e fará o crossmatch com os dados de entrada para que seja possível rodar o modelo RF18. Se model == "RF16", match_irsa == False automaticamente.
+
+verbose: [True ou False] se True, retorna prints de cada etapa
+#+END_SRC
+
+   
 + Cross-match SDSS, LAMOST, SIMBAD.
