@@ -395,7 +395,7 @@ Data to classify: (13644, 7)
 + Finished the red and blue classification: 
   - Compare the synthetic color with the observed one.
   - Compare with statistical techniques (Hierarchical models).
- #+DONE
+:DONE:
 
 + Used the QSOs, stars and galaxy classification.
   - Tutorial of Liliene about how implement the star, galaxy and QSO classification:
