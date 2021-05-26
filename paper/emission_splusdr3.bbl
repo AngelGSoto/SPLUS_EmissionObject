@@ -17,5 +17,43 @@
   {mn@eprint@\@tempb}{\@tempb:\@tempc}{\expandafter \expandafter \csname
   mn@eprint@\@tempb\endcsname \expandafter{\@tempc}}}
 
+\bibitem[\protect\citeauthoryear{{Casares}}{{Casares}}{2015}]{Casares:2015}
+{Casares} J.,  2015, \mn@doi [\apj] {10.1088/0004-637X/808/1/80}, \href
+  {https://ui.adsabs.harvard.edu/abs/2015ApJ...808...80C} {808, 80}
+
+\bibitem[\protect\citeauthoryear{{Casares}}{{Casares}}{2016}]{Casares:2016}
+{Casares} J.,  2016, \mn@doi [\apj] {10.3847/0004-637X/822/2/99}, \href
+  {https://ui.adsabs.harvard.edu/abs/2016ApJ...822...99C} {822, 99}
+
+\bibitem[\protect\citeauthoryear{{Horne} \& {Marsh}}{{Horne} \&
+  {Marsh}}{1986}]{Horne:1986}
+{Horne} K.,  {Marsh} T.~R.,  1986, \mn@doi [\mnras] {10.1093/mnras/218.4.761},
+  \href {https://ui.adsabs.harvard.edu/abs/1986MNRAS.218..761H} {218, 761}
+
+\bibitem[\protect\citeauthoryear{{Ratti}, {Steeghs}, {Jonker}, {Torres},
+  {Bassa}  \& {Verbunt}}{{Ratti} et~al.}{2012}]{Ratti:2012}
+{Ratti} E.~M.,  {Steeghs} D.~T.~H.,  {Jonker} P.~G.,  {Torres} M.~A.~P.,
+  {Bassa} C.~G.,   {Verbunt} F.,  2012, \mn@doi [\mnras]
+  {10.1111/j.1365-2966.2011.19999.x}, \href
+  {https://ui.adsabs.harvard.edu/abs/2012MNRAS.420...75R} {420, 75}
+
+\bibitem[\protect\citeauthoryear{{Schwope}, {Catal{\'a}n}, {Beuermann},
+  {Metzner}, {Smith}  \& {Steeghs}}{{Schwope} et~al.}{2000}]{Schwope:2000}
+{Schwope} A.~D.,  {Catal{\'a}n} M.~S.,  {Beuermann} K.,  {Metzner} A.,  {Smith}
+  R.~C.,   {Steeghs} D.,  2000, \mn@doi [\mnras]
+  {10.1046/j.1365-8711.2000.03240.x}, \href
+  {https://ui.adsabs.harvard.edu/abs/2000MNRAS.313..533S} {313, 533}
+
+\bibitem[\protect\citeauthoryear{{Steeghs} \& {Casares}}{{Steeghs} \&
+  {Casares}}{2002}]{Steeghs:2002}
+{Steeghs} D.,  {Casares} J.,  2002, \mn@doi [\apj] {10.1086/339224}, \href
+  {https://ui.adsabs.harvard.edu/abs/2002ApJ...568..273S} {568, 273}
+
+\bibitem[\protect\citeauthoryear{{van Spaandonk}, {Steeghs}, {Marsh}  \&
+  {Torres}}{{van Spaandonk} et~al.}{2010}]{Spaandonk:2010}
+{van Spaandonk} L.,  {Steeghs} D.,  {Marsh} T.~R.,   {Torres} M.~A.~P.,  2010,
+  \mn@doi [\mnras] {10.1111/j.1365-2966.2009.15762.x}, \href
+  {https://ui.adsabs.harvard.edu/abs/2010MNRAS.401.1857V} {401, 1857}
+
 \makeatother
 \end{thebibliography}

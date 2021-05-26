@@ -1,7 +1,7 @@
 '''
 Program stolen from: 
 https://stackoverflow.com/questions/20105364/how-can-i-make-a-scatter-plot-colored-by-density-in-matplotlib
-Credit for author there
+Credict for author there
 '''
 import numpy as np
 import matplotlib.pyplot as plt
@@ -9,7 +9,7 @@ from matplotlib import cm
 from matplotlib.colors import Normalize 
 from scipy.interpolate import interpn
 
-def density_scatter(x , y, ax = None, sort = True, bins = 20, **kwargs )   :
+def density_scatter(x , y, ax = None, sort = True, bins = 20, **kwargs ):
     """
     Scatter plot colored by 2d histogram
     """
