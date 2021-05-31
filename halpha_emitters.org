@@ -459,3 +459,7 @@ Data to classify: (13644, 7)
        : python ../../programs/join-csvtable.py
 
 + Cross-match SDSS, LAMOST, SIMBAD.
+
+** Notes  
++ The object iDR3.SPLUS-n05n50.017121 (216.6133870755976, 5.065007143584472) is interesant.
++ PN NGC 3132 iDR3.HYDRA-0121.061126 (151.7447846287751, -40.4433163332109)		
