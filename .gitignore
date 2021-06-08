@@ -13,6 +13,7 @@ hydra_Halpha-coorSloan.dat
 Match_Halpha_starsHdbscan.dat
 *.csv
 *.fits
+*.fz
 3fiter/Spectra_claudia/*pdf
 3fiter/Spectra_fornax/*pdf 
 3filter_flat0/Spectra_16r/*pdf
@@ -34,6 +35,7 @@ mnras_guide.pdf
 mnras_guide.tex
 mnras_template.tex
 README.txt
+3filter_noflat/Spectra-Sdss/*.pdf
 3filter_noflat/Spectra_fornax/*.pdf
 3filter_noflat/Spectra_fornax3/*pdf
 3filter_noflat/Spectra_NGC3347/*pdf
