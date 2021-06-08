@@ -134,5 +134,5 @@ ax.annotate("r =" + format(float(table["R_PStotal"]), '.2f'), xy=(8500, 55),  xy
 ax.legend()
 plt.tight_layout()
 asciifile = file_spec.replace(".fits", 
-                  "-"+(str(table["ID"]).split("R3.")[-1]).replace(".", "-")+".jpg")
+                  "-"+(str(table["ID"]).split("R3.")[-1]).replace(".", "-")+".pdf")
 plt.savefig(asciifile)

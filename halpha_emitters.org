@@ -323,6 +323,122 @@ Results =1251923=.
 
 I found that using the Gustavos database is restricted to get table with 20000 rows.
 
+**** Download colored and cut images from database
+
+I write a script to download the colored images and make them for publication:
+
+#+BEGIN_SRC python: scrit to get colored images
+'''
+Scrit to download colored images from database
+'''
+# Import the necessary packages 
+import splusdata 
+import pandas as pd
+import matplotlib.pyplot as plt
+import aplpy
+from astropy.io import fits
+from astropy.wcs import WCS
+import os
+import argparse
+import sys
+
+parser = argparse.ArgumentParser(
+    description="""Get colored image and cut image in the r-band""")
+
+parser.add_argument("ra", type=float,
+                    default="316.473196",
+                    help="RA of the object")
+
+parser.add_argument("dec", type=float,
+                    default="-37.144562",
+                    help="Dec of the object")
+
+parser.add_argument("--radi", type=float, default=None,
+                    help="""Size of the images in pixel""")
+
+parser.add_argument("--name", type=str, default=None,
+                    help="""Name of the object""")
+
+cmd_args = parser.parse_args()
+ra = cmd_args.ra
+dec = cmd_args.dec
+
+# Radius
+rad = int(cmd_args.radi)
+
+# Nome of the object if has
+Name = cmd_args.name
+
+# Connect
+conn = splusdata.connect('Luis', 'plutarco*80')
+
+# Getting the colored imge
+img = conn.twelve_band_img(ra, dec, radius=rad, noise=0.15, saturation=0.15)
+
+# Getting the Fits image in the r-band
+hdu = conn.get_cut(ra, dec, rad, 'R')
+
+# Save the image, note that the output image in compress
+hdu.writeto('{}_{}-{}_{}_r.fz'.format(Name, ra, dec, rad), overwrite=True) # write to fits
+
+############################################################
+# Definition to decompress the images ######################
+############################################################
+def fz2fits(image):
+    """
+    It converts SPLUS images
+    from .fz to .fits
+    """
+    datos = fits.open(image)[1].data
+    heada = fits.open(image)[1].header
+    imageout = image[:-2] + 'fits'
+    print ('Creating file: ')
+    print (imageout)
+    fits.writeto(imageout, datos, heada, overwrite=True)
+############################################################
+# Decompress
+hdufits = fz2fits('{}_{}-{}_{}_r.fz'.format(Name, ra, dec, rad))
+
+# Read the FITS file
+hdul = fits.open('{}_{}-{}_{}_r.fits'.format(Name, ra, dec, rad))[0]
+wcs = WCS(hdul.header)
+
+print(wcs)                 
+
+f = plt.figure(figsize=(18,9))
+
+ax1 = aplpy.FITSFigure(hdul, figure=f, subplot=(1, 1, 1))#, north=True)
+plt.imshow(img, origin='lower', cmap='cividis', aspect='equal')
+                 
+ax1.add_scalebar(20.0/3600)
+ax1.scalebar.set_label('20 arcsec')
+ax1.scalebar.set(color='yellow', linewidth=4, alpha=0.9)
+ax1.scalebar.set_font(size=23, weight='bold',
+                      stretch='normal', family='sans-serif',
+                      style='normal', variant='normal')
+
+ax1.axis_labels.set_font(size=22, weight='medium', stretch='normal', family='sans-serif', style='normal', variant='normal')
+#img.axis_labels.hide()
+#img.axis_labels.hide_y()
+
+ax1.tick_labels.set_font(size=22, weight='medium', stretch='normal', family='sans-serif', style='normal', variant='normal')
+#ax1.list_layers()
+#ax1.show_markers(ra, dec, layer='marker', edgecolor='green', facecolor='none', marker='o', s=10, alpha=0.9, linewidths=60)#, layer='marker_set_1', edgecolor='black', facecolor='none', s=30, alpha=0.5, linewidths=20)
+
+
+# ax1.axis_labels.hide_y()
+# ax1.tick_labels.hide_y()
+
+#ax2.colorbar.set_box([0.95, 0.1, 0.015, 0.8])
+ax1.set_theme('publication')
+#f.tight_layout()
+#f.savefig("-".join([image_name, "images.pdf"]))
+
+plt.savefig('{}_{}-{}_{}_r.fits'.format(Name, ra, dec, rad).replace(".fits", ".pdf"))
+#+END_SRC
+
+: python ../../programs/getColored-imgesSplus.py 338.66637521384126 0.6909664418071105 --radi 100 --name FASTT1560
+
 *** Alternative solution: sqlite
 
 A possible solution is to create a database in my own machine.
@@ -462,4 +578,25 @@ Data to classify: (13644, 7)
 
 ** Notes  
 + The object iDR3.SPLUS-n05n50.017121 (216.6133870755976, 5.065007143584472) is interesant.
-+ PN NGC 3132 iDR3.HYDRA-0121.061126 (151.7447846287751, -40.4433163332109)		
++ PN NGC 3132 iDR3.HYDRA-0121.061126 (151.7447846287751, -40.4433163332109)
++ Spectra for the paper:
+  - STRIPE82-0026-058736 -> H II galaxy
+  - STRIPE82-0031.029096 -> H II galaxy
+  - STRIPE82-0027.022810 -> H II galaxy
+  - STRIPE82-0108.039253 -> CV
+  - STRIPE82-0142.027354 -> CV 
+  - STRIPE82-0152.056707 -> CV
+  - STRIPE82-0165.038101 -> CV
+  - STRIPE82-0103.089600 -> CV
+  - STRIPE82-0159.019049 -> H II regions
+  - STRIPE82-0032.003020 -> QSO
+  - STRIPE82-0044.021486 -> QSO
+  - STRIPE82-0003.028018 -> QSO
+  - STRIPE82-0143.016137 -> QSO, select
+  		
++ Final spectra for the paper at the moment:
+  - PN G006.0-41.9 -> SPLUS-s29s46.072842, (316.4731956938531 -37.14456181858315).
+  - H II GALEX 2417063145906373262 -> STRIPE82-0159.019049 (351.0847562454346 -0.10695578184817373)
+  - CV FASTT 1560 -> STRIPE82-0142.027354 (338.66637521384126 0.6909664418071105)
+  - HIIG LEDA 1185205 -> STRIPE82-0026.058736 (17.28310789223492 1.12097992550518)
+  - QSO PHL   354 -> STRIPE82-0143.016137 (339.59688919210015 -0.952268013442764)
