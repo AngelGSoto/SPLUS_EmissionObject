@@ -467,7 +467,8 @@ with the other one.
 - I used the r-band  and 6250.289 Angstrom on Lamost. 
 
 - Program:
-: for f in *.fits; do python ../../programs/splus_sdss_spectra.py ${f%.fits} Halpha-DR3_errorsall_flagallf_r16; done
+: python ../../programs/splus_sdss_spectra.py spec-9152-58041-0463 Halpha-DR3_noFlag_3ferr_merge --ymin -0.05 --ymax 0.62
+: for f in *.fits; do python ../../programs/splus_sdss_spectra.py ${f%.fits} Halpha-DR3_noFlag_3ferr_merge --ymax 3; done
 
 **** Several plots
 
@@ -606,9 +607,12 @@ Data to classify: (13644, 7)
   - HIIG LEDA 1185205 -> STRIPE82-0026.058736 (17.28310789223492 1.12097992550518)
   - QSO PHL   354 -> STRIPE82-0143.016137 (339.59688919210015 -0.952268013442764)
 
-+ Three spectra from Lamost
++ Three spectra from Lamost:
   - STRIPE82-0057.001810 (39.68852506534099 -1.3705561161546969) -> Interesting object could be a SySt.
   - SPLUS-s03s05.011958 (329.5210752335242 -3.1300673601973967) -> Looks like a galaxy.
   - STRIPE82-0084.014280 (57.74100567327152 0.4260298565588763) -> Very week object. It is probably a quasar.
 
-+ Thre
++ Three spectra from SDSS:
+  - STRIPE82-0007.024265 (3.6458604175197946 -0.731125956040772)
+  - STRIPE82-0147.005730 (343.4952075319428 -1.289144725738761)
+  - SPLUS-n02s23.034336 (180.29305577347304 -1.2960504262969996)

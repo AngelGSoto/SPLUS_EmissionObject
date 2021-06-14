@@ -1,5 +1,5 @@
 '''
-This script make the Lamost spectra overlapped the SPLUS photometry
+This script makes the Lamost SDSS spectra overlapped on SPLUS photometry
 '''
 import astropy.coordinates as coord
 import astropy.units as u
@@ -23,7 +23,7 @@ from astroML.crossmatch import crossmatch_angular
 parser = argparse.ArgumentParser(
     description="""Make a spectras""")
 
-parser.add_argument("fileLamost", type=str,
+parser.add_argument("fileSdss", type=str,
                     default="teste-program",
                     help="Name of file, taken the prefix")
 
@@ -31,49 +31,43 @@ parser.add_argument("TableSplus", type=str,
                     default="teste-program",
                     help="Name of table, taken the prefix")
 
-parser.add_argument("--ymin", required=False, type=float, default=None,
-                    help="""Value y-axis min""")
-
-parser.add_argument("--ymax", required=False, type=float, default=None,
-                    help="""Value y-axis max""")
-
 cmd_args = parser.parse_args()
-file_spec = cmd_args.fileLamost + ".fits"
+file_spec = cmd_args.fileSdss + ".fits"
 file_table = cmd_args.TableSplus + ".ecsv"
 
 hdu = fits.open(file_spec)
 datadir = "../"
 table = Table.read(os.path.join(datadir, file_table), format="ascii.ecsv")
 
-# Coordinates of the Lamost
-ra = hdu[0].header["RA"]
-dec = hdu[0].header["DEC"]
-lmX = np.empty((1, 2), dtype=np.float64)
-lmX[:, 0] = ra
-lmX[:, 1] = dec
+# Coordinates of the SDSS
+ra = hdu[0].header["PLUG_RA"]
+dec = hdu[0].header["PLUG_DEC"]
+sdX = np.empty((1, 2), dtype=np.float64)
+sdX[:, 0] = ra
+sdX[:, 1] = dec
 
-# Put in array type Splus table coor
+# Put in array type Splus table coordinate
 ra1 = table['RA']
 dec1 = table['DEC']
 spX = np.array(list(zip(ra1, dec1)))
 
-# Find the Lamost object on the SPLUS list
+# Find the SDSS object on the SPLUS list, makes crossmacth using 2 arcsec 
 max_radius = 2. / 3600  # 2 arcsec
-dist, ind = crossmatch_angular(lmX, spX, max_radius)
+dist, ind = crossmatch_angular(sdX, spX, max_radius)
 match = ~np.isinf(dist)
 
 dist_match = dist[match]
 dist_match *= 3600
 
 print("******************************************************")
-print("Coordinate Lamost source:", lmX)
-print("Coordinate Splus source:", spX[ind])
+print("Coordinate SDSS source:", sdX)
+print("Coordinate SPLUS source:", spX[ind])
 print("******************************************************")
 
-# Data from the lamost spectra
-hdudata = hdu[0].data
-wl = hdudata[2]
-Flux = hdudata[0]
+# Data from the SDSS spectra
+hdudata = hdu[1].data
+wl = 10**hdudata.field("loglam")
+Flux = 1E-17*hdudata.field("flux")
 
 # Data of the SPLUs list
 mag, mag_err = [], []
@@ -115,7 +109,7 @@ mag_err.append(float(table["e_Z_PStotal"][ind]))
 #          print(i, ii)
 
 # Find scale factor
-m = wl == 6250.289
+m = wl == 6250.289 
 wl_part = wl[m]
 flux_part = Flux[m]
 Fsp = (10**(-(table["R_PStotal"][ind] + 2.41) / 2.5)) / 6250.0**2
@@ -125,7 +119,7 @@ factor = flux_part / Fsp
 err_ = []
 for wll, magg, magerr in zip(wl_sp, mag, mag_err):
     c = (10**(-2.41/2.5)) / wll**2
-    b = -(1 / 2.5)
+    b = -(1. / 2.5)
     err = np.sqrt(((c*10**(b*magg))**2)*(np.log(10)*b*magerr)**2)
     err_.append(err)
 
@@ -134,35 +128,18 @@ fig, ax = plt.subplots(figsize=(12, 5))
 ax.spines["top"].set_visible(False)  
 ax.spines["right"].set_visible(False)
 ax.set(xlim=[3350,9300])
-
-# set Y-axis range (if applicable)
-if cmd_args.ymin is not None and cmd_args.ymax is not None:
-    plt.ylim(cmd_args.ymin,cmd_args.ymax)
-elif cmd_args.ymin is not None:
-    plt.ylim(ymin=cmd_args.ymin)
-elif cmd_args.ymax is not None:
-    plt.ylim(ymax=cmd_args.ymax)
- 
+#plt.ylim(ymin=-50.0,ymax=200)
 ax.set(xlabel='Wavelength $(\AA)$')
-ax.set(ylabel='Normalized flux')
+ax.set(ylabel='Flux')
 ax.plot(wl, Flux, c = "gray", linewidth=1.3, alpha=0.6, zorder=5)
 for wl1, mag, magErr, colors, marker_ in zip(wl_sp, mag, err_, color, marker): #
     F = (10**(-(mag + 2.41) / 2.5)) / wl1**2
-    F *= factor
+    #F *= factor
     ax.scatter(wl1, F, c = colors, marker=marker_, s=80, zorder=4)
     ax.errorbar(wl1, F, yerr=magErr, marker='.', fmt='.', color=colors, ecolor=colors, elinewidth=3.9, markeredgewidth=3.2, capsize=10)
-#ax.axvline(4686, color='r', linewidth=0.3, linestyle='-', zorder = 6, label="He II")
-
-if cmd_args.ymax is not None:
-    ax.annotate(str(table["ID"][ind]).split("R3.")[-1].replace(".", "-"), xy=(9000, cmd_args.ymax),  xycoords='data', size=13,
-            xytext=(-120, -60), textcoords='offset points', 
-            bbox=dict(boxstyle="round4,pad=.5", fc="0.94"),)
-    ax.annotate("r=" + format(float(table["R_PStotal"][ind]), '.2f'), xy=(9000, 0.85*cmd_args.ymax),  xycoords='data', size=13,
-            xytext=(-120, -60), textcoords='offset points', 
-            bbox=dict(boxstyle="round4,pad=.5", fc="0.94"),)
-else:
-    None
-
+ax.axvline(4686, color='r', linewidth=0.3, linestyle='-', zorder = 6, label="He II")
+# plt.text(0.70, 0.19, table["ID"].split("R3.")[-1]).replace(".", "-"),
+#              transform=ax.transAxes, fontsize=25, weight='bold')
 ax.legend()
 plt.tight_layout()
 asciifile = file_spec.replace(".fits", 
