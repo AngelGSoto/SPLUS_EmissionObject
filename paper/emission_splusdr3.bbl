@@ -17,6 +17,16 @@
   {mn@eprint@\@tempb}{\@tempb:\@tempc}{\expandafter \expandafter \csname
   mn@eprint@\@tempb\endcsname \expandafter{\@tempc}}}
 
+\bibitem[\protect\citeauthoryear{Akras, Guzman-Ramirez, Leal-Ferreira  \&
+  Ramos-Larios}{Akras et~al.}{019a}]{Akras:2019a}
+Akras S.,  Guzman-Ramirez L.,  Leal-Ferreira M.,   Ramos-Larios G.,  2019a,
+  \mn@doi [\apjs] {10.3847/1538-4365/aaf88c}, 240, 21
+
+\bibitem[\protect\citeauthoryear{{Barentsen} et~al.,}{{Barentsen}
+  et~al.}{2014}]{Barentsen:2014}
+{Barentsen} G.,  et~al., 2014, \mn@doi [\mnras] {10.1093/mnras/stu1651}, \href
+  {http://adsabs.harvard.edu/abs/2014MNRAS.444.3230B} {444, 3230}
+
 \bibitem[\protect\citeauthoryear{{Casares}}{{Casares}}{2015}]{Casares:2015}
 {Casares} J.,  2015, \mn@doi [\apj] {10.1088/0004-637X/808/1/80}, \href
   {https://ui.adsabs.harvard.edu/abs/2015ApJ...808...80C} {808, 80}
@@ -25,10 +35,40 @@
 {Casares} J.,  2016, \mn@doi [\apj] {10.3847/0004-637X/822/2/99}, \href
   {https://ui.adsabs.harvard.edu/abs/2016ApJ...822...99C} {822, 99}
 
+\bibitem[\protect\citeauthoryear{{Drew} et~al.,}{{Drew}
+  et~al.}{2005}]{Drew:2005}
+{Drew} J.~E.,  et~al., 2005, \mn@doi [\mnras]
+  {10.1111/j.1365-2966.2005.09330.x}, \href
+  {http://adsabs.harvard.edu/abs/2005MNRAS.362..753D} {362, 753}
+
+\bibitem[\protect\citeauthoryear{{Drew} et~al.,}{{Drew}
+  et~al.}{2014}]{Drew:2014}
+{Drew} J.~E.,  et~al., 2014, \mn@doi [\mnras] {10.1093/mnras/stu394}, \href
+  {https://ui.adsabs.harvard.edu/abs/2014MNRAS.440.2036D} {440, 2036}
+
 \bibitem[\protect\citeauthoryear{{Horne} \& {Marsh}}{{Horne} \&
   {Marsh}}{1986}]{Horne:1986}
 {Horne} K.,  {Marsh} T.~R.,  1986, \mn@doi [\mnras] {10.1093/mnras/218.4.761},
   \href {https://ui.adsabs.harvard.edu/abs/1986MNRAS.218..761H} {218, 761}
+
+\bibitem[\protect\citeauthoryear{{Mendes de Oliveira} et~al.,}{{Mendes de
+  Oliveira} et~al.}{2019}]{Mendes:2019}
+{Mendes de Oliveira} C.,  et~al., 2019, \mn@doi [\mnras]
+  {10.1093/mnras/stz1985}, \href
+  {https://ui.adsabs.harvard.edu/abs/2019MNRAS.489..241M} {489, 241}
+
+\bibitem[\protect\citeauthoryear{{Osterbrock} \& {Ferland}}{{Osterbrock} \&
+  {Ferland}}{2006}]{Osterbrock:2006}
+{Osterbrock} D.~E.,  {Ferland} G.~J.,  2006, Astrophysics Of Gas Nebulae and
+  Active Galactic Nuclei.
+Sausalito: University Science Books, \url
+  {https://books.google.com.br/books?id=HgfrkDjBD98C}
+
+\bibitem[\protect\citeauthoryear{{Parker}, {Boji{\v c}i{\'c}}  \&
+  {Frew}}{{Parker} et~al.}{2016}]{Parker:2016}
+{Parker} Q.~A.,  {Boji{\v c}i{\'c}} I.~S.,   {Frew} D.~J.,  2016, in Journal of
+  Physics Conference Series. p. 032008 (\mn@eprint {arXiv} {1603.07042}),
+  \mn@doi{10.1088/1742-6596/728/3/032008}
 
 \bibitem[\protect\citeauthoryear{{Ratti}, {Steeghs}, {Jonker}, {Torres},
   {Bassa}  \& {Verbunt}}{{Ratti} et~al.}{2012}]{Ratti:2012}
