@@ -83,7 +83,7 @@ plt.imshow(img, origin='lower', cmap='cividis', aspect='equal')
 ax1.add_scalebar(20.0/3600)
 ax1.scalebar.set_label('20 arcsec')
 ax1.scalebar.set(color='yellow', linewidth=4, alpha=0.9)
-ax1.scalebar.set_font(size=23, weight='bold',
+ax1.scalebar.set_font(size=40, weight='bold',
                       stretch='normal', family='sans-serif',
                       style='normal', variant='normal')
 
