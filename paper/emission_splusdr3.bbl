@@ -41,11 +41,36 @@ Akras S.,  Guzman-Ramirez L.,  Leal-Ferreira M.,   Ramos-Larios G.,  2019a,
   {http://adsabs.harvard.edu/abs/2018arXiv180402667C} {} (\mn@eprint {arXiv}
   {1804.02667})
 
+\bibitem[\protect\citeauthoryear{{Corradi} \& {Giammanco}}{{Corradi} \&
+  {Giammanco}}{2010}]{Corradi:2010}
+{Corradi} R.~L.~M.,  {Giammanco} C.,  2010, \mn@doi [\aap]
+  {10.1051/0004-6361/201015541}, \href
+  {https://ui.adsabs.harvard.edu/abs/2010A&A...520A..99C} {520, A99}
+
+\bibitem[\protect\citeauthoryear{{Corradi} et~al.,}{{Corradi}
+  et~al.}{2008}]{Corradi:2008}
+{Corradi} R.~L.~M.,  et~al., 2008, \mn@doi [\aap] {10.1051/0004-6361:20078989},
+  \href {https://ui.adsabs.harvard.edu/abs/2008A&A...480..409C} {480, 409}
+
+\bibitem[\protect\citeauthoryear{{Corradi}, {Sabin}, {Munari}, {Cetrulo},
+  {Englaro}, {Angeloni}, {Greimel}  \& {Mampaso}}{{Corradi}
+  et~al.}{2011}]{Corradi:2011}
+{Corradi} R.~L.~M.,  {Sabin} L.,  {Munari} U.,  {Cetrulo} G.,  {Englaro} A.,
+  {Angeloni} R.,  {Greimel} R.,   {Mampaso} A.,  2011, \mn@doi [\aap]
+  {10.1051/0004-6361/201016406}, \href
+  {https://ui.adsabs.harvard.edu/abs/2011A&A...529A..56C} {529, A56}
+
 \bibitem[\protect\citeauthoryear{{Drew} et~al.,}{{Drew}
   et~al.}{2005}]{Drew:2005}
 {Drew} J.~E.,  et~al., 2005, \mn@doi [\mnras]
   {10.1111/j.1365-2966.2005.09330.x}, \href
   {http://adsabs.harvard.edu/abs/2005MNRAS.362..753D} {362, 753}
+
+\bibitem[\protect\citeauthoryear{{Drew}, {Greimel}, {Irwin}  \& {Sale}}{{Drew}
+  et~al.}{2008}]{Drew:2008}
+{Drew} J.~E.,  {Greimel} R.,  {Irwin} M.~J.,   {Sale} S.~E.,  2008, \mn@doi
+  [\mnras] {10.1111/j.1365-2966.2008.13147.x}, \href
+  {https://ui.adsabs.harvard.edu/abs/2008MNRAS.386.1761D} {386, 1761}
 
 \bibitem[\protect\citeauthoryear{{Drew} et~al.,}{{Drew}
   et~al.}{2014}]{Drew:2014}
@@ -83,6 +108,14 @@ Sausalito: University Science Books, \url
   {10.1111/j.1365-2966.2011.19999.x}, \href
   {https://ui.adsabs.harvard.edu/abs/2012MNRAS.420...75R} {420, 75}
 
+\bibitem[\protect\citeauthoryear{{Sabin}, {Zijlstra}, {Wareing}, {Corradi},
+  {Mampaso}, {Viironen}, {Wright}  \& {Parker}}{{Sabin}
+  et~al.}{2010}]{Sabin:2010}
+{Sabin} L.,  {Zijlstra} A.~A.,  {Wareing} C.,  {Corradi} R. L.~M.,  {Mampaso}
+  A.,  {Viironen} K.,  {Wright} N.~J.,   {Parker} Q.~A.,  2010, \mn@doi [\pasa]
+  {10.1071/AS09046}, \href
+  {https://ui.adsabs.harvard.edu/abs/2010PASA...27..166S} {27, 166}
+
 \bibitem[\protect\citeauthoryear{{Schwope}, {Catal{\'a}n}, {Beuermann},
   {Metzner}, {Smith}  \& {Steeghs}}{{Schwope} et~al.}{2000}]{Schwope:2000}
 {Schwope} A.~D.,  {Catal{\'a}n} M.~S.,  {Beuermann} K.,  {Metzner} A.,  {Smith}
@@ -94,6 +127,18 @@ Sausalito: University Science Books, \url
   {Casares}}{2002}]{Steeghs:2002}
 {Steeghs} D.,  {Casares} J.,  2002, \mn@doi [\apj] {10.1086/339224}, \href
   {https://ui.adsabs.harvard.edu/abs/2002ApJ...568..273S} {568, 273}
+
+\bibitem[\protect\citeauthoryear{{Viironen} et~al.,}{{Viironen}
+  et~al.}{2009}]{Viirone:2009}
+{Viironen} K.,  et~al., 2009, \mn@doi [\aap] {10.1051/0004-6361/200811575},
+  \href {https://ui.adsabs.harvard.edu/abs/2009A&A...502..113V} {502, 113}
+
+\bibitem[\protect\citeauthoryear{{Vink}, {Drew}, {Steeghs}, {Wright}, {Martin},
+  {G{\"a}nsicke}, {Greimel}  \& {Drake}}{{Vink} et~al.}{2008}]{Vink:2008}
+{Vink} J.~S.,  {Drew} J.~E.,  {Steeghs} D.,  {Wright} N.~J.,  {Martin} E.~L.,
+  {G{\"a}nsicke} B.~T.,  {Greimel} R.,   {Drake} J.,  2008, \mn@doi [\mnras]
+  {10.1111/j.1365-2966.2008.13220.x}, \href
+  {https://ui.adsabs.harvard.edu/abs/2008MNRAS.387..308V} {387, 308}
 
 \bibitem[\protect\citeauthoryear{{Witham} et~al.,}{{Witham}
   et~al.}{2006}]{Witham:2006}
