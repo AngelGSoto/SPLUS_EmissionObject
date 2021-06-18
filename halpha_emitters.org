@@ -323,6 +323,10 @@ Results =1251923=.
 
 I found that using the Gustavos database is restricted to get table with 20000 rows.
 
+**** Download stamps
+Script to download stamp images FITS from database
+: python ../../programs/get-splus-fits.py 351.0847562454346 -0.10695578184817373 --radi 300 --band F515 --name GALEX24170
+
 **** Download colored and cut images from database
 
 I write a script to download the colored images and make them for publication:
@@ -438,6 +442,11 @@ plt.savefig('{}_{}-{}_{}_r.fits'.format(Name, ra, dec, rad).replace(".fits", ".p
 #+END_SRC
 
 : python ../../programs/getColored-imgesSplus.py 338.66637521384126 0.6909664418071105 --radi 100 --name FASTT1560
+
+***** Or make 3-band colored images
+: ython ../../programs/rgb_image-v2.py GALEX24170_351-0_300_F515 GALEX24170_351-0_300_F660 GALEX24170_351-0_300_F515 --debug
+
+
 
 *** Alternative solution: sqlite
 

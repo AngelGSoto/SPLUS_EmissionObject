@@ -1,0 +1,183 @@
+import matplotlib.pyplot as plt
+from matplotlib.colors import PowerNorm
+from astropy import units as u
+from astropy.coordinates import SkyCoord
+from astropy.wcs import WCS
+import pandas as pd
+import numpy as np
+from astropy.table import Table
+import seaborn as sns
+import argparse
+import sys
+import os
+import glob
+import json
+import matplotlib.patches as mpatches
+from scipy.stats import gaussian_kde
+from pathlib import Path
+from density_scatter import density_scatter
+import hdbscan
+from sklearn.preprocessing import StandardScaler
+from scipy.cluster.hierarchy import dendrogram, linkage
+import scipy.cluster.hierarchy as shc
+sns.set_color_codes()
+ROOT_PATH = Path("../paper/Figs")
+
+# Read the file
+table = Table.read("../3filter_noflat/Good-LD-Halpha-DR3_noFlag_merge-7filter-visualCleaning-Final-takeoutrepeat-Final.ecsv", format="ascii.ecsv")
+
+# Colors
+m = (table["e_G_PStotal"] <= 0.2) & (table["e_I_PStotal"] <= 0.2) & (table["e_Z_PStotal"] <= 0.2)
+m1 =  (table["e_U_PStotal"] <= 0.2) &(table["e_G_PStotal"] <= 0.2) & (table["e_I_PStotal"] <= 0.2) 
+zg = table['Z_PStotal'][m] - table['G_PStotal'][m]
+gr = table['G_PStotal'][m] - table['R_PStotal'][m]
+ri = table['R_PStotal'][m] - table['I_PStotal'][m]
+ug = table['U_PStotal'][m1] - table['G_PStotal'][m1]
+gr_ = table['G_PStotal'][m1] - table['R_PStotal'][m1]
+
+# Create an array
+X = np.array(list(zip(zg, gr)))
+print("Shape:", X.shape)
+# Standarized the data
+X_std = StandardScaler().fit_transform(X)
+
+# Applying HDBSCAN
+clusterer = hdbscan.HDBSCAN(min_samples=30, min_cluster_size=80, prediction_data=True).fit(X_std)
+labels_h = clusterer.labels_
+
+# Number of clusters in labels, ignoring noise if present.
+n_clusters_ = len(set(labels_h)) - (1 if -1 in labels_h else 0)
+n_cluster0 = list(labels_h).count(0)
+n_cluster1 = list(labels_h).count(1)
+n_cluster2 = list(labels_h).count(2)
+n_noise_ = list(labels_h).count(-1)
+
+# Print parameters
+print('##########################################################')
+print('Estimated number of clusters: %d' % n_clusters_)
+print('Estimated number of cluster points 0: %d' % n_cluster0)
+print('Estimated number of cluster points 1: %d' % n_cluster1)
+print('Estimated number of cluster points 2: %d' % n_cluster2)
+print('Estimated number of noise points: %d' % n_noise_)
+print('##########################################################')
+
+# Add label to the table and making the colors
+table_= table[m]
+
+table_["Label"] = labels_h
+
+mask0 = table_["Label"] == -1
+mask1 = table_["Label"] == 0
+mask2 = table_["Label"] == 1
+
+# Making the colors
+zg_0 = table_['Z_PStotal'][mask0] - table_['G_PStotal'][mask0]
+gr_0 = table_['G_PStotal'][mask0] - table_['R_PStotal'][mask0]
+zg_1 = table_['Z_PStotal'][mask1] - table_['G_PStotal'][mask1]
+gr_1 = table_['G_PStotal'][mask1] - table_['R_PStotal'][mask1]
+zg_2 = table_['Z_PStotal'][mask2] - table_['G_PStotal'][mask2]
+gr_2 = table_['G_PStotal'][mask2] - table_['R_PStotal'][mask2]
+
+# Equation constructed form synthetic phometry
+# Limiting the blue and red region
+x_new = np.linspace(-15.0, 1000, 200)
+y = 0.45*x_new + 1.55
+
+#Plot the results
+
+fig, ax = plt.subplots(figsize=(12, 12))
+
+ax.fill_between(x_new, y, -100, color="k", alpha=0.1)
+ax.plot(x_new, y, c="k", zorder=11, lw=0.5)
+
+plt.tick_params(axis='x', labelsize=25) 
+plt.tick_params(axis='y', labelsize=25)
+
+plt.xlabel(r'$z - g$', fontsize= 25)
+plt.ylabel(r'$g - r$', fontsize= 25)
+
+ax.scatter(
+        zg_0,
+        gr_0,
+        marker="o",
+        c=sns.xkcd_rgb["grey"],
+        label="Outliers",
+        edgecolors="w", alpha=0.7, zorder=3
+    )
+
+ax.scatter(
+        zg_1,
+        gr_1,
+        marker="o",
+        c=sns.xkcd_rgb["dark pink"],
+        label="Red",
+        edgecolors="w", zorder=4
+    )
+
+ax.scatter(
+        zg_2,
+        gr_2,
+        marker="o",
+        c=sns.xkcd_rgb["cerulean"],
+        label="Blue",
+        edgecolors="w", zorder=3
+    )
+
+sns.kdeplot(
+    zg_2,
+    gr_2,
+    ax=ax,
+    norm=PowerNorm(0.5), zorder=3,
+        cmap="Blues",
+ )
+
+sns.kdeplot(
+    zg_1,
+    gr_1,
+    ax=ax,
+    norm=PowerNorm(0.5), zorder=5,
+        cmap="Reds",
+ )
+
+
+ax.legend(ncol=1, fontsize=20.0, title="Group", title_fontsize=30)
+ax.set(xlim=[-6.8, 2.5], ylim=[-3., 5.])#, xscale="log", yscale="log")
+ax.set_aspect("equal")
+#ax.set(xlabel=r"$z - g$", ylabel=r"$g - r$")
+fig.savefig(ROOT_PATH / "blued-red-hdbscan.pdf")
+plt.clf()
+
+###############
+#Soft clusters
+
+soft_clusters = hdbscan.all_points_membership_vectors(clusterer)
+color_palette = sns.color_palette('Paired', 12)
+cluster_colors = [color_palette[np.argmax(x)]
+                  for x in soft_clusters]
+
+
+fig, ax1 = plt.subplots(figsize=(12, 12))
+plt.tick_params(axis='x', labelsize=25) 
+plt.tick_params(axis='y', labelsize=25)
+
+plt.xlabel(r'$z - g$', fontsize= 25)
+plt.ylabel(r'$g - r$', fontsize= 25)
+ax1.set(xlim=[-6.8, 2.5], ylim=[-3., 5.])#, xscale="log", yscale="log")
+ax1.fill_between(x_new, y, -100, color="k", alpha=0.1)
+ax1.plot(x_new, y, c="k", zorder=11, lw=0.5)
+ax1.scatter(zg, gr, s=50, linewidth=0.2, c=cluster_colors, edgecolors="w", alpha=0.25)
+ax1.set_aspect("equal")
+#ax.set(xlabel=r"$z - g$", ylabel=r"$g - r$")
+fig.savefig(ROOT_PATH / "blued-red-hdbscan-soft.pdf")
+plt.clf()
+
+########################################
+#Dendrograms for Hierarchical Clustering
+
+fig, ax2 = plt.subplots(figsize=(10, 7))
+#plt.figure(figsize=(10, 7))
+#plt.title("Customer Dendograms")
+plt.tick_params(axis='y', labelsize=25)
+dend = shc.dendrogram(shc.linkage(X, method='ward'))
+fig.savefig(ROOT_PATH / "Customer-Dendrograms.pdf")
+plt.clf()

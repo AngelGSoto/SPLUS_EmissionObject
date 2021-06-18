@@ -16,6 +16,8 @@ import matplotlib.patches as mpatches
 from scipy.stats import gaussian_kde
 from pathlib import Path
 from density_scatter import density_scatter
+from scipy.cluster.hierarchy import dendrogram, linkage
+import scipy.cluster.hierarchy as shc
 sns.set_color_codes()
 ROOT_PATH = Path("../paper/Figs")
 
@@ -34,8 +36,7 @@ gr_red = table_red['G_PStotal'] - table_red['R_PStotal']
 # Equation constructed form synthetic phometry
 # Limiting the blue and red region
 x_new = np.linspace(-15.0, 1000, 200)
-y = 0.45*x_new + 1.48
-
+y = 0.45*x_new + 1.55
 
 fig, ax = plt.subplots(figsize=(12, 12))
 
@@ -46,7 +47,7 @@ plt.tick_params(axis='x', labelsize=25)
 plt.tick_params(axis='y', labelsize=25)
 
 plt.xlabel(r'$z - g$', fontsize= 25)
-plt.ylabel(r'$g - i$', fontsize= 25)
+plt.ylabel(r'$g - r$', fontsize= 25)
 
 ax.scatter(
         zg_blue,
@@ -54,7 +55,7 @@ ax.scatter(
         marker="o",
         c=sns.xkcd_rgb["cerulean"],
         label="Blue",
-        edgecolors="w", alpha=0.7, zorder=3
+        edgecolors="w", alpha=0.7, zorder=4
     )
 
 ax.scatter(
