@@ -29,10 +29,7 @@
 %\usepackage{newtxtext,newtxmath}
 % Depending on your LaTeX fonts installation, you might get better results with one of these:
 \usepackage{mathptmx}
-%\usepackage{txfonts}
-
-% Use vector fonts, so it zooms properly in on-screen viewing software
-% Don't change these lines unless you know what you are doing
+\usepackage{txfonts}
 \usepackage[T1]{fontenc}
 
 % Allow "Thomas van Noord" and "Simon de Laguarde" and alike to be sorted by "N" and "L" etc. in the bibliography.
@@ -41,10 +38,6 @@
 \let\VANthebibliography\thebibliography
 \def\thebibliography{\DeclareRobustCommand{\VAN}[3]{##3}\VANthebibliography}
 
-
-%%%%% AUTHORS - PLACE YOUR OWN PACKAGES HERE %%%%%
-
-% Only include extra packages if you really need them. Common packages are:
 \usepackage{graphicx}	% Including figure files
 \usepackage{amsmath}	% Advanced maths commands
 \usepackage{amssymb}	% Extra maths symbols
@@ -117,30 +110,19 @@ In the past H$\lpha$ surveys with modest spatial resolutions have been used to i
 
 Like VPHAS+, others ongoing surveys that are used to study the population of emission line objects are the The Javalambre Photometric Local Universe Survey (J-PLUS\footnote{\url{https://www.j-plus.es}}, \citealp{Cenarro:2018}) and the Southern-Photometric Local Universe Survey (S-PLUS\footnote{\url{http://www.splus.iag.usp.br}}, \citealp{Mendes:2019}) are providing observations of the Galactic halo covering both northern and southern celestial hemispheres in a systematic way with twin telescopes using the same set of multi-band filters. In addition to the H$\alpha$ filter, which is already vastly applied to systematically searching for H$\alpha$ emitters the telescopes offer 11 more filters. And more ambitious yet the JPAS survey that will the same area of J-PLUS in 56 narrow-band filters.
 
-Traditionally, color-color diagrams based in H$\alpha$ filter are been used to identify H$\alpha$ emitters. The analysis the color-color digramam  (r - H$\alpha$) versus (r - i) has resulted on the discoveried of new emission line objects, for instance \citet{Witham:2006, Witham:2007}  used the (r - H$\alpha$) versus (r - i) colour-colour diagram to find for new CV. On the other hand, \citet{Vink:2008} reported the discovery of YSOs by using this same colour criteria. In this sense using this methology a variety of classes of objects are been identified, which include symbiotic stars \citep{Corradi:2008, Corradi:2010, Corradi:2011}, early type emission line stars \citep{Drew:2008} and planetary nebulae \citep{Viirone:2009, Sabin:2010}. Recently, by useng this same color diagram were also identified compact PNe candidate in VPHAS+ catalog \citep{Akras:2019}. And the same diagram in conjunction new ones shows to be very efficient to find for PN candidates \citep{Gutierrez:2020}.   
+Traditionally, color-color diagrams based in H$\alpha$ filter are been used to identify H$\alpha$ emitters.  The analysis the color-color diagram  (r - H$\alpha$) versus (r - i) has resulted on the discoveried of new emission line objects, for instance \citet{Witham:2006, Witham:2007}  used the (r - H$\alpha$) versus (r - i) colour-colour diagram to find for new CV. On the other hand, \citet{Vink:2008} reported the discovery of YSOs by using this same colour criteria. In this sense using this methology a variety of classes of objects are been identified, which include symbiotic stars \citep{Corradi:2008, Corradi:2010, Corradi:2011}, early type emission line stars \citep{Drew:2008} and planetary nebulae \citep{Viirone:2009, Sabin:2010}. Recently, by using this same color diagram were also identified compact PN candidates in VPHAS+ catalog \citep{Akras:2019}. And the same diagram in conjunction with new ones shows to be very efficient to find for PN candidates \citep{Gutierrez:2020}. In general terms, \citet{Witham:2006} presented a methodology and first results in looking for emission line sources in narrow-band surveys.     
 
-
-
-
-
-
-% \texttt{mnras\_sample.tex} for a more complex example, and \texttt{mnras\_guide.tex}
-
-% \citet{Fournier1901}
-% \citep[e.g.][]{vanDijk1902}.
-% \citet{deLaguarde1903, delaGuarde1904}.
-
+In this work, we used S-PLUS observations of the southern hemisphere to search for objects with an excess of H{$\alpha$} using automatic methods based on the (r - H$\alpha$) versus (r - i) color-color diagram we also used color criteria based in (g - r) and (z - g) in conjunction to unsupervised machine learning techniques to split the final list in those with blue and red continuum. The paper is organized as follows...
 
 \section{Observations}
 \label{sec:obser}
 
-The S-PLUS survey is a multi-band photometric survey...
+Particularly, we are implemented data from S-PLUS DR3 (ref) to carried out our project. S-PLUS is 12-band optical photometric survey, which are formed by using seven narrow-band and five brow-band like SDSS filters. The narrow-band set include the filter $J$0660 which detect the H{$\alpha$} emission line. Figure~\ref{fig:curves} shows the Javalambre filter system (Marín-Franch et al. 2012) overlapping are the optical spectra of several class emission line objects on which it is possible to see that the H{$\alpha$} line falls into the $J$0660 filter, except for the QSOs.   
+
+The actual data release contains about 60 millions of objects. covering a total area of8000 deg2, at high Galac-tic latitudes (𝑏 ¡30deg) using a dedicated 0.83m robotic telescope,the T80-South (T80S), located at Cerro Tololo, Chile. S-PLUS willcover an additional1300 deg2of the Galactic plane and bulge toenable Galactic studies. In this work, we focus on the aspects thatare of particular interest to the second data release of the S-PLUS main survey. Additional information about S-PLUS can be found in \citet{Mendes:2019}. 
 
 \begin{figure}
-	% To include a figure from a file named example.*
-	% Allowable file formats are eps or ps if compiling using latex
-	% or pdf, png, jpg if compiling using pdflatex
-	\includegraphics[width=0.9\linewidth]{Figs/splus-filter.pdf}
+    \includegraphics[width=0.9\linewidth]{Figs/splus-filter.pdf}
     \caption{Transmission curves of the S-PLUS filters set. The narrow-band filter $J0660$ detects the H$\alpha$ emission line. Over-plotted are different classes of emission line objects, from upper to down PN, SySt ... }
     \label{fig:curves}
 \end{figure}
@@ -171,18 +153,20 @@ Firts see an aproximation of the  4$\sigma$ cut away from the ariginal fit.
     \includegraphics[trim=10 0 65 20, clip]{Figs/diagram-DR3-errorFlag0-3f-18r20}
     & \includegraphics[trim=10 0 65 20, clip]{Figs/diagram-DR3-errorFlag0-3f-20r21}\\
   \end{tabular}
-  \caption{Color-color diagrams with all objects...}
+  \caption{An illustration of the selection criteria used to identify strong emission-line objects via colour-colour plots. The data shown here are all from the
+IPHAS field 2373. The data are split up into four magnitude bins, as shown in the four panels. The median errors of the data points in each bin are shown by
+the black crosses near the top of each plot. Objects with H{$\alpha$} excess should be located near the top of the colour-colour plots. The thin red lines illustrate the
+original least-squares fit to all the data (grey points). The thin blue lines represent the final fits to the upper locus of points obtained by applying an iterative
+σ -clipping technique to the initial fit. The actual cuts used to select Hα emitters are shown by the thick dashed lines. If the cut was based on the initial (final)
+fit, it is shown in red (blue). Objects selected as Hα emitters must be located above the cut and are shown as large triangles. Note that the cut lines shown here
+are only approximate, as the actual selection criterion also considers the errors on each individual data point. This explains, for example, why an object in the
+bottom right-hand panel is not selected despite clearly lying above the cut line.}
   \label{fig:color-diagram}
 \end{figure*}
 
 
-%It is frequently split into subsections, such as Section~\ref{sec:maths} below.
-
 \subsection{Maths}
 \label{sec:maths} % used for referring to this section from elsewhere
-
- %% e.g. $2\times3=6$
-%% or $v=220$\,km\,s$^{-1}$, but more complicated expressions should be entered
 
 
 \begin{equation}
@@ -191,7 +175,6 @@ Firts see an aproximation of the  4$\sigma$ cut away from the ariginal fit.
 	\label{eq:quadratic}
 \end{equation}
 
-%Refer back to them as e.g. equation~(\ref{eq:quadratic}).
 
 \subsection{Figures and tables}
 
@@ -200,7 +183,8 @@ Firts see an aproximation of the  4$\sigma$ cut away from the ariginal fit.
 
 \begin{figure*}
 	\includegraphics[width=0.9\linewidth]{Figs/final-emitters.pdf}
-    \caption{Emission lines selected...}
+    \caption{CCD of the three samples of outliers. Blue outliers are shown as blue circles, while emitter candidates are shown as grey triangles and absorption
+line candidates as green diamonds.}
     \label{fig:emission}
 \end{figure*}
 
@@ -267,12 +251,12 @@ Firts see an aproximation of the  4$\sigma$ cut away from the ariginal fit.
   \setkeys{Gin}{width=0.5\linewidth}
   \begin{tabular}{ll}
     (a) & (b) \\
-    \includegraphics[trim=10 0 10 20, clip]{Figs/StenholmAcker_pn_g006_0-41_9_id176-SPLUS-s29s46-072842.pdf} & \includegraphics[width=0.4\linewidth, trim=10 0 65 20, clip]{Figs/PNG006_316-37_100_r.pdf} \\
-     \includegraphics[trim=10 0 10 20, clip]{Figs/spec-0680-52200-0153-STRIPE82-0159-019049.pdf} & \includegraphics[width=0.4\linewidth, trim=10 0 65 20, clip]{Figs/GALEX24170_351-0_150_r.pdf} \\
+    \includegraphics[trim=10 0 10 20, clip]{Figs/StenholmAcker_pn_g006_0-41_9_id176-SPLUS-s29s46-072842.pdf} & \includegraphics[width=0.4\linewidth, trim=10 0 10 20, clip]{Figs/PNG006_316-37_100_r.pdf} \\
+     \includegraphics[trim=10 0 10 20, clip]{Figs/spec-0680-52200-0153-STRIPE82-0159-019049.pdf} & \includegraphics[width=0.4\linewidth, trim=10 0 10 20, clip]{Figs/GALEX24170_351-0_150_r.pdf} \\
     (c) & (d) \\
-    \includegraphics[trim=10 0 10 20, clip]{Figs/spec-0376-52143-0631-STRIPE82-0142-027354.pdf} & \includegraphics[width=0.4\linewidth, trim=10 0 65 20, clip]{Figs/FASTT1560_338-0_100_r.pdf} \\
-     \includegraphics[trim=10 0 10 20, clip]{Figs/spec-0397-51794-0336-STRIPE82-0026-058736.pdf} & \includegraphics[width=0.4\linewidth, trim=10 0 65 20, clip]{Figs/LEDA1185205_17-1_200_r.pdf} \\
-     \includegraphics[trim=10 0 10 20, clip]{Figs/spec-9217-57934-0839-STRIPE82-0143-016137.pdf} & \includegraphics[width=0.4\linewidth, trim=10 0 65 20, clip]{Figs/PHL354_339-0_100_r.pdf} \\
+    \includegraphics[trim=10 0 10 20, clip]{Figs/spec-0376-52143-0631-STRIPE82-0142-027354.pdf} & \includegraphics[width=0.4\linewidth, trim=10 0 10 20, clip]{Figs/FASTT1560_338-0_100_r.pdf} \\
+     \includegraphics[trim=10 0 10 20, clip]{Figs/spec-0397-51794-0336-STRIPE82-0026-058736.pdf} & \includegraphics[width=0.4\linewidth, trim=10 0 10 20, clip]{Figs/LEDA1185205_17-1_200_r.pdf} \\
+     \includegraphics[trim=10 0 10 20, clip]{Figs/spec-9217-57934-0839-STRIPE82-0143-016137.pdf} & \includegraphics[width=0.4\linewidth, trim=10 0 10 20, clip]{Figs/PHL354_339-0_100_r.pdf} \\
   \end{tabular}
   \caption{Spectra of the known objects select with our algorithm }
   \label{fig:color-diagram}
@@ -299,10 +283,10 @@ Firts see an aproximation of the  4$\sigma$ cut away from the ariginal fit.
   \setkeys{Gin}{width=0.5\linewidth}
   \begin{tabular}{ll}
     (a) & (b) \\
-    \includegraphics[trim=10 0 10 20, clip]{Figs/spec-57313-EG220318S020919M01_sp10-173-SPLUS-s03s05-011958.pdf} & \includegraphics[width=0.4\linewidth, trim=10 0 65 20, clip]{Figs/SPLUS-s03s05-011958_329-3_100_r.pdf} \\
-     \includegraphics[trim=10 0 10 20, clip]{Figs/spec-55893-F9304_sp15-198-STRIPE82-0057-001810.pdf} & \includegraphics[width=0.4\linewidth, trim=10 0 65 20, clip]{Figs/STRIPE82-0057-001810_39-1_100_r.pdf} \\
+    \includegraphics[trim=10 0 10 20, clip]{Figs/spec-57313-EG220318S020919M01_sp10-173-SPLUS-s03s05-011958.pdf} & \includegraphics[width=0.4\linewidth, trim=10 0 10 20, clip]{Figs/SPLUS-s03s05-011958_329-3_100_r.pdf} \\
+     \includegraphics[trim=10 0 10 20, clip]{Figs/spec-55893-F9304_sp15-198-STRIPE82-0057-001810.pdf} & \includegraphics[width=0.4\linewidth, trim=10 0 10 20, clip]{Figs/STRIPE82-0057-001810_39-1_100_r.pdf} \\
     (c) & (d) \\
-    \includegraphics[trim=10 0 10 20, clip]{Figs/spec-57336-EG034838N001340M01_sp09-025-STRIPE82-0084-014280.pdf} & \includegraphics[width=0.4\linewidth, trim=10 0 65 20, clip]{Figs/STRIPE82-0084-014280_57-0_80_r.pdf} \\
+    \includegraphics[trim=10 0 10 20, clip]{Figs/spec-57336-EG034838N001340M01_sp09-025-STRIPE82-0084-014280.pdf} & \includegraphics[width=0.4\linewidth, trim=10 0 10 20, clip]{Figs/STRIPE82-0084-014280_57-0_80_r.pdf} \\
   \end{tabular}
   \caption{Spectra of the Lamost }
   \label{fig:color-diagram}
@@ -313,10 +297,10 @@ Firts see an aproximation of the  4$\sigma$ cut away from the ariginal fit.
   \setkeys{Gin}{width=0.5\linewidth}
   \begin{tabular}{ll}
     (a) & (b) \\
-    \includegraphics[trim=10 0 10 20, clip]{Figs/spec-0331-52368-0449-SPLUS-n02s23-034336.pdf} & \includegraphics[width=0.4\linewidth, trim=10 0 65 20, clip]{Figs/SPLUS-n02s23-034336_180-1_200_r.pdf} \\
-     \includegraphics[trim=10 0 10 20, clip]{Figs/spec-9152-58041-0463-STRIPE82-0147-005730.pdf} & \includegraphics[width=0.4\linewidth, trim=10 0 65 20, clip]{Figs/STRIPE82-0147-005730_343-1_100_r.pdf} \\
+    \includegraphics[trim=10 0 10 20, clip]{Figs/spec-0331-52368-0449-SPLUS-n02s23-034336.pdf} & \includegraphics[width=0.4\linewidth, trim=10 0 10 20, clip]{Figs/SPLUS-n02s23-034336_180-1_200_r.pdf} \\
+     \includegraphics[trim=10 0 10 20, clip]{Figs/spec-9152-58041-0463-STRIPE82-0147-005730.pdf} & \includegraphics[width=0.4\linewidth, trim=10 0 10 20, clip]{Figs/STRIPE82-0147-005730_343-1_100_r.pdf} \\
     (c) & (d) \\
-    \includegraphics[trim=10 0 10 20, clip]{Figs/spec-1089-52913-0196-STRIPE82-0007-024265.pdf} & \includegraphics[width=0.4\linewidth, trim=10 0 65 20, clip]{Figs/STRIPE82-0007-024265_3-0_100_r.pdf} \\
+    \includegraphics[trim=10 0 10 20, clip]{Figs/spec-1089-52913-0196-STRIPE82-0007-024265.pdf} & \includegraphics[width=0.4\linewidth, trim=10 0 10 20, clip]{Figs/STRIPE82-0007-024265_3-0_100_r.pdf} \\
   \end{tabular}
   \caption{Spectra of the SDSS}
   \label{fig:color-diagram}
@@ -341,15 +325,6 @@ We have found a important sample of emission line objects.
 \bibliographystyle{mnras}
 \bibliography{ref} % if your bibtex file is called example.bib
 
-
-% Alternatively you could enter them by hand, like this:
-% This method is tedious and prone to error if you have lots of references
-%\begin{thebibliography}{99}
-%\bibitem[\protect\citeauthoryear{Author}{2012}]{Author2012}
-%Author A.~N., 2013, Journal of Improbable Astronomy, 1, 1
-%\bibitem[\protect\citeauthoryear{Others}{2013}]{Others2013}
-%Others S., 2012, Journal of Interesting Stuff, 17, 198
-%\end{thebibliography}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
