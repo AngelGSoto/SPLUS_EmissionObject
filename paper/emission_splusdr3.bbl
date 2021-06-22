@@ -128,6 +128,12 @@ Sausalito: University Science Books, \url
   {10.1071/AS09046}, \href
   {https://ui.adsabs.harvard.edu/abs/2010PASA...27..166S} {27, 166}
 
+\bibitem[\protect\citeauthoryear{{Scaringi}, {Groot}, {Verbeek}, {Greiss},
+  {Knigge}  \& {K{\"o}rding}}{{Scaringi} et~al.}{2013}]{Scaringi:2013}
+{Scaringi} S.,  {Groot} P.~J.,  {Verbeek} K.,  {Greiss} S.,  {Knigge} C.,
+  {K{\"o}rding} E.,  2013, \mn@doi [\mnras] {10.1093/mnras/sts189}, \href
+  {https://ui.adsabs.harvard.edu/abs/2013MNRAS.428.2207S} {428, 2207}
+
 \bibitem[\protect\citeauthoryear{{Schwope}, {Catal{\'a}n}, {Beuermann},
   {Metzner}, {Smith}  \& {Steeghs}}{{Schwope} et~al.}{2000}]{Schwope:2000}
 {Schwope} A.~D.,  {Catal{\'a}n} M.~S.,  {Beuermann} K.,  {Metzner} A.,  {Smith}
@@ -151,6 +157,11 @@ Sausalito: University Science Books, \url
   {G{\"a}nsicke} B.~T.,  {Greimel} R.,   {Drake} J.,  2008, \mn@doi [\mnras]
   {10.1111/j.1365-2966.2008.13220.x}, \href
   {https://ui.adsabs.harvard.edu/abs/2008MNRAS.387..308V} {387, 308}
+
+\bibitem[\protect\citeauthoryear{{Wevers} et~al.,}{{Wevers}
+  et~al.}{2017}]{Wevers:2017}
+{Wevers} T.,  et~al., 2017, \mn@doi [\mnras] {10.1093/mnras/stw3123}, \href
+  {https://ui.adsabs.harvard.edu/abs/2017MNRAS.466..163W} {466, 163}
 
 \bibitem[\protect\citeauthoryear{{Witham} et~al.,}{{Witham}
   et~al.}{2006}]{Witham:2006}
