@@ -463,6 +463,10 @@ with the other one.
 + I created my own data base with DR3. After I wrote a script on python to download the data with these criteria: Flags_allFilter <= 2, error_allFilter <= 0.2, and magnitude interval on r-band.
 : python apply_query.py
 
+*** Final methods: Linear fit
+Method based on Witham et al. (2008) and Wevers et al. (2017).
+: python ../MC/programs/Selecting_Halpha_objects.py LMC_catalog_3fer_18r20 --Ranger "18 $\geq$ r < 20"
+
 **** Second phase: Cross-match 
 + Lamost -> 
   I mede macth with dr6.
@@ -491,7 +495,7 @@ Plots with the results
 
 ** Linear dicriminad analysis
 
-Using linear discriminant alalyis to clean the final sample of H{$\alpha$} emitters:
+Using linear discriminant analisys to clean the final sample of H{$\alpha$} emitters:
 
 #+BEGIN_SRC results
 

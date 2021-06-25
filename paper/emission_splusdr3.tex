@@ -117,9 +117,9 @@ In this work, we used S-PLUS observations of the southern hemisphere to search f
 \section{Observations}
 \label{sec:obser}
 
-Particularly, we are implemented data from S-PLUS DR3 (ref) to carried out our project. S-PLUS is 12-band optical photometric survey, which are formed by using seven narrow-band and five brow-band like SDSS filters. The narrow-band set include the filter $J$0660 which detect the H{$\alpha$} emission line. Figure~\ref{fig:curves} shows the Javalambre filter system (Marín-Franch et al. 2012) overlapping are the optical spectra of several class emission line objects on which it is possible to see that the H{$\alpha$} line falls into the $J$0660 filter, except for the QSOs.   
+Particularly, we are implemented data from S-PLUS DR3 (ref) to carried out our study. S-PLUS is 12-band optical photometric survey, which are formed by using seven narrow-band and five brow-band like SDSS filters. The narrow-band set include the filter $J$0660 which detect the H{$\alpha$} emission line. Figure~\ref{fig:curves} shows the Javalambre filter system (Marín-Franch et al. 2012) overlapping are the optical spectra of several class emission line objects on which it is possible to see that the H{$\alpha$} line falls into the $J$0660 filter, except for the QSOs.   
 
-The actual data release contains about 60 millions of objects. covering a total area of8000 deg2, at high Galac-tic latitudes (𝑏 ¡30deg) using a dedicated 0.83m robotic telescope,the T80-South (T80S), located at Cerro Tololo, Chile. S-PLUS willcover an additional1300 deg2of the Galactic plane and bulge toenable Galactic studies. In this work, we focus on the aspects thatare of particular interest to the second data release of the S-PLUS main survey. Additional information about S-PLUS can be found in \citet{Mendes:2019}. 
+The actual data release contains about 60 millions of objects covering a total area of $\sim$8000 deg$^2$, at high Galactic latitudes ($ > 30$~deg) using a dedicated 0.83m robotic telescope,the T80-South (T80S), located at Cerro Tololo, Chile. S-PLUS willcover an additional1300 deg2of the Galactic plane and bulge toenable Galactic studies. In this work, we focus on the aspects thatare of particular interest to the second data release of the S-PLUS main survey. Additional information about S-PLUS can be found in \citet{Mendes:2019}. 
 
 \begin{figure}
     \includegraphics[width=0.9\linewidth]{Figs/splus-filter.pdf}
@@ -129,11 +129,29 @@ The actual data release contains about 60 millions of objects. covering a total 
 
 
 \section{Methodology}
-\label{sec:meth}
+\label{sec:metho}
 
+We first constructed a sub-sample from all S-PLUS DR3 from which we applied an iterative and automatic technique to select objects with an excess of H{$\alpha$} emission line,  as we describe below:
+
+\subsection{Initial selction sample}
+\label{sec:}
+
+The firts step in our selection procedure consist in the following criteria to guarantee the quality of the observations of the objects:
+
+\begin{enumerate}
+\item The sources must have detection in the filters: $r$, $i$ and $J$0660. To assure that we select object must have error minor or equal to 0.2 in each of three filter.
+
+\item Must have an $r$ magnitude until $r = 21$.
+  
+\end{enumerate}
+
+\subsection{Finding the main stellar locus and selecting the H{$\alpha$ emitters} }
+\label{sec:}
+
+To select t sn
 \citet{Witham:2008} presented a catalogue of point-sources H{$\alpha$} emission objects identified in IPHAS. 
 
-To select the emission lines we used the same method created and implemented by \citet{Witham:2008} its possible to do that because the S-PLUS has similar filters that the IPHAS project, which are $r$, $J$0660 and $i$. This technique was used by \citet{Scaringi:2013} to identify blue objects with excess of H{$\lpha$} and after that \citet{Wevers:2017} also applied this methodology to create catalogue of candidate H{$\alpha$} emission showing a high effectiveness.    
+To select the emission lines we used the same method created and implemented by \citet{Witham:2008} its possible to do that because the S-PLUS has similar filters that the IPHAS project, which are $r$, $J$0660 and $i$. This technique was used by \citet{Scaringi:2013} to identify blue objects with excess of H{$\alpha$} and after that \citet{Wevers:2017} also applied this methodology to create catalogue of candidate H{$\alpha$} emission showing a high effectiveness.    
 Applying the selection criteria to selecting H$\alpha$ emitters. We used the same procedure in  \citet{Wevers:2017}. The objects with H$\alpha$ excess meet the condition:
 
  $(r - J0660)_{obs} - (r - J0660)_{fit} \geq C \times \sqrt{\sigma^2_s - \sigma^2_{phot}}$ 
@@ -156,12 +174,13 @@ Firts see an aproximation of the  4$\sigma$ cut away from the ariginal fit.
   \end{tabular}
   \caption{An illustration of the selection criteria used to identify strong emission-line objects via colour-colour plots. The data shown here are all from the
 S-PLUS DR3. The data are split up into four magnitude bins, as shown in the four panels. Objects with H{$\alpha$} excess should be located near the top of the colour-colour plots. The thin red lines illustrate the original least-squares fit to all the data (grey points). The thin blue lines represent the final fits to the upper locus of points obtained by applying an iterative
-σ -clipping technique to the initial fit. The actual cuts used to select Hα emitters are shown by the thick dashed lines. If the cut was based on the initial (final)
+σ -clipping technique to the initial fit. The actual cuts used to select H{$\alpha$} emitters are shown by the thick dashed lines. If the cut was based on the initial (final)
 fit, it is shown in red (blue). Objects selected as Hα emitters must be located above the cut and are shown as large triangles. Note that the cut lines shown here
 are only approximate, as the actual selection criterion also considers the errors on each individual data point. This explains, for example, why an object in the bottom right-hand panel is not selected despite clearly lying above the cut line.}
-  \label{fig:color-diagram}
+  \label{fig:criteria-color-plot}
 \end{figure*}
 
+In Figure~\ref{fig:criteria-color-plot} is illustrate the selection process.  The black line represent the fit  
 
 \subsection{Maths}
 \label{sec:maths} % used for referring to this section from elsewhere
@@ -181,8 +200,7 @@ are only approximate, as the actual selection criterion also considers the error
 
 \begin{figure*}
 	\includegraphics[width=0.9\linewidth]{Figs/final-emitters.pdf}
-    \caption{CCD of the three samples of outliers. Blue outliers are shown as blue circles, while emitter candidates are shown as grey triangles and absorption
-line candidates as green diamonds.}
+    \caption{Colour-colour diagram with all the emission line objects selected from S-PLUS DR3. Size of the symbols represent the measured FWHM assuming a Gaussian core (for more detail see \citealt{Fernandes:2021}). Colored bar is the magnitude values in the r-band. The contours represent the synthetic main-sequence and giant stars loci from the library of stellar spectral energy distributions of \citet{Pickles:1998}.}
     \label{fig:emission}
 \end{figure*}
 

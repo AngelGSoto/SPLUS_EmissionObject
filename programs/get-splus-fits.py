@@ -42,7 +42,7 @@ rad = int(cmd_args.radi)
 # Filer
 band = cmd_args.band
 
-# Nome of the object if has
+# Name of the object if has
 Name = cmd_args.name
 
 # Connect
@@ -78,6 +78,7 @@ wcs = WCS(hdul.header)
 
 print("Testing the download:")                 
 print(wcs)
+
 # Delete fz file
 os.remove('{}_{}-{}_{}_{}.fz'.format(Name, int(ra), int(dec), rad, band))
 print("FZ File Removed!")
