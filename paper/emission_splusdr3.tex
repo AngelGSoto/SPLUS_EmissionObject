@@ -164,7 +164,11 @@ To select t sn
 To select the emission lines we used the same method created and implemented by \citet{Witham:2008} its possible to do that because the S-PLUS has similar filters that the IPHAS project, which are $r$, $J$0660 and $i$. This technique was used by \citet{Scaringi:2013} to identify blue objects with excess of H{$\alpha$} and after that \citet{Wevers:2017} also applied this methodology to create catalogue of candidate H{$\alpha$} emission showing a high effectiveness.    
 Applying the selection criteria to selecting H$\alpha$ emitters. We used the same procedure in  \citet{Wevers:2017}. The objects with H$\alpha$ excess meet the condition:
 
- $(r - J0660)_{obs} - (r - J0660)_{fit} \geq C \times \sqrt{\sigma^2_s - \sigma^2_{phot}}$ 
+
+\begin{equation}
+  (r - J0660)_{obs} - (r - J0660)_{fit} \geq C \times \sqrt{\sigma^2_s - \sigma^2_{phot}}
+\end{equation}
+ 
  
 where $\sigma_s$ is the root mean squared value of the residuals around
 the fit and $\sigma_{phot}$ is the error on the observed $(r - J0660)$ colour
