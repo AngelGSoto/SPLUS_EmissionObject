@@ -29,5 +29,5 @@ id2 = tab_id["ID"]
 mask = np.array([source in id2 for source in id1])
 
 # Save the final file
-asciifile = file2.replace(".dat", "-VisualInspection.ecsv")
+asciifile = file2.replace(".dat", "-Goodinbad.ecsv")
 tab[mask].write(asciifile, format="ascii.ecsv", overwrite=True)

@@ -1,3 +1,6 @@
+'''
+Scrit to do unmatch using ID 
+'''
 from astropy.table import Table
 import numpy as np
 import argparse
@@ -30,5 +33,5 @@ id2 = tab_id["ID"]
 mask = np.array([not source in id2 for source in id1])
 
 # Save the final file
-asciifile = file1.replace(".ecsv", "-takeoutrepeat.ecsv")
+asciifile = file1.replace(".ecsv", "-takeoutbad.ecsv")
 tab[mask].write(asciifile, format="ascii.ecsv", overwrite=True)

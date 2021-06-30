@@ -56,12 +56,7 @@ table2['Label'] = label2
 table_merge = vstack([table1, table2])
 
 # Put data in form expected by scikit-learn
-X = np.array(list(zip(table_merge['U_PStotal'],
- table_merge['F378_PStotal'],
- table_merge['F395_PStotal'],
- table_merge['F410_PStotal'],
- table_merge['F430_PStotal'],
- table_merge['G_PStotal'],
+X = np.array(list(zip(table_merge['G_PStotal'],
  table_merge['F515_PStotal'],
  table_merge['R_PStotal'],
  table_merge['F660_PStotal'],
@@ -106,13 +101,9 @@ X_lda = lda.transform(X_stand)
 ########################################################################################################
 #X_new = []
 #File_name = input('Input file name:')
-tab = Table.read("Halpha-DR3_noFlag_merge.ecsv", format="ascii.ecsv")
+tab = Table.read("Halpha-DR3_noFlag_3ferr_merge.ecsv", format="ascii.ecsv")
 #tab = Table.read("TAP_DR1SPLUS_HA_r_03.tab", format="ascii.tab")
-X_new = np.array(list(zip(tab['U_PStotal'],
- tab['F378_PStotal'],
- tab['F395_PStotal'],
- tab['F410_PStotal'],
- tab['F430_PStotal'],
+X_new = np.array(list(zip(
  tab['G_PStotal'],
  tab['F515_PStotal'],
  tab['R_PStotal'],
@@ -130,7 +121,8 @@ y_pred = lda.predict(XX_new)
 y_prob = lda.predict_proba(XX_new)
 y_pred_dec = lda.decision_function(XX_new)
 
-print(len(y_pred))
+
+print("Total objects", len(y_pred))
 # for a, b in zip(y_pred, y_prob):
 #     print(a, b)
 
