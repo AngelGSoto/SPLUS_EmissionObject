@@ -32,11 +32,11 @@ table_merge = vstack([tab1, tab2])
 
 # Save the final file
 asciifile = file1.replace(".ecsv", "-Final.ecsv")
-fitsfile = file1.replace(".ecsv", "-Final.fits")
-gzfitsfile = file1.replace(".ecsv", "-Final.fits.gz")
+#fitsfile = file1.replace(".ecsv", "-Final.fits")
+#gzfitsfile = file1.replace(".ecsv", "-Final.fits.gz")
 table_merge.write(asciifile, format="ascii.ecsv", overwrite=True)
-table_merge.write(fitsfile, format='fits',  overwrite=True)
+#table_merge.write(fitsfile, format='fits',  overwrite=True)
 
-f = gzip.open(gzfitsfile, 'wb')
-h = fits.PrimaryHDU()
-table_merge.writeto(f)
+# f = gzip.open(gzfitsfile, 'wb')
+# h = fits.PrimaryHDU()
+# table_merge.writeto(f)

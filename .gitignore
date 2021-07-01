@@ -1,3 +1,4 @@
+.ipynb_checkpoints 
 halpha_emitters.org_archive
 HYDRA_errorsall_flag.csv
 HYDRA-HDBcluster0.ecsv
@@ -37,11 +38,11 @@ mnras_template.tex
 README.txt
 3filter_noflat/Spectra-Sdss/*.pdf
 3filter_noflat/Spectra_fornax/*.pdf
-3filter_noflat/Spectra_fornax3/*pdf
-3filter_noflat/Spectra_NGC3347/*pdf
-3filter_noflat/BadPho-LD/*pdf
-3filter_noflat/GoodPhot-LD/*pdf
+3filter_noflat/Spectra_fornax3/*.pdf
+3filter_noflat/Spectra_NGC3347/*.pdf
+3filter_noflat/BadPho-LD/*.pdf
+3filter_noflat/GoodPhot-LD/*.pdf
 Claudia-objects/
-iDR3_n4/Fig-GoodSpec/ 
-iDR3_n4/Fig-BadSpec/
+iDR3_n4/Figs-Sspec/*.pdf 
+
 
