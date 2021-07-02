@@ -43,6 +43,7 @@
 \usepackage{amssymb}	% Extra maths symbols
 \usepackage{longtable}
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%% AUTHORS - PLACE YOUR OWN COMMANDS HERE %%%%%
@@ -277,11 +278,6 @@ Table 1.}
 \end{figure*}
 
 
-\clearpage
-\subsection{Simbad}
-\label{sec:simbad}
-\input{table-simbad-sort.tex}
-
 \begin{figure*}
   \setlength\tabcolsep{0pt}
   \setkeys{Gin}{width=0.5\linewidth}
@@ -366,10 +362,24 @@ We have found a important sample of emission line objects.
 
 %%%%%%%%%%%%%%%%% APPENDICES %%%%%%%%%%%%%%%%%%%%%
 
+\clearpage
 \appendix
-
 \section{Some extra material}
 
+\newcommand\TableHeader{
+  \hline\hline
+Type & \(\mathrm{RA}\) & \(\mathrm{DEC}\) & Group \\
+  %Object & \(D\) &   \(R_{\mathrm{out}}\) & \(R_{\mathrm{in}}\) \\
+  \hline 
+}
+\begin{longtable}{llll}
+  \caption{Simbad sources. \label{tab:simbad}}\\
+  \TableHeader\endfirsthead 
+  \caption[]{--continued}\\
+  \TableHeader\endhead
+  \hline \endfoot
+\input{table-simbad-sort.tex}
+\end{longtable}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

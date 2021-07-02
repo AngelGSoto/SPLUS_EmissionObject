@@ -51,7 +51,7 @@ tab_drop = tab[mask]
 
 tab_final = vstack([tab_cont, tab_drop])
 
-Col = ["RA","DEC", "U_PStotal", "F378_PStotal", "F395_PStotal", "F410_PStotal", "F430_PStotal", "G_PStotal", "F515_PStotal", "R_PStotal", "F660_PStotal", "I_PStotal", "F861_PStotal", "Z_PStotal", "Label_hier"]
+Col = ["main_type", "RA","DEC", "Label_hier"]
 
 tab_final.sort('RA')
 tab_final[Col].write(ROOT_PATH / 'table-simbad-sort.tex', format = "ascii.latex") 
