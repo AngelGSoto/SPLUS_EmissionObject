@@ -368,11 +368,13 @@ We have found a important sample of emission line objects.
 
 \newcommand\TableHeader{
   \hline\hline
-Type & \(\mathrm{RA}\) & \(\mathrm{DEC}\) & Group \\
+Id Simbad & \(\mathrm{RA}\) & \(\mathrm{DEC}\) & Type & Group \\
   %Object & \(D\) &   \(R_{\mathrm{out}}\) & \(R_{\mathrm{in}}\) \\
   \hline 
 }
-\begin{longtable}{llll}
+
+\begin{center}
+\begin{longtable}{llcll}
   \caption{Simbad sources. \label{tab:simbad}}\\
   \TableHeader\endfirsthead 
   \caption[]{--continued}\\
@@ -380,7 +382,7 @@ Type & \(\mathrm{RA}\) & \(\mathrm{DEC}\) & Group \\
   \hline \endfoot
 \input{table-simbad-sort.tex}
 \end{longtable}
-
+\end{center}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
