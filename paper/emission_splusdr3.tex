@@ -524,20 +524,20 @@ We have found a important sample of emission line objects.
 
 \newcommand\TableHeader{
   \hline\hline
-Id Simbad & \(\mathrm{RA}\) & \(\mathrm{DEC}\) & Type & Group \\
+Id Simbad & \(\mathrm{RA}\) & \(\mathrm{DEC}\) & Type & Group -- {\sc hca} & P(Blue) -- {\sc hdbscan} & P(Red) -- {\sc hdbscan} \\
   %Object & \(D\) &   \(R_{\mathrm{out}}\) & \(R_{\mathrm{in}}\) \\
   \hline 
 }
 
 \begin{center}
-\begin{longtable}{llcll}
+\begin{longtable}{llclccc}
   \caption{Simbad sources. \label{tab:simbad}}\\
   \TableHeader\endfirsthead 
   \caption[]{--continued}\\
   \TableHeader\endhead
   \hline \endfoot
 \input{table-simbad-sort.tex}
-\end{longtable}
+\end{longtable} 
 \end{center}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

@@ -24,7 +24,7 @@ sns.set_color_codes()
 ROOT_PATH = Path("../paper/Figs")
 
 # Read the file
-table = Table.read("../3filter_noflat/Good-LD-Halpha-DR3_noFlag_merge-7filter-visualCleaning-Final-takeoutrepeat-Final.ecsv", format="ascii.ecsv")
+table = Table.read("../iDR3_n4/Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-Final.ecsv", format="ascii.ecsv")
 
 # Colors
 m = (table["e_G_PStotal"] <= 0.2) & (table["e_I_PStotal"] <= 0.2) & (table["e_Z_PStotal"] <= 0.2)
@@ -42,7 +42,7 @@ print("Shape:", X.shape)
 X_std = StandardScaler().fit_transform(X)
 
 # Applying HDBSCAN
-clusterer = hdbscan.HDBSCAN(min_samples=30, min_cluster_size=80, prediction_data=True).fit(X_std)
+clusterer = hdbscan.HDBSCAN(min_samples=40, min_cluster_size=80, prediction_data=True).fit(X_std)
 labels_h = clusterer.labels_
 
 # Number of clusters in labels, ignoring noise if present.
@@ -61,6 +61,9 @@ print('Estimated number of cluster points 2: %d' % n_cluster2)
 print('Estimated number of noise points: %d' % n_noise_)
 print('##########################################################')
 
+# Getting the probabilities
+prob = clusterer.probabilities_
+
 # Add label to the table and making the colors
 table_= table[m]
 
@@ -78,12 +81,23 @@ gr_1 = table_['G_PStotal'][mask1] - table_['R_PStotal'][mask1]
 zg_2 = table_['Z_PStotal'][mask2] - table_['G_PStotal'][mask2]
 gr_2 = table_['G_PStotal'][mask2] - table_['R_PStotal'][mask2]
 
+# Soft clustering
+soft_clusters = hdbscan.all_points_membership_vectors(clusterer)
+
+table_["P(red)"] = soft_clusters[:,0]
+table_["P(Blue)"] = soft_clusters[:,1]
+
+#Save the table
+asciifile = "../iDR3_n4/Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-Final-hdbscan.ecsv" 
+table_.write(asciifile, format="ascii.ecsv")
+
 # Equation constructed form synthetic phometry
 # Limiting the blue and red region
 x_new = np.linspace(-15.0, 1000, 200)
-y = 0.45*x_new + 1.55
+y = 0.47*x_new + 1.55
 
-#Plot the results
+#############################################################
+#Plot the results  ##########################################
 
 fig, ax = plt.subplots(figsize=(12, 12))
 
@@ -177,7 +191,23 @@ plt.clf()
 fig, ax2 = plt.subplots(figsize=(10, 7))
 #plt.figure(figsize=(10, 7))
 #plt.title("Customer Dendograms")
+plt.xlabel('sample index',  fontsize= 25)
+plt.ylabel('distance', fontsize= 25)
 plt.tick_params(axis='y', labelsize=25)
-dend = shc.dendrogram(shc.linkage(X, method='ward'))
+dend = shc.dendrogram(shc.linkage(X, method='ward'),
+                      truncate_mode='lastp',
+                      p=12,  # show only the last p merged clusters
+                      leaf_rotation=45.,
+                      leaf_font_size=18.,
+                      show_contracted=True, )
+# dendrogram(
+#     X,
+#     truncate_mode='lastp',  # show only the last p merged clusters
+#     p=12,  # show only the last p merged clusters
+#     leaf_rotation=90.,
+#     leaf_font_size=12.,
+#     show_contracted=True,  # to get a distribution impression in truncated branches
+# )
+plt.tight_layout()
 fig.savefig(ROOT_PATH / "Customer-Dendrograms.pdf")
 plt.clf()

@@ -22,8 +22,8 @@ sns.set_color_codes()
 ROOT_PATH = Path("../paper/Figs")
 
 
-table_blue = Table.read("Blue0-Good-LD-Halpha-DR3_noFlag_merge-7filter-visualCleaning-Final-takeoutrepeat-Final.ecsv", format="ascii.ecsv")
-table_red = Table.read("Red1-Good-LD-Halpha-DR3_noFlag_merge-7filter-visualCleaning-Final-takeoutrepeat-Final.ecsv", format="ascii.ecsv")
+table_blue = Table.read("Blue0-Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-Final.ecsv", format="ascii.ecsv")
+table_red = Table.read("Red1-Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-Final.ecsv", format="ascii.ecsv")
 
 # Making the colors
 zg_blue = table_blue['Z_PStotal'] - table_blue['G_PStotal']
@@ -36,7 +36,7 @@ gr_red = table_red['G_PStotal'] - table_red['R_PStotal']
 # Equation constructed form synthetic phometry
 # Limiting the blue and red region
 x_new = np.linspace(-15.0, 1000, 200)
-y = 0.45*x_new + 1.55
+y = 0.47*x_new + 1.55
 
 fig, ax = plt.subplots(figsize=(12, 12))
 

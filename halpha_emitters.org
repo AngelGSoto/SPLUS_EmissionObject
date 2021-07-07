@@ -590,6 +590,12 @@ Data to classify: (13644, 7)
 
 + Cross-match SDSS, LAMOST, SIMBAD.
 
++ The separation between blue and red sources sees works well.
++ I checked visually all the objects of my list of Halpha emitters.
++ I made a latex table with all objects crossmatched with Simbad. This table include the 
+  classification red and blue sources  using the hierarchical cluster analysis and the
+  probability of belong each class using HDBSCAN. 
+
 ** Notes  
 + The object iDR3.SPLUS-n05n50.017121 (216.6133870755976, 5.065007143584472) is interesant.
 + PN NGC 3132 iDR3.HYDRA-0121.061126 (151.7447846287751, -40.4433163332109)

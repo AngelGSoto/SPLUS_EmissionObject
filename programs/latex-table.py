@@ -29,6 +29,8 @@ df_blue = pd.read_csv("Simbad-Blue0-Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-F
 
 df_red = pd.read_csv("Simbad-Red1-Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-Final.csv")
 
+df_hdbscan = pd.read_csv("Simbad-hdbscan-Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-Final.csv")
+
 def ra_fmt(x):
     """Write RA  to accuracy of 0.2 deg"""
     return "{:.2f}".format(x)
@@ -47,9 +49,19 @@ df_cont = pd.concat([df_blue, df_red])
 # Converting in astropy table
 tab = Table.from_pandas(df)
 tab_cont = Table.from_pandas(df_cont)
+tab_hdbscan = Table.from_pandas(df_hdbscan)
+
+tab_cont.sort('RA')
+tab_hdbscan.sort('RA')
+
+# Additing columns with the probabilities on table 1
+tab_cont['P(Blue)'] = np.array(tab_hdbscan['P(Blue)'], dtype=('S4'))
+tab_cont['P(red)'] = np.array(tab_hdbscan['P(red)'], dtype=('S4'))
 
 # Column in main table
-tab['Label_hier'] = '-'
+tab['Label_hier'] = '--'
+tab['P(Blue)'] = '--'
+tab['P(red)'] = '--'
 
 #a = np.array(tab_cont['Label_hier'], dtype=str)
 #tab_cont['Label_hier'] = a
@@ -73,9 +85,9 @@ dec = c.dec.to_string(u.degree, alwayssign=True, sep=':',  precision=1)
 tab_final["RA Sex"] = ra
 tab_final["DEC Sex"] = dec
 
-Col = ["main_id", "RA Sex", "DEC Sex", "main_type", "Label_hier"]
+Col = ["main_id", "RA Sex", "DEC Sex", "main_type", "Label_hier", 'P(Blue)', 'P(red)']
 
 tab_final.sort('RA')
-tab_final[Col].write(ROOT_PATH / 'table-simbad-sort.tex', format = "ascii.latex") 
+tab_final[Col].write(ROOT_PATH / 'table-simbad-sort.tex', format = "ascii.latex", overwrite=True) 
 
 
