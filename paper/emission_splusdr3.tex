@@ -100,8 +100,14 @@ $^{3}$Another Department, Different Institution, Street Address, City Postal Cod
   which we have traduced as the presence of the H{$\alpha$} emission line.
   In addition we have found that by combining the colors: (r - i) and (g - z)
   with unsupervised (clustering) machine learning it is possible separate
-  our list of emitters in two sub-groups: one with intense blue continuum
-  and another with intense red one.  
+  the blue sources from red ones, then we ave divided our list of emitters
+  in two sub-groups: one with intense blue continuum and another with
+  intense red one. We compare hierarchical-clustering algorithm with the
+  HDBSCAN. By adopting a ``soft'' clustering approach, we can assign
+  each emission object a probability of belonging to a given cluster
+  (blue or red group), allowing for more flexibility in the classification
+  of objects according to these colours those objects with a low probability
+  of belonging to any cluster. 
 \end{abstract}
 % Select between one and six entries from the list of approved keywords.
 % Don't make up new ones.
@@ -296,7 +302,9 @@ with H$\alpha$ excess meet the condition:
 where $\sigma_s$ is the root mean squared value of the residuals around
 the fit and $\sigma_{phot}$ is the error on the observed $(r - J0660)$ colour
 
-Firts see an aproximation of the  4$\sigma$ cut away from the ariginal fit.
+First see an approximation of the  4$\sigma$ cut away from the ariginal fit.
+Figure~\ref{fig:criteria-color-plot} shows the procedure implemented
+to select the H{$\alpha$} emitters in all S-PLUS DR3 
 
 \begin{figure*}
   \setlength\tabcolsep{0pt}
@@ -329,18 +337,64 @@ Firts see an aproximation of the  4$\sigma$ cut away from the ariginal fit.
 In Figure~\ref{fig:criteria-color-plot} is illustrate the selection process.
 The black line represent the initial fit line the  
 
-\subsection{Maths}
-\label{sec:maths} % used for referring to this section from elsewhere
+
+\subsection{Clustering techniques}
+\label{sec:clustering}
+
+In this work we are using unsupervised machine learning approaches to divided our sample
+in two groups: one represent the blue sources and the another one are the red sources. The blue
+are those that have strong emission of the continuum on the part blue of the spectrum and
+the another with strong emission continuum of the red one. 
+
+\subsubsection{Hierarchical clustering}
+\label{sec:Hierar}
+
+Hierarchical clustering also known as hierarchical cluster analysis ({\sc hca}),
+is an algorithm that groups similar objects into groups called clusters.
+The endpoint is a set of clusters, where each cluster is distinct from each
+other cluster, and the objects within each cluster are broadly similar to each other.
+
+Choosing the number of cluster. Firstly, the Hierarchical cluster output dendrogram (tree)
+can be implemented to obtain the desired clustering. Secondly, the dendrogram schema  allows
+a convenient way to establish the entity relationship between at all levels of granularity.
+In conclusion, a dendrogram is a visualization in form of a tree showing the order
+and distances of merges during the hierarchical clustering.
+
+\begin{itemize}
+  
+     \item On the x axis you see labels. If you don't specify anything else they
+       are the indices of your samples in X.
+     \item On the y axis you see the distances (of the 'ward' method in our case).
+       
+\end{itemize}
 
 
-\begin{equation}
+\subsubsubsection{Dendrogram Truncation}
 
-    x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}.
-	\label{eq:quadratic}
-\end{equation}
+As you might have noticed, the above is pretty big for many samples already and you
+probably have way more in real scenarios, so let me spend a few seconds on highlighting
+some other features of the dendrogram() function:
 
 
-\subsection{Figures and tables}
+Starting from each label at the bottom, you can see a vertical line up to a
+horizontal line. The height of that horizontal line tells you about the distance
+at which this label was merged into another label or cluster. You can find that
+other cluster by following the other vertical line down again. If you don't
+encounter another horizontal line, it was just merged with the other label
+you reach, otherwise it was merged into another cluster that was formed earlier.
+
+Hierarchical clustering can be performed with either a distance matrix or raw data.
+When raw data is provided, the software will automatically compute a distance
+matrix in the background. The distance matrix below shows the distance between
+six objects.
+
+Hierarchical clustering starts by treating each observation as a separate cluster.
+Then, it repeatedly executes the following two steps: (1) identify the two
+clusters that are closest together, and (2) merge the two most similar clusters.
+This iterative process continues until all the clusters are merged together.
+This is illustrated in the diagrams below.
+
+Hierarchical clustering 2
 
 \section{Results}
 \label{sec:results}
@@ -355,8 +409,10 @@ matches that include a big variety of emission line objects:
 As was mentioned, objects with nebulousity include several
 type of objects from H II region, planetary nebulae and galaxies.
 The H II regions are objects with gas that being ionized by
-O star, in the H II regions are formed new stars. Unlike, H II
-regions 
+O star on which are formed the emission lines. In this situation new
+stars are formed. Unlike H II regions, planetary nebulae
+represent the final stages of low- and intermediate-mass stars
+where the gas previously ejected is ionized by their central star.
 
 
 \subsection{SDSS}
@@ -385,7 +441,7 @@ regions
 \caption{he distribution of Hα emitters in Galactic longitude and latitude.
   The emitters are shown as red points if brighter than r = 18, and black points if
   fainter. The S-PLUS direct fields are shown by green squares (offset fields are
-  not shown). All emitters are shown here, including those with flagged with ‘c’ in
+  not shown). All emitters are shown here, including those with flagged with 'c' in
 Table 1.}
 \end{figure*}
 
@@ -523,7 +579,6 @@ We have found a important sample of emission line objects.
 \section*{Data Availability}
 
 
-
 %%%%%%%%%%%%%%%%%%%% REFERENCES %%%%%%%%%%%%%%%%%%
 
 % The best way to enter references is to use BibTeX:
@@ -536,17 +591,18 @@ We have found a important sample of emission line objects.
 
 %%%%%%%%%%%%%%%%% APPENDICES %%%%%%%%%%%%%%%%%%%%%
 
-\clearpage
 \appendix
 \section{Some extra material}
 
 \newcommand\TableHeader{
   \hline\hline
-Id Simbad & \(\mathrm{RA}\) & \(\mathrm{DEC}\) & Type & Group -- {\sc hca} & P(Blue) -- {\sc hdbscan} & P(Red) -- {\sc hdbscan} \\
+  Id Simbad & \(\mathrm{RA}\) & \(\mathrm{Dec}\) & Type & Group -- {\sc hca}
+                          & P(Blue) -- {\sc hdbscan} & P(Red) -- {\sc hdbscan} \\
   %Object & \(D\) &   \(R_{\mathrm{out}}\) & \(R_{\mathrm{in}}\) \\
   \hline 
 }
 
+\clearpage
 \begin{center}
 \begin{longtable}{llclccc}
   \caption{Simbad sources. \label{tab:simbad}}\\
