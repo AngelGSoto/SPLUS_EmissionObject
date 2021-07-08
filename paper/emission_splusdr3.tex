@@ -399,6 +399,17 @@ Hierarchical clustering 2
 \subsubsection{Hierarchical density-based cluster selection}
 \label{sec:hdbscan}
 
+Hierarchical density-based cluster selection (\texttt{HDBSCAN}; \citealp{McInnes:2017})
+Hierarchical Density-Based Spatial Clustering of Applications with Noise(Campello,
+Moulavi, and Sander 2013), (Campello et al. 2015). Performs DBSCAN overvarying epsilon
+values and integrates the result to find a clustering that gives the beststability over
+epsilon. This allows HDBSCAN to find clusters of varying densities (unlikeDBSCAN), and
+be more robust to parameter selection. The library also includes supportfor Robust S
+ingle Linkage clustering (Chaudhuri et al. 2014), (Chaudhuri and Dasgupta2010),
+GLOSH outlier detection (Campello et al. 2015), and tools for visualizing
+andexploring cluster structures. Finally support for prediction and soft clustering
+is also available. 
+
 \section{Results}
 \label{sec:results}
 

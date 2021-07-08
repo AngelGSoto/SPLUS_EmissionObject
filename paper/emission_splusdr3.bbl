@@ -99,6 +99,11 @@ Akras S.,  Guzman-Ramirez L.,  Leal-Ferreira M.,   Ramos-Larios G.,  2019a,
 {Horne} K.,  {Marsh} T.~R.,  1986, \mn@doi [\mnras] {10.1093/mnras/218.4.761},
   \href {https://ui.adsabs.harvard.edu/abs/1986MNRAS.218..761H} {218, 761}
 
+\bibitem[\protect\citeauthoryear{McInnes, Healy  \& Astels}{McInnes
+  et~al.}{2017}]{McInnes:2017}
+McInnes L.,  Healy J.,   Astels S.,  2017, \mn@doi [The Journal of Open Source
+  Software] {10.21105/joss.00205}, 2
+
 \bibitem[\protect\citeauthoryear{{Mendes de Oliveira} et~al.,}{{Mendes de
   Oliveira} et~al.}{2019}]{Mendes:2019}
 {Mendes de Oliveira} C.,  et~al., 2019, \mn@doi [\mnras]
