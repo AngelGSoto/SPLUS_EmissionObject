@@ -98,11 +98,21 @@ y = 0.47*x_new + 1.55
 
 #############################################################
 #Plot the results  ##########################################
+#############################################################
 
-fig, ax = plt.subplots(figsize=(12, 12))
+#Build the cluster hierarchy
 
-ax.fill_between(x_new, y, -100, color="k", alpha=0.1)
-ax.plot(x_new, y, c="k", zorder=11, lw=0.5)
+fig, ax = plt.subplots(figsize=(10, 7))
+clusterer.condensed_tree_.plot(select_clusters=True,
+                               selection_palette=sns.color_palette(), colorbar=True)
+
+fig.savefig(ROOT_PATH / "cluster-hierarchy-hdbscan.pdf")
+plt.clf()
+##########################################################
+fig, ax1 = plt.subplots(figsize=(12, 12))
+
+ax1.fill_between(x_new, y, -100, color="k", alpha=0.1)
+ax1.plot(x_new, y, c="k", zorder=11, lw=0.5)
 
 plt.tick_params(axis='x', labelsize=25) 
 plt.tick_params(axis='y', labelsize=25)
@@ -110,7 +120,7 @@ plt.tick_params(axis='y', labelsize=25)
 plt.xlabel(r'$z - g$', fontsize= 25)
 plt.ylabel(r'$g - r$', fontsize= 25)
 
-ax.scatter(
+ax1.scatter(
         zg_0,
         gr_0,
         marker="o",
@@ -119,7 +129,7 @@ ax.scatter(
         edgecolors="w", alpha=0.7, zorder=3
     )
 
-ax.scatter(
+ax1.scatter(
         zg_1,
         gr_1,
         marker="o",
@@ -128,7 +138,7 @@ ax.scatter(
         edgecolors="w", zorder=4
     )
 
-ax.scatter(
+ax1.scatter(
         zg_2,
         gr_2,
         marker="o",
@@ -140,7 +150,7 @@ ax.scatter(
 sns.kdeplot(
     zg_2,
     gr_2,
-    ax=ax,
+    ax=ax1,
     norm=PowerNorm(0.5), zorder=3,
         cmap="Blues",
  )
@@ -148,15 +158,15 @@ sns.kdeplot(
 sns.kdeplot(
     zg_1,
     gr_1,
-    ax=ax,
+    ax=ax1,
     norm=PowerNorm(0.5), zorder=5,
         cmap="Reds",
  )
 
 
-ax.legend(ncol=1, fontsize=20.0, title="Group", title_fontsize=30)
-ax.set(xlim=[-6.8, 2.5], ylim=[-3., 5.])#, xscale="log", yscale="log")
-ax.set_aspect("equal")
+ax1.legend(ncol=1, fontsize=20.0, title="Group", title_fontsize=30)
+ax1.set(xlim=[-6.8, 2.5], ylim=[-3., 5.])#, xscale="log", yscale="log")
+ax1.set_aspect("equal")
 #ax.set(xlabel=r"$z - g$", ylabel=r"$g - r$")
 fig.savefig(ROOT_PATH / "blued-red-hdbscan.pdf")
 plt.clf()
