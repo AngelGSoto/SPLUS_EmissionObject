@@ -90,7 +90,7 @@ $^{3}$Another Department, Different Institution, Street Address, City Postal Cod
 \begin{abstract}
   The emission line objects are very important objects in astronomy
   because reflects different class of objects that evolved physical
-  mechanics that given counts of formation stellar process, presences
+  mechanics that given counts of stellar formation process, presences
   the gas, shocks, star-burst in galaxies, the finals stage of stars
   among others process. For this reason we have created a list of
   H{$\alpha$} emitters selected from the S-PLUS data, which is mapping
@@ -396,6 +396,9 @@ This is illustrated in the diagrams below.
 
 Hierarchical clustering 2
 
+\subsubsection{Hierarchical density-based cluster selection}
+\label{sec:hdbscan}
+
 \section{Results}
 \label{sec:results}
 
@@ -593,6 +596,10 @@ We have found a important sample of emission line objects.
 
 \appendix
 \section{Condensed Trees}
+The question now is what does the cluster hierarchy look like - which
+clusters are near each other, or could perhaps be merged, and which
+are far apart. We can access the basic hierarchy via the \texttt{condensed\_tree\_}
+ attribute of the clusterer object.
 
 \begin{figure*}
 	\includegraphics[width=0.9\linewidth]{Figs/cluster-hierarchy-hdbscan.pdf}
