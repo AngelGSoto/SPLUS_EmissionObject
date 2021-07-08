@@ -201,7 +201,20 @@ Recently, by using this same color diagram were also identified compact PN candi
 in VPHAS+ catalog \citep{Akras:2019}. And the same diagram in conjunction with new
 ones shows to be very efficient to find for PN candidates \citep{Gutierrez:2020}.
 In general terms, \citet{Witham:2006} presented a methodology and first results
-in looking for emission line sources in narrow-band surveys.     
+in looking for emission line sources in narrow-band surveys.
+
+In this era of big data on astronomy, machine learning techniques are becoming
+in important statistical tools for the analysis and find meaning from massive
+data sets. Particularly, unsupervised machine approaches have showed a promised
+in various applications, especially in automatic classification task. Including
+the separation of starbursts from active galactic nuclei (Geach 2012), optical
+morphology (Hocking et al. 2018; Martin et al. 2020), variable stars
+(Armstrong et al. 2015; Valenzuela & Pichara 2017), and light curves (Aguirre,
+Pichara & Becker 2018) and anomaly and outlier detection (Baron & Poznanski
+2016; Pruzhinskaya et al. 2019) (reescribir esto). Using unsupervised machine
+learning can be very advantageous because they do not require a labeled data
+training sets. Unlike of supervised methods like Random Forest algorithm.
+Instead 
 
 In this work, we used S-PLUS observations of the southern hemisphere to search
 for objects with an excess of H{$\alpha$} using automatic methods based on the
@@ -299,8 +312,10 @@ with H$\alpha$ excess meet the condition:
 \end{equation}
  
  
-where $\sigma_s$ is the root mean squared value of the residuals around
-the fit and $\sigma_{phot}$ is the error on the observed $(r - J0660)$ colour
+where $\sigma_{\mathrm{s}}$ is the root mean squared value of the residuals around
+the fit and $\sigma_{\mathrm{phot}}$ is the error on the observed $(r - J0660)$ colour.
+The fits are carried out with the aid of the python library \texttt{astropy.modeling}
+\footnote{https://docs.astropy.org/en/stable/modeling/index.html}.
 
 First see an approximation of the  4$\sigma$ cut away from the ariginal fit.
 Figure~\ref{fig:criteria-color-plot} shows the procedure implemented
@@ -326,7 +341,7 @@ to select the H{$\alpha$} emitters in all S-PLUS DR3
     fits to the upper locus of points obtained by applying an iterative
     σ -clipping technique to the initial fit. The actual cuts used to select H{$\alpha$}
     emitters are shown by the thick dashed lines. If the cut was based on the initial (final)
-    fit, it is shown in red (blue). Objects selected as Hα emitters must be located above
+    fit, it is shown in red (blue). Objects selected as H{$\alpha$} emitters must be located above
     the cut and are shown as large triangles. Note that the cut lines shown here
     are only approximate, as the actual selection criterion also considers the errors on
     each individual data point. This explains, for example, why an object in the bottom
@@ -336,6 +351,10 @@ to select the H{$\alpha$} emitters in all S-PLUS DR3
 
 In Figure~\ref{fig:criteria-color-plot} is illustrate the selection process.
 The black line represent the initial fit line the  
+
+Once, we felt confident of our sample of H{$\alpha$} emission lines, we proceeded
+in classify the objects in to big groups; those with strong blue continuum and another
+with intense red continuum. 
 
 
 \subsection{Clustering techniques}
