@@ -88,6 +88,10 @@ Akras S.,  Guzman-Ramirez L.,  Leal-Ferreira M.,   Ramos-Larios G.,  2019a,
 {Drew} J.~E.,  et~al., 2014, \mn@doi [\mnras] {10.1093/mnras/stu394}, \href
   {https://ui.adsabs.harvard.edu/abs/2014MNRAS.440.2036D} {440, 2036}
 
+\bibitem[\protect\citeauthoryear{{Geach}}{{Geach}}{2012}]{Geach:2012}
+{Geach} J.~E.,  2012, \mn@doi [\mnras] {10.1111/j.1365-2966.2011.19913.x},
+  \href {https://ui.adsabs.harvard.edu/abs/2012MNRAS.419.2633G} {419, 2633}
+
 \bibitem[\protect\citeauthoryear{{Guti{\'e}rrez-Soto}
   et~al.,}{{Guti{\'e}rrez-Soto} et~al.}{2020}]{Gutierrez:2020}
 {Guti{\'e}rrez-Soto} L.~A.,  et~al., 2020, \mn@doi [\aap]
@@ -98,6 +102,12 @@ Akras S.,  Guzman-Ramirez L.,  Leal-Ferreira M.,   Ramos-Larios G.,  2019a,
   {Marsh}}{1986}]{Horne:1986}
 {Horne} K.,  {Marsh} T.~R.,  1986, \mn@doi [\mnras] {10.1093/mnras/218.4.761},
   \href {https://ui.adsabs.harvard.edu/abs/1986MNRAS.218..761H} {218, 761}
+
+\bibitem[\protect\citeauthoryear{{Martin}, {Kaviraj}, {Hocking}, {Read}  \&
+  {Geach}}{{Martin} et~al.}{2020}]{Martin:2020}
+{Martin} G.,  {Kaviraj} S.,  {Hocking} A.,  {Read} S.~C.,   {Geach} J.~E.,
+  2020, \mn@doi [\mnras] {10.1093/mnras/stz3006}, \href
+  {https://ui.adsabs.harvard.edu/abs/2020MNRAS.491.1408M} {491, 1408}
 
 \bibitem[\protect\citeauthoryear{McInnes, Healy  \& Astels}{McInnes
   et~al.}{2017}]{McInnes:2017}
@@ -165,6 +175,12 @@ Sausalito: University Science Books, \url
   {Casares}}{2002}]{Steeghs:2002}
 {Steeghs} D.,  {Casares} J.,  2002, \mn@doi [\apj] {10.1086/339224}, \href
   {https://ui.adsabs.harvard.edu/abs/2002ApJ...568..273S} {568, 273}
+
+\bibitem[\protect\citeauthoryear{{Valenzuela} \& {Pichara}}{{Valenzuela} \&
+  {Pichara}}{2018}]{Valenzuela:2018}
+{Valenzuela} L.,  {Pichara} K.,  2018, \mn@doi [\mnras]
+  {10.1093/mnras/stx2913}, \href
+  {https://ui.adsabs.harvard.edu/abs/2018MNRAS.474.3259V} {474, 3259}
 
 \bibitem[\protect\citeauthoryear{{Viironen} et~al.,}{{Viironen}
   et~al.}{2009}]{Viirone:2009}

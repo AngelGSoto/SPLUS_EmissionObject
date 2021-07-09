@@ -69,7 +69,7 @@ Third Author$^{2,3}$
 and Fourth Author$^{3}$
 \\
 % List of institutions
-$^{1}$Departamento de Astronomia, IAG, Universidade de S\~{o}a Paulo, Rua do Mata\~{o}, 1226, 05509-900, S\~{o}a Paulo, Brazil\\
+$^{1}$Departamento de Astronomia, IAG, Universidade de S\~{a}o Paulo, Rua do Mat\~{a}o, 1226, 05509-900, S\~{a}o Paulo, Brazil\\
 $^{2}$Department, Institution, Street Address, City Postal Code, Country\\
 $^{3}$Another Department, Different Institution, Street Address, City Postal Code, Country
 }
@@ -112,7 +112,8 @@ $^{3}$Another Department, Different Institution, Street Address, City Postal Cod
 % Select between one and six entries from the list of approved keywords.
 % Don't make up new ones.
 \begin{keywords}
-keyword1 -- keyword2 -- keyword3
+  surveys -- stars: emission-line, Be -- novae, cataclysmic variables
+  -- galaxies: dwarf -- quasars: emission lines
 \end{keywords}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -207,14 +208,15 @@ In this era of big data on astronomy, machine learning techniques are becoming
 in important statistical tools for the analysis and find meaning from massive
 data sets. Particularly, unsupervised machine approaches have showed a promised
 in various applications, especially in automatic classification task. Including
-the separation of starbursts from active galactic nuclei (Geach 2012), optical
-morphology (Hocking et al. 2018; Martin et al. 2020), variable stars
-(Armstrong et al. 2015; Valenzuela & Pichara 2017), and light curves (Aguirre,
-Pichara & Becker 2018) and anomaly and outlier detection (Baron & Poznanski
-2016; Pruzhinskaya et al. 2019) (reescribir esto). Using unsupervised machine
+object classification and selection, using galaxies with active galactic nuclei
+as example \citep{Geach:2012}, morphological analysis of galaxies \citep{Martin:2020},
+classification of variable stars, relying only on the similarity among light curves. 
+\citep{Valenzuela:2018}. Using unsupervised machine
 learning can be very advantageous because they do not require a labeled data
 training sets. Unlike of supervised methods like Random Forest algorithm.
-Instead 
+Instead, unsupervised techniques are generally based in the data itself to
+identify patrons, e. g. cluster of similar objects, in some pre-defined
+feature space where the data are defined.
 
 In this work, we used S-PLUS observations of the southern hemisphere to search
 for objects with an excess of H{$\alpha$} using automatic methods based on the
@@ -238,7 +240,7 @@ for the QSOs.
 The actual data release contains about 60 millions of objects covering a total
 area of $\sim$8000 deg$^2$, at high Galactic latitudes ($ > 30$~deg) using a
 dedicated 0.83m robotic telescope,the T80-South (T80S), located at Cerro Tololo,
-Chile. S-PLUS willcover an additional1300 deg2of the Galactic plane and bulge
+Chile. S-PLUS will cover an additional 1300 deg$^2$ of the Galactic plane and bulge
 toenable Galactic studies. In this work, we focus on the aspects thatare of
 particular interest to the second data release of the S-PLUS main survey.
 Additional information about S-PLUS can be found in \citet{Mendes:2019}. 
@@ -257,7 +259,7 @@ Additional information about S-PLUS can be found in \citet{Mendes:2019}.
 
 We first constructed a sub-sample from all S-PLUS DR3 from which we
 applied an iterative and automatic technique to select objects with
-an excess of H{$\alpha$} emission line,  as we describe below:
+an excess of H{$\alpha$} emission line, as we describe below:
 
 \subsection{Initial selection sample}
 \label{sec:}
@@ -291,19 +293,27 @@ magnitudes. The bins have the follow distribution:
   
 \end{itemize}
 
-To select t sn
-\citet{Witham:2008} presented a catalogue of point-sources H{$\alpha$}
-emission objects identified in IPHAS. 
-
 To select the emission lines we used the same method created and
 implemented by \citet{Witham:2008} its possible to do that because
 the S-PLUS has similar filters that the IPHAS project, which are
 $r$, $J$0660 and $i$. This technique was used by \citet{Scaringi:2013}
 to identify blue objects with excess of H{$\alpha$} and after that
 \citet{Wevers:2017} also applied this methodology to create catalogue
-of candidate H{$\alpha$} emission showing a high effectiveness.    
+of candidate H{$\alpha$} emission showing an high effectiveness. In this
+order of ideas we attempted this methodology in S-PLUS
+
+We first generated the ($r$ - $J$0660) versus ($r$ - $i$) color- color
+diagram for each magnitude bins. We then carried a out an initial straight
+line fit to all objects in each magnitude bin. This initial fit is an
+attempt to find the loci of main-sequence and giant stars. The objects
+with a excesses the H{$\alpha$} 
+To obtain a better
+We also implemented
+
+We considering the best-fitting as the main stellar locus
+
 Applying the selection criteria to selecting H$\alpha$ emitters.
-We used the same procedure in  \citet{Wevers:2017}. The objects
+We used similar procedure in  \citet{Wevers:2017}. The objects
 with H$\alpha$ excess meet the condition:
 
 
@@ -311,11 +321,11 @@ with H$\alpha$ excess meet the condition:
   (r - J0660)_{\mathrm{obs}} - (r - J0660)_{\mathrm{fit}} \geq C \times \sqrt{\sigma^2_{\mathrm{s}} - \sigma^2_{\mathrm{phot}}}
 \end{equation}
  
- 
-where $\sigma_{\mathrm{s}}$ is the root mean squared value of the residuals around
+ where $\sigma_{\mathrm{s}}$ is the root mean squared value of the residuals around
 the fit and $\sigma_{\mathrm{phot}}$ is the error on the observed $(r - J0660)$ colour.
 The fits are carried out with the aid of the python library \texttt{astropy.modeling}
 \footnote{https://docs.astropy.org/en/stable/modeling/index.html}.
+The idea is that we considered those objects 
 
 First see an approximation of the  4$\sigma$ cut away from the ariginal fit.
 Figure~\ref{fig:criteria-color-plot} shows the procedure implemented
@@ -652,9 +662,9 @@ two cluster that in agreement with previous results are the blue and red populat
   \hline 
 }
 
+\clearpage
 \section{Simbad objects}
 
-\clearpage
 \begin{center}
 \begin{longtable}{llclccc}
   \caption{Simbad sources. \label{tab:simbad}}\\
