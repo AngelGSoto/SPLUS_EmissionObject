@@ -163,42 +163,83 @@ sns.kdeplot(
         cmap="Reds",
  )
 
-
 ax1.legend(ncol=1, fontsize=20.0, title="Group", title_fontsize=30)
 ax1.set(xlim=[-6.8, 2.5], ylim=[-3., 5.])#, xscale="log", yscale="log")
+ax1.text(0.05, 1.11, "HDBSCAN", fontsize=20,
+                                 bbox=dict(facecolor='gray', alpha=0.2),
+                                                       transform=ax.transAxes)
 ax1.set_aspect("equal")
 #ax.set(xlabel=r"$z - g$", ylabel=r"$g - r$")
 fig.savefig(ROOT_PATH / "blued-red-hdbscan.pdf")
 plt.clf()
 
-###############
-#Soft clusters
-
+#################################
+#Soft clusters   ################
+#################################
 soft_clusters = hdbscan.all_points_membership_vectors(clusterer)
 color_palette = sns.color_palette('Paired', 12)
 cluster_colors = [color_palette[np.argmax(x)]
                   for x in soft_clusters]
 
+# Mask to high probabilites to belong
+mask_blue = soft_clusters[:,1] > soft_clusters[:,0]
+mask_red = soft_clusters[:,0] > soft_clusters[:,1]
 
-fig, ax1 = plt.subplots(figsize=(12, 12))
+
+fig, ax2 = plt.subplots(figsize=(12, 12))
 plt.tick_params(axis='x', labelsize=25) 
 plt.tick_params(axis='y', labelsize=25)
 
 plt.xlabel(r'$z - g$', fontsize= 25)
 plt.ylabel(r'$g - r$', fontsize= 25)
-ax1.set(xlim=[-6.8, 2.5], ylim=[-3., 5.])#, xscale="log", yscale="log")
-ax1.fill_between(x_new, y, -100, color="k", alpha=0.1)
-ax1.plot(x_new, y, c="k", zorder=11, lw=0.5)
-ax1.scatter(zg, gr, s=50, linewidth=0.2, c=cluster_colors, edgecolors="w", alpha=0.25)
-ax1.set_aspect("equal")
+ax2.set(xlim=[-6.8, 2.5], ylim=[-3., 5.])#, xscale="log", yscale="log")
+ax2.fill_between(x_new, y, -100, color="k", alpha=0.1)
+ax2.plot(x_new, y, c="k", zorder=11, lw=0.5)
+#ax1.scatter(zg, gr, s=50, linewidth=0.2, c=cluster_colors, edgecolors="w", alpha=0.25)
+
+ax2.scatter(
+        zg[mask_red], gr[mask_red],
+        marker="o",
+        c=sns.xkcd_rgb["dark pink"],
+        label="Red",
+        edgecolors="w", zorder=4
+    )
+
+sns.kdeplot(
+    zg[mask_red], gr[mask_red],
+    ax=ax2,
+    norm=PowerNorm(0.5), zorder=5,
+        cmap="Reds",
+ )
+
+ax2.scatter(
+        zg[mask_blue], gr[mask_blue],
+        marker="o",
+        c=sns.xkcd_rgb["cerulean"],
+        label="Blue",
+        edgecolors="w", zorder=3
+    )
+
+sns.kdeplot(
+    zg[mask_blue], gr[mask_blue],
+    ax=ax2,
+    norm=PowerNorm(0.5), zorder=3,
+        cmap="Blues",
+ )
+
+ax2.legend(ncol=1, fontsize=20.0, title="Group", title_fontsize=30)
+ax2.text(0.05, 1.11, "Soft Clustering for HDBSCAN", fontsize=20,
+                                 bbox=dict(facecolor='gray', alpha=0.2),
+                                                       transform=ax.transAxes)
+ax2.set_aspect("equal")
 #ax.set(xlabel=r"$z - g$", ylabel=r"$g - r$")
-fig.savefig(ROOT_PATH / "blued-red-hdbscan-soft.pdf")
+fig.savefig(ROOT_PATH / "blue-red-hdbscan-soft-alternative.pdf")
 plt.clf()
 
 ########################################
 #Dendrograms for Hierarchical Clustering
 
-fig, ax2 = plt.subplots(figsize=(10, 7))
+fig, ax3 = plt.subplots(figsize=(10, 7))
 #plt.figure(figsize=(10, 7))
 #plt.title("Customer Dendograms")
 plt.xlabel('sample index',  fontsize= 25)

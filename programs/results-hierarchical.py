@@ -38,6 +38,7 @@ gr_red = table_red['G_PStotal'] - table_red['R_PStotal']
 x_new = np.linspace(-15.0, 1000, 200)
 y = 0.47*x_new + 1.55
 
+#######################################
 fig, ax = plt.subplots(figsize=(12, 12))
 
 ax.fill_between(x_new, y, -100, color="k", alpha=0.1)
@@ -86,6 +87,9 @@ sns.kdeplot(
 
 ax.legend(ncol=1, fontsize=20.0, title="Group", title_fontsize=30)
 ax.set(xlim=[-6.8, 2.5], ylim=[-3., 5.])#, xscale="log", yscale="log")
+ax.text(0.1, 0.93, "HCA", fontsize=20,
+                                 bbox=dict(facecolor='gray', alpha=0.2),
+                                                       transform=ax.transAxes)
 ax.set_aspect("equal")
 #ax.set(xlabel=r"$z - g$", ylabel=r"$g - r$")
 
