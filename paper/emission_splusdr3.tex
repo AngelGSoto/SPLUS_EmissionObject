@@ -307,12 +307,11 @@ order of ideas we attempted this methodology in S-PLUS
 We first generated the ($r$ - $J$0660) versus ($r$ - $i$) color- color
 diagram for each magnitude bins. We then carried a out an initial straight
 line fit to all objects in each magnitude bin. This initial fit is an
-attempt to find the loci of main-sequence and giant stars. The objects
-with a excesses the H{$\alpha$} 
-To obtain a better
-We also implemented
-
-We considering the best-fitting as the main stellar locus
+attempt to find the loci of main-sequence and giant stars. We implemented
+a iterative $\sigma$-clipped to find the best-fitting as the main stellar locus.
+In this order of ideas we made four interactive $\sigma$-clipped.
+The objects with a excesses of H{$\alpha$} will be those that considered
+above of the final fit.
 
 Applying the selection criteria to selecting H$\alpha$ emitters.
 We used similar procedure in  \citet{Wevers:2017}. The objects
@@ -327,7 +326,8 @@ with H$\alpha$ excess meet the condition:
 the fit and $\sigma_{\mathrm{phot}}$ is the error on the observed $(r - J0660)$ colour.
 The fits are carried out with the aid of the python library \texttt{astropy.modeling}
 \footnote{https://docs.astropy.org/en/stable/modeling/index.html}.
-The idea is that we considered those objects 
+The objects with an H{$\alpha$} excesses will be those that considered above of the
+final fit. 
 
 First see an approximation of the  4$\sigma$ cut away from the ariginal fit.
 Figure~\ref{fig:criteria-color-plot} shows the procedure implemented
@@ -432,7 +432,7 @@ Hierarchical clustering 2
 \label{sec:hdbscan}
 
 Hierarchical density-based cluster selection (\texttt{HDBSCAN}; \citealp{McInnes:2017})
-Hierarchical Density-Based Spatial Clustering of Applications with Noise(Campello,
+Hierarchical Density-Based Spatial Clustering of Applications with Noise (Campello,
 Moulavi, and Sander 2013), (Campello et al. 2015). Performs \texttt{DBSCAN} overvarying
 epsilon values and integrates the result to find a clustering that gives the beststability
 over epsilon. This allows \texttt{HDBSCAN} to find clusters of varying densities
