@@ -45,7 +45,6 @@ m21 = df['main_type'] == 'QSO'
 m22 = df['main_type'] == 'EB*'
 m23 = df['main_type'] == 'Radio'
 m24 = df['main_type'] == 'Seyfert_2'
-m25 = df['main_type'] == 'HII_G'
 m26 = df['main_type'] == 'X'
 m27 = df['main_type'] == 'MolCld'
 m28 = df['main_type'] == 'Cl*'
@@ -74,14 +73,60 @@ m51 = df['main_type'] == 'Nova'
 m52 = df['main_type'] == 'BClG'
 m53 = df['main_type'] == 'GlCl'
 
-# Making the tables with individual object class
+# Making the tables with individual object classes
+df_agn = pd.concat(df[m1], df[m2])
+df_EmG = pd.concat([df[m3], df[m14], df[m38], df[m40]])
+GinGroup = df[m4]
 df_pn = df[m34] 
 df_gal = df[m5]
-df_EmG = pd.concat([df[m3], df[m14], df[m40]])
 df_qso = pd.concat([df[m21], df[m46]])
 df_cv = pd.concat([df[m6], df[m11]])
 df_hii = df[m9]
 df_star = df[m17]
+df_sn = pd.concat(df[m8], df[m45])
+df_rrly = pd.concat(df[m7], df[m33])
+df_fir = df[m12]
+df_GinCl = df[m13]
+df_Seyfert_1 = df[m15]
+df_Seyfert_2 = df[m24]
+df_PartofG = df[m18]
+df_RadioG = df[m19]
+df_IG = df[m20]
+df_EB = df[m22]
+df_Radio = pd.concat(df[m23], df[m44])
+df_X = df[m26]
+df_MolCld = df[m27]
+df_cl = df[m28]
+df_HMXB = df[29]
+df_GinPair = df[30]
+df_LSB_G = df[m31]
+df_WD = pd.concat(df[m32], df[m42])
+df_Blue = df[m35]
+df_EmObj = df[m36]
+df_BlueSG = df[m37]
+df_low_mass = df[m39]
+df_uv = df[m41]
+df_mier = df[m43]
+df_BLLac = df[m47]
+df_pm = df[m48]
+df_Possible_lensImage = df[m49]
+df_nova = df[m51]
+df_bclg = df[m52]
+df_glcl = df[m53]
+
+# Countaining the sources of each class 
+list_numbers = ["H II regions", "PN", "CV", "SN", "Nova", "BL Lac",
+                "Variable Star of RR Lyr type",
+                "Star", "WD", "Cluster of Stars", "HMXB", "Far-Infrared source",
+                "Eclipsing binary", "Blue object", "Emission Object", "Blue supergiant star",
+                "Low-mass star", "UV-emission source", "MIER", "Possible lens Image"
+                "Galaxy", "Galaxy in Pair of Galaxies",
+                "Emission line galaxies",
+                "QSO", "AGN", "Part of a Galaxy", "X-ray source", "Molecular Cloud",
+                "Galaxy in Group of Galaxies", "Radio-source", "Interacting Galaxies",
+                "Low Surface Brightness Galaxy", "Radio Galaxy", "Galaxy in Cluster of Galaxies"
+                "High proper-motion Star", "Seyfert 1", "Seyfert 2",
+                "Brightest galaxy in a Cluster", "Globular Cluster"]
 
 # Definition to make the colors
 def colour(tab, f1, f2, f3, f4):

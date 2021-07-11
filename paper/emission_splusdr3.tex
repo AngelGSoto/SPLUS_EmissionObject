@@ -302,32 +302,31 @@ $r$, $J$0660 and $i$. This technique was used by \citet{Scaringi:2013}
 to identify blue objects with excess of H{$\alpha$} and after that
 \citet{Wevers:2017} also applied this methodology to create catalogue
 of candidate H{$\alpha$} emission showing an high effectiveness. In this
-order of ideas we attempted this methodology in S-PLUS
+order of ideas we attempted this methodology in S-PLUS.
 
 We first generated the ($r$ - $J$0660) versus ($r$ - $i$) color- color
 diagram for each magnitude bins. We then carried a out an initial straight
 line fit to all objects in each magnitude bin. This initial fit is an
 attempt to find the loci of main-sequence and giant stars. We implemented
-a iterative $\sigma$-clipped to find the best-fitting as the main stellar locus.
-In this order of ideas we made four interactive $\sigma$-clipped.
-The objects with a excesses of H{$\alpha$} will be those that considered
-above of the final fit.
-
-Applying the selection criteria to selecting H$\alpha$ emitters.
-We used similar procedure in  \citet{Wevers:2017}. The objects
-with H$\alpha$ excess meet the condition:
-
+a iterative $\sigma$-clipping tecnique to find the best-fitting of the main
+stellar locus. In this order of ideas, we made four interactive $\sigma$-clipped.
+Once we have found the apropiate fitting for each maginitude bin, we identified
+those objects significantly above of this final fit as likely sources with
+a excesses of H{$\alpha$}. Objects with a contribution significative of H{$\alpha$}
+meet the condition:
 
 \begin{equation}
   (r - J0660)_{\mathrm{obs}} - (r - J0660)_{\mathrm{fit}} \geq C \times \sqrt{\sigma^2_{\mathrm{s}} - \sigma^2_{\mathrm{phot}}}
 \end{equation}
  
  where $\sigma_{\mathrm{s}}$ is the root mean squared value of the residuals around
-the fit and $\sigma_{\mathrm{phot}}$ is the error on the observed $(r - J0660)$ colour.
+ the fit and $\sigma_{\mathrm{phot}}$ is the error on the observed $(r - J0660)$ colour idex.
+ $C$ is a constant which has the value 4 following \citet{Wevers:2017}.
 The fits are carried out with the aid of the python library \texttt{astropy.modeling}
 \footnote{https://docs.astropy.org/en/stable/modeling/index.html}.
-The objects with an H{$\alpha$} excesses will be those that considered above of the
-final fit. 
+
+Figure~\ref{fig:criteria-color-plot} ilustrates the procedured used to slected the H{$\alpha$}
+emitters in S-PLUS DR3 for each bin magnitude. The 
 
 First see an approximation of the  4$\sigma$ cut away from the ariginal fit.
 Figure~\ref{fig:criteria-color-plot} shows the procedure implemented
