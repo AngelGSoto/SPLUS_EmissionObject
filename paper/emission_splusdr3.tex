@@ -272,7 +272,7 @@ criteria to guarantee the quality of the observations of the objects:
 \begin{enumerate}
 \item The sources must have detection in the filters: $r$, $i$ and
   $J$0660. To assure that we select object must have error minor or
-  equal to 0.2 in each of three filter.
+  equal to 0.2 in each of three filters.
 
 \item Must have an $r$ magnitude until $r = 21$.
   
@@ -317,6 +317,7 @@ meet the condition:
 
 \begin{equation}
   (r - J0660)_{\mathrm{obs}} - (r - J0660)_{\mathrm{fit}} \geq C \times \sqrt{\sigma^2_{\mathrm{s}} - \sigma^2_{\mathrm{phot}}}
+  \label{eq:criterion}
 \end{equation}
  
  where $\sigma_{\mathrm{s}}$ is the root mean squared value of the residuals around
@@ -326,12 +327,13 @@ The fits are carried out with the aid of the python library \texttt{astropy.mode
 \footnote{https://docs.astropy.org/en/stable/modeling/index.html}.
 
 Figure~\ref{fig:criteria-color-plot} ilustrates the procedured used to slected the H{$\alpha$}
-emitters in S-PLUS DR3 for each bin magnitude. The continuos black lie represents the initial
-fit 
-
-First see an approximation of the  4$\sigma$ cut away from the ariginal fit.
-Figure~\ref{fig:criteria-color-plot} shows the procedure implemented
-to select the H{$\alpha$} emitters in all S-PLUS DR3 
+emitters in S-PLUS DR3 for each magnitude bin. The continuos black lines represent the initial
+fit and  the dashed lines indicate the 4-$\sigma$ clipping fit lines. The dotted lines are
+the cut selection criteria for the H{$\alpha$} emitters -- the 4-$\sigam$ above of the final
+fit--. Note that theses cut lines are only an approximations because to trace these lines
+it is only considered the residual around the fit. The actual selection criteria used here
+also include the phothometric uncertainties in $r$ - $J$0660 for each individual data source as
+shows the equation~\ref{eq:criterion}.
 
 \begin{figure*}
   \setlength\tabcolsep{0pt}
