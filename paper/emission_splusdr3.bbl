@@ -88,6 +88,12 @@ Akras S.,  Guzman-Ramirez L.,  Leal-Ferreira M.,   Ramos-Larios G.,  2019a,
 {Drew} J.~E.,  et~al., 2014, \mn@doi [\mnras] {10.1093/mnras/stu394}, \href
   {https://ui.adsabs.harvard.edu/abs/2014MNRAS.440.2036D} {440, 2036}
 
+\bibitem[\protect\citeauthoryear{{Fukugita}, {Ichikawa}, {Gunn}, {Doi},
+  {Shimasaku}  \& {Schneider}}{{Fukugita} et~al.}{1996}]{Fukugita:1996}
+{Fukugita} M.,  {Ichikawa} T.,  {Gunn} J.~E.,  {Doi} M.,  {Shimasaku} K.,
+  {Schneider} D.~P.,  1996, \mn@doi [\aj] {10.1086/117915}, \href
+  {http://adsabs.harvard.edu/abs/1996AJ....111.1748F} {111, 1748}
+
 \bibitem[\protect\citeauthoryear{{Geach}}{{Geach}}{2012}]{Geach:2012}
 {Geach} J.~E.,  2012, \mn@doi [\mnras] {10.1111/j.1365-2966.2011.19913.x},
   \href {https://ui.adsabs.harvard.edu/abs/2012MNRAS.419.2633G} {419, 2633}
@@ -102,6 +108,13 @@ Akras S.,  Guzman-Ramirez L.,  Leal-Ferreira M.,   Ramos-Larios G.,  2019a,
   {Marsh}}{1986}]{Horne:1986}
 {Horne} K.,  {Marsh} T.~R.,  1986, \mn@doi [\mnras] {10.1093/mnras/218.4.761},
   \href {https://ui.adsabs.harvard.edu/abs/1986MNRAS.218..761H} {218, 761}
+
+\bibitem[\protect\citeauthoryear{{Mar{\'\i}n-Franch}
+  et~al.,}{{Mar{\'\i}n-Franch} et~al.}{2012}]{Martin-Franch:2012}
+{Mar{\'\i}n-Franch} A.,  et~al., 2012, in {Navarro} R.,  {Cunningham} C.~R.,
+  {Prieto} E.,  eds,  Society of Photo-Optical Instrumentation Engineers (SPIE)
+  Conference Series Vol. 8450, Modern Technologies in Space- and Ground-based
+  Telescopes and Instrumentation II. p. 84503S, \mn@doi{10.1117/12.925430}
 
 \bibitem[\protect\citeauthoryear{{Martin}, {Kaviraj}, {Hocking}, {Read}  \&
   {Geach}}{{Martin} et~al.}{2020}]{Martin:2020}

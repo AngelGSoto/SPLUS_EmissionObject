@@ -138,8 +138,8 @@ of star and the formation of heavy elements in the young universe. On the
 other hand, emission lines can also infer the presence or lack the accretion
 discs \citep{Schwope:2000, Ratti:2012}, the properties of single or double
 picked line can allow us to infer geometrical characteristics \citep{Horne:1986},
-the nature of  donor stars in binary system \citep{Steeghs:2002, Spaandonk:2010, Casares:2015}
-and the compact objects as black holes \citep{Casares:2016}. 
+the nature of  donor stars in binary system \citep{Steeghs:2002, Spaandonk:2010,
+Casares:2015} and the compact objects as black holes \citep{Casares:2016}. 
 
 Emission lines are also associated with stars in very early-type and/or
 very late evolutionary stage which are short phase. As already mentioned
@@ -227,17 +227,20 @@ based in (g - r) and (z - g) in conjunction to unsupervised machine learning
 techniques to split the final list in those with blue and red continuum. The
 paper is organized as follows...
 
-\section{Observations}
+\section{Observations: The S-PLUS project}
 \label{sec:obser}
 
-Particularly, we are implemented data from S-PLUS DR3 (ref) to carried out our
-study. S-PLUS is 12-band optical photometric survey, which are formed by using
-seven narrow-band and five brow-band like SDSS filters. The narrow-band set
-include the filter $J$0660 which detect the H{$\alpha$} emission line.
-Figure~\ref{fig:curves} shows the Javalambre filter system (Marín-Franch et al. 2012)
-overlapping are the optical spectra of several class emission line objects on which
-it is possible to see that the H{$\alpha$} line falls into the $J$0660 filter, except
-for the QSOs.   
+We are implemented data from S-PLUS DR3 (ref) to carried out our
+study. S-PLUS is 12-band optical photometric survey, which are formed by
+seven narrow-band (\textit{J}0378, \textit{J}0395, \textit{J}0410, \textit{J}0430,
+\textit{J}0515, \textit{J}0660 and \textit{J}0861) and five brow-band like
+SDSS filters (\(u, g, r, i~\mathrm{and}~z\), \citealp{Fukugita:1996}).
+The narrow-band set include the filter $J$0660 which detect
+the H{$\alpha$} emission line. For more detailed about the configuration of
+S-PLUS filter set see Figure~\ref{fig:curves} shows the Javalambre filter
+system \citep{Martin-Franch:2012} overlapping are the optical spectra of
+several class emission line objects on which it is possible to see that the
+H{$\alpha$} line falls into the $J$0660 filter, except for the QSOs.   
 
 The actual data release contains about 60 millions of objects covering a total
 area of $\sim$8000 deg$^2$, at high Galactic latitudes ($ > 30$~deg) using a
@@ -278,7 +281,7 @@ criteria to guarantee the quality of the observations of the objects:
   
 \end{enumerate}
 
-\subsection{Finding the main stellar locus and selecting the H{$\alpha$ emitters} }
+\subsection{Finding the main stellar locus and selecting the H{$\alpha$ emitters}}
 \label{sec:}
 
 Once the initial cut were made, we proceed to select the objects with
@@ -312,8 +315,8 @@ a iterative $\sigma$-clipping tecnique to find the best-fitting of the main
 stellar locus. In this order of ideas, we made four interactive $\sigma$-clipped.
 Once we have found the apropiate fitting for each maginitude bin, we identified
 those objects significantly above of this final fit as likely sources with
-a excesses of H{$\alpha$}. Objects with a contribution significative of H{$\alpha$}
-meet the condition:
+a excesses of H{$\alpha$}. Objects with a contribution significative of
+H{$\alpha$} meet the condition:
 
 \begin{equation}
   (r - J0660)_{\mathrm{obs}} - (r - J0660)_{\mathrm{fit}} \geq C \times \sqrt{\sigma^2_{\mathrm{s}} - \sigma^2_{\mathrm{phot}}}
@@ -372,11 +375,11 @@ magnitude unities selected with methods explained above. This object
 clearly exhibits strong H$alpha$ emitter.
 
 \begin{figure}
-\includegraphics[width=0.9\linewidth]{Figs/photopectrum_splus_SPLUS-n15s22-024043_Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-Final_PStotal.pdf}
+\includegraphics[width=0.9\linewidth]{Figs/photopectrum_splus_HYDRA-0026-052331_Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-Final_PStotal.pdf}
 \centering
 \llap{\shortstack{%
-        \includegraphics[width=0.25\linewidth, trim=350 10 350 20, clip]{Figs/SPLUS-n15s22-024043_179.74240913634958--19.02992833661004_250_r.pdf}\\
-        \rule{0ex}{0.91in}%
+        \includegraphics[width=0.25\linewidth, trim=350 10 350 20, clip]{Figs/HYDRA-0026-052331_158.85933642579576--24.753136157195524_80_r.pdf}\\
+        \rule{0ex}{0.87in}%
       }
   \rule{0.06in}{0ex}}
 \caption{S-spectra of a random object observed by S-PLUS. Squares represent
