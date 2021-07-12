@@ -80,16 +80,17 @@ f = plt.figure(figsize=(18,9))
 ax1 = aplpy.FITSFigure(hdul, figure=f, subplot=(1, 1, 1))#, north=True)
 plt.imshow(img, origin='lower', cmap='cividis', aspect='equal')
                  
-ax1.add_scalebar(20.0/3600)
-ax1.scalebar.set_label('20 arcsec')
+ax1.add_scalebar(40.0/3600)
+ax1.scalebar.set_label('40 arcsec')
 ax1.scalebar.set(color='yellow', linewidth=4, alpha=0.9)
-ax1.scalebar.set_font(size=40, weight='bold',
+ax1.scalebar.set_font(size=35, weight='bold',
                       stretch='normal', family='sans-serif',
                       style='normal', variant='normal')
 
 ax1.axis_labels.set_font(size=22, weight='medium', stretch='normal', family='sans-serif', style='normal', variant='normal')
-#img.axis_labels.hide()
-#img.axis_labels.hide_y()
+ax1.axis_labels.hide()
+ax1.tick_labels.hide()
+#ax1.axis_labels.hide_y()
 
 ax1.tick_labels.set_font(size=22, weight='medium', stretch='normal', family='sans-serif', style='normal', variant='normal')
 #ax1.list_layers()
