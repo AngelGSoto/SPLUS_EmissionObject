@@ -58,7 +58,7 @@
 
 % Title of the paper, and the short title which is used in the headers.
 % Keep the title short and informative.
-\title[S-PLUS: Emission line objects]{Photometric identification of emission
+\title[S-PLUS: Emission line objects]{Optical identification of emission
   line sources in the southern photometric local Universe survey (S-PLUS)}
 
 % The list of authors, and the short list which is used in the headers.
@@ -264,7 +264,10 @@ Additional information about S-PLUS can be found in \citet{Mendes:2019}.
 
 We first constructed a sub-sample from all S-PLUS DR3 from which we
 applied an iterative and automatic technique to select objects with
-an excess of H{$\alpha$} emission line, as we describe below:
+an excess of H{$\alpha$} emission line. Once the objects were selected
+we also make a separation of them into two groups those with red and blue
+continuum by using optical colors in conjunction with unsupervised
+ machine learning statistical tools. These procedures are described below:
 
 \subsection{Initial selection sample}
 \label{sec:}
@@ -396,18 +399,30 @@ objects with a strong blue continuum and another with an intense emission of the
 continuum on the blue part of the spectrum. 
 
 
-\subsection{Clustering techniques}
+\subsection{Unsupervised machine learning/clustering techniques}
 \label{sec:clustering}
 
 In this work we are using unsupervised machine learning approaches to divided our sample
 in two groups: one represent the blue sources and the another one are the red sources.
 The blue are those that have strong emission of the continuum on the part blue of the
-spectrum and the another with strong emission continuum of the red one. 
+spectrum and the another with strong emission continuum of the red one. For that task,
+was performed two clustering techniques; hierarchical clustering and Hierarchical
+density-based cluster selection
 
 \subsubsection{Hierarchical clustering}
 \label{sec:Hierar}
 
-Hierarchical clustering also known as hierarchical cluster analysis ({\sc hca}),
+Hierarchical clustering also known as hierarchical cluster analysis ({\sc hca})
+belong to the family of clustering algorithms on which are constructed cluster
+by merging clusters splitting them successively. {\sc hca} is an unsupervised
+technique. It consists of building a binary merge tree,
+
+\textit{Hierarchical clustering consists of building a binary merge tree,
+  starting from the data elements stored at the leaves (interpreted as singleton sets)
+  and proceed by merging two by two the “closest” sub-sets (stored at nodes)
+  until we reach the root of the tree that contains all the elements of X.}
+
+starting  
 is an algorithm that groups similar objects into groups called clusters.
 The endpoint is a set of clusters, where each cluster is distinct from each
 other cluster, and the objects within each cluster are broadly similar to each other.
