@@ -425,7 +425,7 @@ clusters. In every iteration, two cluster are selected that are considered as cl
 possible. These cluster are merged and replaced with a newly created merged cluster.
 Thus, each merging step reduces the number of cluster by ``1''. Therefore, the
 method needs to be designated for measuring proximity between cluster containing
-multiple data points, so that they may be merged \citep{Aggarwal:2015}. We could
+multiple data points, so that they may be merged \citep{Aggarwal:2015, Mann:2013}. We could
 describe how to work the algorithm in three simple steps:
 
 \begin{enumerate}
@@ -436,11 +436,10 @@ describe how to work the algorithm in three simple steps:
   known as the root of the tree structure.
  \end{enumerate}
 
-
 In simple words HCA can be interpreted  as an algorithm that groups
-similar objects into groups called clusters. The endpoint is a set of clusters,
-where each cluster is distinct from each other cluster, and the objects within
-each cluster are broadly similar to each other.
+similar objects into groups called clusters or nodes. The endpoint is a
+set of clusters, where each cluster is distinct from each other cluster,
+and the objects within each cluster are broadly similar to each other.
 
 
 
