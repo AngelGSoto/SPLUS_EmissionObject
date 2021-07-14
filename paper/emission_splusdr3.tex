@@ -426,8 +426,15 @@ possible. These cluster are merged and replaced with a newly created merged clus
 Thus, each merging step reduces the number of cluster by ``1''. Therefore, the
 method needs to be designated for measuring proximity between cluster containing
 multiple data points, so that they may be merged \citep{Aggarwal:2015}. We could
-the algorithm in three simple steps:
+describe how to work the algorithm in three simple steps:
 
+\begin{enumerate}
+\item Initially all the data points that are cluster i.e. leaf.
+\item It looping merges the nodes (cluster) that have the maximum similarity
+  between them.
+\item At the end of the process all the nodes belong to unique cluster. This is
+  known as the root of the tree structure.
+ \end{enumerate}
 
 
 In simple words HCA can be interpreted  as an algorithm that groups
