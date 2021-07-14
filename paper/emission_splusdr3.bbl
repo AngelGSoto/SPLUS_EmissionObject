@@ -17,6 +17,10 @@
   {mn@eprint@\@tempb}{\@tempb:\@tempc}{\expandafter \expandafter \csname
   mn@eprint@\@tempb\endcsname \expandafter{\@tempc}}}
 
+\bibitem[\protect\citeauthoryear{Aggarwal}{Aggarwal}{2015}]{Aggarwal:2015}
+Aggarwal C.~C.,  2015, Data Mining: The Textbook.
+Springer, Cham, \mn@doi{10.1007/978-3-319-14142-8}
+
 \bibitem[\protect\citeauthoryear{{Akras}, {Guzman-Ramirez}  \&
   {Gon{\c{c}}alves}}{{Akras} et~al.}{2019}]{Akras:2019}
 {Akras} S.,  {Guzman-Ramirez} L.,   {Gon{\c{c}}alves} D.~R.,  2019, \mn@doi
