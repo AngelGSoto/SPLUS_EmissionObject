@@ -42,6 +42,12 @@ Akras S.,  Guzman-Ramirez L.,  Leal-Ferreira M.,   Ramos-Larios G.,  2019a,
 {Barentsen} G.,  et~al., 2014, \mn@doi [\mnras] {10.1093/mnras/stu1651}, \href
   {http://adsabs.harvard.edu/abs/2014MNRAS.444.3230B} {444, 3230}
 
+\bibitem[\protect\citeauthoryear{Campello, Moulavi  \& Sander}{Campello
+  et~al.}{2013}]{Campello:2013}
+Campello R. J. G.~B.,  Moulavi D.,   Sander J.,  2013, in Pei J.,  Tseng V.~S.,
+   Cao L.,  Motoda H.,   Xu G.,  eds, Advances in Knowledge Discovery and Data
+  Mining. Springer Berlin Heidelberg, Berlin, Heidelberg, pp 160--172
+
 \bibitem[\protect\citeauthoryear{{Casares}}{{Casares}}{2015}]{Casares:2015}
 {Casares} J.,  2015, \mn@doi [\apj] {10.1088/0004-637X/808/1/80}, \href
   {https://ui.adsabs.harvard.edu/abs/2015ApJ...808...80C} {808, 80}
@@ -92,6 +98,12 @@ Akras S.,  Guzman-Ramirez L.,  Leal-Ferreira M.,   Ramos-Larios G.,  2019a,
 {Drew} J.~E.,  et~al., 2014, \mn@doi [\mnras] {10.1093/mnras/stu394}, \href
   {https://ui.adsabs.harvard.edu/abs/2014MNRAS.440.2036D} {440, 2036}
 
+\bibitem[\protect\citeauthoryear{Ester, Kriegel, Sander  \& Xu}{Ester
+  et~al.}{1996}]{Ester:1996}
+Ester M.,  Kriegel H.-P.,  Sander J.,   Xu X.,  1996, in Proc. of 2nd
+  International Conference on Knowledge Discovery and Data Mining (KDD-96). pp
+  226--231
+
 \bibitem[\protect\citeauthoryear{{Fukugita}, {Ichikawa}, {Gunn}, {Doi},
   {Shimasaku}  \& {Schneider}}{{Fukugita} et~al.}{1996}]{Fukugita:1996}
 {Fukugita} M.,  {Ichikawa} T.,  {Gunn} J.~E.,  {Doi} M.,  {Shimasaku} K.,
@@ -113,6 +125,11 @@ Akras S.,  Guzman-Ramirez L.,  Leal-Ferreira M.,   Ramos-Larios G.,  2019a,
 {Horne} K.,  {Marsh} T.~R.,  1986, \mn@doi [\mnras] {10.1093/mnras/218.4.761},
   \href {https://ui.adsabs.harvard.edu/abs/1986MNRAS.218..761H} {218, 761}
 
+\bibitem[\protect\citeauthoryear{Jain, Murty  \& Flynn}{Jain
+  et~al.}{1999}]{Jain:1999}
+Jain A.~K.,  Murty M.~N.,   Flynn P.~J.,  1999, \mn@doi [ACM Comput. Surv.]
+  {http://doi.acm.org/10.1145/331499.331504}, 31, 264
+
 \bibitem[\protect\citeauthoryear{Mann \& Kaur}{Mann \& Kaur}{2013}]{Mann:2013}
 Mann A.,  Kaur N.,  2013.
 
@@ -128,11 +145,6 @@ Mann A.,  Kaur N.,  2013.
 {Martin} G.,  {Kaviraj} S.,  {Hocking} A.,  {Read} S.~C.,   {Geach} J.~E.,
   2020, \mn@doi [\mnras] {10.1093/mnras/stz3006}, \href
   {https://ui.adsabs.harvard.edu/abs/2020MNRAS.491.1408M} {491, 1408}
-
-\bibitem[\protect\citeauthoryear{McInnes, Healy  \& Astels}{McInnes
-  et~al.}{2017}]{McInnes:2017}
-McInnes L.,  Healy J.,   Astels S.,  2017, \mn@doi [The Journal of Open Source
-  Software] {10.21105/joss.00205}, 2
 
 \bibitem[\protect\citeauthoryear{{Mendes de Oliveira} et~al.,}{{Mendes de
   Oliveira} et~al.}{2019}]{Mendes:2019}

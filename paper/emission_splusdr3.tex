@@ -359,11 +359,11 @@ shows on the Equation~\ref{eq:criterion}.
     colour-colour diagrams. The thin red lines illustrate the original linear
     fit to all the data (grey points). The dashed lines represent the final
     fits to the stellar locus of points which were obtained by applying an iterative
-    $\sigma$-clipping technique to the initial fit. The actual cuts used to select H{$\alpha$}
-    emitters are shown by the dotted lines. Objects selected as H{$\alpha$} emitters
-    must be located above. Note that the cut lines (selection criteria) shown here
-    are only approximate, as the actual selection criterion also considers the errors on
-    each source. This means that an object could be in the bottom
+    $\sigma$-clipping technique to the initial fit. The actual cuts used to select
+    H{$\alpha$} emitters are shown by the dotted lines. Objects selected as H{$\alpha$}
+    emitters must be located above. Note that the cut lines (selection criteria) shown
+    here are only approximate, as the actual selection criterion also considers the
+    errors on each source. This means that an object could be in the bottom
     right-hand panel is not selected despite clearly lying above the cut line
     ({\sc explicar esta última frase mejor}).}
   \label{fig:criteria-color-plot}
@@ -412,21 +412,25 @@ density-based cluster selection
 \subsubsection{Hierarchical clustering}
 \label{sec:Hierar}
 
-Hierarchical clustering also known as hierarchical cluster analysis (\texttt{HCA})
-belong to the family of clustering algorithms on which are constructed cluster
-by merging clusters and splitting them successively. {\sc hca} is an unsupervised
-technique. It consists of building a binary merge tree, starting from the data
-elements stored at the leaves (interpreted as individual cluster)
+Hierarchical clustering belong to the family of clustering algorithms
+on which are constructed cluster by merging clusters and splitting them successively.
+It is an unsupervised algorithm that yields a dendrogram representing
+the nested grouping of patterns and similarity levels at which groupings change
+\citep{Jain:1999}. There is two type of hierarchical clustering:
+one is the \textit{agglomerative hierarchical clustering}
+which is ``bottom-up'' approach. Hierarchical agglomerative clustering (\texttt{HAC})
+consists of building a binary merge tree, starting from the data elements stored at the
+leaves (interpreted as individual cluster)
 and proceed by merging two by two the ``closest'' sub-sets (stored at nodes)
 until it reaches the root of the tree that contains all the elements of the data set.
-This technique is also called \textit{agglomerative hierarchical clustering}
-since the individual data point are successively agglomerated into higher-level
-clusters. In every iteration, two cluster are selected that are considered as close as
-possible. These cluster are merged and replaced with a newly created merged cluster.
-Thus, each merging step reduces the number of cluster by ``1''. Therefore, the
-method needs to be designated for measuring proximity between cluster containing
-multiple data points, so that they may be merged \citep{Aggarwal:2015, Mann:2013}.
-We could describe how to work the algorithm in three simple steps:
+Agglomerative term used  to define it since the individual data
+point are successively agglomerated into higher-level. In each  iteration, two cluster are
+selected that are considered as close as possible. These cluster are merged and
+replaced with a newly created merged cluster. Thus, each merging step reduces
+the number of cluster by ``1''. Therefore, the method needs to be designated for
+measuring proximity between cluster containing multiple data points, so that
+they may be merged \citep{Aggarwal:2015, Mann:2013}. We could describe how to
+work the algorithm in three simple steps:
 
 \begin{enumerate}
 \item Initially all the data points that are cluster i.e. leaf.
@@ -436,11 +440,16 @@ We could describe how to work the algorithm in three simple steps:
   known as the root of the tree structure.
  \end{enumerate}
 
+
+The other type is the \textit{agglomerative hierarchical clustering}. This is a ``top-down''
+approach. The data start in one cluster, and splits are performed recursively as
+one moves down the hierarchy. It is the inverse procedure of \texttt{HAC}.
+
+In this work we have used the \texttt{HAC} technique for classify our sample.
 In simple words HCA can be interpreted  as an algorithm that groups
 similar objects into groups called clusters or nodes. The endpoint is a
 set of clusters, where each cluster is distinct from each other cluster,
 and the objects within each cluster are broadly similar to each other.
-
 
 
 Choosing the number of cluster. Firstly, the Hierarchical cluster output dendrogram (tree)
@@ -488,8 +497,26 @@ Hierarchical clustering 2
 \subsubsection{Hierarchical density-based cluster selection}
 \label{sec:hdbscan}
 
-Hierarchical density-based cluster selection (\texttt{HDBSCAN}; \citealp{McInnes:2017})
-is a 
+Hierarchical density-based cluster selection (\texttt{HDBSCAN}, \citealp{Campello:2013})
+is another unsupervised machine learning algorithm that hinges on clustering.
+It is based on a slightly modified version of Density-based Spatial
+Clustering of Applications with Noise (\texttt{DBSCAN}; \citealp{Ester:1996}) which
+declare points as noise. It is a algorithm that assumes clusters are characterized
+by ``islands'' of high density in the sea of the parameter space, such
+that clusters are regarded as data partitions that have a higher density
+than their surroundings \citep{Ntwaetsile:2021}. HDBSCAN takes forward the
+DBSCAN concept by introducing a hierarchy
+to the clustering, with ``persistent'' clusters finally extracted from the
+hierarchical tree. The main advantage of HDBSCAN in comparison with the predecessor
+consists in the possibility in finding clusters of variables densities and different
+shape.
+
+HDBSCAN is a recent algorithm developed by some of the same people who write the original DBSCAN paper. Their goal was to allow varying density clusters. The algorithm starts off much the same as DBSCAN: we transform the space according to density, exactly as DBSCAN does, and perform single linkage clustering on the transformed space. Instead of taking an epsilon value as a cut level for the dendrogram however, a different approach is taken: the dendrogram is condensed by viewing splits that result in a small number of points splitting off as points 'falling out of a cluster'. This results in a smaller tree with fewer clusters that 'lose points'. That tree can then be used to select the most stable or persistent clusters. This process allows the tree to be cut at varying height, picking our varying density clusters based on cluster stability. The immediate advantage of this is that we can ave varying density clusters; the second benefit is that we have eliminated the epsilon parameter as we no longer need it to choose a cut of the dendrogram. Instead we have a new parameter \texttt{min\_cluster\_size} which is used to determine whether points are ``falling out of a cluster'' or splitting to form two new clusters. This trades an unintuitive parameter for one that is not so hard to choose for EDA (what is the minimum size cluster I am willing to care about?).
+
+
+
+
+
 Hierarchical Density-Based Spatial Clustering of Applications with Noise (Campello,
 Moulavi, and Sander 2013), (Campello et al. 2015). Performs \texttt{DBSCAN} overvarying
 epsilon values and integrates the result to find a clustering that gives the best stability
