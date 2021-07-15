@@ -505,11 +505,10 @@ declare points as noise. It is a algorithm that assumes clusters are characteriz
 by ``islands'' of high density in the sea of the parameter space, such
 that clusters are regarded as data partitions that have a higher density
 than their surroundings \citep{Ntwaetsile:2021}. HDBSCAN takes forward the
-DBSCAN concept by introducing a hierarchy
-to the clustering, with ``persistent'' clusters finally extracted from the
-hierarchical tree. The main advantage of HDBSCAN in comparison with the predecessor
-consists in the possibility in finding clusters of variables densities and different
-shape.
+DBSCAN concept by introducing a hierarchy to the clustering, with ``persistent''
+clusters finally extracted from the hierarchical tree. The main advantage of
+HDBSCAN in comparison with the predecessor consists in the possibility in finding
+clusters of variables densities and different shape.
 
 HDBSCAN is a recent algorithm developed by some of the same people who write
 the original DBSCAN paper. Their goal was to allow varying density clusters.
@@ -530,8 +529,6 @@ to determine whether points are ``falling out of a cluster'' or splitting
 to form two new clusters. This trades an unintuitive parameter for one that
 is not so hard to choose for EDA (what is the minimum size cluster I am
 willing to care about?).
-
-
 
 
 
