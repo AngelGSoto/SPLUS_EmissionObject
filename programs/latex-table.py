@@ -95,7 +95,7 @@ red = [prob_fmt(a) for a in tab_hdbscan['P(red)']]
 # tab_hdbscan['P(Blue)'].format = "%.2f"
 # tab_hdbscan['P(red)'].format = "%.2f"
 
-# Additing columns with the probabilities on table of HBDSCAN
+# Additing columns with the probabilities on table 1
 tab_cont['P(Blue)'] = blue
 tab_cont['P(red)'] = red
 
