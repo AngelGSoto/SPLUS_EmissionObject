@@ -257,7 +257,7 @@ IDR3 has 59,738,355 objects.
 
 In agreement with the synthetic photometry, I downloaded the objects from the database with subjective equation: =r - H\alpha > 0.15*(r - i) - 0.4=.
 
-#+BEGIN_SRC sql: query to select objects
+#+BEGIN_SRC sql :query to select objects
 SELECT detection.ID
 FROM idr3.detection_image as detection JOIN idr3.u_band as u ON detection.ID=u.ID 
 JOIN idr3.f378_band as f378 ON detection.ID=f378.ID JOIN idr3.f395_band as f395 ON detection.ID=f395.ID
@@ -274,7 +274,7 @@ AND FWHM < 7.0 AND (R_PStotal - F660_PStotal) >= 0.15*(R_PStotal - I_PStotal) - 
 The above query take long time. Take 21min.
 The next step is to make matching this Votable using website and ADQL language including the columns desire.
 
-#+BEGIN_SRC sql: query to match with columns desire
+#+BEGIN_SRC sql :query to match with columns desire
 SELECT detection.Field, detection.ID, detection.RA, detection.DEC, detection.FWHM, detection.ISOarea, detection.KRON_RADIUS, 
 detection.nDet_magPStotal, detection.PhotoFlagDet, u.U_PStotal, f378.F378_PStotal, f395.F395_PStotal,
 f410.F410_PStotal, f430.F430_PStotal, g.G_PStotal, f515.F515_PStotal, r.R_PStotal, f660.F660_PStotal, i.I_PStotal, 
@@ -292,7 +292,7 @@ I got the error:
 
 Try the initial query include the columns desire.
 
-#+BEGIN_SRC sql: query to select objects
+#+BEGIN_SRC sql 
 SELECT detection.Field, detection.ID, detection.RA, detection.DEC, detection.FWHM, detection.ISOarea, detection.KRON_RADIUS, 
 detection.nDet_magPStotal, detection.PhotoFlagDet, u.U_PStotal, f378.F378_PStotal, f395.F395_PStotal,
 f410.F410_PStotal, f430.F430_PStotal, g.G_PStotal, f515.F515_PStotal, r.R_PStotal, f660.F660_PStotal, i.I_PStotal, 
@@ -331,13 +331,13 @@ Script to download stamp images FITS from database
 
 I write a script to download the colored images and make them for publication:
 
-#+BEGIN_SRC python: scrit to get colored images
-'''
-Scrit to download colored images from database
-'''
-# Import the necessary packages 
-import splusdata 
-import pandas as pd
+#+begin_src python
+ '''
+ Scrit to download colored images from database
+ '''
+ # Import the necessary packages 
+ import splusdata 
+ import pandas as pd
 import matplotlib.pyplot as plt
 import aplpy
 from astropy.io import fits
@@ -499,13 +499,13 @@ Using linear discriminant analisys to clean the final sample of H{$\alpha$} emit
 
 #+BEGIN_SRC results
 
-Shape of array: (419, 12)
-Accuracy score for Testing Dataset =  0.8333333333333334
-Precision score for Testing Dataset =  0.8205128205128205
-Confusion matrix =  (38  7)
+ Shape of array: (419, 12)
+ Accuracy score for Testing Dataset =  0.8333333333333334
+ Precision score for Testing Dataset =  0.8205128205128205
+ Confusion matrix =  (38  7)
                     ( 7 32)
-Data to classify: (13644, 12)
-13644
+ Data to classify: (13644, 12)
+ 13644
 
 #+END_SRC
 
@@ -530,7 +530,7 @@ Data to classify: (13644, 7)
 + Used the QSOs, stars and galaxy classification.
   - Tutorial of Liliene about how implement the star, galaxy and QSO classification:
 
-    #+BEGIN_SRC tutorial
+#+BEGIN_SRC  e-mail
     1. Baixar última versão do splusdata (3.65)
        pip install --upgrade splusdata
 
@@ -561,13 +561,13 @@ Data to classify: (13644, 7)
        match_irsa: [True ou False] se True, irá fazer query do ALLWISE catalogue e fará o crossmatch com os dados de entrada para que seja possível rodar o modelo RF18. Se model == "RF16", match_irsa == False automaticamente.
 
        verbose: [True ou False] se True, retorna prints de cada etapa
-       #+END_SRC
+#+END_SRC
  
   - Cross-match to download the table with the right columns.
 
        Query:
 
-       #+BEGIN_SRC sql: query for match
+#+BEGIN_SRC sql : query for match
        SELECT detection.Field, detection.ID, detection.RA, detection.DEC, detection.FWHM, detection.FWHM_n, detection.A, 
        detection.B, detection.ISOarea, detection.KRON_RADIUS, 
        detection.nDet_PStotal, detection.PhotoFlagDet, u.u_PStotal, J0378.J0378_PStotal, J0395.J0395_PStotal,
@@ -583,7 +583,7 @@ Data to classify: (13644, 7)
        JOIN idr3.J0410_band as J0410 ON tap.ID=J0410.ID JOIN idr3.J0430_band as J0430 ON tap.ID=J0430.ID JOIN idr3.g_band as g ON tap.ID=g.ID 
        JOIN idr3.J0515_band as J0515 ON tap.ID=J0515.ID JOIN idr3.r_band as r ON tap.ID=r.ID JOIN idr3.J0660_band as J0660 ON tap.ID=J0660.ID 
        JOIN idr3.i_band as i ON tap.ID=i.ID JOIN idr3.J0861_band as J0861 ON tap.ID=J0861.ID JOIN idr3.z_band as z ON tap.ID=z.ID 
-       #+END_SRC
+#+END_SRC
       
        Before to apply the query I split the file (I am not sure if necessary) but the splus documentation says that the cross match is restringing to 2000 rows.
        : python ../../programs/join-csvtable.py
