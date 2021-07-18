@@ -508,7 +508,18 @@ than their surroundings \citep{Ntwaetsile:2021}. HDBSCAN takes forward the
 DBSCAN concept by introducing a hierarchy to the clustering, with ``persistent''
 clusters finally extracted from the hierarchical tree. The main advantage of
 HDBSCAN in comparison with the predecessor consists in the possibility in finding
-clusters of variables densities and different shape.
+clusters of variables densities and different shape. Following \citet{Malzer:2021}
+and \citet{{Ntwaetsile:2021} works as follows:
+
+\begin{enumerate}
+\item In \texttt{DBSCAN} is consider the ``core'' distance  for a point $x$, core$_k(x)$
+  which defines the distance of an object to the $k$th nearest neighbor that is an
+  efficient way of measurement of density. Low values of core$_k(x)$ represents high
+  density and vice-versa.
+
+\item The ``mutual readability''
+  
+\end{enumerate}
 
 The algorithm starts off much the same as DBSCAN: we transform the space
 according to density, exactly as DBSCAN does, and perform single linkage
@@ -768,7 +779,7 @@ two cluster that in agreement with previous results are the blue and red sources
 
 \newcommand\TableHeader{
   \hline\hline
-  Id Simbad & \(\mathrm{RA}\) & \(\mathrm{Dec}\) & Type & Group -- {\sc hca}
+  Id Simbad & \(\mathrm{RA}\) & \(\mathrm{Dec}\) & Type & Group -- {\sc hac}
                           & P(Blue) -- {\sc hdbscan} & P(Red) -- {\sc hdbscan} \\
   %Object & \(D\) &   \(R_{\mathrm{out}}\) & \(R_{\mathrm{in}}\) \\
   \hline 
@@ -778,7 +789,7 @@ two cluster that in agreement with previous results are the blue and red sources
 \section{Simbad objects}
 
 \begin{center}
-\begin{longtable}{llclccc}
+\begin{longtable}{llrcccc}
   \caption{Simbad sources. \label{tab:simbad}}\\
   \TableHeader\endfirsthead 
   \caption[]{--continued}\\

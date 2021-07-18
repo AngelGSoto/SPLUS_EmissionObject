@@ -805,3 +805,16 @@
   pages="160--172",
   abstract="We propose a theoretically and practically improved density-based, hierarchical clustering method, providing a clustering hierarchy from which a simplified tree of significant clusters can be constructed. For obtaining a ``flat'' partition consisting of only the most significant clusters (possibly corresponding to different density thresholds), we propose a novel cluster stability measure, formalize the problem of maximizing the overall stability of selected clusters, and formulate an algorithm that computes an optimal solution to this problem. We demonstrate that our approach outperforms the current, state-of-the-art, density-based clustering methods on a wide variety of real world data.",
   isbn="978-3-642-37456-2"}
+
+@Article{Malzer:2021,
+  AUTHOR = {Malzer, Claudia and Baum, Marcus},
+  TITLE = {Constraint-Based Hierarchical Cluster Selection in Automotive Radar Data},
+  JOURNAL = {Sensors},
+  VOLUME = {21},
+  YEAR = {2021},
+  NUMBER = {10},
+  ARTICLE-NUMBER = {3410},
+  URL = {https://www.mdpi.com/1424-8220/21/10/3410},
+  ISSN = {1424-8220},
+  ABSTRACT = {High-resolution automotive radar sensors play an increasing role in detection, classification and tracking of moving objects in traffic scenes. Clustering is frequently used to group detection points in this context. However, this is a particularly challenging task due to variations in number and density of available data points across different scans. Modified versions of the density-based clustering method DBSCAN have mostly been used so far, while hierarchical approaches are rarely considered. In this article, we explore the applicability of HDBSCAN, a hierarchical DBSCAN variant, for clustering radar measurements. To improve results achieved by its unsupervised version, we propose the use of cluster-level constraints based on aggregated background information from cluster candidates. Further, we propose the application of a distance threshold to avoid selection of small clusters at low hierarchy levels. Based on exemplary traffic scenes from nuScenes, a publicly available autonomous driving data set, we test our constraint-based approach along with other methods, including label-based semi-supervised HDBSCAN. Our experiments demonstrate that cluster-level constraints help to adjust HDBSCAN to the given application context and can therefore achieve considerably better results than the unsupervised method. However, the approach requires carefully selected constraint criteria that can be difficult to choose in constantly changing environments.},
+  DOI = {10.3390/s21103410}}
