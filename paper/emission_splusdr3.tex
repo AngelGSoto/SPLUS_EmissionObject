@@ -542,7 +542,24 @@ and \citet{Ntwaetsile:2021} works as follows:
   a branch splits into two with both branches exceeding the minimum cluster size,
   both new branches persist.
 
-\item The clusters are extracted on the notion of persistence in the hierarchy. 
+\item The clusters are extracted on the notion of persistence in the hierarchy.
+  The parameter $\lambda = d_{\mathrm{m}}^{-1}$ is defined, and each cluster has a
+  $\lambda_{\mathrm{birth}}$ (the point at which the cluster split off) and
+  $\lambda_{\mathrm{death}}$ (the point when the cluster split into other clusters).
+  In each cluster, we have $\lambda_p$ describing when each point fell out of the
+  cluster (or was split off into new cluster), $\lambda_{\mathrm{birth}} \leq \lambda_{p} \leq \lambda_{\mathrm{death}}$. Cluster stability  $S$ is defined as the sum of $\lambda_{p} - \lambda_{\mathrm{birth}}$ for all points in the cluster. To extract cluster the following procedure is
+  implemented: First, select all leaves as cluster. Then, working through the
+  hierarchy, consider the stability of a parent cluster $S_p$ and its $n$ descendants
+  $S_d^{0,1,2,...,n}$. If $S_p > \sum_{i=0}^{n} S_d^i$ we unselect all the descendants.
+  If $S_p < \sum_{i=0}^{n} S_d^i$ then the cluster stability is set such that
+  $S_p = \sum_{i=0}^{n} S_d^i$. At the root node we have our set of selected 
+  cluster. Any point in the sample that does not fall into one of the selected
+  clusters is defined as noise.
+
+\item The selected cluster are used the label points. Furthermore, the definition
+  of $\lambda_p$ within a cluster, when normalized between O and 1 provides a means
+  of characterization a probability that a given point belongs to the cluster or
+  alternative a measure of the strength of membership. 
   
 \end{enumerate}
 
