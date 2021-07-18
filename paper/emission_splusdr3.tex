@@ -517,10 +517,32 @@ and \citet{Ntwaetsile:2021} works as follows:
   efficient way of measurement of density. Low values of core$_k(x)$ represents high
   density and vice-versa.
 
-\item The ``mutual readability'' between two points $a$ and ``b'' is defined as
-  $d_{\mathrm{m}}(a, b) = \mathrm{min}{\mathrm{core}_k(a), \mathrm{core}_k(b), d(a, b)}$
+\item The ``mutual readability distance'' between two points $a$ and $b$ is defined as
+  $d_{\mathrm{m}}(a, b) = \mathrm{min}{\mathrm\{core}_k(a), \mathrm{core}_k(b), d(a, b)\}$,
   where $d(a, b)$ is the distance between $a$ and $b$ according, for instance,
-  Euclidean metric. 
+  Euclidean metric. The mutual readability distance allows points in dense regions
+  stay close together and those that are in lees dense regions pushed away.
+
+\item The mutual readability graph is used to construct the minimum spanning tree,
+  and sorting its edges by the mutual readability distance results in a
+  hierarchical tree structure. The hierarchy of connected components is
+  defined by sorting the edges of the tree by distance in reverse order,
+  describing a dendrogram. This is the structure from which cluster will
+  be identified.
+
+\item \texttt{HDBSCAN} allows to extract clusters of variable density, effectively
+  by cutting the dendrogram at different points.
+
+\item The cluster tree is condensed into a simpler structure. Considering the single
+  main trunk which contains all of the data points, the tree splits into branches.
+  A condensed cluster hierarchy can be described by considering the number points
+  kept in each branch as it splits. If a given branch splits into two, with a branch
+  containing fewer points than the minimum cluster size means, the large branch
+  ``persists'' and the smaller split branch ``falls out'' of the  cluster. If
+  a branch splits into two with both branches exceeding the minimum cluster size,
+  both new branches persist.
+
+\item The clusters are extracted on the notion of persistence in the hierarchy. 
   
 \end{enumerate}
 
@@ -541,7 +563,6 @@ to determine whether points are ``falling out of a cluster'' or splitting
 to form two new clusters. This trades an unintuitive parameter for one that
 is not so hard to choose for EDA (what is the minimum size cluster I am
 willing to care about?).
-
 
 
 Hierarchical Density-Based Spatial Clustering of Applications with Noise (Campello,
