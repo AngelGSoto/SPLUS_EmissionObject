@@ -409,51 +409,52 @@ spectrum and the another with strong emission continuum of the red one. For that
 was performed two clustering techniques; hierarchical clustering and Hierarchical
 density-based cluster selection
 
-\subsubsection{Hierarchical clustering}
+\subsubsection{Hierarchical agglomerative clustering}
 \label{sec:Hierar}
 
 Hierarchical clustering belong to the family of clustering algorithms
-on which are constructed cluster by merging clusters and splitting them successively.
-It is an unsupervised algorithm that yields a dendrogram representing
-the nested grouping of patterns and similarity levels at which groupings change
-\citep{Jain:1999}. There is two type of hierarchical clustering:
-one is the \textit{agglomerative hierarchical clustering}
-which is ``bottom-up'' approach. Hierarchical agglomerative clustering (\texttt{HAC})
-consists of building a binary merge tree, starting from the data elements stored at the
-leaves (interpreted as individual cluster)
+on which are constructed clusters by merging and splitting them successively.
+It is an unsupervised algorithm that yields a dendrogram\footnot{Dendrogram is
+a diagram representing tree, which shows hierarchical relationship between objects.}
+represents the nested grouping of patterns and the levels of similarity
+at which the groupings change \citep{Jain:1999}. There is two type of hierarchical clustering:
+one is the \textit{hierarchical agglomerative clustering} (that we have used
+in this work) which is ``bottom-up'' approach. Hierarchical agglomerative
+clustering (\texttt{HAC}) consists of building a binary merge tree, starting from the
+data elements stored at the leaves (interpreted as individual clusters)
 and proceed by merging two by two the ``closest'' sub-sets (stored at nodes)
 until it reaches the root of the tree that contains all the elements of the data set.
-Agglomerative term used  to define it since the individual data
+Agglomerative term is used  to define it since the individual data
 point are successively agglomerated into higher-level. In each  iteration, two cluster are
 selected that are considered as close as possible. These cluster are merged and
 replaced with a newly created merged cluster. Thus, each merging step reduces
 the number of cluster by ``1''. Therefore, the method needs to be designated for
 measuring proximity between cluster containing multiple data points, so that
-they may be merged \citep{Aggarwal:2015, Mann:2013}. We could describe how to
+they may be merged \citep{Mann:2013, Aggarwal:2015}. We could describe how to
 work the algorithm in three simple steps:
 
 \begin{enumerate}
-\item Initially all the data points that are cluster i.e. leaf.
-\item It looping merges the nodes (cluster) that have the maximum similarity
+\item Initially, each data point represents the clusters i.e. leaves.
+\item It looping merges the nodes (clusters) that have the maximum similarity
   between them.
-\item At the end of the process all the nodes belong to unique cluster. This is
+\item At the end of the process all the nodes belong to an unique cluster. This is
   known as the root of the tree structure.
  \end{enumerate}
 
 
-The other type is the \textit{agglomerative hierarchical clustering}. This is a ``top-down''
-approach. The data start in one cluster, and splits are performed recursively as
-one moves down the hierarchy. It is the inverse procedure of \texttt{HAC}.
+The other type is the \textit{hierarchical divisive clustering}. This is a ``top-down''
+approach. The data start in one cluster (the root of the tree), and splits step by step
+are performed recursively as one moves down the hierarchy. It is the inverse procedure
+of \texttt{HAC}.
 
-In this work we have used the \texttt{HAC} technique for classify our sample.
-In simple words HCA can be interpreted  as an algorithm that groups
-similar objects into groups called clusters or nodes. The endpoint is a
-set of clusters, where each cluster is distinct from each other cluster,
+In simple words, hierarchical clustering approaches can be interpreted  as an
+algorithm that groups similar objects into groups called clusters or nodes.
+The endpoint is a set of clusters, where each cluster is distinct from each other cluster,
 and the objects within each cluster are broadly similar to each other.
 
 
 Choosing the number of cluster. Firstly, the Hierarchical cluster output dendrogram (tree)
-can be implemented to obtain the desired clustering. Secondly, the dendrogram schema  allows
+can be implemented to obtain the desired clustering. Secondly, the dendrogram schema allows
 a convenient way to establish the entity relationship between at all levels of granularity.
 In conclusion, a dendrogram is a visualization in form of a tree showing the order
 and distances of merges during the hierarchical clustering.
@@ -568,8 +569,8 @@ according to density, exactly as DBSCAN does, and perform single linkage
 clustering on the transformed space. Instead of taking an epsilon value
 as a cut level for the dendrogram however, a different approach is taken:
 the dendrogram is condensed by viewing splits that result in a small number
-of points splitting off as points 'falling out of a cluster'. This results
-in a smaller tree with fewer clusters that 'lose points'. That tree can then
+of points splitting off as points ``falling out of a cluster''. This results
+in a smaller tree with fewer clusters that ``lose points''. That tree can then
 be used to select the most stable or persistent clusters. This process allows
 the tree to be cut at varying height, picking our varying density clusters
 based on cluster stability. The immediate advantage of this is that we can
@@ -596,6 +597,19 @@ There have been few times that it has been used \texttt{HDBSCAN} in astronomy.
 Recently, \citet{Ntwaetsile:2021} used it to group radio sources into a sequence
 of morphological classes, illustrating a simple methodology to classify and
 label new, unseen galaxies in large samples.
+
+\subsection{Applying the approaches to  the H{$\alpha$} list}
+\label{sec:apply-hac-hdebscan}
+
+In this work, we implemented {\sc hac} by using the python machine learning library
+\texttt{Scikit-learn} \citep{Pedregosa:2011}. There are some parameters to have in count
+where the algorithm is apply: \texttt{n\_clusters} which is the number cluster to find. Given
+that our goal is to divide our sample in two groups we set this value in 2. \texttt{Affinity},
+Metric used to compute the linkage. We found that a simple ``Euclidean'' distance metric was
+effective. \texttt{Linkage} which determines which distance to use between sets of observation.
+The algorithm will merge the pairs of cluster that minimize this criterion. The implemented here
+was ``ward'' which minimizes the variance of the clusters being merged. Fig.~\ref{fig:dendrogram}
+shows the dendrogram truncated diagram visualization that shows the branching of the sample from the main root.
 
 \section{Results}
 \label{sec:results}

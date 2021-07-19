@@ -175,6 +175,10 @@ Sausalito: University Science Books, \url
   Physics Conference Series. p. 032008 (\mn@eprint {arXiv} {1603.07042}),
   \mn@doi{10.1088/1742-6596/728/3/032008}
 
+\bibitem[\protect\citeauthoryear{Pedregosa et~al.,}{Pedregosa
+  et~al.}{2011}]{Pedregosa:2011}
+Pedregosa F.,  et~al., 2011, Journal of Machine Learning Research, 12, 2825
+
 \bibitem[\protect\citeauthoryear{{Pickles}}{{Pickles}}{1998}]{Pickles:1998}
 {Pickles} A.~J.,  1998, \mn@doi [\pasp] {10.1086/316197}, \href
   {https://ui.adsabs.harvard.edu/abs/1998PASP..110..863P} {110, 863}
