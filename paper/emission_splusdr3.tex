@@ -635,8 +635,11 @@ two cluster. If we use values of minimum number of samples smaller than ``40'' s
 cluster are found that do not make sense.
 
 Fig~\ref{fig:hdbscan} the resulted cluster found with \texttt{HDBSCAN}. These results are
-consistent with results found with  \stexttt{HAC}. Two primary cluster are found in the same
-region in color-color diagram 
+consistent with results found with  \stexttt{HAC}. Two primary clusters are found in the same
+region in the ($g - r$) versus ($z - g$) color-color diagram where lie the group found
+for the other algorithm. The main difference between the two algorithm is that  \taexttt{HDBSCAN}
+is much conservative, then many data points are classified as noise\footnote{In this case
+noise will be interpreted as those object }
 
 
 
