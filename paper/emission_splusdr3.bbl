@@ -150,6 +150,11 @@ Mann A.,  Kaur N.,  2013.
   2020, \mn@doi [\mnras] {10.1093/mnras/stz3006}, \href
   {https://ui.adsabs.harvard.edu/abs/2020MNRAS.491.1408M} {491, 1408}
 
+\bibitem[\protect\citeauthoryear{McInnes, Healy  \& Astels}{McInnes
+  et~al.}{2017}]{McInnes:2017}
+McInnes L.,  Healy J.,   Astels S.,  2017, \mn@doi [The Journal of Open Source
+  Software] {10.21105/joss.00205}, 2
+
 \bibitem[\protect\citeauthoryear{{Mendes de Oliveira} et~al.,}{{Mendes de
   Oliveira} et~al.}{2019}]{Mendes:2019}
 {Mendes de Oliveira} C.,  et~al., 2019, \mn@doi [\mnras]

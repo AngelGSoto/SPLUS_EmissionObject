@@ -417,16 +417,16 @@ on which are constructed clusters by merging and splitting them successively.
 It is an unsupervised algorithm that yields a dendrogram\footnot{Dendrogram is
 a diagram representing tree, which shows hierarchical relationship between objects.}
 represents the nested grouping of patterns and the levels of similarity
-at which the groupings change \citep{Jain:1999}. There is two type of hierarchical clustering:
-one is the \textit{hierarchical agglomerative clustering} (that we have used
-in this work) which is ``bottom-up'' approach. Hierarchical agglomerative
-clustering (\texttt{HAC}) consists of building a binary merge tree, starting from the
-data elements stored at the leaves (interpreted as individual clusters)
+at which the groupings change \citep{Jain:1999}. There is two type of hierarchical
+clustering: one is the \textit{hierarchical agglomerative clustering} (that we have
+used in this work) which is ``bottom-up'' approach. Hierarchical agglomerative
+clustering (\texttt{HAC}) consists of building a binary merge tree, starting from 
+each data element stored at the leaves (interpreted as individual clusters)
 and proceed by merging two by two the ``closest'' sub-sets (stored at nodes)
-until it reaches the root of the tree that contains all the elements of the data set.
-Agglomerative term is used  to define it since the individual data
-point are successively agglomerated into higher-level. In each  iteration, two cluster are
-selected that are considered as close as possible. These cluster are merged and
+until it reaches the root -unique cluster- of the tree that contains all the elements
+of the data set. Agglomerative term is used  to define it since the individual data
+point are successively agglomerated into higher-level. In each  iteration, two cluster
+are selected that are considered as close as possible. These cluster are merged and
 replaced with a newly created merged cluster. Thus, each merging step reduces
 the number of cluster by ``1''. Therefore, the method needs to be designated for
 measuring proximity between cluster containing multiple data points, so that
@@ -548,7 +548,9 @@ and \citet{Ntwaetsile:2021} works as follows:
   $\lambda_{\mathrm{birth}}$ (the point at which the cluster split off) and
   $\lambda_{\mathrm{death}}$ (the point when the cluster split into other clusters).
   In each cluster, we have $\lambda_p$ describing when each point fell out of the
-  cluster (or was split off into new cluster), $\lambda_{\mathrm{birth}} \leq \lambda_{p} \leq \lambda_{\mathrm{death}}$. Cluster stability  $S$ is defined as the sum of $\lambda_{p} - \lambda_{\mathrm{birth}}$ for all points in the cluster. To extract cluster the following procedure is
+  cluster (or was split off into new cluster), $\lambda_{\mathrm{birth}} \leq \lambda_{p} \leq \lambda_{\mathrm{death}}$.
+  Cluster stability  $S$ is defined as the sum of $\lambda_{p} - \lambda_{\mathrm{birth}}$
+  for all points in the cluster. To extract cluster the following procedure is
   implemented: First, select all leaves as cluster. Then, working through the
   hierarchy, consider the stability of a parent cluster $S_p$ and its $n$ descendants
   $S_d^{0,1,2,...,n}$. If $S_p > \sum_{i=0}^{n} S_d^i$ we unselect all the descendants.
@@ -602,14 +604,41 @@ label new, unseen galaxies in large samples.
 \label{sec:apply-hac-hdebscan}
 
 In this work, we implemented {\sc hac} by using the python machine learning library
-\texttt{Scikit-learn} \citep{Pedregosa:2011}. There are some parameters to have in count
-where the algorithm is apply: \texttt{n\_clusters} which is the number cluster to find. Given
+\texttt{Scikit-learn}\footnote{\url{https://scikit-learn.org/stable/}} \citep{Pedregosa:2011}.
+There are some parameters to have in count
+when the algorithm is applied: \texttt{n\_clusters} which is the number cluster to find. Given
 that our goal is to divide our sample in two groups we set this value in 2. \texttt{Affinity},
 Metric used to compute the linkage. We found that a simple ``Euclidean'' distance metric was
 effective. \texttt{Linkage} which determines which distance to use between sets of observation.
-The algorithm will merge the pairs of cluster that minimize this criterion. The implemented here
-was ``ward'' which minimizes the variance of the clusters being merged. Fig.~\ref{fig:dendrogram}
-shows the dendrogram truncated diagram visualization that shows the branching of the sample from the main root.
+The algorithm merge the pairs of cluster that minimize this criterion. Here was implemented
+``ward'' which minimizes the variance of the clusters being merged. As was mentioned,
+the input variables are the colors; ($g - r$) and ($z - g$).
+
+Fig.~\ref{fig:dendrogram} shows the dendrogram truncated diagram visualization that
+shows the branching of the sample from the main root. And Fig.~\ref{fig:hierar} shows
+the position of the two groups that resulted after to applying \texttt{HAC} in the
+color-color diagram. The two cluters represent the blue sources (blue simbols)
+and red sources (blue symbols) as already by analyzing the diagram of the
+Fig.~\ref{fig:synthetic}. Now, we have dividided our list in two groups in agreement
+with the nature of their continuum. We found that the number of blue H{$\alpha$}
+emitter is bigger than the red one.
+
+We also used \texttt{HDBSCAN} to separate the blue sources from the red ones. This just for
+comparing the performance of two algorithms and show that the our resulted are consistent.
+We used the python implementation of \texttt{HDBSCAN}\footnote{\url{https://hdbscan.readthedocs.io/en/latest/}} \citep{McInnes:2017}. Like \stexttt{HAC}, in addition to the colors input
+parameters,  there are key parameters that should be considered  when the algorithm is
+applied. ``Euclidean'' metric is implemented which results to be very efficient. The two most
+critical parameters to be implemented are the ``minimum cluster size'' and ``minimum number
+of samples''. The former refers to the smallest size grouping that we wish to consider a cluster. We have adopted the value ``80''. The latter provides a measure of how conservative we want our
+clustering to be. The value implemented was ``40''. With this configuration of our model we found
+two cluster. If we use values of minimum number of samples smaller than ``40'' several small
+cluster are found that do not make sense.
+
+Fig~\fe{fig:hdbscan} 
+
+
+
+
 
 \section{Results}
 \label{sec:results}
