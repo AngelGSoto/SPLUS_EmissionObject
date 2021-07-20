@@ -600,8 +600,10 @@ Recently, \citet{Ntwaetsile:2021} used it to group radio sources into a sequence
 of morphological classes, illustrating a simple methodology to classify and
 label new, unseen galaxies in large samples.
 
-\subsection{Applying the approaches to  the H{$\alpha$} list}
+\subsection{Grouping the H{$\alpha$} emitters in blue and red sources}
 \label{sec:apply-hac-hdebscan}
+
+\subsubsection{\texttt{HAC}}
 
 In this work, we implemented {\sc hac} by using the python machine learning library
 \texttt{Scikit-learn}\footnote{\url{https://scikit-learn.org/stable/}} \citep{Pedregosa:2011}.
@@ -623,6 +625,8 @@ Fig.~\ref{fig:synthetic}. Now, we have dividided our list in two groups in agree
 with the nature of their continuum. We found that the number of blue H{$\alpha$}
 emitter is bigger than the red one.
 
+\subsubsection{\texttt{HDBSCAN}}
+
 We also used \texttt{HDBSCAN} to separate the blue sources from the red ones. This just for
 comparing the performance of two algorithms and show that the our resulted are consistent.
 We used the python implementation of \texttt{HDBSCAN}\footnote{\url{https://hdbscan.readthedocs.io/en/latest/}} \citep{McInnes:2017}. Like \stexttt{HAC}, in addition to the colors input
@@ -638,12 +642,10 @@ Fig~\ref{fig:hdbscan} the resulted cluster found with \texttt{HDBSCAN}. These re
 consistent with results found with  \stexttt{HAC}. Two primary clusters are found in the same
 region in the ($g - r$) versus ($z - g$) color-color diagram where lie the group found
 for the other algorithm. The main difference between the two algorithm is that  \taexttt{HDBSCAN}
-is much conservative, then many data points are classified as noise\footnote{In this case
-noise will be interpreted as those object }
+is much conservative, then many data points are classified as noise. The two final cluster
+contain, which we are labeled blue and red sources contain xxx and xxx objects, respectively.
 
-
-
-
+\subsection{Soft clustering for \texttt{HDBSCAN}}
 
 \section{Results}
 \label{sec:results}
