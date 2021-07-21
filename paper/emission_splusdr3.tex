@@ -600,7 +600,7 @@ Recently, \citet{Ntwaetsile:2021} used it to group radio sources into a sequence
 of morphological classes, illustrating a simple methodology to classify and
 label new, unseen galaxies in large samples.
 
-\subsection{Grouping the H{$\alpha$} emitters in blue and red sources}
+\subsection{Grouping the H{$\alpha$} emitters into blue and red sources}
 \label{sec:apply-hac-hdebscan}
 
 \subsubsection{\texttt{HAC}}
@@ -629,23 +629,49 @@ emitter is bigger than the red one.
 
 We also used \texttt{HDBSCAN} to separate the blue sources from the red ones. This just for
 comparing the performance of two algorithms and show that the our resulted are consistent.
-We used the python implementation of \texttt{HDBSCAN}\footnote{\url{https://hdbscan.readthedocs.io/en/latest/}} \citep{McInnes:2017}. Like \stexttt{HAC}, in addition to the colors input
+We used the python implementation of \texttt{HDBSCAN}\footnote{\url{https://hdbscan.readthedocs.io/en/latest/}}
+\citep{McInnes:2017}. Like \stexttt{HAC}, in addition to the colors input
 parameters,  there are key parameters that should be considered  when the algorithm is
 applied. ``Euclidean'' metric is implemented which results to be very efficient. The two most
 critical parameters to be implemented are the ``minimum cluster size'' and ``minimum number
-of samples''. The former refers to the smallest size grouping that we wish to consider a cluster. We have adopted the value ``80''. The latter provides a measure of how conservative we want our
-clustering to be. The value implemented was ``40''. With this configuration of our model we found
+of samples''. The former refers to the smallest size grouping that we wish to consider a cluster.
+We have adopted the value ``80''. The latter provides a measure of how conservative we want our
+clustering to be and expressed as the fraction of data classified as noise.
+The value implemented was ``40''. With this configuration of our model we found
 two cluster. If we use values of minimum number of samples smaller than ``40'' several small
 cluster are found that do not make sense.
 
-Fig~\ref{fig:hdbscan} the resulted cluster found with \texttt{HDBSCAN}. These results are
-consistent with results found with  \stexttt{HAC}. Two primary clusters are found in the same
-region in the ($g - r$) versus ($z - g$) color-color diagram where lie the group found
-for the other algorithm. The main difference between the two algorithm is that  \taexttt{HDBSCAN}
+Left panel of Fig~\ref{fig:hdbscan} the resulted cluster found with \texttt{HDBSCAN}. Two group are
+found and these results are consistent with results found with  \stexttt{HAC}.
+In fact, by applying the
+\texttt{condensed\_tree\_} to the data colors two clusters are selected (for mare detail about
+\texttt{condensed\_tree\_} attribute see appendix~\ref{sec:trees} and related
+Fig.~\ref{fig:treess}). The two primary clusters are located in the same region in
+the ($g - r$) versus ($z - g$) color-color diagram where lie the group found by the other algorithm.
+The main difference between the two algorithm is that  \taexttt{HDBSCAN}
 is much conservative, then many data points are classified as noise. The two final cluster
 contain, which we are labeled blue and red sources contain xxx and xxx objects, respectively.
 
 \subsection{Soft clustering for \texttt{HDBSCAN}}
+
+Perhaps, the main disadvantage of \texttt{HDBSCAN} is that many of the sources are labelled
+as ``noise'', on which some sources are not assigned to any cluster. As was mentioned,
+this comes from the conservative nature of \texttt{HDBSCAN}
+and that they are located far away of the cluster cores. An alternative to avoid the outlier
+classification consists in used the concept of ``soft clustering''. We have took here soft
+clustering for \texttt{HDBSCAN} to assign every object to its most likely cluster.
+This means that with this approach, points are not assigned cluster labels, instead are
+assigned a vector of probabilities. The probability value at the $i$th entry of the vector
+is the probability that a data point is a member of the $i$th cluster. We can then simply
+assign cluster labels for every point by taking the most likely cluster it belongs to,
+using probability thresholds. Soft clustering for \texttt{HDBSCAN} is based on the
+Global-Local Outlier Score from Hierarchies (GLOSH) algorithm \citep{Campello:2015}
+and combines this with a
+measure of distance from a given cluster to produce an estimate of the probability that any
+given data point belongs to any of the fixed clusters extracted from the
+condensed tree.
+
+Right panel of Fig.~\ref{fig:hdbscan}
 
 \section{Results}
 \label{sec:results}
@@ -854,6 +880,8 @@ We have found a important sample of emission line objects.
 
 \appendix
 \section{Condensed Trees}
+\label{sec:trees}
+
 The question now is what does the cluster hierarchy look like - which
 clusters are near each other, or could perhaps be merged, and which
 are far apart. We can access the basic hierarchy via the \texttt{condensed\_tree\_}
@@ -863,13 +891,13 @@ two cluster that in agreement with previous results are the blue and red sources
 \begin{figure*}
 	\includegraphics[width=0.9\linewidth]{Figs/cluster-hierarchy-hdbscan.pdf}
         \caption{Branches were selected by the HDBSCAN* algorithm.}
-    \label{fig:emission}
+    \label{fig:treess}
 \end{figure*}
 
 
 \newcommand\TableHeader{
   \hline\hline
-  Id Simbad & \(\mathrm{RA}\) & \(\mathrm{Dec}\) & Type & Group -- {\sc hac}
+  Id Object & \(\mathrm{RA}\) & \(\mathrm{Dec}\) & Type & Group -- {\sc hac}
                           & P(Blue) -- {\sc hdbscan} & P(Red) -- {\sc hdbscan} \\
   %Object & \(D\) &   \(R_{\mathrm{out}}\) & \(R_{\mathrm{in}}\) \\
   \hline 
@@ -879,7 +907,7 @@ two cluster that in agreement with previous results are the blue and red sources
 \section{Simbad objects}
 
 \begin{center}
-\begin{longtable}{llrcccc}
+\begin{longtable}{lrrcccc}
   \caption{Simbad sources. \label{tab:simbad}}\\
   \TableHeader\endfirsthead 
   \caption[]{--continued}\\
