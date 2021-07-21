@@ -658,7 +658,7 @@ Perhaps, the main disadvantage of \texttt{HDBSCAN} is that many of the sources a
 as ``noise'', on which some sources are not assigned to any cluster. As was mentioned,
 this comes from the conservative nature of \texttt{HDBSCAN}
 and that they are located far away of the cluster cores. An alternative to avoid the outlier
-classification consists in used the concept of ``soft clustering''. We have took here soft
+classification consists in used the concept of ``soft clustering''. We have carried out here soft
 clustering for \texttt{HDBSCAN} to assign every object to its most likely cluster.
 This means that with this approach, points are not assigned cluster labels, instead are
 assigned a vector of probabilities. The probability value at the $i$th entry of the vector
@@ -671,7 +671,8 @@ measure of distance from a given cluster to produce an estimate of the probabili
 given data point belongs to any of the fixed clusters extracted from the
 condensed tree.
 
-Right panel of Fig.~\ref{fig:hdbscan}
+The right panel of Fig.~\ref{fig:hdbscan} shows that the data points that are classified as 
+the noise by \texttt{HDBSCAN}  at which the most likely cluster belong.   
 
 \section{Results}
 \label{sec:results}
