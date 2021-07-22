@@ -135,6 +135,11 @@ Ester M.,  Kriegel H.-P.,  Sander J.,   Xu X.,  1996, in Proc. of 2nd
 Jain A.~K.,  Murty M.~N.,   Flynn P.~J.,  1999, \mn@doi [ACM Comput. Surv.]
   {http://doi.acm.org/10.1145/331499.331504}, 31, 264
 
+\bibitem[\protect\citeauthoryear{{Jayasinghe} et~al.,}{{Jayasinghe}
+  et~al.}{2019}]{Jayasinghe:2019}
+{Jayasinghe} T.,  et~al., 2019, \mn@doi [\mnras] {10.1093/mnras/stz1738}, \href
+  {https://ui.adsabs.harvard.edu/abs/2019MNRAS.488.1141J} {488, 1141}
+
 \bibitem[\protect\citeauthoryear{Malzer \& Baum}{Malzer \&
   Baum}{2021}]{Malzer:2021}
 Malzer C.,  Baum M.,  2021, \mn@doi [Sensors] {10.3390/s21103410}, 21
@@ -243,6 +248,11 @@ Pedregosa F.,  et~al., 2011, Journal of Machine Learning Research, 12, 2825
   {G{\"a}nsicke} B.~T.,  {Greimel} R.,   {Drake} J.,  2008, \mn@doi [\mnras]
   {10.1111/j.1365-2966.2008.13220.x}, \href
   {https://ui.adsabs.harvard.edu/abs/2008MNRAS.387..308V} {387, 308}
+
+\bibitem[\protect\citeauthoryear{{Webb} et~al.,}{{Webb}
+  et~al.}{2020}]{Webb:2020}
+{Webb} S.,  et~al., 2020, \mn@doi [\mnras] {10.1093/mnras/staa2395}, \href
+  {https://ui.adsabs.harvard.edu/abs/2020MNRAS.498.3077W} {498, 3077}
 
 \bibitem[\protect\citeauthoryear{{Wevers} et~al.,}{{Wevers}
   et~al.}{2017}]{Wevers:2017}
