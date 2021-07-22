@@ -598,7 +598,7 @@ and soft clustering is also available.
 There have been few times that it has been used \texttt{HDBSCAN} in astronomy.
 Recently, \citet{Ntwaetsile:2021} used it to group radio sources into a sequence
 of morphological classes, illustrating a simple methodology to classify and
-label new, unseen galaxies in large samples.
+label new, unseen galaxies in large samples. 
 
 \subsection{Grouping the H{$\alpha$} emitters into blue and red sources}
 \label{sec:apply-hac-hdebscan}
@@ -671,8 +671,15 @@ measure of distance from a given cluster to produce an estimate of the probabili
 given data point belongs to any of the fixed clusters extracted from the
 condensed tree.
 
-The right panel of Fig.~\ref{fig:hdbscan} shows that the data points that are classified as 
-the noise by \texttt{HDBSCAN}  at which the most likely cluster belong.   
+The right panel of Fig.~\ref{fig:hdbscan} shows at what most likely cluster belongs the data
+points classified as the noise by \texttt{HDBSCAN}. We have used blue and red colors for the
+points that have the highest probability of being in the blue and red groups, respectively.
+This fills out the clusters nicely. We see that there were many noise points that are most
+likely to belong to the clusters we would expect, e. g. in agreement we the results obtained
+with \texttt{HAC}. Indeed, We now have improved our classification of our list into sources
+with blue and red continuum because we have estimated the probability of each source to belong
+to every group.
+
 
 \section{Results}
 \label{sec:results}
