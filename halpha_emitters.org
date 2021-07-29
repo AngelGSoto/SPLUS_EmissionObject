@@ -985,6 +985,16 @@ Trying to get the Redshift of the QSOs from simbad.
 #+RESULTS: QSO-simbad
 [[file:iDR3_n4/QSO-simabad-redshift.ecsv]]
 
+Now we need to do the table latex with the Redshift
+
+#+BEGIN_SRC python :result output
+  from astropy.table import Table
+  
+  # Read the table
+  tab = Table.read("iDR3_n4/QSO-simabad-redshift.ecsv", format="ascii.ecsv")
+  
+#+END_SRC
+
 #+BEGIN_SRC sh
   pip install constants
 #+END_SRC
@@ -1003,12 +1013,3 @@ Trying to get the Redshift of the QSOs from simbad.
 
 Now we need to do the table latex with the Redshift
 
-#+BEGIN_SRC python :result output
-  from astropy.table import Table
-  
-  
-  
-#+END_SRC
-
-#+RESULTS:
-: None
