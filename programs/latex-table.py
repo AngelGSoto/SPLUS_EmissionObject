@@ -71,7 +71,7 @@ def prob_fmt(p):
     return "{:.2f}".format(p)
 
 def z_fmt(z):
-    return "{:.2f}".format(z)
+    return "{:.3f}".format(z)
 
 # Read the files
 df = pd.read_csv("simbad.csv")
