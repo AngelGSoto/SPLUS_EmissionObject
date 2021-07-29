@@ -11,7 +11,7 @@ import json
 import matplotlib.pyplot as plt
 import pandas as pd
 #import StringIO
-from astropy.table import Table, vstack
+from astropy.table import Table, vstack, Column, MaskedColumn
 import seaborn as sns
 import sys
 from scipy.optimize import fsolve
@@ -21,6 +21,7 @@ from astropy import units as u
 from astropy.coordinates import SkyCoord
 import astropy.coordinates as coord
 from pathlib import Path
+from astropy.io import ascii
 ROOT_PATH = Path("../paper")
 
 def format_RA(ra):
@@ -45,11 +46,17 @@ def replace_2(colum1):
     else:
         return colum1
 
-def replace_3(colum):
-    if '_' in colum:
-        return colum.replace('_', ' ')
+def replace_3(colum2):
+    if '_' in colum2:
+        return colum2.replace('_', ' ')
     else:
-        return colum
+        return colum2
+    
+def replace_4(colum4):
+    if "" in colum4:
+        return colum4.replace("", '--')
+    else:
+        return colum4
 
 def ra_fmt(x):
     """Write RA  to accuracy of 0.2 deg"""
@@ -62,6 +69,9 @@ def dec_fmt(x):
 def prob_fmt(p):
     """Write proybablity to accuracy of 0.01"""
     return "{:.2f}".format(p)
+
+def z_fmt(z):
+    return "{:.2f}".format(z)
 
 # Read the files
 df = pd.read_csv("simbad.csv")
@@ -122,11 +132,15 @@ tab_final = vstack([tab_cont, tab_drop])
 #ra = c.ra.to_string(u.hour, sep=':',  precision=2, pad=True)
 # dec = c.dec.to_string(u.degree, alwayssign=True, sep=':',  precision=1, pad=True)
 
+# tab_final[np.where(tab_final['redshift'] == '-')]['redshift'] = '--'
+# print(tab_final['redshift'])
+
 # Selected columns
-Col = ["main_id", "RA", "DEC", "main_type", "Label_hier", 'P(Blue)', 'P(red)']
+Col = ["main_id", "RA", "DEC", "main_type", 'redshift', "Label_hier", 'P(Blue)', 'P(red)']
 
 latex_columns = ['Id Simbad', 'RA', 'DEC',
                  'Type' ,
+                 r'Redshift' ,
                  r'Group -- {\sc hac}',
                  r'P(Blue) -- {\sc hdbscan}',
                  r'P(Red) -- {\sc hdbscan}'
@@ -139,13 +153,15 @@ column_formats['DEC'] = format_DEC
 column_formats['Id Simbad'] = replace_1
 column_formats['Id Simbad'] = replace_2
 column_formats['Type'] = replace_3
+#column_formats['Redshift'] = replace_4
+column_formats['Redshift'] = z_fmt
 
 tab_final.sort('RA')
 tab_final[Col].write(ROOT_PATH / 'table-simbad-sort.tex', format = "ascii.latex",
                      col_align='r'*len(latex_columns),
                      names=latex_columns,
                      formats=column_formats,
-                     fill_values=[('nan', r'0.00')],
-                     overwrite=True) 
+                     fill_values=[(ascii.masked, '--')],
+                     overwrite=True)
 
 
