@@ -941,6 +941,7 @@ So, working with the SIMBAD sample.
 ]]
 
 *** QSOs
+    SCHEDULED: <2021-07-28 qua>
 
 Trying to get the Redshift of the QSOs from simbad.
 
@@ -1004,7 +1005,6 @@ Now we need to do the table latex with the Redshift
 
 #+BEGIN_SRC python :result output
   from astropy.table import Table
-  
   
   
   
