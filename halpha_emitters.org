@@ -942,10 +942,10 @@ So, working with the SIMBAD sample.
 
 *** QSOs
 
-Trying to get the redshifht of the QSOs from simbad.
+Trying to get the Redshift of the QSOs from simbad.
 
 #+name: QSO-simbad
-#+BEGIN_SRC python :tangle /programs//simbad-QSO.py :results output
+#+BEGIN_SRC python :tangle /programs/simbad-QSO.py :return asciifile :results file
   from astroquery.simbad import Simbad
   import astropy.coordinates as coord
   import astropy.units as u
@@ -972,13 +972,17 @@ Trying to get the redshifht of the QSOs from simbad.
   #Calculating redshift
   rv = result_table["RV_VALUE"].quantity.data[0]*1000 # rv in m / s
   z = rv / constants.c
-  print(rv)
   
+  result_table["Redshift"] = z
+  
+  #save the table resulting
+  asciifile = "iDR3_n4/QSO-simabad-redshift.ecsv"
+  result_table.write(asciifile, format="ascii.ecsv")  
   
 #+END_SRC
 
 #+RESULTS: QSO-simbad
-: 85729000.0
+[[file:iDR3_n4/QSO-simabad-redshift.ecsv]]
 
 #+BEGIN_SRC sh
   pip install constants
@@ -995,3 +999,15 @@ Trying to get the redshifht of the QSOs from simbad.
 | Successfully | built                  | constants       |                                                                                        |                                           |           |                                                                         |        |        |
 | Installing   | collected              | packages:       | constants                                                                              |                                           |           |                                                                         |        |        |
 | Successfully | installed              | constants-0.6.0 |                                                                                        |                                           |           |                                                                         |        |        |
+
+Now we need to do the table latex with the Redshift
+
+#+BEGIN_SRC python :result output
+  from astropy.table import Table
+  
+  
+  
+#+END_SRC
+
+#+RESULTS:
+: None
