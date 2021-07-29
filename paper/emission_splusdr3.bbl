@@ -21,6 +21,11 @@
 Aggarwal C.~C.,  2015, Data Mining: The Textbook.
 Springer, Cham, \mn@doi{10.1007/978-3-319-14142-8}
 
+\bibitem[\protect\citeauthoryear{{Ahumada} et~al.,}{{Ahumada}
+  et~al.}{2020}]{Ahumada:2020}
+{Ahumada} R.,  et~al., 2020, \mn@doi [\apjs] {10.3847/1538-4365/ab929e}, \href
+  {https://ui.adsabs.harvard.edu/abs/2020ApJS..249....3A} {249, 3}
+
 \bibitem[\protect\citeauthoryear{{Akras}, {Guzman-Ramirez}  \&
   {Gon{\c{c}}alves}}{{Akras} et~al.}{2019}]{Akras:2019}
 {Akras} S.,  {Guzman-Ramirez} L.,   {Gon{\c{c}}alves} D.~R.,  2019, \mn@doi
@@ -190,6 +195,10 @@ Sausalito: University Science Books, \url
   Physics Conference Series. p. 032008 (\mn@eprint {arXiv} {1603.07042}),
   \mn@doi{10.1088/1742-6596/728/3/032008}
 
+\bibitem[\protect\citeauthoryear{{Patterson}}{{Patterson}}{1984}]{Patterson:1984}
+{Patterson} J.,  1984, \mn@doi [\apjs] {10.1086/190940}, \href
+  {https://ui.adsabs.harvard.edu/abs/1984ApJS...54..443P} {54, 443}
+
 \bibitem[\protect\citeauthoryear{Pedregosa et~al.,}{Pedregosa
   et~al.}{2011}]{Pedregosa:2011}
 Pedregosa F.,  et~al., 2011, Journal of Machine Learning Research, 12, 2825
@@ -278,6 +287,11 @@ Pedregosa F.,  et~al., 2011, Journal of Machine Learning Research, 12, 2825
   {G{\"a}nsicke} B.~T.,  {Groot} P.~J.,   {Mampaso} A.,  2008, \mn@doi [\mnras]
   {10.1111/j.1365-2966.2007.12774.x}, \href
   {https://ui.adsabs.harvard.edu/abs/2008MNRAS.384.1277W} {384, 1277}
+
+\bibitem[\protect\citeauthoryear{{Wu} et~al.,}{{Wu} et~al.}{2011}]{Wu:2011}
+{Wu} Y.,  et~al., 2011, \mn@doi [Research in Astronomy and Astrophysics]
+  {10.1088/1674-4527/11/8/006}, \href
+  {https://ui.adsabs.harvard.edu/abs/2011RAA....11..924W} {11, 924}
 
 \bibitem[\protect\citeauthoryear{{van Spaandonk}, {Steeghs}, {Marsh}  \&
   {Torres}}{{van Spaandonk} et~al.}{2010}]{Spaandonk:2010}

@@ -74,7 +74,7 @@ m52 = df['main_type'] == 'BClG'
 m53 = df['main_type'] == 'GlCl'
 
 # Making the tables with individual object classes
-df_agn = pd.concat(df[m1], df[m2])
+df_agn = pd.concat([df[m1], df[m2]])
 df_EmG = pd.concat([df[m3], df[m14], df[m38], df[m40]])
 GinGroup = df[m4]
 df_pn = df[m34] 
@@ -83,8 +83,8 @@ df_qso = pd.concat([df[m21], df[m46]])
 df_cv = pd.concat([df[m6], df[m11]])
 df_hii = df[m9]
 df_star = df[m17]
-df_sn = pd.concat(df[m8], df[m45])
-df_rrly = pd.concat(df[m7], df[m33])
+df_sn = pd.concat([df[m8], df[m45]])
+df_rrly = pd.concat([df[m7], df[m33]])
 df_fir = df[m12]
 df_GinCl = df[m13]
 df_Seyfert_1 = df[m15]
@@ -93,14 +93,14 @@ df_PartofG = df[m18]
 df_RadioG = df[m19]
 df_IG = df[m20]
 df_EB = df[m22]
-df_Radio = pd.concat(df[m23], df[m44])
+df_Radio = pd.concat([df[m23], df[m44]])
 df_X = df[m26]
 df_MolCld = df[m27]
 df_cl = df[m28]
-df_HMXB = df[29]
-df_GinPair = df[30]
+df_HMXB = df[m29]
+df_GinPair = df[m30]
 df_LSB_G = df[m31]
-df_WD = pd.concat(df[m32], df[m42])
+df_WD = pd.concat([df[m32], df[m42]])
 df_Blue = df[m35]
 df_EmObj = df[m36]
 df_BlueSG = df[m37]
@@ -114,6 +114,7 @@ df_nova = df[m51]
 df_bclg = df[m52]
 df_glcl = df[m53]
 
+print(len(df_qso))
 # Countaining the sources of each class 
 list_numbers = ["H II regions", "PN", "CV", "SN", "Nova", "BL Lac",
                 "Variable Star of RR Lyr type",
@@ -221,4 +222,7 @@ ax.set(xlim=[-6.8, 2.5], ylim=[-3., 5.])#, xscale="log", yscale="log")
 ax.set_aspect("equal")
 #ax.set(xlabel=r"$z - g$", ylabel=r"$g - r$")
 
-fig.savefig(ROOT_PATH / "colour-digram-simbadObj.pdf")
+filefile ="colour-digram-simbadObj.pdf"
+fig.savefig(ROOT_PATH / filefile)
+
+# Saving subtables

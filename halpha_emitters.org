@@ -48,23 +48,18 @@ I want to know the population of H\alpha emitter in SPLUS DR3 and described what
 
 #+END_SRC
 
-+ Witham et el. (2006) report on the properties of 71 known cataclysmic variables (CVs) in photometric 
++ [[https://ui.adsabs.harvard.edu/abs/2006MNRAS.369..581W/abstract][Witham et el. (2006)]] report on the properties of 71 known cataclysmic variables (CVs) in photometric 
   H\alpha emission-line surveys.  
-  + https://ui.adsabs.harvard.edu/abs/2006MNRAS.369..581W/abstract
 
-+ Witham et el. (2008) present a catalogue of point-sources H\alpha emission objects identified in IPHAS.
-  + https://ui.adsabs.harvard.edu/abs/2008MNRAS.384.1277W/abstract
++ [[https://ui.adsabs.harvard.edu/abs/2008MNRAS.384.1277W/abstract][Witham et el. (2008)]] present a catalogue of point-sources H\alpha emission objects identified in IPHAS.
 
-+ Scaringi et al. (2013) present the first results of an ongoing spectroscopic follow-up programme of blue-H\alpha-excess sources within 
-  the Kepler field of view in order to identify new cataclysmic variables.
-  + https://ui.adsabs.harvard.edu/abs/2013MNRAS.428.2207S/abstract
++ [[https://ui.adsabs.harvard.edu/abs/2013MNRAS.428.2207S/abstract][Scaringi et al. (2013]]) present the first results of an ongoing spectroscopic follow-up programme
+  of blue-H\alpha-excess sources within the Kepler field of view in order to identify new cataclysmic variables.
 
-+ Wevers et al. (2017) paper present a catalog of H$\alpha$ emitters candidates.  
-  + https://ui.adsabs.harvard.edu/abs/2017MNRAS.466..163W/abstract 
-
-+ Škoda et al. (2020) using deep learning found new emission line objects.
-  + https://ui.adsabs.harvard.edu/abs/2020A%26A...643A.122S/abstract
-
++ [[https://ui.adsabs.harvard.edu/abs/2017MNRAS.466..163W/abstract][Wevers et al. (2017)]] paper present a catalog of H$\alpha$ emitters candidates.  
+  
++ [[https://ui.adsabs.harvard.edu/abs/2020A%26A...643A.122S/abstract][Škoda et al. (2020)]] using deep learning found new emission line objects.
+ 
 * Looking for Halpha emitters using color criteria and database
 By inspecting the position of Splus synthetic photometry known emission line objects
 in the (r-Ha)vs(r-i) color color diagram. I have divided the location of them in two zone.
@@ -102,13 +97,13 @@ as follows:
 ***** DBSCAN with Python Scikit-Learn
 
 Some examples using DBSCAN algorithms:
- + [[file:Notebook/DBSCAN testing.ipynb]]
+ + [[file:Notebook/DBSCAN testing.ipynb][DBSCAN]]
  + [[file:Notebook/K-distance graph to find the value of epsilon and other clustering algorithms .ipynb]] 
 
 
 ***** DBSCAN Parameter Estimation 
 
-Source: https://medium.com/@tarammullin/dbscan-parameter-estimation-ff8330e3a3bd
+Source: [[https://medium.com/@tarammullin/dbscan-parameter-estimation-ff8330e3a3bd]]
 Focus on estimating DBSCAN’s two parameters:
 
 1. Minimum samples (“MinPts”): the fewest number of points required to form a cluster
@@ -190,7 +185,7 @@ I tried unsupervised machine learning to find the locus of Main sequence and Gia
 + min_samples=20, min_cluster_size=100 -> Same than min_samples=20, min_cluster_size=90
 #+END_SRC
 
-#+BEGIN_SRC test hdbscan
+#+BEGIN_SRC test :hdbscan
 + min_samples=30, min_cluster_size=90 -> Cluster 0 172
                                          Cluster 1 1191735
                                          Cluster 2 0
@@ -221,7 +216,7 @@ I tried unsupervised machine learning to find the locus of Main sequence and Gia
                                          Estimated number of noise points: 34035
 #+END_SRC
 
-#+BEGIN_SRC test hdbscan
+#+BEGIN_SRC test :hdbscan
 + min_samples=40, min_cluster_size=60 -> Estimated number of clusters: 2
                                          Estimated number of cluster points 0: 122
                                          Estimated number of cluster points 1: 1191359
@@ -338,107 +333,107 @@ I write a script to download the colored images and make them for publication:
  # Import the necessary packages 
  import splusdata 
  import pandas as pd
-import matplotlib.pyplot as plt
-import aplpy
-from astropy.io import fits
-from astropy.wcs import WCS
-import os
-import argparse
-import sys
+ import matplotlib.pyplot as plt
+ import aplpy
+ from astropy.io import fits
+ from astropy.wcs import WCS
+ import os
+ import argparse
+ import sys
 
-parser = argparse.ArgumentParser(
-    description="""Get colored image and cut image in the r-band""")
+ parser = argparse.ArgumentParser(
+     description="""Get colored image and cut image in the r-band""")
 
-parser.add_argument("ra", type=float,
-                    default="316.473196",
-                    help="RA of the object")
+ parser.add_argument("ra", type=float,
+                     default="316.473196",
+                     help="RA of the object")
 
-parser.add_argument("dec", type=float,
+ parser.add_argument("dec", type=float,
                     default="-37.144562",
                     help="Dec of the object")
 
-parser.add_argument("--radi", type=float, default=None,
+ parser.add_argument("--radi", type=float, default=None,
                     help="""Size of the images in pixel""")
 
-parser.add_argument("--name", type=str, default=None,
+ parser.add_argument("--name", type=str, default=None,
                     help="""Name of the object""")
 
-cmd_args = parser.parse_args()
-ra = cmd_args.ra
-dec = cmd_args.dec
+ cmd_args = parser.parse_args()
+ ra = cmd_args.ra
+ dec = cmd_args.dec
 
-# Radius
-rad = int(cmd_args.radi)
+ # Radius
+ rad = int(cmd_args.radi)
 
-# Nome of the object if has
-Name = cmd_args.name
+ # Nome of the object if has
+ Name = cmd_args.name
 
-# Connect
-conn = splusdata.connect('Luis', 'plutarco*80')
+ # Connect
+ conn = splusdata.connect('Luis', 'plutarco*80')
 
-# Getting the colored imge
-img = conn.twelve_band_img(ra, dec, radius=rad, noise=0.15, saturation=0.15)
+ # Getting the colored imge
+ img = conn.twelve_band_img(ra, dec, radius=rad, noise=0.15, saturation=0.15)
 
-# Getting the Fits image in the r-band
-hdu = conn.get_cut(ra, dec, rad, 'R')
+ # Getting the Fits image in the r-band
+ hdu = conn.get_cut(ra, dec, rad, 'R')
 
-# Save the image, note that the output image in compress
-hdu.writeto('{}_{}-{}_{}_r.fz'.format(Name, ra, dec, rad), overwrite=True) # write to fits
+ # Save the image, note that the output image in compress
+ hdu.writeto('{}_{}-{}_{}_r.fz'.format(Name, ra, dec, rad), overwrite=True) # write to fits
 
-############################################################
-# Definition to decompress the images ######################
-############################################################
-def fz2fits(image):
-    """
-    It converts SPLUS images
-    from .fz to .fits
-    """
-    datos = fits.open(image)[1].data
-    heada = fits.open(image)[1].header
-    imageout = image[:-2] + 'fits'
-    print ('Creating file: ')
-    print (imageout)
-    fits.writeto(imageout, datos, heada, overwrite=True)
-############################################################
-# Decompress
-hdufits = fz2fits('{}_{}-{}_{}_r.fz'.format(Name, ra, dec, rad))
+ ############################################################
+ # Definition to decompress the images ######################
+ ############################################################
+ def fz2fits(image):
+     """
+     It converts SPLUS images
+     from .fz to .fits
+     """
+     datos = fits.open(image)[1].data
+     heada = fits.open(image)[1].header
+     imageout = image[:-2] + 'fits'
+     print ('Creating file: ')
+     print (imageout)
+     fits.writeto(imageout, datos, heada, overwrite=True)
+ ############################################################
+ # Decompress
+ hdufits = fz2fits('{}_{}-{}_{}_r.fz'.format(Name, ra, dec, rad))
 
-# Read the FITS file
-hdul = fits.open('{}_{}-{}_{}_r.fits'.format(Name, ra, dec, rad))[0]
-wcs = WCS(hdul.header)
+ # Read the FITS file
+ hdul = fits.open('{}_{}-{}_{}_r.fits'.format(Name, ra, dec, rad))[0]
+ wcs = WCS(hdul.header)
 
-print(wcs)                 
+ print(wcs)                 
 
-f = plt.figure(figsize=(18,9))
+ f = plt.figure(figsize=(18,9))
 
-ax1 = aplpy.FITSFigure(hdul, figure=f, subplot=(1, 1, 1))#, north=True)
-plt.imshow(img, origin='lower', cmap='cividis', aspect='equal')
+ ax1 = aplpy.FITSFigure(hdul, figure=f, subplot=(1, 1, 1))#, north=True)
+ plt.imshow(img, origin='lower', cmap='cividis', aspect='equal')
                  
-ax1.add_scalebar(20.0/3600)
-ax1.scalebar.set_label('20 arcsec')
-ax1.scalebar.set(color='yellow', linewidth=4, alpha=0.9)
-ax1.scalebar.set_font(size=23, weight='bold',
+ ax1.add_scalebar(20.0/3600)
+ ax1.scalebar.set_label('20 arcsec')
+ ax1.scalebar.set(color='yellow', linewidth=4, alpha=0.9)
+ ax1.scalebar.set_font(size=23, weight='bold',
                       stretch='normal', family='sans-serif',
                       style='normal', variant='normal')
 
-ax1.axis_labels.set_font(size=22, weight='medium', stretch='normal', family='sans-serif', style='normal', variant='normal')
-#img.axis_labels.hide()
-#img.axis_labels.hide_y()
+ ax1.axis_labels.set_font(size=22, weight='medium', stretch='normal', family='sans-serif', style='normal', variant='normal')
+ #img.axis_labels.hide()
+ #img.axis_labels.hide_y()
 
-ax1.tick_labels.set_font(size=22, weight='medium', stretch='normal', family='sans-serif', style='normal', variant='normal')
-#ax1.list_layers()
-#ax1.show_markers(ra, dec, layer='marker', edgecolor='green', facecolor='none', marker='o', s=10, alpha=0.9, linewidths=60)#, layer='marker_set_1', edgecolor='black', facecolor='none', s=30, alpha=0.5, linewidths=20)
+ ax1.tick_labels.set_font(size=22, weight='medium', stretch='normal', family='sans-serif', style='normal', variant='normal')
+ #ax1.list_layers()
+ #ax1.show_markers(ra, dec, layer='marker', edgecolor='green', facecolor='none', marker='o', s=10, alpha=0.9, linewidths=60)#, layer='marker_set_1', edgecolor='black', facecolor='none', s=30, alpha=0.5, linewidths=20)
 
 
-# ax1.axis_labels.hide_y()
-# ax1.tick_labels.hide_y()
+ # ax1.axis_labels.hide_y()
+ # ax1.tick_labels.hide_y()
 
-#ax2.colorbar.set_box([0.95, 0.1, 0.015, 0.8])
-ax1.set_theme('publication')
-#f.tight_layout()
-#f.savefig("-".join([image_name, "images.pdf"]))
+ #ax2.colorbar.set_box([0.95, 0.1, 0.015, 0.8])
+ ax1.set_theme('publication')
+ #f.tight_layout()
+ #f.savefig("-".join([image_name, "images.pdf"]))
 
-plt.savefig('{}_{}-{}_{}_r.fits'.format(Name, ra, dec, rad).replace(".fits", ".pdf"))
+ plt.savefig('{}_{}-{}_{}_r.fits'.format(Name, ra, dec, rad).replace(".fits", ".pdf"))
 #+END_SRC
 
 : python ../../programs/getColored-imgesSplus.py 338.66637521384126 0.6909664418071105 --radi 100 --name FASTT1560
@@ -474,7 +469,9 @@ Method based on Witham et al. (2008) and Wevers et al. (2017).
 
 + Match with sloan. Limited to 1000 rows.
   Program to write the table in SDSS format to download spectra and to split the table:
-: python ../programs/coordinate_forSloantMacth.py Halpha-DR3_noFlag_merge 
+: python ../programs/coordinate_forSloantMacth.py Halpha-DR3_noFlag_merge
+
++ Match with [[http://skyserver.sdss.org/dr16/en/tools/search/SQS.aspx][SDSS]]
 
 **** S-spectra
 - I used the r-band  and 6250.289 Angstrom on Lamost. 
@@ -667,3 +664,334 @@ Found in the list of Halpha emitters. The S-spectra is very to those confirmed C
 *** Take in count
 - SPLUS-n05n50,iDR3.SPLUS-n05n50.013917 (217.2307884592734,5.0060874486010265):
   Simbad Possible_lensImage or blue.
+
+
+** SIMBAD
+I made cross-match with SIMBAD.
+So, working with the SIMBAD sample.
+
+#+name: simbad-data
+#+BEGIN_SRC python :tangle /programs/simbad-data.py :return filename :results file
+  #from __future__ import print_function
+  import numpy as np
+  from sklearn import metrics
+  from scipy.optimize import curve_fit
+  import pandas as pd
+  from astropy.table import Table
+  import seaborn as sns
+  from astropy.stats import sigma_clip
+  import matplotlib.pyplot as plt
+  from matplotlib.font_manager import FontProperties
+  from sklearn.metrics import mean_squared_error
+  from astropy.modeling import models, fitting
+  import argparse
+  import sys
+  import os
+  from pathlib import Path
+  ROOT_PATH = Path("paper/Figs")
+  
+  df = pd.read_csv("iDR3_n4/simbad.csv")
+  print(df.columns)
+  
+  # MASKs
+  m1 = df['main_type'] == 'AGN_Candidate'
+  m2 = df['main_type'] == 'AGN'
+  m3 = df['main_type'] == 'EmG'
+  m4 = df['main_type'] == 'GinGroup'
+  m5 = df['main_type'] == 'Galaxy'
+  m6 = df['main_type'] == 'Candidate_CV*'
+  m7 = df['main_type'] == 'RRLyr'
+  m8 = df['main_type'] == 'SN'
+  m9 = df['main_type'] == 'HII'
+  m11 = df['main_type'] == 'CataclyV*'
+  m12 = df['main_type'] == 'FIR'
+  m13 = df['main_type'] == 'GinCl'
+  m14 = df['main_type'] == 'HII_G'
+  m15 = df['main_type'] == 'Seyfert_1'
+  m17 = df['main_type'] == 'Star'
+  m18 = df['main_type'] == 'PartofG'
+  m19 = df['main_type'] == 'RadioG'
+  m20 = df['main_type'] == 'IG'
+  m21 = df['main_type'] == 'QSO'
+  m22 = df['main_type'] == 'EB*'
+  m23 = df['main_type'] == 'Radio'
+  m24 = df['main_type'] == 'Seyfert_2'
+  m26 = df['main_type'] == 'X'
+  m27 = df['main_type'] == 'MolCld'
+  m28 = df['main_type'] == 'Cl*'
+  m29 = df['main_type'] == 'HMXB'
+  m30 = df['main_type'] == 'GinPair'
+  m31 = df['main_type'] == 'LSB_G'
+  m32 = df['main_type'] == 'WD*'
+  m33 = df['main_type'] == 'Candidate_RRLyr'
+  m34 = df['main_type'] == 'PN'
+  m35 = df['main_type'] == 'Blue'
+  m36 = df['main_type'] == 'EmObj'
+  m37 = df['main_type'] == 'BlueSG*'
+  m38 = df['main_type'] == 'StarburstG'
+  m39 = df['main_type'] == 'low-mass*'
+  m40 = df['main_type'] == 'BlueCompG'
+  m41 = df['main_type'] == 'UV'
+  m42 = df['main_type'] == 'Candidate_WD*'
+  m43 = df['main_type'] == 'MIR'
+  m44 = df['main_type'] == 'Radio(cm)'
+  m45 = df['main_type'] == 'Candidate_SN*'
+  m46 = df['main_type'] == 'QSO_Candidate'
+  m47 = df['main_type'] == 'BLLac'
+  m48 = df['main_type'] == 'PM*'
+  m49 = df['main_type'] == 'Possible_lensImage'
+  m51 = df['main_type'] == 'Nova'
+  m52 = df['main_type'] == 'BClG'
+  m53 = df['main_type'] == 'GlCl'
+  
+  # Making the tables with individual object classes
+  df_agn = pd.concat([df[m1], df[m2]])
+  df_EmG = pd.concat([df[m3], df[m14], df[m38], df[m40]])
+  GinGroup = df[m4]
+  df_pn = df[m34] 
+  df_gal = df[m5]
+  df_qso = pd.concat([df[m21], df[m46]])
+  df_cv = pd.concat([df[m6], df[m11]])
+  df_hii = df[m9]
+  df_star = df[m17]
+  df_sn = pd.concat([df[m8], df[m45]])
+  df_rrly = pd.concat([df[m7], df[m33]])
+  df_fir = df[m12]
+  df_GinCl = df[m13]
+  df_Seyfert_1 = df[m15]
+  df_Seyfert_2 = df[m24]
+  df_PartofG = df[m18]
+  df_RadioG = df[m19]
+  df_IG = df[m20]
+  df_EB = df[m22]
+  df_Radio = pd.concat([df[m23], df[m44]])
+  df_X = df[m26]
+  df_MolCld = df[m27]
+  df_cl = df[m28]
+  df_HMXB = df[m29]
+  df_GinPair = df[m30]
+  df_LSB_G = df[m31]
+  df_WD = pd.concat([df[m32], df[m42]])
+  df_Blue = df[m35]
+  df_EmObj = df[m36]
+  df_BlueSG = df[m37]
+  df_low_mass = df[m39]
+  df_uv = df[m41]
+  df_mier = df[m43]
+  df_BLLac = df[m47]
+  df_pm = df[m48]
+  df_Possible_lensImage = df[m49]
+  df_nova = df[m51]
+  df_bclg = df[m52]
+  df_glcl = df[m53]
+  
+  # Countaining the sources of each class 
+  list_numbers = ["H II regions", "PN", "CV", "SN", "Nova", "BL Lac",
+		  "Variable Star of RR Lyr type",
+		  "Star", "WD", "Cluster of Stars", "HMXB", "Far-Infrared source",
+		  "Eclipsing binary", "Blue object", "Emission Object", "Blue supergiant star",
+		  "Low-mass star", "UV-emission source", "MIER", "Possible lens Image"
+		  "Galaxy", "Galaxy in Pair of Galaxies",
+		  "Emission line galaxies",
+		  "QSO", "AGN", "Part of a Galaxy", "X-ray source", "Molecular Cloud",
+		  "Galaxy in Group of Galaxies", "Radio-source", "Interacting Galaxies",
+		  "Low Surface Brightness Galaxy", "Radio Galaxy", "Galaxy in Cluster of Galaxies"
+		  "High proper-motion Star", "Seyfert 1", "Seyfert 2",
+		  "Brightest galaxy in a Cluster", "Globular Cluster"]
+  
+  # Definition to make the colors
+  def colour(tab, f1, f2, f3, f4):
+      xcolour = tab[f1] - tab[f2]
+      ycolour = tab[f3] - tab[f4]
+      return xcolour, ycolour
+  
+  # Colors
+  cx_pn, cy_pn = colour(df_pn, "Z_PStotal", "G_PStotal", "G_PStotal", "R_PStotal")
+  cx_gal, cy_gal = colour(df_gal, "Z_PStotal", "G_PStotal", "G_PStotal", "R_PStotal")
+  cx_EmG, cy_EmG = colour(df_EmG, "Z_PStotal", "G_PStotal", "G_PStotal", "R_PStotal")
+  cx_qso, cy_qso = colour(df_qso, "Z_PStotal", "G_PStotal", "G_PStotal", "R_PStotal")
+  cx_cv, cy_cv = colour(df_cv, "Z_PStotal", "G_PStotal", "G_PStotal", "R_PStotal")
+  cx_hii, cy_hii = colour(df_hii, "Z_PStotal", "G_PStotal", "G_PStotal", "R_PStotal")
+  cx_star, cy_star = colour(df_star, "Z_PStotal", "G_PStotal", "G_PStotal", "R_PStotal")
+  
+  #PLOT
+  # Limiting the blue and red region
+  x_new = np.linspace(-15.0, 1000, 200)
+  y = 0.45*x_new + 1.55
+  
+  fig, ax = plt.subplots(figsize=(12, 12))
+  
+  ax.fill_between(x_new, y, -100, color="k", alpha=0.1)
+  ax.plot(x_new, y, c="k", zorder=11, lw=0.5)
+  
+  plt.tick_params(axis='x', labelsize=25) 
+  plt.tick_params(axis='y', labelsize=25)
+  
+  plt.xlabel(r'$z - g$', fontsize= 25)
+  plt.ylabel(r'$g - r$', fontsize= 25)
+  
+  ax.scatter(
+	  cx_pn, cy_pn,
+	  marker="o",
+	  c=sns.xkcd_rgb["cerulean"],
+	  label="PN",
+	  edgecolors="w", alpha=0.7, zorder=4
+      )
+  
+  ax.scatter(
+	  cx_gal, cy_gal,
+	  marker="o",
+	  c=sns.xkcd_rgb["dark pink"],
+	  label="Galaxy",
+	  edgecolors="w", zorder=3
+      )
+  
+  ax.scatter(
+	  cx_EmG, cy_EmG,
+	  marker="o",
+	  c=sns.xkcd_rgb["bright blue"],
+	  label="EmG",
+	  edgecolors="w", zorder=3
+      )
+  
+  ax.scatter(
+	  cx_qso, cy_qso,
+	  marker="o",
+	  c=sns.xkcd_rgb["green"],
+	  label="QSO",
+	  edgecolors="w", zorder=3
+      )
+  
+  ax.scatter(
+	  cx_cv, cy_cv,
+	  marker="o",
+	  c=sns.xkcd_rgb["periwinkle"],
+	  label="CV",
+	  edgecolors="w", zorder=5
+      )
+  
+  ax.scatter(
+	  cx_hii, cy_hii,
+	  marker="o",
+	  c=sns.xkcd_rgb["pale yellow"],
+	  label="HII Region",
+	  edgecolors="w", zorder=4
+      )
+  
+  ax.scatter(
+	  cx_star, cy_star,
+	  marker="o",
+	  c=sns.xkcd_rgb["army green"],
+	  label="Star",
+	  edgecolors="w", zorder=6
+      )
+  
+  
+  ax.legend(ncol=1, fontsize=20.0, title_fontsize=30)
+  ax.set(xlim=[-6.8, 2.5], ylim=[-3., 5.])#, xscale="log", yscale="log")
+  ax.set_aspect("equal")
+  #ax.set(xlabel=r"$z - g$", ylabel=r"$g - r$")
+  
+  filefile ="colour-digram-simbadObj.pdf"
+  fig.savefig(ROOT_PATH / filefile)
+  
+  # Saving subtables (QSO)
+  print(df_qso)
+  filename = "iDR3_n4/QSO-simabad.ecsv"
+  Table.from_pandas(df_qso).write(filename, format="ascii.ecsv")
+  
+  
+#+END_SRC
+
+#+RESULTS: simbad-data
+[[file:iDR3_n4/QSO-simabad.ecsv]]
+[[file:Index(['Field', 'ID', 'RA', 'DEC', 'FWHM', 'FWHM_n', 'A', 'B', 'ISOarea',
+       'KRON_RADIUS', 'PhotoFlagDet', 's2n_Det_iso', 'U_PStotal',
+       'F378_PStotal', 'F395_PStotal', 'F410_PStotal', 'F430_PStotal',
+       'G_PStotal', 'F515_PStotal', 'R_PStotal', 'F660_PStotal', 'I_PStotal',
+       'F861_PStotal', 'Z_PStotal', 'e_U_PStotal', 'e_F378_PStotal',
+       'e_F395_PStotal', 'e_F410_PStotal', 'e_F430_PStotal', 'e_G_PStotal',
+       'e_F515_PStotal', 'e_R_PStotal', 'e_F660_PStotal', 'e_I_PStotal',
+       'e_F861_PStotal', 'e_Z_PStotal', 'F378_iso', 'F395_iso', 'F410_iso',
+       'F430_iso', 'G_iso', 'F515_iso', 'R_iso', 'F660_iso', 'I_iso',
+       'F861_iso', 'Z_iso', 'e_U_iso', 'e_F378_iso', 'e_F395_iso',
+       'e_F410_iso', 'e_F430_iso', 'e_G_iso', 'e_F515_iso', 'e_R_iso',
+       'e_F660_iso', 'e_I_iso', 'e_F861_iso', 'e_Z_iso', 'r - i', 'r - J0660',
+       'e(r - i)', 'e(r - J0660)', 'P(GoodPho)', 'P(BadPho)', 'main_id',
+       'ra_x', 'dec_x', 'coo_err_maj', 'coo_err_min', 'coo_err_angle', 'nbref',
+       'ra_sexa', 'dec_sexa', 'main_type', 'other_types', 'radvel', 'redshift',
+       'sp_type', 'morph_type', 'plx', 'pmra', 'pmdec', 'size_maj', 'size_min',
+       'size_angle', 'B_x', 'V', 'R_x', 'J', 'H', 'K', 'u', 'g', 'r_xa', 'i',
+       'z', 'angDist'],
+      dtype='object')
+              Field                         ID  ...       z   angDist
+39     SPLUS-n12s01   iDR3.SPLUS-n12s01.020886  ...     NaN  0.169442
+52    STRIPE82-0004  iDR3.STRIPE82-0004.031191  ...  16.267  0.145873
+55    STRIPE82-0104  iDR3.STRIPE82-0104.027921  ...  16.986  0.103838
+65     SPLUS-n09s43   iDR3.SPLUS-n09s43.035461  ...     NaN  0.147378
+66     SPLUS-n10s36   iDR3.SPLUS-n10s36.018587  ...     NaN  0.539756
+...             ...                        ...  ...     ...       ...
+1045   SPLUS-n02n27   iDR3.SPLUS-n02n27.022071  ...  20.729  0.040387
+1046   SPLUS-n02s19   iDR3.SPLUS-n02s19.000577  ...  20.790  0.266297
+1048   SPLUS-n02s37   iDR3.SPLUS-n02s37.051418  ...  20.486  0.136084
+1049   SPLUS-s35s45   iDR3.SPLUS-s35s45.031885  ...     NaN  1.500802
+787   STRIPE82-0074  iDR3.STRIPE82-0074.040778  ...  19.410  0.102930
+
+[225 rows x 98 columns]
+]]
+
+*** QSOs
+
+Trying to get the redshifht of the QSOs from simbad.
+
+#+name: QSO-simbad
+#+BEGIN_SRC python :tangle /programs//simbad-QSO.py :results output
+  from astroquery.simbad import Simbad
+  import astropy.coordinates as coord
+  import astropy.units as u
+  from astropy.table import Table, hstack
+  from astropy.coordinates import SkyCoord 
+  import numpy as np
+  from scipy.constants import constants
+  
+  # Read the table
+  tab = Table.read("iDR3_n4/QSO-simabad.ecsv", format="ascii.ecsv")
+  #Looking the objects of the table in Simbad and specifying the column wanted of Simbad
+  customSimbad = Simbad()
+  customSimbad.get_votable_fields()
+  #customSimbad.list_votable_fields()
+  customSimbad.add_votable_fields('sptype', 'otype','distance', "velocity")
+  customSimbad.add_votable_fields("uvby")
+  customSimbad.add_votable_fields('ra(d)', 'dec(d)')
+  customSimbad.add_votable_fields('bibcodelist(1990-2020)')#, 'biblio')
+  ## get redshift of object
+  customSimbad.add_votable_fields("rv_value") 
+  result_table = customSimbad.query_region(coord.SkyCoord(tab["RA"], tab["DEC"], 
+						 unit=(u.deg, u.deg)), radius = 2.0 * u.arcsec)
+  
+  #Calculating redshift
+  rv = result_table["RV_VALUE"].quantity.data[0]*1000 # rv in m / s
+  z = rv / constants.c
+  print(rv)
+  
+  
+#+END_SRC
+
+#+RESULTS: QSO-simbad
+: 85729000.0
+
+#+BEGIN_SRC sh
+  pip install constants
+#+END_SRC
+
+#+RESULTS:
+| Collecting   | constants              |                 |                                                                                        |                                           |           |                                                                         |        |        |
+| Downloading  | constants-0.6.0.tar.gz | (5.1            | kB)                                                                                    |                                           |           |                                                                         |        |        |
+| Building     | wheels                 | for             | collected                                                                              | packages:                                 | constants |                                                                         |        |        |
+| Building     | wheel                  | for             | constants                                                                              | (setup.py):                               | started   |                                                                         |        |        |
+| Building     | wheel                  | for             | constants                                                                              | (setup.py):                               | finished  | with                                                                    | status | 'done' |
+| Created      | wheel                  | for             | constants:                                                                             | filename=constants-0.6.0-py3-none-any.whl | size=5458 | sha256=a711a23bba1fafd7bbb2e4bc83d9b97b11370a83fd5ce9bef79882b9dca9b262 |        |        |
+| Stored       | in                     | directory:      | /home/luis/.cache/pip/wheels/77/ac/b2/89268490b92bf6fd0102b3634668042437e0e024c64ef447a1 |                                           |           |                                                                         |        |        |
+| Successfully | built                  | constants       |                                                                                        |                                           |           |                                                                         |        |        |
+| Installing   | collected              | packages:       | constants                                                                              |                                           |           |                                                                         |        |        |
+| Successfully | installed              | constants-0.6.0 |                                                                                        |                                           |           |                                                                         |        |        |
