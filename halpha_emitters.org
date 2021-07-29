@@ -1007,6 +1007,7 @@ Now we need to do the table latex with the Redshift
   
   
   
+  
 #+END_SRC
 
 #+RESULTS:
