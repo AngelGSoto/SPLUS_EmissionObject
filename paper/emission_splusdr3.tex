@@ -691,6 +691,16 @@ to every group.
 \section{Results}
 \label{sec:results}
 
+\begin{figure*}
+  \begin{tabular}{l l l}
+  \includegraphics[width=0.7\columnwidth]{Figs/distribution-Halpha-group.pdf} 
+    \includegraphics[width=0.7\columnwidth]{Figs/distribution-ri-group.pdf}
+    \includegraphics[width=0.7\columnwidth]{Figs/distribution_r-group.pdf}
+  \end{tabular}
+    \caption{Emission lines selected...}
+    \label{fig:diagram-distri}
+\end{figure*}
+
 We find a total of 389 blue outliers, 336 absorption line candidates
 and 1337 emission line candidates in our photometric catalogue.
 We show the magnitude and colour distributions of the emission
@@ -726,7 +736,7 @@ listed on the SIMBAD database are in our sample of H{$\alpha$} emitters
 25 known CVs and 5 candidate CVs (from SIMBAD) were selected with algorithm.
 CVs are binary systems of very short orbital period, in which a low-mass and
 early-type star fills its Roche region and transfers mass to a companion stars,
-a dwarf white \citep{Patterson:1984}. Fig.~\ref{fig:knonw-objects} the SPLUS
+a dwarf white \citep{Patterson:1984}. Fig.~\ref{fig:knonw-objects} the S-PLUS
 photometry overlapped to the SDSS spectrum of the CV FASTT 1560. As expected,
 this object was classified as blue source by the machine learning approaches.
 
@@ -740,8 +750,17 @@ Seyfert 2, AGN and galaxy.
 
 
 \subsubsection{QSOs}
-Another extragalactic objects with emission lines that were selected are the
-QSOS. This category include several class of galaxies according to SIMBAD
+Other extragalactic objects with emission lines that were selected are the
+QSOs. In the case of the QSOs is not the H{$\alpha$} emission line who impact
+on the $J$0660 filter. This filter is affected by strong emission lines present in
+these objects that to specific redshift drop into the $J$0660 filter.
+Some of these emission lines are H{$\beta$}, C {\sc IV} 1550 \AA, C {\sc III]} 1909 \AA,
+  Mg {\sc II} 2798 \AA~(see, also \citealp{Gutierrez:2020, Nakazono:2021}).
+  All the objects were classified as blue sources which was the expected.
+  Fig. show the S-PLUS photomerty and SDSS spectrum of the QSO 2SLAQ J224531.20-004509.4
+  which has a redshift of $\sim$1.37 indicating that the emission line corresponds to
+  the line Mg {\sc II}.
+  
 
 \subsubsection{Star}
 Stars are also selected 
@@ -788,15 +807,6 @@ Table 1.}
 \end{figure*}
 
 
-\begin{figure*}
-  \begin{tabular}{l l l}
-  \includegraphics[width=0.7\columnwidth]{Figs/distribution-Halpha.pdf} 
-    \includegraphics[width=0.7\columnwidth]{Figs/distribution-ri.pdf}
-    \includegraphics[width=0.7\columnwidth]{Figs/distribution_r.pdf}
-  \end{tabular}
-    \caption{Emission lines selected...}
-    \label{fig:diagram-distri}
-\end{figure*}
 
 \begin{figure}
 	\includegraphics[width=0.9\linewidth]{Figs/Fig-SPLUS-gr-zg.pdf}

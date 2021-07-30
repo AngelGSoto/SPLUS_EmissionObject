@@ -665,7 +665,113 @@ Found in the list of Halpha emitters. The S-spectra is very to those confirmed C
 - SPLUS-n05n50,iDR3.SPLUS-n05n50.013917 (217.2307884592734,5.0060874486010265):
   Simbad Possible_lensImage or blue.
 
+*** Distribution of colors of groups
+Making the distributing of colors =r - J0060=, =r - i= and =r=  for each group.
 
+#+BEGIN_SRC python :return filename1 :return filename2 :return filename3 :results file
+  import matplotlib.pyplot as plt
+  from matplotlib.colors import PowerNorm
+  from astropy import units as u
+  from astropy.coordinates import SkyCoord
+  from astropy.wcs import WCS
+  import pandas as pd
+  import numpy as np
+  from astropy.table import Table
+  import seaborn as sns
+  import argparse
+  import sys
+  import os
+  import glob
+  import json
+  import matplotlib.patches as mpatches
+  from scipy.stats import gaussian_kde
+  from pathlib import Path
+  from scipy.cluster.hierarchy import dendrogram, linkage
+  import scipy.cluster.hierarchy as shc
+  sns.set_color_codes()
+  ROOT_PATH = Path("paper/Figs")
+  
+  table_blue = Table.read("iDR3_n4/Blue0-Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-Final.ecsv", format="ascii.ecsv")
+  table_red = Table.read("iDR3_n4/Red1-Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-Final.ecsv", format="ascii.ecsv")
+  
+  # Bar diagram
+  fig1, ax1 = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
+  plt.xlabel(r"$r - J0660$", fontsize=33)
+  plt.ylabel(r"Density", fontsize=33)
+  plt.tick_params(axis='x', labelsize=33) 
+  plt.tick_params(axis='y', labelsize=33)
+  r_j0660blue = [x for x in table_blue["r - J0660"]]
+  r_j0660red = [x for x in table_red["r - J0660"]]
+  g = sns.distplot(r_j0660blue, 
+		 norm_hist=True, kde=True, ax=ax1,
+		 bins=40, hist_kws=dict(color='b'),
+		 label = "Blue sources")
+  g = sns.distplot(r_j0660red, 
+		 norm_hist=True, kde=True, ax=ax1,
+		 bins=40, hist_kws=dict(color='r'),
+		 label = "Red sources")
+  ax1.set(xlim=[-1.0, 4.1])
+  ax1.legend(loc='upper right', fontsize=18)
+  ymax = ax1.get_ybound()[1]
+  sns.despine()
+  plt.tight_layout()
+  filename1="paper/Figs/distribution-Halpha-group.pdf"
+  plt.savefig(filename1)
+  ##########################
+  # Distribution r - i color
+  fig2, ax2 = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
+  plt.xlabel(r"$r - i$", fontsize=33)
+  plt.ylabel(r"Density", fontsize=33)
+  plt.tick_params(axis='x', labelsize=33) 
+  plt.tick_params(axis='y', labelsize=33)
+  r_iblue = [x for x in table_blue["r - i"]]
+  r_ired = [x for x in table_red["r - i"]]
+  sns.distplot(r_iblue, 
+	norm_hist=True, kde=True, ax=ax2,
+	bins=40, hist_kws=dict(range=[-3.0, 3.0], color='b')
+		)
+  sns.distplot(r_ired, 
+	norm_hist=True, kde=True, ax=ax2,
+	bins=40, hist_kws=dict(range=[-3.0, 3.0], color='r'),
+		label="Red")
+  ax2.set(xlim=[-2.0, 2.5])
+  #ax2.legend(loc='upper right')
+  ymax = ax2.get_ybound()[1]
+  sns.despine()
+  plt.tight_layout()
+  filename2= "paper/Figs/distribution-ri-group.pdf"
+  plt.savefig(filename2)
+  #########################
+  # Distribution  r-mag
+  fig3, ax3 = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
+  plt.xlabel(r"$r$", fontsize=33)
+  plt.ylabel(r"Density", fontsize=33)
+  plt.tick_params(axis='x', labelsize=33) 
+  plt.tick_params(axis='y', labelsize=33)
+  rblue = [x for x in table_blue["R_PStotal"]]
+  rred = [x for x in table_red["R_PStotal"]]
+  sns.distplot(rblue, 
+  norm_hist=False, kde=True, ax=ax3,
+	bins=20, hist_kws=dict(color='b')
+		)
+  sns.distplot(rred, 
+	norm_hist=False, kde=True, ax=ax3,
+	bins=20, hist_kws=dict(color='r')
+		)
+  #ax3.set(xlim=[-0.7, 1.8])
+  #ax.legend(loc='upper left')
+  sns.despine()
+  plt.tight_layout()
+  filename3="paper/Figs/distribution_r-group.pdf"
+  plt.savefig(filename3)
+  
+#+END_SRC  
+
+#+RESULTS:
+[[file:paper/Figs/distribution_r-group.pdf]]
+
+For the color =r -i= we got the expected results.
+    
 ** SIMBAD
 I made cross-match with SIMBAD.
 So, working with the SIMBAD sample.
@@ -1279,6 +1385,7 @@ emission line of the QSO fall into the J0660 filter are:
 + 1.3 < z < 1.4 -> MgII
 + 2.4 < z < 2.6 -> CIII]
 + 3.2 < z < 3.4 -> CIV 
+
 
 #+BEGIN_SRC sh
   pip install constants
