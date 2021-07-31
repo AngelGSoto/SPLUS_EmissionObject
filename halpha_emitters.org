@@ -751,11 +751,11 @@ Making the distributing of colors =r - J0060=, =r - i= and =r=  for each group.
   rblue = [x for x in table_blue["R_PStotal"]]
   rred = [x for x in table_red["R_PStotal"]]
   sns.distplot(rblue, 
-  norm_hist=False, kde=True, ax=ax3,
+  norm_hist=True, kde=True, ax=ax3,
 	bins=20, hist_kws=dict(color='b')
 		)
   sns.distplot(rred, 
-	norm_hist=False, kde=True, ax=ax3,
+	norm_hist=True, kde=True, ax=ax3,
 	bins=20, hist_kws=dict(color='r')
 		)
   #ax3.set(xlim=[-0.7, 1.8])
@@ -770,7 +770,10 @@ Making the distributing of colors =r - J0060=, =r - i= and =r=  for each group.
 #+RESULTS:
 [[file:paper/Figs/distribution_r-group.pdf]]
 
-For the color =r -i= we got the expected results.
+For the color =r - i= we got the expected results. I have used normalized hist because
+Before we do, another point to note is that, when the subsets have unequal
+numbers of observations, comparing their distributions in terms of counts
+may not be ideal. One solution is to normalize the counts using the stat parameter:
     
 ** SIMBAD
 I made cross-match with SIMBAD.
