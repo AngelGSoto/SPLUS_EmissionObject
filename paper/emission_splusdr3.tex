@@ -375,7 +375,7 @@ The figure~\ref{fig:Spectra} shows an example of how looks like a
 S-spectra\footnote{S-spectra signify the S-PLUS emission in flux
 or magnitude unities of an object in all twelve bands.} of sources in
 magnitude unities selected with methods explained above. This object
-clearly exhibits strong H$alpha$ emitter.
+clearly exhibits strong H$\alpha$ emitter.
 
 \begin{figure}
 \includegraphics[width=0.9\linewidth]{Figs/photopectrum_splus_HYDRA-0026-052331_Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-Final_PStotal.pdf}
@@ -392,6 +392,31 @@ clearly exhibits strong H$alpha$ emitter.
   \textit{J}0515, \textit{J}0660 and \textit{J}0861.}
 \label{fig:Spectra}
 \end{figure}
+
+
+\begin{figure*}
+	\includegraphics[width=0.9\linewidth]{Figs/final-emitters.pdf}
+        \caption{Colour-colour diagram with all the emission line objects selected
+          from S-PLUS DR3. Size of the symbols represent the measured FWHM assuming
+          a Gaussian core (for more detail see \citealt{Fernandes:2021}). Colored
+          bar indicates the magnitude values in the r-band. The contours represent
+          the synthetic main-sequence and giant stars loci from the library of stellar
+          spectral energy distributions of \citet{Pickles:1998}.}
+    \label{fig:emission}
+\end{figure*}
+
+Fig~\ref{fig:emission} exhibits the distribution of the emission on the
+$r - J0600$ versus $r - i$ color-color plane. At this point we can say that
+the algorithm implemented works well in selected objects with a excess in emission
+on the $J$0660 filter. It is possible to affirm that, because the identified objects
+are located  above of the loci of the main and giant stars. The S-PLUS synthetic  photometry
+of the stellar locus is represent by the contours in the diagram and was obtained by using the
+filter transmission profiles, shown in Fig.~\ref{fig:curves}, and the library of stellar
+spectral energy distributions of \citet{Pickles:1998}. This synthetic magnitudes were
+defined in the AB magnitude system \citep{Oke:1983}. The wide distribution of fonts across
+the colors $ r - J060 $ and $ r - i $ indicates that several types of objects were selected.
+
+
 
 Once, we felt confident of our sample of H{$\alpha$} emission lines sources,
 we proceeded to classify the objects into two big groups; one group containing those
@@ -413,12 +438,41 @@ density-based cluster selection based on the $(g - r)$ and $(z - g)$ colors.
 
 \begin{figure}
 	\includegraphics[width=0.9\linewidth]{Figs/Fig-SPLUS-gr-zg.pdf}
-        \caption{The $(g - r)$ versus $(z - g)$ synthetic color-color diagram of several
-          classes of emission lines objects}
+        \caption{The $(g - r)$ versus $(z - g)$ synthetic color-color diagram of
+          several classes of emission lines objects. Included in the diagrams, there
+          are families of CLOUDY modelled hPNe spanning a range of properties (density
+          map region). Cyan circles represent S-PLUS photometry from observed spectra
+          Grey diamonds represent H II regions in NGC 55. Red
+          boxes display symbiotic stars, this group also includes Galactic and
+          external SySt from NGC 205 IC 10 and NGC 185,. Yellow circles correspond to
+          cataclysmic variables (CVs) from SDSS. Pink circles indicate  blue compact
+          galaxies (BCGs) from SDSS. Orange triangles refer to SDSS
+          star-forming galaxies (SDSS SFGs). SDSS QSOs at different redshift
+          ranges are shown as light blue diamonds, and YSOs from Lupus and
+          Sigma Orionis are represented by salmon stars. The diagonal line represent
+         a subjective criterion to separate the objects into two color types.}
     \label{fig:synthetic}
 \end{figure}
 
-Fig.~\ref{fig:synthetic} is the 
+In order to find the best color-color diagram to separating the final sample of
+emission line objects into two color types, we first attempted constructed  color-color
+diagrams by using the S-PLUS simulated photometry of several classes of emission line
+objects\footnote{It is important to note that there are other classes of objects
+with emission lines that have not been included, because our main objective is to
+separate between two types of these objects by their photometric colors.}.
+The {$(g - r)$ versus $(z - g)$ color-color diagram is displayed on
+  the Fig.~\ref{fig:synthetic}. The SySt span a wide range on the $(z - g)$ color,
+  from approximately -0.5 to 6.0. This wide range on the color may refer to the different
+  type spectral of the cold stellar component of the binary system. All the YSOs and many
+  SySt are located on the top-left on the diagram indicating a reddening effect of the
+  circumstellar disk for many SySt (for example for those symbiotic with a Mira star)
+  and YSOs. On the other hand, the PNe, HII regions, CVs, QSOs and emission line galaxies
+  are located on the lower-right region in the diagram. This indicates blue continuum
+  present in each classes of theses objects, mainly by the presence of the high excitation
+  star, for instance, white dwarf in planetary nebulae and cataclysm variable stars and
+  massive young stars in H II regions and the starburst galaxies. Although some SySt are located
+  in the region where appear the blue sources, this color-color diagram seems to separate
+  very well two color types, blue from red sources.
 
 \begin{figure}
 	\includegraphics[width=0.9\linewidth]{Figs/red-blue-colorObjects-gr-edit.jpg}
@@ -429,7 +483,13 @@ Fig.~\ref{fig:synthetic} is the
 \end{figure}
 
 
-Fig.
+We constructed the $(g - r)$ versus $(z - g)$ color-color diagram using the photometry of
+our final list of H{$\alpha$} emitters, which is presented in Fig.~\ref{fig:new-color}.
+As was we expected two-color population is showed in the diagram perceptible in the level of the
+color of the density region on which yellow areas represent a higher concentration of points. This is re-forced by the bimodal shape of the $(g - r)$ and $(z - g)$ color distributions (see inset
+plots of the Fig.~\ref{fig:new-color}). The two peaks of the $(g - r)$ and $(z - g)$
+distributions clearly correspond to blue and red sources, respectively. This histograms also
+show that the fraction of blue objects is considerable higher than the red ones.
 
 \subsubsection{Hierarchical agglomerative clustering}
 \label{sec:Hierar}
@@ -794,17 +854,6 @@ for selecting sources with strong emission lines.
 
 
 \begin{figure*}
-	\includegraphics[width=0.9\linewidth]{Figs/final-emitters.pdf}
-        \caption{Colour-colour diagram with all the emission line objects selected
-          from S-PLUS DR3. Size of the symbols represent the measured FWHM assuming
-          a Gaussian core (for more detail see \citealt{Fernandes:2021}). Colored
-          bar indicates the magnitude values in the r-band. The contours represent
-          the synthetic main-sequence and giant stars loci from the library of stellar
-          spectral energy distributions of \citet{Pickles:1998}.}
-    \label{fig:emission}
-\end{figure*}
-
-\begin{figure*}
 \includegraphics[width=0.9\linewidth]{Figs/halpha-emitters-galactic-aitoff.pdf}
 \centering
 \llap{\shortstack{%
@@ -930,7 +979,7 @@ Table 1.}
     \includegraphics[width=0.7\columnwidth]{Figs/distribution-Halpha-group.pdf}
   \end{tabular}
   \caption{Distribution of $r$ magnitude  (left panel), $(r - i)$ color (middle panel), and $(r - J0660)$
-    color (right panel) for the blue and red sources of the sample of H$a\lpha$ emitters. Both sample are normalized to their maximum counts, xx and xx objects for blue and red sources, respectively.   The curves represent a Kernel density estimation for both samṕles.}
+    color (right panel) for the blue and red sources of the sample of H$a\lpha$ emitters. Both sample are normalized to their maximum counts, xx and xx objects for blue and red sources, respectively.   The smooth curves represent a Kernel density estimation for both samṕles.}
     \label{fig:diagram-distri}
 \end{figure*}
 

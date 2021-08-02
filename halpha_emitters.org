@@ -711,7 +711,7 @@ Making the distributing of colors =r - J0060=, =r - i= and =r=  for each group.
 		 bins=40, hist_kws=dict(color='r'),
 		 label = "Red sources")
   ax1.set(xlim=[-1.0, 4.1])
-  ax1.legend(loc='upper right', fontsize=18)
+  #ax1.legend(loc='upper right', fontsize=18)
   ymax = ax1.get_ybound()[1]
   sns.despine()
   plt.tight_layout()
@@ -752,14 +752,14 @@ Making the distributing of colors =r - J0060=, =r - i= and =r=  for each group.
   rred = [x for x in table_red["R_PStotal"]]
   sns.distplot(rblue, 
   norm_hist=True, kde=True, ax=ax3,
-	bins=20, hist_kws=dict(color='b')
-		)
+	bins=20, hist_kws=dict(color='b'),
+		label = "Blue sources")
   sns.distplot(rred, 
 	norm_hist=True, kde=True, ax=ax3,
-	bins=20, hist_kws=dict(color='r')
-		)
+	bins=20, hist_kws=dict(color='r'),
+		label = "Red sources")
   #ax3.set(xlim=[-0.7, 1.8])
-  #ax.legend(loc='upper left')
+  ax3.legend(loc='upper left', fontsize=18)
   sns.despine()
   plt.tight_layout()
   filename3="paper/Figs/distribution_r-group.pdf"
