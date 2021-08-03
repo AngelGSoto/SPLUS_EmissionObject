@@ -759,7 +759,7 @@ Making the distributing of colors =r - J0060=, =r - i= and =r=  for each group.
 	bins=20, hist_kws=dict(color='r'),
 		label = "Red sources")
   #ax3.set(xlim=[-0.7, 1.8])
-  ax3.legend(loc='upper left', fontsize=18)
+  ax3.legend(loc='upper left', fontsize=22)
   sns.despine()
   plt.tight_layout()
   filename3="paper/Figs/distribution_r-group.pdf"
