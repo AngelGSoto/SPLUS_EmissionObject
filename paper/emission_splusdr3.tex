@@ -293,13 +293,13 @@ the filter $J$0660 in comparison with r-band filter. For that we
 first divided our sub-sample in for magnitude bins using the $r$-band
 magnitudes. The bins have the follow distribution:
 
-\begin{itemize}
-\item 1 bin- objects with magnitude in the $r$-band $r < 16$
-\item 2 bin- objects with magnitude in the $r$-band $16 \leq r < 18$
-\item 3 bin- objects with magnitude in the $r$-band $18 \leq r < 20$
-\item 4 bin- objects with magnitude in the $r$-band $20 \leq r < 21$
+\begin{enumerate}
+\item  objects with magnitude in the $r$-band $r < 16$
+\item  objects with magnitude in the $r$-band $16 \leq r < 18$
+\item  objects with magnitude in the $r$-band $18 \leq r < 20$
+\item  objects with magnitude in the $r$-band $20 \leq r < 21$
   
-\end{itemize}
+\end{enumerate}
 
 To select the emission lines we used the same method created and
 implemented by \citet{Witham:2008} its possible to do that because
@@ -310,7 +310,7 @@ to identify blue objects with excess of H{$\alpha$} and after that
 of candidate H{$\alpha$} emission showing an high effectiveness. In this
 order of ideas we attempted this methodology in S-PLUS.
 
-We first generated the ($r$ - $J$0660) versus ($r$ - $i$) color- color
+We first generated the ($r$ - $J$0660) versus ($r$ - $i$) color-color
 diagram for each magnitude bins. We then carried a out an initial straight
 line fit to all objects in each magnitude bin. This initial fit is an
 attempt to find the loci of main-sequence and giant stars. We implemented
@@ -336,7 +336,7 @@ Figure~\ref{fig:criteria-color-plot} ilustrates the procedured used to slected t
 emitters in S-PLUS DR3 for each magnitude bin. The continuos black lines represent the initial
 fit and  the dashed lines indicate the 4-$\sigma$ clipping fit lines. The dotted lines are
 the cut selection criteria for the H{$\alpha$} emitters -- the 4-$\sigam$ above of the final
-fit--. Note that theses cut lines are only an approximations because to trace these lines
+fit--. Note that theses cut lines are only an approximations because to trace them,
 it is only considered the residual around the fit. The actual selection criteria used here
 also include the phothometric uncertainties in $r$ - $J$0660 for each individual data source as
 shows on the Equation~\ref{eq:criterion}.
@@ -415,8 +415,27 @@ filter transmission profiles, shown in Fig.~\ref{fig:curves}, and the library of
 spectral energy distributions of \citet{Pickles:1998}. This synthetic magnitudes were
 defined in the AB magnitude system \citep{Oke:1983}. The wide distribution of fonts across
 the colors $ r - J060 $ and $ r - i $ indicates that several types of objects were selected.
+For instance, higher values on the  $r - J060$ color of some sources could be indicating
+that they are H II regions or/and blue compact galaxies and PNe. On the hand, the 
+$r - i$ color indicates the rendered sources such as SySt and young stellar objects
+or source with strong blue continuum as cataclysm variables.
 
+\begin{figure*}
+\includegraphics[width=0.9\linewidth]{Figs/halpha-emitters-galactic-aitoff.pdf}
+\centering
+\llap{\shortstack{%
+        \includegraphics[width=0.25\linewidth, trim=10 10 -40 0]{Figs/distribution-bgalactic.pdf}\\
+        \rule{0ex}{1.8in}%
+      }
+  \rule{1.0in}{0ex}}
+\caption{Distribution of H{$\alpha$} emitters in Galactic longitude and latitude
+  coordinate. Inset figure represents distribution of the objects in Galactic latitude.}
+\label{fig:aitoff-distribution}
+\end{figure*}
 
+Fig.~\ref{fig:aitoff-distribution} displays the distribution of all emitters in Galactic la
+ic latitude and longitude. The density map regions represent the spatial positions of the objects
+on the sky. The surface density of $J$0660-excess objects is highest near the Galactic plane.
 
 Once, we felt confident of our sample of H{$\alpha$} emission lines sources,
 we proceeded to classify the objects into two big groups; one group containing those
@@ -779,6 +798,57 @@ contribution of different classes
 of objects with emission lines to the overall sample cross-matching
 with some catalogs available were carried out.
 
+\begin{table*}
+\centering
+\caption{A summary of the results obtained of the positional cross-match between
+         between the S-PLUS list of emission line objects and the SIMBAD database.
+          We used a search radios of 2 arcsec. 
+                                               }
+\label{tab:simbad-sources}
+\begin{tabular}{lccc} % four columns, alignment for each
+  \hline
+Main type    & Associated SIMBAD           & Number of S-PLUS objects                 \\
+             & type                        &  with SIMBAD match               \\
+\hline
+H II region                & HII                     & 26                \\
+Planetary nebula           & PN                      & 1                 \\
+Supernova                  & SN, Candidate\_SN*      & 9                 \\
+Nova                       & Nova                    & 1                 \\
+Cataclysmic variable star  & CataclyV*, Candidate\_CV* & 30              \\
+Variable star of RR Lyr type & RRLyr, Candidate\_RRLyr & 19              \\
+X-ray source                & HMXB, X                  & 6               \\
+Eclipsing binary            & EB*                    & 8                 \\            
+BL Lac - type object        & BLLac                  & 2                 \\
+Emission object             & EmObj                  & 4                 \\
+Star                        & star, WD*, Candidate\_WD*, Blue, BlueSG*, PM* & 54 \\
+Low-mass star               & low-mass*              & 3                 \\
+UV-emission source          & UV                     & 2                 \\
+Cluster of stars            & Cl*                    & 3                 \\
+Far-infrared source         & FIR                    & 2                 \\
+Mid-infrared source         & MIR                    & 1                 \\
+Radio-source                & Radio                  & 7                 \\
+Molecular cloud             & MolCld                 & 2                 \\
+Emission line galaxy        & EmG, HII\_G, StarburstG, BlueCompG & 102   \\
+Part of a galaxy            & PartofG                & 9                 \\
+Interacting galaxies        & IG                     & 10                \\
+Radio galaxy                & RadioG                 & 2                 \\
+Galaxy in pair of galaxies      & GinPair            & 12                \\
+Galaxy in group of galaxies     & GinGroup           & 18                \\
+Galaxy in cluster of galaxies   & GinCl              & 23                \\
+Low surface brightness galaxy   & LSB\_G             & 10                \\
+Brightest galaxy in a cluster   & BClG               & 3                 \\
+Globular cluster            & GlCl                   & 1                 \\
+QSO                         & QSO, QSO\_Candidate    & 225               \\
+AGN                         & AGN, AGN\_Candidate    & 18                \\
+Seyfert 1                   & Seyfert\_1             & 38                \\
+Seyfert 2                   & Seyfert\_2             & 7                 \\
+Galaxy                      &  Galaxy                & 421               \\
+Possible gravitationally lensed image & Possible\_lensImage & 1          \\
+\hline
+Total                       &                               & 10         \\
+\hline
+\end{tabular}
+\end{table*}
 
 \subsection{Simbad}
 
@@ -852,24 +922,6 @@ We also cross-correlate our list with Large Sky Area Multi-Object Fiber Spectros
 (LAMOST; \citealp{Wu:2011}) using a radius of 2 arcsec for the match.  These spectra also
 show strong emission lines. These results shows that this technique actually are very effective
 for selecting sources with strong emission lines.
-
-
-\begin{figure*}
-\includegraphics[width=0.9\linewidth]{Figs/halpha-emitters-galactic-aitoff.pdf}
-\centering
-\llap{\shortstack{%
-        \includegraphics[width=0.25\linewidth, trim=10 10 -40 0]{Figs/distribution-bgalactic.pdf}\\
-        \rule{0ex}{1.8in}%
-      }
-  \rule{1.0in}{0ex}}
-\caption{Distribution of H{$\alpha$} emitters in Galactic longitude and latitude.
-  The emitters are shown as red points if brighter than r = 18, and black points if
-  fainter. The S-PLUS direct fields are shown by green squares (offset fields are
-  not shown). All emitters are shown here, including those with flagged with 'c' in
-Table 1.}
-\end{figure*}
-
-
 
 
 \begin{figure}
@@ -980,7 +1032,9 @@ Table 1.}
     \includegraphics[width=\columnwidth]{Figs/distribution-Halpha-group.pdf}
   \end{tabular}
   \caption{Distribution of $r$ magnitude  (left panel), $(r - i)$ color (middle panel), and $(r - J0660)$
-    color (right panel) for the blue and red sources of the sample of H$a\lpha$ emitters. Both sample are normalized to their maximum counts, xx and xx objects for blue and red sources, respectively.   The smooth curves represent a Kernel density estimation for both samṕles.}
+    color (right panel) for the blue and red sources of the sample of H$a\lpha$ emitters.
+    Both sample are normalized to their maximum counts, xx and xx objects for blue and
+    red sources, respectively.   The smooth curves represent a Kernel density estimation for both samṕles.}
     \label{fig:diagram-distri}
 \end{figure}
 
@@ -1030,7 +1084,7 @@ We have found a important sample of emission line objects.
 % The best way to enter references is to use BibTeX:
 
 \bibliographystyle{mnras}
-\bibliography{ref} % if your bibtex file is called example.bib
+\bibliography{ref} 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

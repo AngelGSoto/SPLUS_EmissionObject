@@ -780,7 +780,7 @@ I made cross-match with SIMBAD.
 So, working with the SIMBAD sample.
 
 #+name: simbad-data
-#+BEGIN_SRC python :tangle /programs/simbad-data.py :return filename :results file
+#+BEGIN_SRC python :tangle /programs/simbad-data.py 
   #from __future__ import print_function
   import numpy as np
   from sklearn import metrics
@@ -856,7 +856,7 @@ So, working with the SIMBAD sample.
   # Making the tables with individual object classes
   df_agn = pd.concat([df[m1], df[m2]])
   df_EmG = pd.concat([df[m3], df[m14], df[m38], df[m40]])
-  GinGroup = df[m4]
+  df_GinGroup = df[m4]
   df_pn = df[m34] 
   df_gal = df[m5]
   df_qso = pd.concat([df[m21], df[m46]])
@@ -907,6 +907,11 @@ So, working with the SIMBAD sample.
 		  "Low Surface Brightness Galaxy", "Radio Galaxy", "Galaxy in Cluster of Galaxies"
 		  "High proper-motion Star", "Seyfert 1", "Seyfert 2",
 		  "Brightest galaxy in a Cluster", "Globular Cluster"]
+  
+#+END_SRC
+
+#+BEGIN_SRC python :return filename :results file :noweb yes
+  <<simbad-data>>
   
   # Definition to make the colors
   def colour(tab, f1, f2, f3, f4):
@@ -1012,6 +1017,9 @@ So, working with the SIMBAD sample.
   
 #+END_SRC
 
+#+RESULTS:
+[[file:iDR3_n4/QSO-simabad.ecsv]]
+
 #+RESULTS: simbad-data
 [[file:iDR3_n4/QSO-simabad.ecsv]]
 [[file:Index(['Field', 'ID', 'RA', 'DEC', 'FWHM', 'FWHM_n', 'A', 'B', 'ISOarea',
@@ -1094,7 +1102,64 @@ Trying to get the Redshift of the QSOs from simbad.
 #+RESULTS: QSO-simbad
 [[file:iDR3_n4/QSO-simabad-redshift.ecsv]]
 
-Now, we need to do the table latex with the Redshift
++ <2021-08-03 ter> Making latex file with number of each class of objects with matches on SIMBAD.
+  I decided to make the table by hand. So I just will to make a table with the number of
+  each class of objects.
+  
+#+BEGIN_SRC python :return filejson :results file :noweb yes
+  import json
+  <<simbad-data>>
+  dict_class = {"H II regions": len(df_hii),
+		"PN": len(df_pn),
+		"CV": len(df_cv),
+		"SN": len(df_sn),
+		"Nova": len(df_nova),
+		"BL Lac": len(df_BLLac),
+		"RR Lyr": len(df_rrly),
+		"Star": len(df_star),
+		"WD": len(df_WD),
+		"Cluster of Stars": len(df_cl),
+		"HMXB": len(df_HMXB),
+		"Far-Infrared source": len(df_fir),
+		"Eclipsing binary": len(df_EB),
+		"Blue object": len(df_Blue),
+		"Emission Object": len(df_EmObj),
+		"Blue supergiant star": len(df_BlueSG),
+		"Low-mass star": len(df_low_mass),
+		"UV-emission source": len(df_uv),
+		"MIER": len(df_mier),
+		"Possible lens Image": len(df_Possible_lensImage),
+		"Galaxy": len(df_gal),
+		"Galaxy in Pair of Galaxies": len(df_GinPair),
+		"Emission line galaxies": len(df_EmG),
+		"QSO": len(df_qso),
+		"AGN": len(df_agn),
+		"Part of a Galaxy": len(df_PartofG),
+		"X-ray source": len(df_X),
+		"Molecular Cloud": len(df_MolCld),
+		"Galaxy in Group of Galaxies": len(df_GinGroup),
+		"Radio-source": len(df_Radio),
+		"Interacting Galaxies": len(df_IG),
+		"Low Surface Brightness Galaxy": len(df_LSB_G),
+		"Radio Galaxy": len(df_RadioG),
+		"Galaxy in Cluster of Galaxies": len(df_GinCl),
+		"High proper-motion Star": len(df_pm),
+		"Seyfert 1": len(df_Seyfert_1),
+		"Seyfert 2": len(df_Seyfert_2),
+		"Brightest galaxy in a Cluster": len(df_bclg),
+		"Globular Cluster": len(df_glcl)}
+  filejson = "iDR3_n4/simbad-data.json"
+  with open(filejson, "w") as f:
+      json.dump(dict_class, f, indent=2)
+  
+#+END_SRC
+
+#+RESULTS:
+[[file:iDR3_n4/simbad-data.json]]
+
+
++  Now, we need to do the table latex with the Redshift:
+
 
 #+name: table-qso-redshift
 #+BEGIN_SRC python  :return table 

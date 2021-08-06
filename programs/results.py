@@ -44,11 +44,11 @@ def plot_mag(f1, f2, f3):
 
 # Read the file
 parser = argparse.ArgumentParser(
-    description="""Make a table from the S-PLUS catalogs """)
+    description="""Make a table from the S-PLUS catalogs""")
 
 parser.add_argument("fileName", type=str,
                     default="teste-program",
-                    help="Name of table, taken the prefix ")
+                    help="Name of table, taken the prefix")
 
 cmd_args = parser.parse_args()
 file_ = cmd_args.fileName + ".ecsv"
@@ -122,7 +122,9 @@ with sns.axes_style("ticks"):
     # main sequence and giant stars loci
     x1, y1 = 0.3, 0.3
     el = mpatches.Ellipse((x1, y1), 0.3, 0.4, angle=30, alpha=0.3)
-    ax.annotate("Contour indicates main-sequence and giant stars loci", xy=(0.1, -0.1), xytext=(-1.5, -1.), color='black', size=20, zorder= 111, arrowprops=dict(arrowstyle="fancy",
+    ax.annotate("Contour indicates main-sequence and giant stars loci",
+                xy=(0.1, -0.1), xytext=(-1.5, -1.), color='black', size=20,
+                zorder= 111, arrowprops=dict(arrowstyle="fancy",
                             color="0.5",
                             patchB=el,
                             shrinkB=5,
@@ -264,11 +266,11 @@ with sns.axes_style("ticks"):
     # Distribution b coordinate
     fig4, ax4 = plt.subplots(1, 1, figsize=(10, 5), sharex=True)
     plt.xlabel(r"$b(Gal)$", fontsize=33)
-    plt.ylabel(r"Density", fontsize=33)
+    plt.ylabel(r"# of sources", fontsize=33)
     plt.tick_params(axis='x', labelsize=33) 
     plt.tick_params(axis='y', labelsize=33)
     sns.distplot(b_rad, 
-                 norm_hist=True, kde=True, ax=ax4,
+                 norm_hist=False, kde=False, ax=ax4,
                  bins=30, hist_kws=dict(range=[-3.0, 3.0],  color='y')
                 )
     #ax4.set(xlim=[-0.7, 1.8])
