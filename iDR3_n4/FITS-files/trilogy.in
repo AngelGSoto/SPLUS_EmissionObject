@@ -1,0 +1,19 @@
+B
+FASTT1560_338-0_80_F515.fits
+
+G
+FASTT1560_338-0_80_F660.fits
+
+R
+FASTT1560_338-0_80_F861.fits
+
+outname  a383
+samplesize 1000
+stampsize  1000
+showstamps  0
+satpercent  0.001
+noiselum    0.15
+colorsatfac  1
+deletetests  0
+sampledx  0
+sampledy  0

@@ -1,0 +1,30 @@
+trilogy.in.png
+B = F515
+G = F660
+R = F861
+
+trilogy.in.png
+B = F515
+G = F660
+R = F861
+
+trilogy.in.png
+B = F515
+G = F660
+R = F861
+
+trilogy.in.png
+B = F515
+G = F660
+R = F861
+
+trilogy.in.png
+B = F515
+G = F660
+R = F861
+
+trilogy.in.png
+B = F515
+G = F660
+R = F861
+

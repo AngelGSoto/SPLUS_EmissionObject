@@ -805,8 +805,8 @@ with some catalogs available were carried out.
 \label{tab:simbad-sources}
 \begin{tabular}{lccc} % four columns, alignment for each
   \hline
-Main type    & Associated SIMBAD           & Number of S-PLUS objects                 \\
-             & type                        &  with SIMBAD match               \\
+Main type    & Associated SIMBAD           & Number of S-PLUS objects    \\
+             & types                        &  with SIMBAD match         \\
 \hline
 H II region                & HII                     & 26                \\
 Planetary nebula           & PN                      & 1                 \\
@@ -818,8 +818,7 @@ X-ray source                & HMXB, X                  & 6               \\
 Eclipsing binary            & EB*                    & 8                 \\            
 BL Lac - type object        & BLLac                  & 2                 \\
 Emission object             & EmObj                  & 4                 \\
-Star                        & star, WD*, Candidate\_WD*, Blue, BlueSG*, PM* & 54 \\
-Low-mass star               & low-mass*              & 3                 \\
+Star                        & star, WD*, Candidate\_WD*, Blue, BlueSG*, PM*, low-mass* & 57 \\
 UV-emission source          & UV                     & 2                 \\
 Cluster of stars            & Cl*                    & 3                 \\
 Far-infrared source         & FIR                    & 2                 \\
@@ -853,7 +852,9 @@ Total                       &                               & 10         \\
 We made cross-match between our sample of objects with a excess of emission of
 the $J$0660 and SIMBAD. We searched for all objects in SIMBAD using a radius of 2 arcsec
 around the position of the optical source in question. We found 1000
-matches that include a great variety of emission line objects:
+matches that include a great variety of emission line objects. In table
+\ref{tab:simbad-sources} is showed the different categories of objects found
+in SIMBAD.
 
 \subsubsection{Nebulae}
 
@@ -881,6 +882,12 @@ a dwarf white \citep{Patterson:1984}. Fig.~\ref{fig:knonw-objects} the S-PLUS
 photometry overlapped to the SDSS spectrum of the CV FASTT 1560. As expected,
 this object was classified as blue source by the machine learning approaches.
 
+\subsubsection{Star}
+Several stars were selected as shows the matches with SIMBAD.
+The SIMBAD types include normal stars, white dwarf stars (WD*), white dwarf
+candidates (Candidate\_WD*), blue stars, blue super-giant stars (BlueSG*), high
+proper-motion stars (PM*) and Low-mass star (low-mass*; M<1M$_\odot$). 
+
 \subsubsection{Galaxies}
 Several type of emission line galaxies were selected. This category include
 several class of galaxies according to SIMBAD. emission-line galaxy (EmG),
@@ -888,8 +895,6 @@ blue compact galaxy (BlueCompG), HII galaxy (HII G), Galaxy in Cluster of Galaxi
 (GinCl), Galaxy in Group of Galaxies (GinGroup), Low Surface Brightness Galaxy
 (LSB G), Interacting Galaxies (IG), part of a Galaxy (PartofG), Seyfert 1 and
 Seyfert 2, AGN and galaxy.
-
-
 
 One interesting discussion here, is that the type part of a Galaxy (PartofG)
 on SIMBAD are actually galaxies with Wolf-Rayet (WR) signature in the low red shift
@@ -899,7 +904,14 @@ and [NII]. These spectral features can be of them very similar to extragalactic
 H II regions present typically of the outskirt of spiral galaxies. Fig. displys
 the S-PLUS and SDSS spectra of the PartofG which belong to the galaxy nnnnn.
 
-
+Many of the objects that have as main type ``galaxy'' in SIMBAD. This galaxies
+could be spiral galaxies on which the star formation is present. It is known
+that in the spiral arms of the galaxies H II regions as well as
+neutral gas (H I) and molecular gas. Actually some of these galaxies haves for
+secundary type H I. The reservoir of H i gas in galaxies must ultimately
+feed their star formation, after cooling and forming molecular
+clouds \citep{van-Driel:2016}. Fig. shows the S-PLUS photometry and
+the SDSS spectra of two galaxies with clearly emission lines. 
 
 
 \subsubsection{QSOs}
@@ -915,11 +927,10 @@ Some of these emission lines are H{$\beta$}, C {\sc IV} 1550 \AA, C {\sc III]} 1
   the line Mg {\sc II}.
   
 
-\subsubsection{Star}
-Stars are also selected 
+  \subsubsection{Other type of objects}
+  Miscellanies the objects were selected on which are include as it can see in the
+  table~\ref{tab:simbad-sources}. They include FIR sources, 
 
-\subsubsection{Radio sources}
-Radio sources are selected with our
 
 \subsection{SDSS and LAMOST}
 
@@ -1201,4 +1212,3 @@ two cluster that in agreement with previous results are the blue and red sources
 \label{lastpage}
 \end{document}
 
-% End of mnras_template.tex
