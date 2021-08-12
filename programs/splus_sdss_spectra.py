@@ -130,7 +130,7 @@ for wll, magg, magerr in zip(wl_sp, mag, mag_err):
     err_.append(err)
 
 # PLOTS
-fig, ax = plt.subplots(figsize=(12, 5))
+fig, ax = plt.subplots(figsize=(12, 9))
 ax.spines["top"].set_visible(False)  
 ax.spines["right"].set_visible(False)
 ax.set(xlim=[3350,9300])
@@ -142,11 +142,24 @@ elif cmd_args.ymin is not None:
     plt.ylim(ymin=cmd_args.ymin)
 elif cmd_args.ymax is not None:
     plt.ylim(ymax=cmd_args.ymax)
-    
+
 #plt.ylim(ymin=-50.0,ymax=200)
 ax.set(xlabel='Wavelength $(\AA)$')
 ax.set(ylabel=r'F$(\mathrm{10^{-15} erg\ s^{-1} cm^{-2} \AA^{-1}})$')
 Flux /=1e-15
+#axis limit
+mask_lim = (wl > 6100.) & (wl < 6900.)
+Flux_lim = Flux[mask_lim]
+if max(Flux_lim) > 5 * np.mean(Flux_lim):
+    max_y_lim = max(Flux_lim) * .9
+    plt.ylim(ymax=max_y_lim)
+    # min_y_lim = min(Flux_lim) - 0.2
+    # plt.ylim(ymin=min_y_lim,ymax=max_y_lim)
+
+# if max(Flux) > 9 * np.mean(Flux):
+#     max_y_lim = max(Flux) * .9
+#     min_y_lim = min(Flux) 
+#     plt.ylim(ymin=min_y_lim,ymax=max_y_lim)
 ax.plot(wl, Flux, c = "gray", linewidth=1.3, alpha=0.6, zorder=5)
 for wl1, mag, magErr, colors, marker_ in zip(wl_sp, mag, err_, color, marker): #
     F = (10**(-(mag + 2.41) / 2.5)) / wl1**2

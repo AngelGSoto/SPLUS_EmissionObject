@@ -130,7 +130,7 @@ for wll, magg, magerr in zip(wl_sp, mag, mag_err):
     err_.append(err)
 
 # PLOTS
-fig, ax = plt.subplots(figsize=(12, 5))
+fig, ax = plt.subplots(figsize=(12, 9))
 ax.spines["top"].set_visible(False)  
 ax.spines["right"].set_visible(False)
 ax.set(xlim=[3350,9300])
@@ -145,6 +145,14 @@ elif cmd_args.ymax is not None:
  
 ax.set(xlabel='Wavelength $(\AA)$')
 ax.set(ylabel='Normalized flux')
+
+#axis limit
+mask_lim = (wl > 6100.) & (wl < 6900.)
+Flux_lim = Flux[mask_lim]
+if max(Flux_lim) > 5 * np.mean(Flux_lim):
+    max_y_lim = max(Flux_lim) * 1.7
+    min_y_lim = min(Flux_lim) - 60
+    plt.ylim(ymin=min_y_lim,ymax=max_y_lim)
 ax.plot(wl, Flux, c = "gray", linewidth=1.3, alpha=0.6, zorder=5)
 for wl1, mag, magErr, colors, marker_ in zip(wl_sp, mag, err_, color, marker): #
     F = (10**(-(mag + 2.41) / 2.5)) / wl1**2
