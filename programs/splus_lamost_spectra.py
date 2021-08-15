@@ -121,6 +121,14 @@ flux_part = Flux[m]
 Fsp = (10**(-(table["R_PStotal"][ind] + 2.41) / 2.5)) / 6250.0**2
 factor = flux_part / Fsp
 
+# Using other wl for fing the factor of scale
+m1 = wl == 6250.3125
+wl_part1 = wl[m1]
+flux_part1 = Flux[m1]
+Fsp1 = (10**(-(table["R_PStotal"][ind] + 2.41) / 2.5)) / 6250.0**2
+factor1 = flux_part1 / Fsp1
+
+
 # Propagation of error
 err_ = []
 for wll, magg, magerr in zip(wl_sp, mag, mag_err):
@@ -135,6 +143,14 @@ ax.spines["top"].set_visible(False)
 ax.spines["right"].set_visible(False)
 ax.set(xlim=[3350,9300])
 
+#axis limit
+mask_lim = (wl > 6100.) & (wl < 6900.)
+Flux_lim = Flux[mask_lim]
+if max(Flux_lim) > 5 * np.mean(Flux_lim):
+    max_y_lim = max(Flux_lim) * 1.7
+    min_y_lim = min(Flux_lim) - 60
+    #plt.ylim(ymin=min_y_lim,ymax=max_y_lim)
+
 # set Y-axis range (if applicable)
 if cmd_args.ymin is not None and cmd_args.ymax is not None:
     plt.ylim(cmd_args.ymin,cmd_args.ymax)
@@ -146,17 +162,13 @@ elif cmd_args.ymax is not None:
 ax.set(xlabel='Wavelength $(\AA)$')
 ax.set(ylabel='Normalized flux')
 
-#axis limit
-mask_lim = (wl > 6100.) & (wl < 6900.)
-Flux_lim = Flux[mask_lim]
-if max(Flux_lim) > 5 * np.mean(Flux_lim):
-    max_y_lim = max(Flux_lim) * 1.7
-    min_y_lim = min(Flux_lim) - 60
-    plt.ylim(ymin=min_y_lim,ymax=max_y_lim)
 ax.plot(wl, Flux, c = "gray", linewidth=1.3, alpha=0.6, zorder=5)
-for wl1, mag, magErr, colors, marker_ in zip(wl_sp, mag, err_, color, marker): #
+for wl1, mag, magErr, colors, marker_ in zip(wl_sp, mag, err_, color, marker): #)
     F = (10**(-(mag + 2.41) / 2.5)) / wl1**2
-    F *= factor
+    try:
+        F *= factor
+    except ValueError:
+        F *= factor1
     ax.scatter(wl1, F, c = colors, marker=marker_, s=80, zorder=4)
     ax.errorbar(wl1, F, yerr=magErr, marker='.', fmt='.', color=colors, ecolor=colors, elinewidth=3.9, markeredgewidth=3.2, capsize=10)
 #ax.axvline(4686, color='r', linewidth=0.3, linestyle='-', zorder = 6, label="He II")

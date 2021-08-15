@@ -135,6 +135,15 @@ ax.spines["top"].set_visible(False)
 ax.spines["right"].set_visible(False)
 ax.set(xlim=[3350,9300])
 
+#axis limit
+mask_lim = (wl > 6100.) & (wl < 6900.)
+Flux_lim = Flux[mask_lim]
+if max(Flux_lim) > 5 * np.mean(Flux_lim):
+    max_y_lim = max(Flux_lim) * .9
+    #plt.ylim(ymax=max_y_lim)
+    # min_y_lim = min(Flux_lim) - 0.2
+    # plt.ylim(ymin=min_y_lim,ymax=max_y_lim)
+
 # set Y-axis range (if applicable)
 if cmd_args.ymin is not None and cmd_args.ymax is not None:
     plt.ylim(cmd_args.ymin,cmd_args.ymax)
@@ -147,14 +156,6 @@ elif cmd_args.ymax is not None:
 ax.set(xlabel='Wavelength $(\AA)$')
 ax.set(ylabel=r'F$(\mathrm{10^{-15} erg\ s^{-1} cm^{-2} \AA^{-1}})$')
 Flux /=1e-15
-#axis limit
-mask_lim = (wl > 6100.) & (wl < 6900.)
-Flux_lim = Flux[mask_lim]
-if max(Flux_lim) > 5 * np.mean(Flux_lim):
-    max_y_lim = max(Flux_lim) * .9
-    plt.ylim(ymax=max_y_lim)
-    # min_y_lim = min(Flux_lim) - 0.2
-    # plt.ylim(ymin=min_y_lim,ymax=max_y_lim)
 
 # if max(Flux) > 9 * np.mean(Flux):
 #     max_y_lim = max(Flux) * .9
@@ -171,15 +172,15 @@ for wl1, mag, magErr, colors, marker_ in zip(wl_sp, mag, err_, color, marker): #
 # plt.text(0.70, 0.19, table["ID"].split("R3.")[-1]).replace(".", "-"),
 #              transform=ax.transAxes, fontsize=25, weight='bold')
 
-if cmd_args.ymax is not None:
-    ax.annotate(str(table["ID"][ind]).split("R3.")[-1].replace(".", "-"), xy=(9000, cmd_args.ymax),  xycoords='data', size=13,
-            xytext=(-120, -60), textcoords='offset points', 
-            bbox=dict(boxstyle="round4,pad=.5", fc="0.94"),)
-    ax.annotate("r=" + format(float(table["R_PStotal"][ind]), '.2f'), xy=(9000, 0.86*cmd_args.ymax),  xycoords='data', size=13,
-            xytext=(-120, -60), textcoords='offset points', 
-            bbox=dict(boxstyle="round4,pad=.5", fc="0.94"),)
-else:
-    None
+# if cmd_args.ymax is not None:
+#     ax.annotate(str(table["ID"][ind]).split("R3.")[-1].replace(".", "-"), xy=(9000, cmd_args.ymax),  xycoords='data', size=13,
+#             xytext=(-120, -60), textcoords='offset points', 
+#             bbox=dict(boxstyle="round4,pad=.5", fc="0.94"),)
+#     ax.annotate("r=" + format(float(table["R_PStotal"][ind]), '.2f'), xy=(9000, 0.86*cmd_args.ymax),  xycoords='data', size=13,
+#             xytext=(-120, -60), textcoords='offset points', 
+#             bbox=dict(boxstyle="round4,pad=.5", fc="0.94"),)
+# else:
+#     None
     
 ax.legend()
 plt.tight_layout()
