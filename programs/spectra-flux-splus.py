@@ -105,7 +105,7 @@ for wll, magg, magerr in zip(wl_sp, mag, mag_err):
     err_.append(err)
 
 # PLOTS
-fig, ax = plt.subplots(figsize=(12, 5))
+fig, ax = plt.subplots(figsize=(12, 9))
 ax.spines["top"].set_visible(False)  
 ax.spines["right"].set_visible(False)
 ax.set(xlim=[3350,9300])
@@ -122,13 +122,13 @@ for wl1, mag, magErr, colors, marker_ in zip(wl_sp, mag, err_, color, marker): #
 #ax.axvline(4686, color='r', linewidth=0.3, linestyle='-', zorder = 6, label="He II")
 rmag = [r for r in table["R_PStotal"]]
 
-ax.annotate("PN G006.0-41.9", xy=(8500, 75),  xycoords='data', size=13,
+ax.annotate("PN G006.0-41.9", xy=(8500, 29),  xycoords='data', size=13,
             xytext=(-120, -60), textcoords='offset points', 
             bbox=dict(boxstyle="round4,pad=.5", fc="0.9"),)
-ax.annotate(str(table["ID"]).split("R3.")[-1].replace(".", "-"), xy=(8500, 65),  xycoords='data', size=13,
+ax.annotate(str(table["ID"]).split("R3.")[-1].replace(".", "-"), xy=(8500, 24.5),  xycoords='data', size=13,
             xytext=(-120, -60), textcoords='offset points', 
             bbox=dict(boxstyle="round4,pad=.5", fc="0.9"),)
-ax.annotate("r =" + format(float(table["R_PStotal"]), '.2f'), xy=(8500, 55),  xycoords='data', size=13,
+ax.annotate("r =" + format(float(table["R_PStotal"]), '.2f'), xy=(8500, 20),  xycoords='data', size=13,
             xytext=(-120, -60), textcoords='offset points', 
             bbox=dict(boxstyle="round4,pad=.5", fc="0.9"),)
 ax.legend()
