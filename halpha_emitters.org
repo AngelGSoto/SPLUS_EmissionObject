@@ -75,7 +75,8 @@ Witham carry out an initial straight line least-squares fit toall objects in eac
 I propose to use unsupervised machine learning to do that.
 
 ** Change
-I decided to apply the criteria all data. I selected objects with very good photometry: errors minors and equal than 0.2 in all bands, flats in J0660, r and i  minor and equal than 2.0. 
+I decided to apply the criteria all data. I selected objects with very good photometry: errors minors
+and equal than 0.2 in all bands, flats in J0660, r and i  minor and equal than 2.0. 
 At the moment I apply FWHM <= 2.0.
 
 **** DBSCAN
@@ -110,7 +111,8 @@ Focus on estimating DBSCAN’s two parameters:
 2. \epsilon (epsilon or “eps”): the maximum distance two points can be from one another while still belonging to the same cluster
 
 + Minimum Samples (“MinPts”)
-  There is no automatic way to determine the MinPts value for DBSCAN. Ultimately, the MinPts value should be set using domain knowledge and familiarity with the data set. From some research I’ve done, 
+  There is no automatic way to determine the MinPts value for DBSCAN. Ultimately, the MinPts value should be set using
+  domain knowledge and familiarity with the data set. From some research I’ve done, 
   here are a few rules of thumb for selecting the MinPts value:
 
     + The larger the data set, the larger the value of MinPts should be
@@ -134,7 +136,8 @@ Put information here...
 Some sources:
  + https://www.machinecurve.com/index.php/2020/12/15/performing-optics-clustering-with-python-and-scikit-learn/
 
-... For this reason, OPTICS is preferable over DBSCAN when your clusters have varying density. In other cases, the choice for algorithm does not really matter.
+... For this reason, OPTICS is preferable over DBSCAN when your clusters have varying density. In other cases,
+the choice for algorithm does not really matter.
 
 ***** OPTICS with Python Scikit-Learn
 
@@ -452,10 +455,12 @@ Considering https://github.com/astropy/astropy/pull/4760 for sigma clipping.
 
 *** Change the methodology
 
-Find the locus of MS stars by line fit to all data and apply the methodology from Witham et al. (2006) to select the H\alpha emitters. After apply HDBSCAN to find the locus of MS stars to compare 
+Find the locus of MS stars by line fit to all data and apply the methodology from Witham et al. (2006)
+to select the H\alpha emitters. After apply HDBSCAN to find the locus of MS stars to compare 
 with the other one.   
 
-+ I created my own data base with DR3. After I wrote a script on python to download the data with these criteria: Flags_allFilter <= 2, error_allFilter <= 0.2, and magnitude interval on r-band.
++ I created my own data base with DR3. After I wrote a script on python to download the data
+  with these criteria: Flags_allFilter <= 2, error_allFilter <= 0.2, and magnitude interval on r-band.
 : python apply_query.py
 
 *** Final methods: Linear fit
@@ -550,12 +555,16 @@ Data to classify: (13644, 7)
        model: ["RF16", "RF18" ou "both"] determina com qual modelo vai ser gerada as classificações.
        "RF16": usa o modelo que leva em consideração apenas os dados do S-PLUS
        "RF18": usa o modelo que leva em consideração os dados do S-PLUS e W1 e W2 do WISE (em magnitude vega) 
-       "both": se usar essa opção vai retornar a classificação RF18 para objetos que tem informação no WISE (model_flag == 0), caso contrário vai retornar a classificação por RF16 (model_flag==1). 
-       Nota: "RF18" pode retornar um dataframe MENOR que o dataframe de input pois nem todos os objetos terão informação no WISE. Os indíces da linha são mantidos, então se fizer um pd.concat([data, clf.results], axis=1) irá fazer o join das tabelas de forma correta. 
+       "both": se usar essa opção vai retornar a classificação RF18 para objetos que tem informação no WISE (model_flag == 0),
+caso contrário vai retornar a classificação por RF16 (model_flag==1). 
+       Nota: "RF18" pode retornar um dataframe MENOR que o dataframe de input pois nem todos os objetos terão informação no WISE.
+Os indíces da linha são mantidos, então se fizer um pd.concat([data, clf.results], axis=1) irá fazer o join das tabelas de forma correta. 
 
-       return_prob: [True ou False] se True, determina se irá retornar as probabilidades. Caso contrário, retornará apenas a classe (0: QSO, 1: STAR, 2: GALAXY)
+       return_prob: [True ou False] se True, determina se irá retornar as probabilidades. Caso contrário, retornará
+apenas a classe (0: QSO, 1: STAR, 2: GALAXY)
 
-       match_irsa: [True ou False] se True, irá fazer query do ALLWISE catalogue e fará o crossmatch com os dados de entrada para que seja possível rodar o modelo RF18. Se model == "RF16", match_irsa == False automaticamente.
+       match_irsa: [True ou False] se True, irá fazer query do ALLWISE catalogue e fará o crossmatch
+com os dados de entrada para que seja possível rodar o modelo RF18. Se model == "RF16", match_irsa == False automaticamente.
 
        verbose: [True ou False] se True, retorna prints de cada etapa
 #+END_SRC
@@ -622,6 +631,12 @@ Data to classify: (13644, 7)
   - CV FASTT 1560 -> STRIPE82-0142.027354 (338.66637521384126 0.6909664418071105)
   - HIIG LEDA 1185205 -> STRIPE82-0026.058736 (17.28310789223492 1.12097992550518)
   - QSO PHL   354 -> STRIPE82-0143.016137 (339.59688919210015 -0.952268013442764)
+  - Galaxy Z  12-78 176.359607,0.00404 -> iDR3.SPLUS-n01s20.026220 (176.35960159169613, 0.0041113183584209)
+  - Galaxy ,LEDA 3107905,6.974365,-0.966824 -> iDR3.STRIPE82-0011.016278 (6.974318052697582, -0.9667199252402)
+  - Galaxy 2dFGRS TGN176Z274,178.308748,-3.408946 -> iDR3.SPLUS-n03s21.001338 (178.30862939134568,-3.409047236958316)
+  - SN LSQ 12dwl 333.1730416667,0.5119722222 -> iDR3.STRIPE82-0134.016856 (333.17320112679323,0.5119642601996512)
+  - QSO 2SLAQ J220529.34-003110.6 331.3722551089 -0.5196284017 -> iDR3.STRIPE82-0131.050516 (331.37225331383246,-0.5196269942518518)
+  - WR [BKD2008] WR  14,180.1095,-1.1021666667 -> SPLUS-n02s23.042426 (180.1095757612321 -1.1019334954271696) 
 
 + Three spectra from Lamost:
   - STRIPE82-0057.001810 (39.68852506534099 -1.3705561161546969) -> Interesting object could be a SySt.
