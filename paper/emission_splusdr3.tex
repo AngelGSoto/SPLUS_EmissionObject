@@ -40,9 +40,12 @@
 
 \usepackage{graphicx}	% Including figure files
 \usepackage{amsmath}	% Advanced maths commands
-%\usepackage{amssymb}	% Extra maths symbols
+\usepackage{amssymb}	% Extra maths symbols
 \usepackage{longtable}
+\usepackage{ulem}
+
 \newcommand{\rlopes}[1]{\textcolor{blue}{#1}}
+\newcommand{\cut}[1]{\textcolor{red}{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -58,8 +61,9 @@
 
 % Title of the paper, and the short title which is used in the headers.
 % Keep the title short and informative.
-\title[\rlopes{S-PLUS: H$\alpha$ emitters} S-PLUS: Emission line objects]{\rlopes{H$\alpha$ emitters from the Southern Photometric Local Universe Survey (S-PLUS)} Optical identification of emission
-  line sources in the southern photometric local Universe survey (S-PLUS)}
+\title[\rlopes{S-PLUS: H$\alpha$ emitters} S-PLUS: Emission line objects]{\rlopes{H$\alpha$ emitters from the Southern Photometric Local Universe Survey (S-PLUS)} 
+\sout{Optical identification of emission
+  line sources in the southern photometric local Universe survey (S-PLUS)}}
 
 \author[Guti\'{e}rrez-Soto et al.]{
 L. A. Guti\'{e}rrez-Soto,$^{1}$\thanks{E-mail: gsoto.angel@gmail.com}
@@ -89,10 +93,24 @@ $^{3}$Another Department, Different Institution, Street Address, City Postal Cod
 % Abstract of the paper
 \begin{abstract}
 
-\rlopes{In the way to map 9000 deg$^2$ of the Southern hemisphere, the S-PLUS project is also surveying the sky in a proxy of a myriad of astrophysical processes: the H$\alpha$ transition. Here we explore such a capability from its DR3 to make H$\alpha$ emitters in evidence from 
-the ($r$ - $J$0660) versus ($r$ - $i$) color-color diagram and distinguish the red from the blue ones by exploring the ($r$ - $i$) and ($g$ - $z$) diagram. Our catalog is composed of 9,200 objects that exhibit excess in the narrow $J$0660 band which is consistent with H{$\alpha$} in emission. Unsupervised, clustering machine learning approach revealed two distinct populations: one with an intense blue continuum and another with a red one. The hierarchical clustering algorithm was compared with the HDBSCAN. By adopting a ``soft'' clustering approach, we assigned the probability of each emitter belonging to a given population, blue or red clusters. We use synthetic and observed (SDSS) spectra to emphasize the potential of color-color diagrams to distinguish several classes of emission line emitters that include planetary nebulae, H II regions, young stellar objects, symbiotic stellar systems, cataclysmic variables, blue compact galaxies, star-forming galaxies, and quasars, and trace the way to reveal new ones with S-PLUS data.}
+  \rlopes{In the way to map 9000 deg$^2$ of the Southern hemisphere,
+    the S-PLUS project is also surveying the sky in a proxy of a myriad of
+    astrophysical processes: the H$\alpha$ transition. Here we explore
+    such a capability from its DR3 to make H$\alpha$ emitters in evidence from
+    the ($r$ - $J$0660) versus ($r$ - $i$) color-color diagram and distinguish the
+    red from the blue ones by exploring the ($r$ - $i$) and ($g$ - $z$) diagram.
+    Our catalog is composed of 9,200 objects that exhibit excess in the narrow $J$0660 band
+    which is consistent with H{$\alpha$} in emission. Unsupervised, clustering machine
+    learning approach revealed two distinct populations: one with an intense blue continuum
+    and another with a red one. The hierarchical clustering algorithm was compared with the
+    HDBSCAN. By adopting a ``soft'' clustering approach, we assigned the probability of
+    each emitter belonging to a given population, blue or red clusters. We use synthetic
+    and observed (SDSS) spectra to emphasize the potential of color-color diagrams to distinguish
+    several classes of emission line emitters that include planetary nebulae, H II regions, young
+    stellar objects, symbiotic stellar systems, cataclysmic variables, blue compact galaxies,
+    star-forming galaxies, and quasars, and trace the way to reveal new ones with S-PLUS data.}
 
-  The emission line objects are very important objects in astronomy
+\sout{The emission line objects are very important objects in astronomy
   because reflects different class of objects that evolved physical
   mechanics that given counts of stellar formation process, presences
   the gas, shocks, star-burst in galaxies, the finals stage of stars
@@ -111,7 +129,7 @@ the ($r$ - $J$0660) versus ($r$ - $i$) color-color diagram and distinguish the r
   each emission object a probability of belonging to a given cluster
   (blue or red group), allowing for more flexibility in the classification
   of objects according to these colours those objects with a low probability
-  of belonging to any cluster. 
+  of belonging to any cluster.} 
 \end{abstract}
 % Select between one and six entries from the list of approved keywords.
 % Don't make up new ones.
@@ -224,7 +242,7 @@ feature space where the data are defined.
 
 In this work, we used S-PLUS observations of the southern hemisphere to search
 for objects with an excess of H{$\alpha$} using automatic methods based on the
-(r - H$\alpha$) versus (r - i) color-color diagram we also used color criteria
+(r - H$\alpha$) versus (r - i) color-color diagram. We have also used color criteria
 based in (g - r) and (z - g) in conjunction to unsupervised machine learning
 techniques to split the final list in those with blue and red continuum. The
 paper is organized as follows...
@@ -248,7 +266,7 @@ The actual data release contains about 60 millions of objects covering a total
 area of $\sim$8000 deg$^2$, at high Galactic latitudes ($ > 30$~deg) using a
 dedicated 0.83m robotic telescope,the T80-South (T80S), located at Cerro Tololo,
 Chile. S-PLUS will cover an additional 1300 deg$^2$ of the Galactic plane and bulge
-toenable Galactic studies. In this work, we focus on the aspects thatare of
+to enable Galactic studies. In this work, we focus on the aspects that are of
 particular interest to the second data release of the S-PLUS main survey.
 Additional information about S-PLUS can be found in \citet{Mendes:2019}. 
 
@@ -319,7 +337,7 @@ a iterative $\sigma$-clipping technique to find the best-fitting of the main
 stellar locus. In this order of ideas, we made four interactive $\sigma$-clipped.
 Once we have found the appropriate fitting for each magnitude bin, we identified
 those objects significantly above of this final fit as likely sources with
-a excesses of H{$\alpha$}. Objects with a contribution significative of
+a excesses of H{$\alpha$}. Objects with a significative contribution of
 H{$\alpha$} meet the condition:
 
 \begin{equation}
@@ -333,7 +351,7 @@ H{$\alpha$} meet the condition:
 The fits are carried out with the aid of the python library \texttt{astropy.modeling}
 \footnote{https://docs.astropy.org/en/stable/modeling/index.html}.
 
-Figure~\ref{fig:criteria-color-plot} illustrates the procedure used to slected the H{$\alpha$}
+Figure~\ref{fig:criteria-color-plot} illustrates the procedure used to selected the H{$\alpha$}
 emitters in S-PLUS DR3 for each magnitude bin. The continuous black lines represent the initial
 fit and  the dashed lines indicate the 4-$\sigma$ clipping fit lines. The dotted lines are
 the cut selection criteria for the H{$\alpha$} emitters -- the 4-$\sigma$ above of the final
@@ -508,8 +526,7 @@ We constructed the $(g - r)$ versus $(z - g)$ color-color diagram using the phot
 our final list of H{$\alpha$} emitters, which is presented in Fig.~\ref{fig:new-color}.
 As was we expected two-color population is showed in the diagram perceptible in the level of the
 color of the density region on which yellow areas represent a higher concentration of points.
-This is re-forced by the bi-modal shape of the $(g - r)$ and $(z - g)$ color distributions (see inset
-plots of the Fig.~\ref{fig:new-color}). The two peaks of the $(g - r)$ and $(z - g)$
+This is re-forced by the bi-modal shape of the $(g - r)$ and $(z - g)$ color distributions (see inset plots of the Fig.~\ref{fig:new-color}). The two peaks of the $(g - r)$ and $(z - g)$
 distributions clearly correspond to blue and red sources, respectively. This histograms also
 show that the fraction of blue objects is considerable higher than the red ones.
 
@@ -577,7 +594,6 @@ and distances of merges during the hierarchical clustering.
 As you might have noticed, the above is pretty big for many samples already and you
 probably have way more in real scenarios, so let me spend a few seconds on highlighting
 some other features of the dendrogram() function:
-
 
 Starting from each label at the bottom, you can see a vertical line up to a
 horizontal line. The height of that horizontal line tells you about the distance
@@ -730,9 +746,9 @@ the input variables are the colors; ($g - r$) and ($z - g$).
 Fig.~\ref{fig:dendrogram} shows the dendrogram truncated diagram visualization that
 shows the branching of the sample from the main root. And Fig.~\ref{fig:hierar} shows
 the position of the two groups that resulted after to applying \texttt{HAC} in the
-color-color diagram. The two cluters represent the blue sources (blue simbols)
+color-color diagram. The two clusters represent the blue sources (blue simbols)
 and red sources (blue symbols) as already by analyzing the diagram of the
-Fig.~\ref{fig:synthetic}. Now, we have dividided our list in two groups in agreement
+Fig.~\ref{fig:synthetic}. Now, we have divided our list in two groups in agreement
 with the nature of their continuum. We found that the number of blue H{$\alpha$}
 emitter is bigger than the red one.
 
@@ -906,8 +922,8 @@ on SIMBAD are actually galaxies with Wolf-Rayet (WR) signature in the low red sh
 universe also named ``WR galaxy'' \citep{Osterbrock:1982}. WR stars in galaxies
 is perceptible in their spectra with strong emission lines such as H{$\alpha$}
 and [NII]. These spectral features can be of them very similar to extragalactic
-H II regions present typically of the outskirt of spiral galaxies. Fig. displys
-the S-PLUS and SDSS spectra of the PartofG which belong to the galaxy nnnnn.
+H II regions present typically of the outskirt of spiral galaxies. Fig. displays
+the S-PLUS and SDSS spectra of the WR star which belong to the galaxy nnnnn.
 
 Many of the objects that have as main type ``galaxy'' in SIMBAD. This galaxies
 could be spiral galaxies on which the star formation is present. It is known
