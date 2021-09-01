@@ -93,22 +93,8 @@ $^{3}$Another Department, Different Institution, Street Address, City Postal Cod
 % Abstract of the paper
 \begin{abstract}
 
-  \rlopes{In the way to map 9000 deg$^2$ of the Southern hemisphere,
-    the S-PLUS project is also surveying the sky in a proxy of a myriad of
-    astrophysical processes: the H$\alpha$ transition. Here we explore
-    such a capability from its DR3 to make H$\alpha$ emitters in evidence from
-    the ($r$ - $J$0660) versus ($r$ - $i$) color-color diagram and distinguish the
-    red from the blue ones by exploring the ($r$ - $i$) and ($g$ - $z$) diagram.
-    Our catalog is composed of 9,200 objects that exhibit excess in the narrow $J$0660 band
-    which is consistent with H{$\alpha$} in emission. Unsupervised, clustering machine
-    learning approach revealed two distinct populations: one with an intense blue continuum
-    and another with a red one. The hierarchical clustering algorithm was compared with the
-    HDBSCAN. By adopting a ``soft'' clustering approach, we assigned the probability of
-    each emitter belonging to a given population, blue or red clusters. We use synthetic
-    and observed (SDSS) spectra to emphasize the potential of color-color diagrams to distinguish
-    several classes of emission line emitters that include planetary nebulae, H II regions, young
-    stellar objects, symbiotic stellar systems, cataclysmic variables, blue compact galaxies,
-    star-forming galaxies, and quasars, and trace the way to reveal new ones with S-PLUS data.}
+\rlopes{In the way to map 9000 deg$^2$ of the Southern hemisphere, the S-PLUS project is also surveying the sky in a proxy of a myriad of astrophysical processes: the H$\alpha$ transition. Here we explore such a capability from its DR3 to make H$\alpha$ emitters in evidence from 
+the ($r$ - $J$0660) versus ($r$ - $i$) color-color diagram and distinguish the red from the blue ones by exploring the ($r$ - $i$) and ($g$ - $z$) diagram. Our catalog is composed of 9,200 objects that exhibit excess in the narrow $J$0660 band which is consistent with H{$\alpha$} in emission. Unsupervised, clustering machine learning approach revealed two distinct populations: one with an intense blue continuum and another with a red one. The hierarchical clustering algorithm was compared with the HDBSCAN. By adopting a ``soft'' clustering approach, we assigned the probability of each emitter belonging to a given population, blue or red clusters. We use synthetic and observed (SDSS) spectra to emphasize the potential of color-color diagrams to distinguish several classes of emission line emitters that include planetary nebulae, H II regions, young stellar objects, symbiotic stellar systems, cataclysmic variables, blue compact galaxies, star-forming galaxies, and quasars, and trace the way to reveal new ones with S-PLUS data.}
 
 \sout{The emission line objects are very important objects in astronomy
   because reflects different class of objects that evolved physical
@@ -213,7 +199,7 @@ will the same area of J-PLUS in 56 narrow-band filters.
 
 Traditionally, color-color diagrams based in H$\alpha$ filter are been used to
 identify H$\alpha$ emitters.  The analysis the color-color diagram  (r - H$\alpha$)
-versus (r - i) has resulted on the discoveried of new emission line objects, for
+versus (r - i) has resulted on the discovered of new emission line objects, for
 instance \citet{Witham:2006, Witham:2007}  used the (r - H$\alpha$) versus (r - i)
 colour-colour diagram to find for new CV. On the other hand, \citet{Vink:2008}
 reported the discovery of YSOs by using this same colour criteria. In this sense using
@@ -259,13 +245,13 @@ The narrow-band set include the filter $J$0660 which detect
 the H{$\alpha$} emission line. For more detailed about the configuration of
 S-PLUS filter set see Figure~\ref{fig:curves} shows the Javalambre filter
 system \citep{Martin-Franch:2012} overlapping are the optical spectra of
-several class emission line objects on which it is possible to see that the
+several class of emission line objects on which it is possible to see that the
 H{$\alpha$} line falls into the $J$0660 filter, except for the QSOs.   
 
 The actual data release contains about 60 millions of objects covering a total
 area of $\sim$8000 deg$^2$, at high Galactic latitudes ($ > 30$~deg) using a
 dedicated 0.83m robotic telescope,the T80-South (T80S), located at Cerro Tololo,
-Chile. S-PLUS will cover an additional 1300 deg$^2$ of the Galactic plane and bulge
+Chile. S-PLUS will cover an additional 1,300 deg$^2$ of the Galactic plane and bulge
 to enable Galactic studies. In this work, we focus on the aspects that are of
 particular interest to the second data release of the S-PLUS main survey.
 Additional information about S-PLUS can be found in \citet{Mendes:2019}. 
@@ -291,7 +277,7 @@ continuum by using optical colors in conjunction with unsupervised
 \subsection{Initial selection sample}
 \label{sec:}
 
-The firts step in our selection procedure consist in the following
+The first step in our selection procedure consist in the following
 criteria to guarantee the quality of the observations of the objects:
 
 \begin{enumerate}
@@ -337,7 +323,7 @@ a iterative $\sigma$-clipping technique to find the best-fitting of the main
 stellar locus. In this order of ideas, we made four interactive $\sigma$-clipped.
 Once we have found the appropriate fitting for each magnitude bin, we identified
 those objects significantly above of this final fit as likely sources with
-a excesses of H{$\alpha$}. Objects with a significative contribution of
+a excesses of H{$\alpha$}. Objects with a significant contribution of
 H{$\alpha$} meet the condition:
 
 \begin{equation}
@@ -429,12 +415,12 @@ Fig~\ref{fig:emission} exhibits the distribution of the emission on the
 $r - J0600$ versus $r - i$ color-color plane. At this point we can say that
 the algorithm implemented works well in selected objects with a excess in emission
 on the $J$0660 filter. It is possible to affirm that, because the identified objects
-are located  above of the loci of the main and giant stars. The S-PLUS synthetic  photometry
+are located  above of the loci of the main and giant stars. The S-PLUS synthetic photometry
 of the stellar locus is represent by the contours in the diagram and was obtained by using the
 filter transmission profiles, shown in Fig.~\ref{fig:curves}, and the library of stellar
 spectral energy distributions of \citet{Pickles:1998}. This synthetic magnitudes were
 defined in the AB magnitude system \citep{Oke:1983}. The wide distribution of fonts across
-the colors $ r - J060 $ and $ r - i $ indicates that several types of objects were selected.
+the colors $ (r - J060) $ and $ (r - i) $ indicates that several types of objects were selected.
 For instance, higher values on the  $r - J060$ color of some sources could be indicating
 that they are H II regions or/and blue compact galaxies and PNe. On the hand, the 
 $r - i$ color indicates the rendered sources such as SySt and young stellar objects
@@ -561,7 +547,6 @@ work the algorithm in three simple steps:
 \item At the end of the process all the nodes belong to an unique cluster. This is
   known as the root of the tree structure.
  \end{enumerate}
-
 
 The other type is the \textit{hierarchical divisive clustering}. This is a ``top-down''
 approach. The data start in one cluster (the root of the tree), and splits step by step
@@ -902,6 +887,8 @@ early-type star fills its Roche region and transfers mass to a companion stars,
 a dwarf white \citep{Patterson:1984}. Fig.~\ref{fig:photo-image-knonw-objects} the S-PLUS
 photometry overlapped to the SDSS spectrum of the CV FASTT 1560. As expected,
 this object was classified as blue source by the machine learning approaches.
+Othe bynari system in our list are the X-binary sources, eclipsing binary, variable
+stars of RR Lyr type. 
 
 \subsubsection{Star}
 Several stars were selected as shows the matches with SIMBAD.
@@ -911,11 +898,11 @@ proper-motion stars (PM*) and Low-mass star (low-mass*; M<1M$_\odot$).
 
 \subsubsection{Galaxies}
 Several type of emission line galaxies were selected. This category include
-several class of galaxies according to SIMBAD. emission-line galaxy (EmG),
+several class of galaxies according to SIMBAD. Emission-line galaxy (EmG),
 blue compact galaxy (BlueCompG), HII galaxy (HII G), Galaxy in Cluster of Galaxies
 (GinCl), Galaxy in Group of Galaxies (GinGroup), Low Surface Brightness Galaxy
-(LSB G), Interacting Galaxies (IG), part of a Galaxy (PartofG), Seyfert 1 and
-Seyfert 2, AGN and galaxy.
+(LSB G), interacting galaxies (IG), part of a Galaxy (PartofG), Seyfert 1 and
+Seyfert 2 galaxies, AGN and galaxy.
 
 One interesting discussion here, is that the type part of a Galaxy (PartofG)
 on SIMBAD are actually galaxies with Wolf-Rayet (WR) signature in the low red shift
@@ -925,14 +912,14 @@ and [NII]. These spectral features can be of them very similar to extragalactic
 H II regions present typically of the outskirt of spiral galaxies. Fig. displays
 the S-PLUS and SDSS spectra of the WR star which belong to the galaxy nnnnn.
 
-Many of the objects that have as main type ``galaxy'' in SIMBAD. This galaxies
+Many of the objects have as main type ``galaxy'' in SIMBAD. This galaxies
 could be spiral galaxies on which the star formation is present. It is known
 that in the spiral arms of the galaxies are present H II regions as well as
 neutral gas (H I) and molecular gas. Actually some of these galaxies haves for
-secundary type H I. The reservoir of H i gas in galaxies must ultimately
+secundary type H I. The reservoir of H I gas in galaxies must ultimately
 feed their star formation, after cooling and forming molecular
 clouds \citep{van-Driel:2016}. Fig. shows the S-PLUS photometry and
-the SDSS spectra of two galaxies with clearly emission lines.
+the SDSS spectra of star-forming galaxy with clearly emission lines.
 
 
 \subsubsection{QSOs}
@@ -1000,10 +987,16 @@ for selecting sources with strong emission lines.
 (e) & (f) \\
   \includegraphics[width=0.5\linewidth, trim=10 10 10 8, clip]{Figs/spec-0285-51930-0042-SPLUS-n02s23-042426.pdf} \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/wr1_180.1095757612321--1.1019334954271696_100_r.pdf}}} & \includegraphics[width=0.5\linewidth, trim=10 10 10 8, clip]{Figs/spec-9146-58042-0510-STRIPE82-0131-050516.pdf}  \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/QSO_331.37225331383246--0.5196269942518518_100_r.pdf}}}
   \end{tabular}
-  \caption{}
+  \caption{Summary of our selection results showing the spectrum (gray line en each panel) of 
+          different classes of emission line sources identified in our target list. 
+          A spectrum of a PN (\textit{a}) from  {\sc ref}. The SDSS spectra of an external H II region (\textit{b}), 
+          a cataclysm variable star ((\textit{c}), a super nova ((\textit{d}), a WR in a galaxy ((\textit{e}) 
+          and a QSO ((\textit{f})) with red-shift of $\sim$ 2.45. 
+          As in Figure~\ref{fig:Spectra}, coloured square and circles symbols represent the S-PLUS
+          photometry. All these objects show a significance excesses on the $J0660$ filter in
+          comparison with the broad-bands.}
   \label{fig:photo-image-knonw-objects}
 \end{figure*}
-
 
 \begin{figure*}
 %\setlength\tabcolsep{\figstampcolsep}
@@ -1014,10 +1007,10 @@ for selecting sources with strong emission lines.
 (c) & (d) \\
   \includegraphics[width=0.5\linewidth, trim=10 10 10 8]{Figs/spec-0329-52056-0529-SPLUS-n02s20-017833.pdf} \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/Seyfert1_177.07589066324908--1.6399572049281346_150_r.pdf}}} & \includegraphics[width=0.5\linewidth, trim=10 10 10 8, clip]{Figs/spec-0283-51959-0496-SPLUS-n01s20-026220.pdf}  \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/Galaxy_176.35960159169613-0.0041113183584209_150_r.pdf}}} 
   \end{tabular}
-  \caption{}
+  \caption{SDSS spectra of a HII galaxy ((\textit{a}), a radio galaxy (\textit{b}), 
+  a seyfert 1 (\textit{c}) and a star-forming galaxy (\textit{d}). As Figure~\ref{fig:photo-image-knonw-objects}, coloured symbols indicate the S-PLUS photometry.}
   \label{fig:photo-image-knonw-objects1}
 \end{figure*}
-
 
 \subsection{Magnitudes and color distributions}
 
@@ -1039,7 +1032,7 @@ sources --classification performed with machine learning on Section~\ref{sec:clu
 Upper panel of the figure shows the distribution of the blue and red sources of the $r$ magnitude.
 The peaks of the $r$ distribution is the same for the blue and red sources, which is around
 $r \sim 19.9$. However, the density at the peak is higher in red sources than the blue ones
-indicating that the proportion of objects with value $r$ of 19.9 is higher than the blue sources
+indicating that the proportion of objects with value $r$ of 19.9 is higher than the blue sources.
 The fraction of object is very small at $r < 16$ for each group of objects.
 The distribution of the objects for both group increase in the range $16 \gtrsim r \gtrsim 19.9$.
 However the density as indicating the Kernel density estimation curves is higher in the
@@ -1047,14 +1040,13 @@ blue sources. This implies that the fraction of sources with the magnitude range
 higher in comparison with the red group. In conclusion the blue sources tends to be brighter
 than the red ones.
 
-
 Middle panel of figure displays the $(r - i)$ distribution of the blue and red emission line
 objects. The peaks of the $(r - i)$ distributions are distinct for the blue and red sources.
 The peaks of the red sources at high red continuum,  $(r - i) = 0.5$, compared to the value
 of the blue sample, $(r - i) = -0.9$. All these results are consistent because the $(r - i)$
 color is an indicating of reddened sources. This is also consistent with previous works,
 since \citet{Wevers:2017} used different algorithms based on the  $(r - i)$ color
-to successfully select blue outliers.
+to successfully select blue outliers from the the Galactic Bulge Survey (GBS; \citealp{Jonker:2011}).
 
 Botton panel of Fig.~\ref{fig:diagram-distri} shows the
 $(r - J0660)$ color distribution of the blue and red objects.  The fraction of objects selected
@@ -1072,13 +1064,13 @@ $J0660$-excess the objects that above of the locus, we have found
 the emission line sources in S-PLUS DR3. In agreement with the results after
 to find the coincidences with SIMBAD several type of emission objects are included
 in our list which including nebulae, binary systems, stars, emission line galaxies,
-quasars, globular clusters among other.
+quasars, globular clusters among other. \\
 
 We also found that using the colors $g - r$ and $(z - g)$ is very efficient to separate
-the blue sources from the red ones.
+the blue sources from the red ones. \\
 
-We also found that using this colors as the input to implement unsupervised machine learning
-in better to group the source in the red or blue sources.
+We also found that using this colors as the input to implement unsupervised machine 
+learning in better to group the source in the red or blue sources.
 
 \section*{Acknowledgements}
 
