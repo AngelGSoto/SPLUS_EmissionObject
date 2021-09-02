@@ -5,7 +5,6 @@
 % v3.0 released 14 May 2015
 % (version numbers match those of mnras.cls)
 %
-% Copyright (C) Royal Astronomical Society 2015
 % Authors:
 % Keith T. Smith (Royal Astronomical Society)
 
@@ -26,10 +25,10 @@
 % MNRAS is set in Times font. If you don't have this installed (most LaTeX
 % installations will be fine) or prefer the old Computer Modern fonts, comment
 % out the following line
-%\usepackage{newtxtext,newtxmath}
+\usepackage{newtxtext,newtxmath}
 % Depending on your LaTeX fonts installation, you might get better results with one of these:
-\usepackage{mathptmx}
-\usepackage{txfonts}
+%\usepackage{mathptmx}
+%\usepackage{txfonts}
 \usepackage[T1]{fontenc}
 
 % Allow "Thomas van Noord" and "Simon de Laguarde" and alike to be sorted by"N" and "L" etc. in the bibliography.
@@ -40,9 +39,11 @@
 
 \usepackage{graphicx}	% Including figure files
 \usepackage{amsmath}	% Advanced maths commands
-\usepackage{amssymb}	% Extra maths symbols
+%\usepackage{amssymb}	% Extra maths symbols
 \usepackage{longtable}
 \usepackage{ulem}
+\usepackage{supertabular}
+\usepackage{booktabs}
 
 \newcommand{\rlopes}[1]{\textcolor{blue}{#1}}
 \newcommand{\cut}[1]{\textcolor{red}{#1}}
@@ -717,6 +718,20 @@ label new, unseen galaxies in large samples.
 
 \subsubsection{\texttt{HAC}}
 
+\begin{figure}
+	\includegraphics[width=0.9\linewidth]{Figs/Customer-Dendrograms.pdf}
+    \caption{Costomer dendrogram...}
+    \label{fig:dendrogram}
+\end{figure}
+
+\begin{figure}
+	\includegraphics[width=0.9\linewidth]{Figs/blued-red-hierarchical.pdf}
+    \caption{The $(g - r)$ versus $(z - g)$ color-color diagram with the two population
+    found bi implementing \texttt{HAC} algorithm. The blue symbols represent the sources with 
+    intense blue continuum and the red symbols are the objects with intense red continuum.}
+    \label{fig:hierar}
+\end{figure}
+
 In this work, we implemented {\sc hac} by using the python machine learning library
 \texttt{Scikit-learn}\footnote{\url{https://scikit-learn.org/stable/}} \citep{Pedregosa:2011}.
 There are some parameters to have in count
@@ -792,7 +807,6 @@ with \texttt{HAC}. Indeed, We now have improved our classification of our list i
 with blue and red continuum because we have estimated the probability of each source to belong
 to every group.
 
-
 \section{Results and discussion}
 \label{sec:results}
 
@@ -864,21 +878,26 @@ in SIMBAD.
 
 \subsubsection{Nebulae}
 
-As was mentioned, objects with nebulousity include several
-type of objects like H II region and  planetary nebulae.
+As was mentioned, objects with nebulosity include several
+types of objects such as H II region and planetary nebulae.
 The H II regions are objects with gas that being ionized by
 amounts of UV light come from massive stars (OB type) on which
-are formed the emission lines. In theses clouds of ionized nebulae
+are formed the emission lines. In theses clouds of ionized gas,
 new stars are formed. Unlike H II regions, planetary nebulae
 represent the final stages of low- and intermediate-mass stars
 where the gas previously ejected in the phase of AGB is ionized
-by their central star.
+by the high energetic radiation come from their central stars.
 
-In our list of H{$\alpha$} emission line a PN appears cataloged in SIMBAD.
+In our list of H{$\alpha$} emission line a PN appears cataloged in SIMBAD 
+on which the S-PLUS photometry and spectrum is displyed on panel (\textit{a}) 
+of Fig~\ref{fig:photo-image-knonw-objects}. Emission lines like H{$\alpha$} 
+and [N II] are clearly perceptive in its spectrum, agreeing with PLUS photometry.
 This objects is a very interesting because is one of the twelves PNe that belong
 to the Galactic halo. These PNe are low metallizite and present large velocities that
-can give cont of the origin and nuclesintheis of the early universe. 30 HII regions
-listed on the SIMBAD database are in our sample of H{$\alpha$} emitters
+can give count of the origin and nuclesintheis of the early universe. 30 objects 
+cataloged as HII regions on the SIMBAD database are in our list of H{$\alpha$} emitters. 
+Panel (\textit{b}) oh the figure shows the S-PLUS photometry and SDSS spectrum 
+of the extragalactic HII region GALEX 2417063145906373262.   
 
 \subsubsection{Binary systems}
 25 known CVs and 5 candidate CVs (from SIMBAD) were selected with algorithm.
@@ -887,36 +906,54 @@ early-type star fills its Roche region and transfers mass to a companion stars,
 a dwarf white \citep{Patterson:1984}. Fig.~\ref{fig:photo-image-knonw-objects} the S-PLUS
 photometry overlapped to the SDSS spectrum of the CV FASTT 1560. As expected,
 this object was classified as blue source by the machine learning approaches.
-Othe bynari system in our list are the X-binary sources, eclipsing binary, variable
+Other binary system in our list are the X-binary sources, eclipsing binary, variable
 stars of RR Lyr type. 
 
-\subsubsection{Star}
+\subsubsection{Stars}
 Several stars were selected as shows the matches with SIMBAD.
 The SIMBAD types include normal stars, white dwarf stars (WD*), white dwarf
 candidates (Candidate\_WD*), blue stars, blue super-giant stars (BlueSG*), high
-proper-motion stars (PM*) and Low-mass star (low-mass*; M<1M$_\odot$). 
+proper-motion stars (PM*) and low-mass star (low-mass*; M<1M$_\odot$). All these
+objects appears in the S-PLUS catalog as H{$\alpha$} emitters. Some of them 
+can be early/late-type emission-line stars and/or different types of stars with
+the H{$\alpha$} emission lines. Although some of these stars could represent the 
+fraction of contaminant of our sample.
 
 \subsubsection{Galaxies}
 Several type of emission line galaxies were selected. This category include
-several class of galaxies according to SIMBAD. Emission-line galaxy (EmG),
-blue compact galaxy (BlueCompG), HII galaxy (HII G), Galaxy in Cluster of Galaxies
-(GinCl), Galaxy in Group of Galaxies (GinGroup), Low Surface Brightness Galaxy
+several class of galaxies according to SIMBAD class: emission-line galaxy (EmG),
+blue compact galaxy (BlueCompG), HII galaxy (HII G), galaxy in cluster of galaxies
+(GinCl), galaxy in group of galaxies (GinGroup), low surface brightness galaxy
 (LSB G), interacting galaxies (IG), part of a Galaxy (PartofG), Seyfert 1 and
 Seyfert 2 galaxies, AGN and galaxy.
+
+All the emission line galaxies of these category form part of the universe local.
+This mean that their redshift cover the range on which the H{$\alpha$} emission line still
+falls into the $J0660$ filter. Objects with $ z \gtrsim  0.02$ the  H{$\alpha$} is outside 
+of the $J066o$ filter. Table~\ref{tab:simbad} of the appendices shows the red-shift of the
+emission line galaxies of our sample that have matches on SIMBAD, probing that mostly of 
+the galaxies are real H{$\alpha$} emitters. In these kind of galaxies such as the blue 
+compact and/or H II galaxies their starburst regions that consist of ensemble of massive ionizing 
+stars and their respective giant H II regions cover the extension of the optical images and 
+the emission lines of their spectra.
+
+On the other hand, Seyfert 1 and Seyfert 2 galaxias together with the 
 
 One interesting discussion here, is that the type part of a Galaxy (PartofG)
 on SIMBAD are actually galaxies with Wolf-Rayet (WR) signature in the low red shift
 universe also named ``WR galaxy'' \citep{Osterbrock:1982}. WR stars in galaxies
 is perceptible in their spectra with strong emission lines such as H{$\alpha$}
 and [NII]. These spectral features can be of them very similar to extragalactic
-H II regions present typically of the outskirt of spiral galaxies. Fig. displays
-the S-PLUS and SDSS spectra of the WR star which belong to the galaxy nnnnn.
+H II regions present typically of the outskirt of spiral galaxies. Panel (\textit{e}) 
+of Fig.~\ref{fig:photo-image-knonw-objects} displays
+the S-PLUS and SDSS spectra of the  Wolf-Rayet [BKD2008] WR 14 which belong 
+to the galaxy nnnnn.
 
 Many of the objects have as main type ``galaxy'' in SIMBAD. This galaxies
 could be spiral galaxies on which the star formation is present. It is known
 that in the spiral arms of the galaxies are present H II regions as well as
 neutral gas (H I) and molecular gas. Actually some of these galaxies haves for
-secundary type H I. The reservoir of H I gas in galaxies must ultimately
+secondary type H I. The reservoir of H I gas in galaxies must ultimately
 feed their star formation, after cooling and forming molecular
 clouds \citep{van-Driel:2016}. Fig. shows the S-PLUS photometry and
 the SDSS spectra of star-forming galaxy with clearly emission lines.
@@ -931,14 +968,15 @@ Some of these emission lines are H{$\beta$}, C {\sc IV} 1550 \AA, C {\sc III]} 1
   Mg {\sc II} 2798 \AA~(see, also \citealp{Gutierrez:2020, Nakazono:2021}).
   All the objects were classified as blue sources which was the expected.
   Fig. show the S-PLUS photomerty and SDSS spectrum of the QSO 2SLAQ J220529.34-003110.6
-  which has a red-shift of $\sim$2.45 indicating that the emission line corresponds to
+  which has red-shift of $\sim$2.45 indicating that the emission line corresponds to
   the line C {\sc III]}.
   
 
   \subsubsection{Other type of objects}
   Miscellanies the objects were selected on which are include as it can see in the
-  table~\ref{tab:simbad-sources}. They include FIR sources, 
+  table~\ref{tab:simbad-sources}. They include FIR sources, MIR objects, molecular clouds, 
 
+  
 
 \subsection{SDSS and LAMOST}
 
@@ -952,18 +990,6 @@ We also cross-correlate our list with Large Sky Area Multi-Object Fiber Spectros
 show strong emission lines. These results shows that this technique actually are very effective
 for selecting sources with strong emission lines.
 
-
-\begin{figure}
-	\includegraphics[width=0.9\linewidth]{Figs/Customer-Dendrograms.pdf}
-    \caption{Costomer dendrogram...}
-    \label{fig:dendrogram}
-\end{figure}
-
-\begin{figure}
-	\includegraphics[width=0.9\linewidth]{Figs/blued-red-hierarchical.pdf}
-    \caption{Costomer dendrogram...}
-    \label{fig:hierar}
-\end{figure}
 
 \begin{figure*}
 \centering
@@ -1023,7 +1049,7 @@ for selecting sources with strong emission lines.
   \caption{Distribution of $r$ magnitude  (left panel), $(r - i)$ color (middle panel), and $(r - J0660)$
     color (right panel) for the blue and red sources of the sample of H$\alpha$ emitters.
     Both sample are normalized to their maximum counts, xx and xx objects for blue and
-    red sources, respectively.   The smooth curves represent a Kernel density estimation for both samples.}
+    red sources, respectively. The smooth curves represent a Kernel density estimation for both samples.}
     \label{fig:diagram-distri}
 \end{figure}
 
@@ -1044,8 +1070,8 @@ Middle panel of figure displays the $(r - i)$ distribution of the blue and red e
 objects. The peaks of the $(r - i)$ distributions are distinct for the blue and red sources.
 The peaks of the red sources at high red continuum,  $(r - i) = 0.5$, compared to the value
 of the blue sample, $(r - i) = -0.9$. All these results are consistent because the $(r - i)$
-color is an indicating of reddened sources. This is also consistent with previous works,
-since \citet{Wevers:2017} used different algorithms based on the  $(r - i)$ color
+color is an indicating of reddened sources. This is also consistent with previous works. 
+For instance, \citet{Wevers:2017} used different algorithms based on the  $(r - i)$ color
 to successfully select blue outliers from the the Galactic Bulge Survey (GBS; \citealp{Jonker:2011}).
 
 Botton panel of Fig.~\ref{fig:diagram-distri} shows the
@@ -1174,7 +1200,7 @@ two cluster that in agreement with previous results are the blue and red sources
 
 \clearpage
 \input{S-spectra-sdss.tex}
-  
+
 \clearpage
 \input{S-spectra-lamost.tex}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
