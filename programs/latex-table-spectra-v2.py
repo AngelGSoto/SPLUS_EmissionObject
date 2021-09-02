@@ -24,9 +24,9 @@ file_list = glob.glob(pattern)
 # Number of objects
 nrows = len(file_list)
 
-fig_template = r'\includegraphics[width=0.3\linewidth, clip]{{{:s}}}'
+fig_template = r'\includegraphics[width=0.19\linewidth, clip]{{{:s}}}'
 
-NCOLS = 6
+NCOLS = 5
 thefiles = []
 thistable = []
 for filename in file_list:
