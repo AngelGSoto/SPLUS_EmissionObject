@@ -27,8 +27,8 @@
 % out the following line
 %\usepackage{newtxtext,newtxmath}
 % Depending on your LaTeX fonts installation, you might get better results with one of these:
-%\usepackage{mathptmx}
-%\usepackage{txfonts}
+\usepackage{mathptmx}
+\usepackage{txfonts}
 \usepackage[T1]{fontenc}
 
 % Allow "Thomas van Noord" and "Simon de Laguarde" and alike to be sorted by"N" and "L" etc. in the bibliography.
@@ -42,7 +42,6 @@
 %\usepackage{amssymb}	% Extra maths symbols
 \usepackage{longtable}
 \usepackage{ulem}
-
 
 \newcommand{\rlopes}[1]{\textcolor{blue}{#1}}
 \newcommand{\cut}[1]{\textcolor{red}{#1}}
@@ -260,7 +259,7 @@ Additional information about S-PLUS can be found in \citet{Mendes:2019}.
     \includegraphics[width=0.9\linewidth]{Figs/splus-filter.pdf}
     \caption{Transmission curves of the S-PLUS filters set. The narrow-band filter
       $J0660$ detects the H$\alpha$ emission line. Over-plotted are different
-      classes of emission line objects, from upper to down PN, SySt ... }
+      classes of emission line objects, from upper to down PN, SySt... }
     \label{fig:curves}
 \end{figure}
 
@@ -391,10 +390,9 @@ clearly exhibits strong H$\alpha$ emitter.
       }
   \rule{0.06in}{0ex}}
 \caption{S-spectra of a random object with emission lines select with algorithm explained
-  above. Squares represent
-  the SDSS-like broad-band filters. From left to right they are \(u, g, r,
-  i~\text{and}~ z\). Circle symbols are the narrow-band filters, which from
-  left to right represent \textit{J}0378, \textit{J}0395, \textit{J}0410,
+  above. Squares represent the SDSS-like broad-band filters. From left to right 
+  they are \(u, g, r, i~\text{and}~ z\). Circle symbols are the narrow-band filters,
+  which from left to right represent \textit{J}0378, \textit{J}0395, \textit{J}0410,
   \textit{J}0515, \textit{J}0660 and \textit{J}0861.}
 \label{fig:Spectra}
 \end{figure}
@@ -404,10 +402,10 @@ clearly exhibits strong H$\alpha$ emitter.
 	\includegraphics[width=0.9\linewidth]{Figs/final-emitters.pdf}
         \caption{Colour-colour diagram with all the emission line objects selected
           from S-PLUS DR3. Size of the symbols represent the measured FWHM assuming
-          a Gaussian core (for more detail see \citealt{Fernandes:2021}). Colored
+          a Gaussian core (for more detail see \citealt{Fernandes:2021}). Coloured
           bar indicates the magnitude values in the r-band. The contours represent
-          the synthetic main-sequence and giant stars loci from the library of stellar
-          spectral energy distributions of \citet{Pickles:1998}.}
+          the S-PLUS synthetic photometry of main-sequence and giant stars loci from 
+          the library of stellar spectral energy distributions of \citet{Pickles:1998}.}
     \label{fig:emission}
 \end{figure*}
 
@@ -928,15 +926,19 @@ Seyfert 2 galaxies, AGN and galaxy.
 
 All the emission line galaxies of these category form part of the universe local.
 This mean that their redshift cover the range on which the H{$\alpha$} emission line still
-falls into the $J0660$ filter. Objects with $ z \gtrsim  0.02$ the  H{$\alpha$} is outside 
-of the $J066o$ filter. Table~\ref{tab:simbad} of the appendices shows the red-shift of the
-emission line galaxies of our sample that have matches on SIMBAD, probing that mostly of 
-the galaxies are real H{$\alpha$} emitters. In these kind of galaxies such as the blue 
-compact and/or H II galaxies their starburst regions that consist of ensemble of massive ionizing 
-stars and their respective giant H II regions cover the extension of the optical images and 
-the emission lines of their spectra.
+falls into the $J0660$ filter. Objects with $ z >  0.02$ the  H{$\alpha$} is outside 
+of the $J0660$ filter. Table~\ref{tab:simbad} of the appendices shows the red-shift of the
+emission line galaxies of our sample that have SIMBAD matches, probing that mostly of 
+these galaxies are real H{$\alpha$} emitters. In these kind of galaxies such as the blue 
+compact and/or H II galaxies their starburst regions that consist of ensemble of massive 
+ionizing stars and their respective giant H II regions cover the extension of the optical 
+images and the emission lines of their spectra.
 
-On the other hand, Seyfert 1 and Seyfert 2 galaxias together with the 
+On the other hand, several AGN, Seyfert 1 and Seyfert 2 galaxies have red-shift 
+between 0.31 and 0.37 indicating that the excess on the $J0660$ filter
+is not due to the H{$\alpha$} emission but if due to the H{$\beta$} and [O III] 4959, 5007 \AA~ 
+emission lines. These emission lines at the red-shift range $0.306 < z < 0.376$ are detected in the $J0660$ band. It is well known that the AGNs have very strong emission 
+lines such as H{$\beta$}, [0 III] 4959, 5007 \AA~and H{$\alpha$}.
 
 One interesting discussion here, is that the type part of a Galaxy (PartofG)
 on SIMBAD are actually galaxies with Wolf-Rayet (WR) signature in the low red shift
@@ -956,7 +958,10 @@ secondary type H I. The reservoir of H I gas in galaxies must ultimately
 feed their star formation, after cooling and forming molecular
 clouds \citep{van-Driel:2016}. Fig. shows the S-PLUS photometry and
 the SDSS spectra of star-forming galaxy with clearly emission lines.
-
+Note that almost all these galaxies
+are classified as blue color type objects by the \texttt{HAC} and \texttt{HDBSCAN}.
+However, Mostly of the Seyfert 2 galaxies and a handful of galaxies are classified as
+red sources, why?
 
 \subsubsection{QSOs}
 Other extragalactic objects with emission lines that were selected are the
@@ -1015,8 +1020,8 @@ for selecting sources with strong emission lines.
   \caption{Summary of our selection results showing the spectrum (gray line en each panel) of 
           different classes of emission line sources identified in our target list. 
           A spectrum of a PN (\textit{a}) from  {\sc ref}. The SDSS spectra of an external H II region (\textit{b}), 
-          a cataclysm variable star ((\textit{c}), a super nova ((\textit{d}), a WR in a galaxy ((\textit{e}) 
-          and a QSO ((\textit{f})) with red-shift of $\sim$ 2.45. 
+          a cataclysm variable star (\textit{c}), a super nova (\textit{d}), a WR in a galaxy (\textit{e}) 
+          and a QSO (\textit{f}) with red-shift of $\sim$ 2.45. 
           As in Figure~\ref{fig:Spectra}, coloured square and circles symbols represent the S-PLUS
           photometry. All these objects show a significance excesses on the $J0660$ filter in
           comparison with the broad-bands.}
@@ -1030,10 +1035,17 @@ for selecting sources with strong emission lines.
   (a) & (b) \\
   \includegraphics[width=0.5\linewidth, trim=10 60 5 8, clip]{Figs/spec-0399-51817-0140-STRIPE82-0031-029096.pdf} \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/HIIGalaxy_21.69378980441009--0.6457451930656755_150_r.pdf}}} & \includegraphics[width=0.5\linewidth, trim=10 60 10 8, clip]{Figs/spec-0410-51877-0492-STRIPE82-0064-042346.pdf} \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/RadioGalaxy_43.98850261320957-0.692640180601257_150_r.pdf}}} \\
 (c) & (d) \\
-  \includegraphics[width=0.5\linewidth, trim=10 10 10 8]{Figs/spec-0329-52056-0529-SPLUS-n02s20-017833.pdf} \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/Seyfert1_177.07589066324908--1.6399572049281346_150_r.pdf}}} & \includegraphics[width=0.5\linewidth, trim=10 10 10 8, clip]{Figs/spec-0283-51959-0496-SPLUS-n01s20-026220.pdf}  \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/Galaxy_176.35960159169613-0.0041113183584209_150_r.pdf}}} 
+\includegraphics[width=0.5\linewidth, trim=10 10 10 8, clip]{Figs/spec-0283-51959-0496-SPLUS-n01s20-026220.pdf}  \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/Galaxy_176.35960159169613-0.0041113183584209_150_r.pdf}}} &
+  \includegraphics[width=0.5\linewidth, trim=10 10 5 8, clip]{Figs/spec-0981-52435-0575-STRIPE82-0102-040352.pdf} \llap{\shortstack{%
+        \includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/Seyfer1_option2_310.91682422695794-0.481551561964735_100_r.pdf}\\
+        \rule{0ex}{3.7cm}%
+      }
+  \rule{4.1cm}{0ex}} 
   \end{tabular}
-  \caption{SDSS spectra of a HII galaxy ((\textit{a}), a radio galaxy (\textit{b}), 
-  a seyfert 1 (\textit{c}) and a star-forming galaxy (\textit{d}). As Figure~\ref{fig:photo-image-knonw-objects}, coloured symbols indicate the S-PLUS photometry.}
+  \caption{SDSS spectra of a H II galaxy with $z = 0.006$ (\textit{a}), a radio galaxy with $z = 0.014$ (\textit{b}), 
+  a star-forming galaxy with $z = 0.013$(\textit{c}). For this object, the H{$\alpha$} line 
+  is responsible for the $J0660$ magnitude. And a Seyfert 1 with $z = 0.317$ (\textit{d}). For this last object, the excess on the $J0660$ is due to the [O III] 4959, 5007 \AA~ emission lines (\textit{d}). As in Figure~\ref{fig:photo-image-knonw-objects} coloured symbols indicate the 
+  S-PLUS photometry.}
   \label{fig:photo-image-knonw-objects1}
 \end{figure*}
 
@@ -1153,7 +1165,6 @@ National Astronomical Observatories, Chinese Academy of Sciences.
 \bibliographystyle{mnras}
 \bibliography{ref} 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%% APPENDICES %%%%%%%%%%%%%%%%%%%%%
@@ -1182,7 +1193,6 @@ two cluster that in agreement with previous results are the blue and red sources
   \hline 
 }
 
-\clearpage
 \section{Simbad objects}
 
 \begin{center}
