@@ -25,10 +25,10 @@
 % MNRAS is set in Times font. If you don't have this installed (most LaTeX
 % installations will be fine) or prefer the old Computer Modern fonts, comment
 % out the following line
-%\usepackage{newtxtext,newtxmath}
+\usepackage{newtxtext,newtxmath}
 % Depending on your LaTeX fonts installation, you might get better results with one of these:
-\usepackage{mathptmx}
-\usepackage{txfonts}
+%\usepackage{mathptmx}
+%\usepackage{txfonts}
 \usepackage[T1]{fontenc}
 
 % Allow "Thomas van Noord" and "Simon de Laguarde" and alike to be sorted by"N" and "L" etc. in the bibliography.
@@ -60,21 +60,16 @@
 
 % Title of the paper, and the short title which is used in the headers.
 % Keep the title short and informative.
-\title[\rlopes{S-PLUS: H$\alpha$ emitters} S-PLUS: Emission line objects]{\rlopes{H$\alpha$ emitters from the Southern Photometric Local Universe Survey (S-PLUS)} 
-\sout{Optical identification of emission
-  line sources in the southern photometric local Universe survey (S-PLUS)}}
+\title[S-PLUS: H$\alpha$ emitters]{H$\alpha$ emitters from the Southern Photometric Local Universe Survey (S-PLUS)}
 
 \author[Guti\'{e}rrez-Soto et al.]{
 L. A. Guti\'{e}rrez-Soto,$^{1}$\thanks{E-mail: gsoto.angel@gmail.com}
-Second  Author,$^{2}$
-Third Author$^{2,3}$
-and Fourth Author$^{3}$
+R. Lopes de Oliveira$^{2}$
 \\
 % List of institutions
 $^{1}$Departamento de Astronomia, IAG, Universidade de S\~{a}o Paulo, Rua do Mat\~{a}o,
 1226, 05509-900, S\~{a}o Paulo, Brazil\\
-$^{2}$Department, Institution, Street Address, City Postal Code, Country\\
-$^{3}$Another Department, Different Institution, Street Address, City Postal Code, Country
+$^{2}$Departamento de Física, Universidade Federal de Sergipe, Av. Marechal Rondon, S/N, 49000-000 São Cristóvão, SE, Brazil
 }
 
 % These dates will be filled out by the publisher
@@ -92,29 +87,9 @@ $^{3}$Another Department, Different Institution, Street Address, City Postal Cod
 % Abstract of the paper
 \begin{abstract}
 
-\rlopes{In the way to map 9000 deg$^2$ of the Southern hemisphere, the S-PLUS project is also surveying the sky in a proxy of a myriad of astrophysical processes: the H$\alpha$ transition. Here we explore such a capability from its DR3 to make H$\alpha$ emitters in evidence from 
-the ($r$ - $J$0660) versus ($r$ - $i$) color-color diagram and distinguish the red from the blue ones by exploring the ($r$ - $i$) and ($g$ - $z$) diagram. Our catalog is composed of 9,200 objects that exhibit excess in the narrow $J$0660 band which is consistent with H{$\alpha$} in emission. Unsupervised, clustering machine learning approach revealed two distinct populations: one with an intense blue continuum and another with a red one. The hierarchical clustering algorithm was compared with the HDBSCAN. By adopting a ``soft'' clustering approach, we assigned the probability of each emitter belonging to a given population, blue or red clusters. We use synthetic and observed (SDSS) spectra to emphasize the potential of color-color diagrams to distinguish several classes of emission line emitters that include planetary nebulae, H II regions, young stellar objects, symbiotic stellar systems, cataclysmic variables, blue compact galaxies, star-forming galaxies, and quasars, and trace the way to reveal new ones with S-PLUS data.}
+In the way to map 9000 deg$^2$ of the Southern hemisphere, the S-PLUS project is also surveying the sky in a proxy of a myriad of astrophysical processes: the H$\alpha$ transition. Here we explore such a capability from its DR3 to make H$\alpha$ emitters in evidence from 
+the ($r$ - $J$0660) versus ($r$ - $i$) color-color diagram and distinguish the red from the blue ones by exploring the ($r$ - $i$) and ($g$ - $z$) diagram. Our catalog is composed of 9,200 objects that exhibit excess in the narrow $J$0660 band which is consistent with H{$\alpha$} in emission. Unsupervised, clustering machine learning approach revealed two distinct populations: one with an intense blue continuum and another with a red one. The hierarchical clustering algorithm was compared with the HDBSCAN. By adopting a ``soft'' clustering approach, we assigned the probability of each emitter belonging to a given population, blue or red clusters. We use synthetic and observed (SDSS) spectra to emphasize the potential of color-color diagrams to distinguish several classes of emission line emitters that include planetary nebulae, H II regions, young stellar objects, symbiotic stellar systems, cataclysmic variables, blue compact galaxies, star-forming galaxies, and quasars, and trace the way to reveal new ones with S-PLUS data.
 
-\sout{The emission line objects are very important objects in astronomy
-  because reflects different class of objects that evolved physical
-  mechanics that given counts of stellar formation process, presences
-  the gas, shocks, star-burst in galaxies, the finals stage of stars
-  among others process. For this reason we have created a list of
-  H{$\alpha$} emitters selected from the S-PLUS data, which is mapping
-  the southern hemisphere at relatively high latitudes. We implemented
-  the (r - $J$0660) versus (r - i) color-color diagram for that task.
-  We found 9,200 objects that exhibit um excess in emission in the J066o
-  which we have traduced as the presence of the H{$\alpha$} emission line.
-  In addition we have found that by combining the colors: (r - i) and (g - z)
-  with unsupervised (clustering) machine learning it is possible separate
-  the blue sources from red ones, then we ave divided our list of emitters
-  in two sub-groups: one with intense blue continuum and another with
-  intense red one. We compare hierarchical-clustering algorithm with the
-  HDBSCAN. By adopting a ``soft'' clustering approach, we can assign
-  each emission object a probability of belonging to a given cluster
-  (blue or red group), allowing for more flexibility in the classification
-  of objects according to these colours those objects with a low probability
-  of belonging to any cluster.} 
 \end{abstract}
 % Select between one and six entries from the list of approved keywords.
 % Don't make up new ones.
@@ -292,9 +267,9 @@ criteria to guarantee the quality of the observations of the objects:
 \label{sec:}
 
 Once the initial cut were made, we proceed to select the objects with
-an excess of H{$\alpha$} wich is represent with a relatively high value of
-the filter $J$0660 in comparison with r-band filter. For that we
-first divided our sub-sample in for magnitude bins using the $r$-band
+an excess of H{$\alpha$} which is represent with a relatively high value of
+the  $J$0660 filter in comparison with r-band filter. For that we
+first divided our sub-sample in four magnitude bins using the $r$-band
 magnitudes. The bins have the follow distribution:
 
 \begin{enumerate}
