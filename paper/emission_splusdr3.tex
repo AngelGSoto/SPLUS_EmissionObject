@@ -29,7 +29,7 @@
 % Depending on your LaTeX fonts installation, you might get better results with one of these:
 \usepackage{mathptmx}
 \usepackage{txfonts}
-%\usepackage[T1]{fontenc}
+\usepackage[T1]{fontenc}
 
 % Allow "Thomas van Noord" and "Simon de Laguarde" and alike to be sorted by"N" and "L" etc. in the bibliography.
 % Write the name in the bibliography as "\VAN{Noord}{Van}{van} Noord, Thomas"
@@ -174,7 +174,7 @@ early type emission
 line stars \citep{Drew:2008}, 
 and PNs \citep{Viirone:2009, Sabin:2010}.} 
 
-\rlopes{There are two ongoing multi-band surveys observing the sky in a systematic, complementary way with X broad and Y narrow-band filters, including H$\alpha$: the Javalambre Photometric Local Universe Survey
+\rlopes{There are two ongoing multi-band surveys observing the sky in a systematic, complementary way with 5 broad and 7 narrow-band filters, including H$\alpha$: the Javalambre Photometric Local Universe Survey
 (J-PLUS\footnote{\url{https://www.j-plus.es}}; \citealp{Cenarro:2018}), covering the Northern celestial hemisphere, and the Southern-Photometric Local Universe Survey
 (S-PLUS\footnote{\url{http://www.splus.iag.usp.br}}; \citealp{Mendes:2019}), doing the same to the Southern sky with a twin 80\,cm telescope. They are paving the way for a even more ambitious survey, the Javalambre Physics of the Accelerating Universe Astrophysical Survey (J-PAS), which will observe the Northern sky with 56 narrow-band filters. As source revealers, the spectral energy distribution provided by these surveys also provide an unprecedented classification from photometry. However, as part of the new era of big data, efficient investigation tools are required to deal with their massive data sets and machine learning techniques have been increasingly used.}
 
@@ -220,28 +220,16 @@ and PNs \citep{Viirone:2009, Sabin:2010}.}
 %in looking for emission line sources in narrow-band surveys.}
 
 %\comment{I RECOMMEND TO REMOVE THIS BUT NOT ERASING IT FOR NOW; JUST KEEP IT HERE COMMENTED SO THAT WE MAY PLACE THE INFORMATION SOMEWHERE AT THE END - OR REMOVE IT AT ALL. I AM TRYING JUST TO KEEP THE INTRODUCTION AS SHORT AND DIRECT TO THE POINT AS POSSIBLE:} 
-%\sout{In this era of big data on astronomy, machine learning techniques are becoming
-%in important statistical tools for the analysis and find meaning from massive
-%data sets. Particularly, unsupervised machine approaches have showed a promised
-%in various applications, especially in automatic classification task. Including
-%object classification and selection, using galaxies with active galactic nuclei
-%as example \citep{Geach:2012}, morphological analysis of galaxies \citep{Martin:2020},
-%classification of variable stars, relying only on the similarity among light
-%curves. \citep{Valenzuela:2018}. Using unsupervised machine
-%learning can be very advantageous because they do not require a labeled data
-%training sets. Unlike of supervised methods like Random Forest algorithm.
-%Instead, unsupervised techniques are generally based in the data itself to
-%identify patrons, e. g. cluster of similar objects, in some pre-defined
-%feature space where the data are defined.}
+%\sout{In this era of big data on astronomy, machine learning techniques are becoming in important statistical tools for the analysis and find meaning from massive data sets. Particularly, unsupervised machine approaches have showed a promised in various applications, especially in automatic classification task. Including object classification and selection, using galaxies with active galactic nuclei as example \citep{Geach:2012}, morphological analysis of galaxies \citep{Martin:2020}, classification of variable stars, relying only on the similarity among light curves. \citep{Valenzuela:2018}. Using unsupervised machine learning can be very advantageous because they do not require a labeled data training sets. Unlike of supervised methods like Random Forest algorithm. Instead, unsupervised techniques are generally based in the data itself to identify patrons, e. g. cluster of similar objects, in some pre-defined feature space where the data are defined.}
 
 \rlopes{Here we present H$\alpha$ emitters from the S-PLUS iDR3 by using color-color diagrams and unsupervised machine learning techniques, classifying them as blue or red fonts and also proposing which class they belong to.}
 
-\sout{In this work, we used S-PLUS observations of the southern hemisphere to search
-for objects with an excess of H{$\alpha$} using automatic methods based on the
-(r - H$\alpha$) versus (r - i) color-color diagram. We have also used color criteria
-based in (g - r) and (z - g) in conjunction to unsupervised machine learning
-techniques to split the final list in those with blue and red continuum. The
-paper is organized as follows...}
+%\sout{In this work, we used S-PLUS observations of the southern hemisphere to search
+%for objects with an excess of H{$\alpha$} using automatic methods based on the
+%(r - H$\alpha$) versus (r - i) color-color diagram. We have also used color criteria
+%based in (g - r) and (z - g) in conjunction to unsupervised machine learning
+%techniques to split the final list in those with blue and red continuum. The
+%paper is organized as follows...}
 
 \section{Observations: The S-PLUS project}
 \label{sec:obser}
@@ -251,49 +239,52 @@ study. S-PLUS is 12-band optical photometric survey, which are formed by
 seven narrow-band (\textit{J}0378, \textit{J}0395, \textit{J}0410, \textit{J}0430,
 \textit{J}0515, \textit{J}0660 and \textit{J}0861) and five brow-band like
 SDSS filters (\(u, g, r, i~\mathrm{and}~z\), \citealp{Fukugita:1996}).
-The narrow-band set include the filter $J$0660 which detect
-the H{$\alpha$} emission line. For more detailed about the configuration of
-S-PLUS filter set see Figure~\ref{fig:curves} shows the Javalambre filter
+The narrow-band set include the filter $J0660$ which detect
+the H{$\alpha$} plus [N II] emission lines. For more detailed about the configuration of
+S-PLUS filter set see Figure~\ref{fig:curves}, which shows the Javalambre filter
 system \citep{Martin-Franch:2012} overlapping are the optical spectra of
 several class of emission line objects on which it is possible to see that the
-H{$\alpha$} line falls into the $J$0660 filter, except for the QSOs.   
+H{$\alpha$} line falls into the $J0660$ filter, except for the QSOs. Other strong emission lines of the QSOs are detected on the $J0660$-band filter due to their red-shift, in the
+following sections, this topic will be addressed in more detail. 
 
-The actual data release contains about 60 millions of objects covering a total
-area of $\sim$8000 deg$^2$, at high Galactic latitudes ($ > 30$~deg) using a
+The current data release contains about 60 millions of objects covering a total
+area of $\sim$2,000 deg$^2$, at high Galactic latitudes ($ > 30$~deg) using a
 dedicated 0.83m robotic telescope,the T80-South (T80S), located at Cerro Tololo,
-Chile. S-PLUS will cover an additional 1,300 deg$^2$ of the Galactic plane and bulge
-to enable Galactic studies. In this work, we focus on the aspects that are of
-particular interest to the second data release of the S-PLUS main survey.
+Chile. In general terms, S-PLUS will cover $\sim$ 9,000 deg$^2$ and  
+an additional 1,300 deg$^2$ of the 
+Galactic plane and bulge to enable Galactic studies. 
+In this work, we focus on the aspects that are of
+particular interest to the third data release of the S-PLUS main survey.
 Additional information about S-PLUS can be found in \citet{Mendes:2019}. 
 
 \begin{figure}
     \includegraphics[width=0.9\linewidth]{Figs/splus-filter.pdf}
-    \caption{Transmission curves of the S-PLUS filters set. The narrow-band filter
-      $J0660$ detects the H$\alpha$ emission line. Over-plotted are different
-      classes of emission line objects, from upper to down PN, SySt... }
+    \caption{Transmission curves of the S-PLUS filter set. The narrow-band filter
+      $J0660$ detects the H$\alpha$ emission line. Over-plotted are spectra of different
+      classes of emission line objects, from upper to down;  a PN, a symbiotic star, an extragalactic H II region, a blue compact galaxy,  a YSO, a CV star, a B[e] star, a star forming galaxy and QSO with redshift of XX.}
     \label{fig:curves}
 \end{figure}
 
 \section{Methodology}
 \label{sec:metho}
 
-We first constructed a sub-sample from all S-PLUS DR3 from which we
+We first constructed a sub-sample from all S-PLUS iDR3 from which we
 applied an iterative and automatic technique to select objects with
 an excess of H{$\alpha$} emission line. Once the objects were selected
 we also make a separation of them into two groups those with red and blue
 continuum by using optical colors in conjunction with unsupervised
- machine learning statistical tools. These procedures are described below:
+ machine learning/statistical tools. These procedures are described below:
 
 \subsection{Initial selection sample}
 \label{sec:}
 
-The first step in our selection procedure consist in the following
+The first step in our selection procedure consists in the following
 criteria to guarantee the quality of the observations of the objects:
 
 \begin{enumerate}
 \item The sources must have detection in the filters: $r$, $i$ and
-  $J$0660. To assure that we select object must have error minor or
-  equal to 0.2 in each of three filters.
+  $J0660$. To assure that, we select object must have error minor or
+  equal to 0.2 in each of these three filters.
 
 \item Must have an $r$ magnitude until $r = 21$.
   
@@ -303,21 +294,22 @@ criteria to guarantee the quality of the observations of the objects:
 \label{sec:}
 
 Once the initial cut were made, we proceed to select the objects with
-an excess of H{$\alpha$} which is represent with a relatively high value of
-the  $J$0660 filter in comparison with r-band filter. For that we
-first divided our sub-sample in four magnitude bins using the $r$-band
-magnitudes. The bins have the follow distribution:
+an excess of H{$\alpha$} which is represented with a relatively excess magnitude-value  of
+the  $J0660$-band in comparison with r-band filter. We first divided our sub-sample in four magnitude bins using the $r$-band magnitudes. The idea to split the sample into magnitude bins
+consists to avoid mix faint objects, which have intrinsic high photometric uncertainties with those sources with small photometric uncertainties in the same color-color diagram. If we combine sources with large and small errors, our selection criteria could be dominated by 
+the intrinsic scatter of the faint objects. The bins have the follow distribution:
 
 \begin{enumerate}
-\item  objects with magnitude in the $r$-band $r < 16$
-\item  objects with magnitude in the $r$-band $16 \leq r < 18$
-\item  objects with magnitude in the $r$-band $18 \leq r < 20$
-\item  objects with magnitude in the $r$-band $20 \leq r < 21$
+
+\item  objects with magnitude in the $r$-band $ < 16$
+\item  objects with magnitude range of $16 \leq r < 18$
+\item  objects with magnitude range of $18 \leq r < 20$
+\item  objects with magnitude range of $20 \leq r < 21$
   
 \end{enumerate}
 
 To select the emission lines we used the same method created and
-implemented by \citet{Witham:2008} its possible to do that because
+implemented by \citet{Witham:2008}. It is possible to do that because
 the S-PLUS has similar filters that the IPHAS project, which are
 $r$, $J$0660 and $i$. This technique was used by \citet{Scaringi:2013}
 to identify blue objects with excess of H{$\alpha$} and after that
@@ -325,7 +317,7 @@ to identify blue objects with excess of H{$\alpha$} and after that
 of candidate H{$\alpha$} emission showing an high effectiveness. In this
 order of ideas we attempted this methodology in S-PLUS.
 
-We first generated the ($r$ - $J$0660) versus ($r$ - $i$) color-color
+We first generated the ($r$ - $J0660$) versus ($r$ - $i$) color-color
 diagram for each magnitude bins. We then carried a out an initial straight
 line fit to all objects in each magnitude bin. This initial fit is an
 attempt to find the loci of main-sequence and giant stars. We implemented
@@ -333,7 +325,7 @@ a iterative $\sigma$-clipping technique to find the best-fitting of the main
 stellar locus. In this order of ideas, we made four interactive $\sigma$-clipped.
 Once we have found the appropriate fitting for each magnitude bin, we identified
 those objects significantly above of this final fit as likely sources with
-a excess of H{$\alpha$}. Objects with a significant contribution of
+a excess of H{$\alpha$} emission line. Objects with a significant contribution of
 H{$\alpha$} meet the condition:
 
 \begin{equation}
@@ -348,12 +340,12 @@ The fits are carried out with the aid of the python library \texttt{astropy.mode
 \footnote{https://docs.astropy.org/en/stable/modeling/index.html}.
 
 Figure~\ref{fig:criteria-color-plot} illustrates the procedure used to selected the H{$\alpha$}
-emitters in S-PLUS DR3 for each magnitude bin. The continuous black lines represent the initial
+emitters in S-PLUS iDR3 for each magnitude bin. The continuous black lines represent the initial
 fit and  the dashed lines indicate the 4-$\sigma$ clipping fit lines. The dotted lines are
 the cut selection criteria for the H{$\alpha$} emitters -- the 4-$\sigma$ above of the final
 fit--. Note that theses cut lines are only an approximations because to trace them,
 it is only considered the residual around the fit. The actual selection criteria used here
-also include the phothometric uncertainties in $r$ - $J$0660 for each individual data source as
+also include the phothometric uncertainties in $r$ - $J0660$ for each individual data source as
 shows on the Equation~\ref{eq:criterion}.
 
 \begin{figure*}
@@ -371,7 +363,7 @@ shows on the Equation~\ref{eq:criterion}.
     emission-line objects via colour-colour plots. The data shown here are all from the
     S-PLUS DR3. The data are split up into four magnitude bins, as shown in the four
     panels. Objects with H{$\alpha$} excess should be located near the top of the
-    colour-colour diagrams. The thin red lines illustrate the original linear
+    colour-colour diagrams. The thin continuous lines illustrate the original linear
     fit to all the data (grey points). The dashed lines represent the final
     fits to the stellar locus of points which were obtained by applying an iterative
     $\sigma$-clipping technique to the initial fit. The actual cuts used to select
@@ -412,9 +404,9 @@ clearly exhibits strong H$\alpha$ emitter.
 \begin{figure*}
 	\includegraphics[width=0.9\linewidth]{Figs/final-emitters.pdf}
         \caption{Colour-colour diagram with all the emission line objects selected
-          from S-PLUS DR3. Size of the symbols represent the measured FWHM assuming
+          from S-PLUS iDR3. Size of the symbols represent the measured FWHM assuming
           a Gaussian core (for more detail see \citealt{Fernandes:2021}). Coloured
-          bar indicates the magnitude values in the r-band. The contours represent
+          bar indicates the magnitude values of the r-band. The contours represent
           the S-PLUS synthetic photometry of main-sequence and giant stars loci from 
           the library of stellar spectral energy distributions of \citet{Pickles:1998}.}
     \label{fig:emission}
@@ -484,7 +476,8 @@ density-based cluster selection based on the $(g - r)$ and $(z - g)$ colors.
           star-forming galaxies (SDSS SFGs). SDSS QSOs at different redshift
           ranges are shown as light blue diamonds, and YSOs from Lupus and
           Sigma Orionis are represented by salmon stars. The diagonal line represent
-         a subjective criterion to separate the objects into two color types.}
+         a subjective criterion to separate the objects into two color types. {\sc Maybe 
+         is a good idea to put the reddened vector of this color-color diagram.}}
     \label{fig:synthetic}
 \end{figure}
 
@@ -492,8 +485,7 @@ In order to find the best color-color diagram to separating the final sample of
 emission line objects into two color types, we first attempted constructed  color-color
 diagrams by using the S-PLUS simulated photometry of several classes of emission line
 objects\footnote{It is important to note that there are other classes of objects
-with emission lines that have not been included, because our main objective is to
-separate between two types of these objects by their photometric colors.}.
+with emission lines that have not been included. Our main objective is to explore different populations and/or types of these objects by using their photometric colors.}.
 The $(g - r)$ versus $(z - g)$ color-color diagram is displayed on
 the Fig.~\ref{fig:synthetic}. The SySt span a wide range on the $(z - g)$ color,
   from approximately -0.5 to 6.0. This wide range on the color may refer to the different
@@ -1165,13 +1157,13 @@ Development and Reform Commission. LAMOST is operated and managed by the
 National Astronomical Observatories, Chinese Academy of Sciences. 
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Data Availability}
 
 
-%%%%%%%%%%%%%%%%%% REFERENCES %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% REFERENCES %%%%%%%%%%%%%%%%%%
 
-%The best way to enter references is to use BibTeX:
+% The best way to enter references is to use BibTeX:
 
 \bibliographystyle{mnras}
 \bibliography{ref} 
