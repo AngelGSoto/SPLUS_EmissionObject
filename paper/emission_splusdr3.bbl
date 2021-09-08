@@ -26,12 +26,6 @@ Springer, Cham, \mn@doi{10.1007/978-3-319-14142-8}
 {Ahumada} R.,  et~al., 2020, \mn@doi [\apjs] {10.3847/1538-4365/ab929e}, \href
   {https://ui.adsabs.harvard.edu/abs/2020ApJS..249....3A} {249, 3}
 
-\bibitem[\protect\citeauthoryear{{Akras}, {Guzman-Ramirez}  \&
-  {Gon{\c{c}}alves}}{{Akras} et~al.}{2019}]{Akras:2019}
-{Akras} S.,  {Guzman-Ramirez} L.,   {Gon{\c{c}}alves} D.~R.,  2019, \mn@doi
-  [\mnras] {10.1093/mnras/stz1911}, \href
-  {https://ui.adsabs.harvard.edu/abs/2019MNRAS.488.3238A} {488, 3238}
-
 \bibitem[\protect\citeauthoryear{Akras, Guzman-Ramirez, Leal-Ferreira  \&
   Ramos-Larios}{Akras et~al.}{019a}]{Akras:2019a}
 Akras S.,  Guzman-Ramirez L.,  Leal-Ferreira M.,   Ramos-Larios G.,  2019a,
@@ -58,14 +52,6 @@ Campello R. J. G.~B.,  Moulavi D.,   Sander J.,  2013, in Pei J.,  Tseng V.~S.,
 Campello R.,  Moulavi D.,  Zimek A.,   Sander J.,  2015, \mn@doi [A C M
   Transactions on Knowledge Discovery from Data] {10.1145/2733381}, 10, 1
 
-\bibitem[\protect\citeauthoryear{{Casares}}{{Casares}}{2015}]{Casares:2015}
-{Casares} J.,  2015, \mn@doi [\apj] {10.1088/0004-637X/808/1/80}, \href
-  {https://ui.adsabs.harvard.edu/abs/2015ApJ...808...80C} {808, 80}
-
-\bibitem[\protect\citeauthoryear{{Casares}}{{Casares}}{2016}]{Casares:2016}
-{Casares} J.,  2016, \mn@doi [\apj] {10.3847/0004-637X/822/2/99}, \href
-  {https://ui.adsabs.harvard.edu/abs/2016ApJ...822...99C} {822, 99}
-
 \bibitem[\protect\citeauthoryear{{Cenarro} et~al.,}{{Cenarro}
   et~al.}{2018}]{Cenarro:2018}
 {Cenarro} A.~J.,  et~al., 2018, preprint, \href
@@ -90,6 +76,11 @@ Campello R.,  Moulavi D.,  Zimek A.,   Sander J.,  2015, \mn@doi [A C M
   {Angeloni} R.,  {Greimel} R.,   {Mampaso} A.,  2011, \mn@doi [\aap]
   {10.1051/0004-6361/201016406}, \href
   {https://ui.adsabs.harvard.edu/abs/2011A&A...529A..56C} {529, A56}
+
+\bibitem[\protect\citeauthoryear{{Davies}, {Elliott}  \& {Meaburn}}{{Davies}
+  et~al.}{1976}]{1976MmRAS..81...89D}
+{Davies} R.~D.,  {Elliott} K.~H.,   {Meaburn} J.,  1976, \memras, \href
+  {https://ui.adsabs.harvard.edu/abs/1976MmRAS..81...89D} {81, 89}
 
 \bibitem[\protect\citeauthoryear{{Drew} et~al.,}{{Drew}
   et~al.}{2005}]{Drew:2005}
@@ -119,10 +110,6 @@ Ester M.,  Kriegel H.-P.,  Sander J.,   Xu X.,  1996, in Proc. of 2nd
 {Fukugita} M.,  {Ichikawa} T.,  {Gunn} J.~E.,  {Doi} M.,  {Shimasaku} K.,
   {Schneider} D.~P.,  1996, \mn@doi [\aj] {10.1086/117915}, \href
   {http://adsabs.harvard.edu/abs/1996AJ....111.1748F} {111, 1748}
-
-\bibitem[\protect\citeauthoryear{{Geach}}{{Geach}}{2012}]{Geach:2012}
-{Geach} J.~E.,  2012, \mn@doi [\mnras] {10.1111/j.1365-2966.2011.19913.x},
-  \href {https://ui.adsabs.harvard.edu/abs/2012MNRAS.419.2633G} {419, 2633}
 
 \bibitem[\protect\citeauthoryear{{Guti{\'e}rrez-Soto}
   et~al.,}{{Guti{\'e}rrez-Soto} et~al.}{2020}]{Gutierrez:2020}
@@ -164,12 +151,6 @@ Mann A.,  Kaur N.,  2013.
   Conference Series Vol. 8450, Modern Technologies in Space- and Ground-based
   Telescopes and Instrumentation II. p. 84503S, \mn@doi{10.1117/12.925430}
 
-\bibitem[\protect\citeauthoryear{{Martin}, {Kaviraj}, {Hocking}, {Read}  \&
-  {Geach}}{{Martin} et~al.}{2020}]{Martin:2020}
-{Martin} G.,  {Kaviraj} S.,  {Hocking} A.,  {Read} S.~C.,   {Geach} J.~E.,
-  2020, \mn@doi [\mnras] {10.1093/mnras/stz3006}, \href
-  {https://ui.adsabs.harvard.edu/abs/2020MNRAS.491.1408M} {491, 1408}
-
 \bibitem[\protect\citeauthoryear{McInnes, Healy  \& Astels}{McInnes
   et~al.}{2017}]{McInnes:2017}
 McInnes L.,  Healy J.,   Astels S.,  2017, \mn@doi [The Journal of Open Source
@@ -202,12 +183,11 @@ McInnes L.,  Healy J.,   Astels S.,  2017, \mn@doi [The Journal of Open Source
 {Osterbrock} D.~E.,  {Cohen} R.~D.,  1982, \mn@doi [\apj] {10.1086/160318},
   \href {https://ui.adsabs.harvard.edu/abs/1982ApJ...261...64O} {261, 64}
 
-\bibitem[\protect\citeauthoryear{{Osterbrock} \& {Ferland}}{{Osterbrock} \&
-  {Ferland}}{2006}]{Osterbrock:2006}
-{Osterbrock} D.~E.,  {Ferland} G.~J.,  2006, Astrophysics Of Gas Nebulae and
-  Active Galactic Nuclei.
-Sausalito: University Science Books, \url
-  {https://books.google.com.br/books?id=HgfrkDjBD98C}
+\bibitem[\protect\citeauthoryear{{Parker} et~al.,}{{Parker}
+  et~al.}{2005}]{2005MNRAS.362..689P}
+{Parker} Q.~A.,  et~al., 2005, \mn@doi [\mnras]
+  {10.1111/j.1365-2966.2005.09350.x}, \href
+  {https://ui.adsabs.harvard.edu/abs/2005MNRAS.362..689P} {362, 689}
 
 \bibitem[\protect\citeauthoryear{{Parker}, {Boji{\v c}i{\'c}}  \&
   {Frew}}{{Parker} et~al.}{2016}]{Parker:2016}
@@ -254,17 +234,6 @@ Pedregosa F.,  et~al., 2011, Journal of Machine Learning Research, 12, 2825
   R.~C.,   {Steeghs} D.,  2000, \mn@doi [\mnras]
   {10.1046/j.1365-8711.2000.03240.x}, \href
   {https://ui.adsabs.harvard.edu/abs/2000MNRAS.313..533S} {313, 533}
-
-\bibitem[\protect\citeauthoryear{{Steeghs} \& {Casares}}{{Steeghs} \&
-  {Casares}}{2002}]{Steeghs:2002}
-{Steeghs} D.,  {Casares} J.,  2002, \mn@doi [\apj] {10.1086/339224}, \href
-  {https://ui.adsabs.harvard.edu/abs/2002ApJ...568..273S} {568, 273}
-
-\bibitem[\protect\citeauthoryear{{Valenzuela} \& {Pichara}}{{Valenzuela} \&
-  {Pichara}}{2018}]{Valenzuela:2018}
-{Valenzuela} L.,  {Pichara} K.,  2018, \mn@doi [\mnras]
-  {10.1093/mnras/stx2913}, \href
-  {https://ui.adsabs.harvard.edu/abs/2018MNRAS.474.3259V} {474, 3259}
 
 \bibitem[\protect\citeauthoryear{{Viironen} et~al.,}{{Viironen}
   et~al.}{2009}]{Viirone:2009}
@@ -317,12 +286,6 @@ Pedregosa F.,  et~al., 2011, Journal of Machine Learning Research, 12, 2825
   et~al.}{2016}]{van-Driel:2016}
 {van Driel} W.,  et~al., 2016, \mn@doi [\aap] {10.1051/0004-6361/201528048},
   \href {https://ui.adsabs.harvard.edu/abs/2016A&A...595A.118V} {595, A118}
-
-\bibitem[\protect\citeauthoryear{{van Spaandonk}, {Steeghs}, {Marsh}  \&
-  {Torres}}{{van Spaandonk} et~al.}{2010}]{Spaandonk:2010}
-{van Spaandonk} L.,  {Steeghs} D.,  {Marsh} T.~R.,   {Torres} M.~A.~P.,  2010,
-  \mn@doi [\mnras] {10.1111/j.1365-2966.2009.15762.x}, \href
-  {https://ui.adsabs.harvard.edu/abs/2010MNRAS.401.1857V} {401, 1857}
 
 \makeatother
 \end{thebibliography}
