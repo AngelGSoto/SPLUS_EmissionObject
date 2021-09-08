@@ -25,11 +25,11 @@
 % MNRAS is set in Times font. If you don't have this installed (most LaTeX
 % installations will be fine) or prefer the old Computer Modern fonts, comment
 % out the following line
-\usepackage{newtxtext,newtxmath}
+%\usepackage{newtxtext,newtxmath}
 % Depending on your LaTeX fonts installation, you might get better results with one of these:
-%\usepackage{mathptmx}
-%\usepackage{txfonts}
-\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage{txfonts}
+%\usepackage[T1]{fontenc}
 
 % Allow "Thomas van Noord" and "Simon de Laguarde" and alike to be sorted by"N" and "L" etc. in the bibliography.
 % Write the name in the bibliography as "\VAN{Noord}{Van}{van} Noord, Thomas"
@@ -45,6 +45,7 @@
 
 \newcommand{\rlopes}[1]{\textcolor{blue}{#1}}
 \newcommand{\cut}[1]{\textcolor{red}{#1}}
+\newcommand{\comment}[1]{\textcolor{red}{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -64,12 +65,13 @@
 
 \author[Guti\'{e}rrez-Soto et al.]{
 L. A. Guti\'{e}rrez-Soto,$^{1}$\thanks{E-mail: gsoto.angel@gmail.com}
-R. Lopes de Oliveira$^{2}$
+R. Lopes de Oliveira$^{1,2,3}$
 \\
 % List of institutions
 $^{1}$Departamento de Astronomia, IAG, Universidade de S\~{a}o Paulo, Rua do Mat\~{a}o,
 1226, 05509-900, S\~{a}o Paulo, Brazil\\
-$^{2}$Departamento de Física, Universidade Federal de Sergipe, Av. Marechal Rondon, S/N, 49000-000 São Cristóvão, SE, Brazil
+$^{2}$Departamento de F\'isica, Universidade Federal de Sergipe, Av. Marechal Rondon, S/N, 49100-000, S\~ao Crist\'ov\~ao, SE, Brazil\\
+$^{3}$Observat\'orio Nacional, Rua Gal. Jos\'e Cristino 77, 20921-400, Rio~de~Janeiro, RJ, Brazil\\
 }
 
 % These dates will be filled out by the publisher
@@ -104,108 +106,142 @@ the ($r$ - $J$0660) versus ($r$ - $i$) color-color diagram and distinguish the r
 
 \section{Introduction}
 
-The existence of an ionizing radiation field can lead to Balmer hydrogen
-emission lines. From the presence  of the H Balmer lines in the optical
-spectra of some sources it is well known the possible presence of ionized
-gas. Many important astronomical objects involve the physics of photo-ionized
-gases and the interpretation of the emission-line spectra. Emission line
-objects as the H II regions allow us to study the star formation history
-of the far reaches of our Galaxy and of distant galaxies. Planetary nebulae
-let us to see the remaining envelope of dying stars. Star-burst galaxies and
-QSOs are one the most luminous objects and hence the most distant that can
-be observed. Their spectra can reveal details about of the first generation
-of star and the formation of heavy elements in the young universe. On the
-other hand, emission lines can also infer the presence or lack the accretion
-discs \citep{Schwope:2000, Ratti:2012}, the properties of single or double
-picked line can allow us to infer geometrical characteristics \citep{Horne:1986},
-the nature of  donor stars in binary system \citep{Steeghs:2002, Spaandonk:2010,
-Casares:2015} and the compact objects as black holes \citep{Casares:2016}. 
+Atomic excitation followed by  recombination in Balmer hydrogen emission lines may be ignited in many different ways, as from thermal and non-thermal collisional excitation in shock-heated gas, and from energetic photons acting over a diffuse gas. As a practical result, and being Hydrogen abundant in the Universe, the observation of those electronic transitions offer an important window into the study of astrophysical objects.
+Among them is H$\alpha$ ($@$6564.614\,\AA\
+at vacuum, in rest-frame wavelength), 
+the strongest one and therefore the Hydrogen line most widely used to identify certain systems and proceed with their investigations.
 
-Emission lines are also associated with stars in very early-type and/or
-very late evolutionary stage which are short phase. As already mentioned
-are also associated with binaries that experiencing mass transfer. These
-group of emission line stars includes young stellar (YSOs) and Herbig-Haro
-(HH) objects, post-asymptotic and some asymptotic giant branch (AGB), some
-red giant stars (RGB), Wolf-Rayet (WR) stars, supernova remnants, classical
-Be stars, active late-type dwarfs, interacting binary system like symbiotic
-stars (SySt) and cataclysmic variables (CV). Most of these class of object
-are in-homogeneous and some contains many few identified members, for
-instance at the moment around 323 symbiotic system have been identified
-from which 257 belong to the Galaxy and  $\sim$66 are extra-galactic
-objects \citep{Akras:2019a}. The same occurs with PNe from witch around
-3500 of them are been cataloged \citep{Parker:2016}, this current number
-of PNe represents only about 15-30\% of the estimated total of Galactic
-PNe (Frew, 2008; Jacoby et al., 2010) showing that a small fraction of the
-PNe have been cataloged. Many galaxies, in addition to harbor Planetary
-nebulae and H II regions, show characteristic nebular in their spectra.
-In most of these objects, the gas is photoionized by hot stars in the nucleus,
-which is thus much like giant H II region, or perhaps many H II regions.
-The galactic nucleus with very strongest  emission lines of this type are
-often called blue compact galaxies, extragaltic H II regions, star forming
-or starburst galaxies \citep{Osterbrock:2006}. There are also spiral galaxies
-that present emission lines.
+Emission line objects as the H II regions, radiated for young stars, allow us to map and study the star formation history
+of the far reaches of our Galaxy and of distant galaxies. 
+Planetary Nebulae (PNe) let us see remnant envelope of dying stars, illuminated by their residual white dwarf. 
+Starburst galaxies and QSOs, the most luminous objects, allow us to probe the distant Universe
+as for the first generation of star and the primordial formation of heavy elements. 
+On the other hand, emission lines 
+ trace  discs \citep{Schwope:2000, Ratti:2012} in stellar and extragalactic systems, including their geometrical characteristics from line profiles \citep{Horne:1986}.
 
-In the past H$\alpha$ surveys with modest spatial resolutions have been used
-to identified extended nebular emission to study supernova remnants, galaxy
-groups and star forming regions (Davies, Elliott \& Meaburn 1976). More recently,
-higher resolution surveys such as the INT Photometric H$\alpha$ survey
-(IPHAS; \citealt{Drew:2005, Barentsen:2014}) have focused in the study of
-compact emission line sources on the Galactic plane, typically with objects
-in different stage of stellar evolution. The Anglo-Australian Observatory UKS
-chmidt Telescope Supercosmos H$\alpha$ Survey (Parker et al. 2005) is another
-H{$\alpha$} survey of the Southern Galactic Plane and Magellanic Cloud which
-has covered to b $\sim$ 10-13$^{\circ}$ (verificar esto). Currently ongoing is
-the VST Photometric H$\alpha$ Survey of the Southern Galactic Plane and Bulge
-(VPHAS+; \citealt{Drew:2014}) that will cover the Galactic bulge and plane in
-five filters. 
+Short-lived evolutionary stages of stars may be marked by emission lines. This category includes young stellar (YSOs) and Herbig-Haro (HH) objects surrounded by a 
+nebula-like structure, evolved systems like 
+post-asymptotic and some asymptotic giant branch (AGB), some
+red giant stars (RGB), active late-type dwarfs, and supernova remnants. 
+Amongst massive stars, emission lines are observed, for example, in Be stars when 
+circumstellar decretion disks are present and in Wolf-Rayet (WR) stars, which are marked by strong winds.  
+Interacting binary systems experiencing mass exchange, 
+%the nature of donor stars 
+%\rlopes{and accreting compact objects} 
+%in 
+% \citep{Steeghs:2002, Spaandonk:2010,
+%Casares:2015,Casares:2016}.
+%\sout{the compact objects as black holes \citep{Casares:2016}.} 
+like symbiotic stars (SySt) in which a white dwarf (WD) or a neutron star accretes matter from a supergiant star, and Cataclysmic Variables (CVs), pairs of  white dwarf plus a low mass star, may be added to this category. 
 
-Like VPHAS+, others ongoing surveys that are used to study the population of
-emission line objects are the The Javalambre Photometric Local Universe Survey
-(J-PLUS\footnote{\url{https://www.j-plus.es}}, \citealp{Cenarro:2018})
-and the Southern-Photometric Local Universe Survey
-(S-PLUS\footnote{\url{http://www.splus.iag.usp.br}}, \citealp{Mendes:2019})
-are providing observations of the Galactic halo covering both northern and
-southern celestial hemispheres in a systematic way with twin telescopes
-using the same set of multi-band filters. In addition to the H$\alpha$ filter,
-which is already vastly applied to systematically searching for H$\alpha$ emitters
-the telescopes offer 11 more filters. And more ambitious yet the JPAS survey that
-will the same area of J-PLUS in 56 narrow-band filters.
+Most of the classes above mentioned are not homogeneous 
+and far from complete even in the local universe, with some highly populated while others less so. For example, 
+\rlopes{there are $\sim$\,320 SySt known, with only $\sim$\,65 out of them harbored in galaxies other than the Milky Way \citep{Akras:2019a}.}
+%\sout{around 323 symbiotic system have been identified
+%from which 257 belong to the Galaxy and  $\sim$66 are extra-galactic
+%objects \citep{Akras:2019a}.} 
+\rlopes{The number of PNe is higher, with 3500 objects listed in catalogs \citep{Parker:2016}, but it is argued that it represents only about 15-30\% of the total expected in the Galaxy (Frew, 2008; Jacoby et al., 2010).}
+%\sout{The same occurs with PNe from witch around
+%3500 of them are been cataloged \citep{Parker:2016}, this current number
+%of PNe represents only about 15-30\% of the estimated total of Galactic
+%PNe (Frew, 2008; Jacoby et al., 2010) showing that a small fraction of the
+%PNe have been cataloged.} 
 
-Traditionally, color-color diagrams based in H$\alpha$ filter are been used to
-identify H$\alpha$ emitters.  The analysis the color-color diagram  (r - H$\alpha$)
-versus (r - i) has resulted on the discovered of new emission line objects, for
-instance \citet{Witham:2006, Witham:2007}  used the (r - H$\alpha$) versus (r - i)
-colour-colour diagram to find for new CV. On the other hand, \citet{Vink:2008}
-reported the discovery of YSOs by using this same colour criteria. In this sense using
-this methology a variety of classes of objects are been identified, which include
-symbiotic stars \citep{Corradi:2008, Corradi:2010, Corradi:2011}, early type emission
-line stars \citep{Drew:2008} and planetary nebulae \citep{Viirone:2009, Sabin:2010}.
-Recently, by using this same color diagram were also identified compact PN candidates
-in VPHAS+ catalog \citep{Akras:2019}. And the same diagram in conjunction with new
-ones shows to be very efficient to find for PN candidates \citep{Gutierrez:2020}.
-In general terms, \citet{Witham:2006} presented a methodology and first results
-in looking for emission line sources in narrow-band surveys.
+%\rlopes{I'M HERE.}
+\rlopes{Many H$\alpha$ surveys in a variety of angular resolution, sky coverage, and sensitivity have been carried out.}
+Some of them, with modest spatial resolutions\rlopes{, revealed} 
+\rlopes{spatially resolved,} 
+extended nebular emission to study supernova remnants, galaxy
+groups, and star forming regions \citep[e.g.][]{1976MmRAS..81...89D}. 
+\rlopes{Others with} 
+higher 
+\rlopes{spatial} resolution 
+%\sout{surveys such as the INT Photometric H$\alpha$ survey
+%(IPHAS; \citealt{Drew:2005, Barentsen:2014}) have focused in the study of}
+\rlopes{disclosed} compact emission line sources
+\rlopes{in the Galaxy and sources in nearby galaxies.}
+%\sout{, typically with objects
+%in different stage of stellar evolution}. 
+\rlopes{Examples are the INT Photometric H$\alpha$ survey
+(IPHAS; \citealt{Drew:2005, Barentsen:2014}), the  SuperCOSMOS H$\alpha$ Survey with the UK Schmidt Telescope (UKST) of the Anglo-Australian Observatory \citep{2005MNRAS.362..689P}, and the ongoing VST Photometric H$\alpha$ Survey (VPHAS+; \citealt{Drew:2014}).}
 
-In this era of big data on astronomy, machine learning techniques are becoming
-in important statistical tools for the analysis and find meaning from massive
-data sets. Particularly, unsupervised machine approaches have showed a promised
-in various applications, especially in automatic classification task. Including
-object classification and selection, using galaxies with active galactic nuclei
-as example \citep{Geach:2012}, morphological analysis of galaxies \citep{Martin:2020},
-classification of variable stars, relying only on the similarity among light
-curves. \citep{Valenzuela:2018}. Using unsupervised machine
-learning can be very advantageous because they do not require a labeled data
-training sets. Unlike of supervised methods like Random Forest algorithm.
-Instead, unsupervised techniques are generally based in the data itself to
-identify patrons, e. g. cluster of similar objects, in some pre-defined
-feature space where the data are defined.
+\rlopes{Traditionally, H$\alpha$ emitters are revealed directly from images and in color-color diagrams from photometric surveys observing the sky with at most five filters. For example, the (r - H$\alpha$) versus (r - i) colour-colour diagram or similar was used
+to find new 
+CVs \citep{Witham:2006,Witham:2007}, 
+YSOs \citep{Vink:2008}, 
+SySt \citep{Corradi:2008, Corradi:2010, Corradi:2011}, 
+early type emission
+line stars \citep{Drew:2008}, 
+and PNs \citep{Viirone:2009, Sabin:2010}.} 
 
-In this work, we used S-PLUS observations of the southern hemisphere to search
+\rlopes{There are two ongoing multi-band surveys observing the sky in a systematic, complementary way with X broad and Y narrow-band filters, including H$\alpha$: the Javalambre Photometric Local Universe Survey
+(J-PLUS\footnote{\url{https://www.j-plus.es}}; \citealp{Cenarro:2018}), covering the Northern celestial hemisphere, and the Southern-Photometric Local Universe Survey
+(S-PLUS\footnote{\url{http://www.splus.iag.usp.br}}; \citealp{Mendes:2019}), doing the same to the Southern sky with a twin 80\,cm telescope. They are paving the way for a even more ambitious survey, the Javalambre Physics of the Accelerating Universe Astrophysical Survey (J-PAS), which will observe the Northern sky with 56 narrow-band filters. As source revealers, the spectral energy distribution provided by these surveys also provide an unprecedented classification from photometry. However, as part of the new era of big data, efficient investigation tools are required to deal with their massive data sets and machine learning techniques have been increasingly used.}
+
+%Akras:2019}. And the same diagram in conjunction with new
+%ones shows to be very efficient to find for PN candidates \citep{Gutierrez:2020}.
+%In general terms, \citet{Witham:2006} presented a methodology and first results
+%in looking for emission line sources in narrow-band surveys.
+
+%\sout{The Anglo-Australian Observatory UKS
+%chmidt Telescope Supercosmos H$\alpha$ Survey (Parker et al. 2005) is another
+%H{$\alpha$} survey of the Southern Galactic Plane and Magellanic Cloud which
+%has covered to b $\sim$ 10-13$^{\circ}$ (verificar esto). 
+%Currently ongoing is
+%the VST Photometric H$\alpha$ Survey of the Southern Galactic Plane and Bulge
+%(VPHAS+; \citealt{Drew:2014}) that will cover the Galactic bulge and plane in
+%five filters.} 
+
+%\sout{REWRITTEN AND REPLACED ABOVE: Like VPHAS+, others ongoing surveys that are used to study %the population of
+%emission line objects are the The Javalambre Photometric Local Universe Survey
+%(J-PLUS\footnote{\url{https://www.j-plus.es}}, \citealp{Cenarro:2018})
+%and the Southern-Photometric Local Universe Survey
+%(S-PLUS\footnote{\url{http://www.splus.iag.usp.br}}, \citealp{Mendes:2019})
+%are providing observations of the Galactic halo covering both northern and
+%southern celestial hemispheres in a systematic way with twin telescopes
+%using the same set of multi-band filters. In addition to the H$\alpha$ filter,
+%which is already vastly applied to systematically searching for H$\alpha$ emitters
+%the telescopes offer 11 more filters. And more ambitious yet the JPAS survey that
+%will the same area of J-PLUS in 56 narrow-band filters.}
+
+%\sout{ADDRESSED ABOVE: Traditionally, color-color diagrams based in H$\alpha$ filter are been %used to
+%identify H$\alpha$ emitters.  The analysis the color-color diagram  (r - H$\alpha$)
+%versus (r - i) has resulted on the discovered of new emission line objects, for
+%instance \citet{Witham:2006, Witham:2007}  used the (r - H$\alpha$) versus (r - i)
+%colour-colour diagram to find for new CV. On the other hand, \citet{Vink:2008}
+%reported the discovery of YSOs by using this same colour criteria. In this sense using
+%this methology a variety of classes of objects are been identified, which include
+%symbiotic stars \citep{Corradi:2008, Corradi:2010, Corradi:2011}, early type emission
+%line stars \citep{Drew:2008} and planetary nebulae \citep{Viirone:2009, Sabin:2010}.
+%Recently, by using this same color diagram were also identified compact PN candidates
+%in VPHAS+ catalog \citep{Akras:2019}. And the same diagram in conjunction with new
+%ones shows to be very efficient to find for PN candidates \citep{Gutierrez:2020}.
+%In general terms, \citet{Witham:2006} presented a methodology and first results
+%in looking for emission line sources in narrow-band surveys.}
+
+%\comment{I RECOMMEND TO REMOVE THIS BUT NOT ERASING IT FOR NOW; JUST KEEP IT HERE COMMENTED SO THAT WE MAY PLACE THE INFORMATION SOMEWHERE AT THE END - OR REMOVE IT AT ALL. I AM TRYING JUST TO KEEP THE INTRODUCTION AS SHORT AND DIRECT TO THE POINT AS POSSIBLE:} 
+%\sout{In this era of big data on astronomy, machine learning techniques are becoming
+%in important statistical tools for the analysis and find meaning from massive
+%data sets. Particularly, unsupervised machine approaches have showed a promised
+%in various applications, especially in automatic classification task. Including
+%object classification and selection, using galaxies with active galactic nuclei
+%as example \citep{Geach:2012}, morphological analysis of galaxies \citep{Martin:2020},
+%classification of variable stars, relying only on the similarity among light
+%curves. \citep{Valenzuela:2018}. Using unsupervised machine
+%learning can be very advantageous because they do not require a labeled data
+%training sets. Unlike of supervised methods like Random Forest algorithm.
+%Instead, unsupervised techniques are generally based in the data itself to
+%identify patrons, e. g. cluster of similar objects, in some pre-defined
+%feature space where the data are defined.}
+
+\rlopes{Here we present H$\alpha$ emitters from the S-PLUS iDR3 by using color-color diagrams and unsupervised machine learning techniques, classifying them as blue or red fonts and also proposing which class they belong to.}
+
+\sout{In this work, we used S-PLUS observations of the southern hemisphere to search
 for objects with an excess of H{$\alpha$} using automatic methods based on the
 (r - H$\alpha$) versus (r - i) color-color diagram. We have also used color criteria
 based in (g - r) and (z - g) in conjunction to unsupervised machine learning
 techniques to split the final list in those with blue and red continuum. The
-paper is organized as follows...
+paper is organized as follows...}
 
 \section{Observations: The S-PLUS project}
 \label{sec:obser}
@@ -297,7 +333,7 @@ a iterative $\sigma$-clipping technique to find the best-fitting of the main
 stellar locus. In this order of ideas, we made four interactive $\sigma$-clipped.
 Once we have found the appropriate fitting for each magnitude bin, we identified
 those objects significantly above of this final fit as likely sources with
-a excesses of H{$\alpha$}. Objects with a significant contribution of
+a excess of H{$\alpha$}. Objects with a significant contribution of
 H{$\alpha$} meet the condition:
 
 \begin{equation}
@@ -637,7 +673,7 @@ and \citet{Ntwaetsile:2021} works as follows:
   cluster. Any point in the sample that does not fall into one of the selected
   clusters is defined as noise.
 
-\item The selected cluster are used the label points. Furthermore, the definition
+\item The selected cluster are used to the label points. Furthermore, the definition
   of $\lambda_p$ within a cluster, when normalized between O and 1 provides a means
   of characterization a probability that a given point belongs to the cluster or
   alternative a measure of the strength of membership. 
@@ -892,8 +928,8 @@ the H{$\alpha$} emission lines. Although some of these stars could represent the
 fraction of contaminant of our sample.
 
 \subsubsection{Galaxies}
-Several type of emission line galaxies were selected. This category include
-several class of galaxies according to SIMBAD class: emission-line galaxy (EmG),
+Emission line galaxies also were selected. This category include
+several class of galaxies according to SIMBAD types: emission-line galaxy (EmG),
 blue compact galaxy (BlueCompG), HII galaxy (HII G), galaxy in cluster of galaxies
 (GinCl), galaxy in group of galaxies (GinGroup), low surface brightness galaxy
 (LSB G), interacting galaxies (IG), part of a Galaxy (PartofG), Seyfert 1 and
@@ -903,11 +939,15 @@ All the emission line galaxies of these category form part of the universe local
 This mean that their redshift cover the range on which the H{$\alpha$} emission line still
 falls into the $J0660$ filter. Objects with $ z >  0.02$ the  H{$\alpha$} is outside 
 of the $J0660$ filter. Table~\ref{tab:simbad} of the appendices shows the red-shift of the
-emission line galaxies of our sample that have SIMBAD matches, probing that mostly of 
-these galaxies are real H{$\alpha$} emitters. In these kind of galaxies such as the blue 
+emission line galaxies of our sample that have SIMBAD matches. Many of the galaxies have 
+small red-shift values probing that mostly of these galaxies are real H{$\alpha$} emitters. 
+In these kind of galaxies such as the blue 
 compact and/or H II galaxies their starburst regions that consist of ensemble of massive 
 ionizing stars and their respective giant H II regions cover the extension of the optical 
-images and the emission lines of their spectra.
+images and the emission lines of their spectra. Fig.~\ref{fig:photo-image-knonw-objects2}
+shows the SDSS spectra and S-PLUS photometry of the H II galaxy 6dFGS gJ012646.5-003845 
+(panel \textit{a}) and of the radio galaxy NVSS J025557+004132. The H II galaxy is classified 
+as blue source while the radio galaxy as red by the machine learning algorithm. 
 
 On the other hand, several AGN, Seyfert 1 and Seyfert 2 galaxies have red-shift 
 between 0.31 and 0.37 indicating that the excess on the $J0660$ filter
@@ -921,9 +961,8 @@ universe also named ``WR galaxy'' \citep{Osterbrock:1982}. WR stars in galaxies
 is perceptible in their spectra with strong emission lines such as H{$\alpha$}
 and [NII]. These spectral features can be of them very similar to extragalactic
 H II regions present typically of the outskirt of spiral galaxies. Panel (\textit{e}) 
-of Fig.~\ref{fig:photo-image-knonw-objects} displays
-the S-PLUS and SDSS spectra of the  Wolf-Rayet [BKD2008] WR 14 which belong 
-to the galaxy nnnnn.
+of Fig.~\ref{fig:photo-image-knonw-objects} displays the S-PLUS and SDSS spectra 
+of the  Wolf-Rayet [BKD2008] WR 14 which belong to the galaxy ??.
 
 Many of the objects have as main type ``galaxy'' in SIMBAD. This galaxies
 could be spiral galaxies on which the star formation is present. It is known
@@ -933,8 +972,8 @@ secondary type H I. The reservoir of H I gas in galaxies must ultimately
 feed their star formation, after cooling and forming molecular
 clouds \citep{van-Driel:2016}. Fig. shows the S-PLUS photometry and
 the SDSS spectra of star-forming galaxy with clearly emission lines.
-Note that almost all these galaxies
-are classified as blue color type objects by the \texttt{HAC} and \texttt{HDBSCAN}.
+Note that almost all these galaxies are classified as blue color 
+type objects by the \texttt{HAC} and \texttt{HDBSCAN}.
 However, Mostly of the Seyfert 2 galaxies and a handful of galaxies are classified as
 red sources, why?
 
@@ -952,15 +991,15 @@ Some of these emission lines are H{$\beta$}, C {\sc IV} 1550 \AA, C {\sc III]} 1
   
 
   \subsubsection{Other type of objects}
-  Miscellanies the objects were selected on which are include as it can see in the
-  table~\ref{tab:simbad-sources}. They include FIR sources, MIR objects, molecular clouds, 
-
   
+  Miscellanies the objects were selected as H{$\alpha$} emitters which are cataloged on 
+  SIMBAD as it can see in the table~\ref{tab:simbad-sources}. They are included FIR 
+  sources, MIR objects, molecular clouds, 
 
 \subsection{SDSS and LAMOST}
 
 We also made cross-match between the sample of H{$\alpha$} emission line objects and SDSS DR16
-\citep{Ahumada:2020}. We used use the 2$\sigma$ error circle as the cross-matching radius.
+\citep{Ahumada:2020}. We have used the 2$\sigma$ error circle as the cross-matching radius.
 We got 200 spectra from which 195 objects exhibit strong emission lines. 5 objects do not show
 emission lines, they probably are stars or galaxies.
 
@@ -969,39 +1008,39 @@ We also cross-correlate our list with Large Sky Area Multi-Object Fiber Spectros
 show strong emission lines. These results shows that this technique actually are very effective
 for selecting sources with strong emission lines.
 
-
 \begin{figure*}
 \centering
 \begin{tabular}{l l}
   \includegraphics[width=0.5\linewidth, trim=10 10 5 8, clip]{Figs/blued-red-hdbscan.pdf}
-   \includegraphics[width=0.5\linewidth, trim=10 10 5 8. clip]{Figs/blue-red-hdbscan-soft-alternative.pdf}
+   \includegraphics[width=0.5\linewidth, trim=10 10 5 8, clip]{Figs/blue-red-hdbscan-soft-alternative.pdf}
   \end{tabular}  
-  \caption{ $(r - g)$ versus $(g - z)$ color-color diagram to separate the blue objects from the red ones.}
+  \caption{$(r - g)$ versus $(g - z)$ color-color diagram to separate the blue objects 
+  from the red ones.}
 \label{fig:hdbscan}
 \end{figure*}
 
 
-\begin{figure*}
-%\setlength\tabcolsep{\figstampcolsep}
-\centering
-\begin{tabular}{ll}
-  (a) & (b) \\
-  \includegraphics[width=0.5\linewidth, trim=10 60 5 8, clip]{Figs/StenholmAcker_pn_g006_0-41_9_id176-SPLUS-s29s46-072842.pdf} \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/PN_316.4731956938531--37.14456181858315_100_r.pdf}}} & \includegraphics[width=0.5\linewidth, trim=10 60 10 8, clip]{Figs/spec-0680-52200-0153-STRIPE82-0159-019049.pdf} \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/HII_351.0847562454346--0.10695578184817373_150_r.pdf}}} \\
-(c) & (d) \\
-  \includegraphics[width=0.5\linewidth, trim=10 60 10 8, clip]{Figs/spec-0982-52466-0477-STRIPE82-0103-089600.pdf} \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/CV_311.8365168802931-0.0021268467006492_100_r.pdf}}} & \includegraphics[width=0.5\linewidth, trim=10 60 10 8, clip]{Figs/spec-1033-52822-0623-STRIPE82-0134-016856.pdf} \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/SN_333.17320112679323-0.5119642601996512_150_r.pdf}}} \\
-(e) & (f) \\
-  \includegraphics[width=0.5\linewidth, trim=10 10 10 8, clip]{Figs/spec-0285-51930-0042-SPLUS-n02s23-042426.pdf} \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/wr1_180.1095757612321--1.1019334954271696_100_r.pdf}}} & \includegraphics[width=0.5\linewidth, trim=10 10 10 8, clip]{Figs/spec-9146-58042-0510-STRIPE82-0131-050516.pdf}  \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/QSO_331.37225331383246--0.5196269942518518_100_r.pdf}}}
-  \end{tabular}
-  \caption{Summary of our selection results showing the spectrum (gray line en each panel) of 
-          different classes of emission line sources identified in our target list. 
-          A spectrum of a PN (\textit{a}) from  {\sc ref}. The SDSS spectra of an external H II region (\textit{b}), 
-          a cataclysm variable star (\textit{c}), a super nova (\textit{d}), a WR in a galaxy (\textit{e}) 
-          and a QSO (\textit{f}) with red-shift of $\sim$ 2.45. 
-          As in Figure~\ref{fig:Spectra}, coloured square and circles symbols represent the S-PLUS
-          photometry. All these objects show a significance excesses on the $J0660$ filter in
-          comparison with the broad-bands.}
-  \label{fig:photo-image-knonw-objects}
-\end{figure*}
+%% \begin{figure*}
+%% %\setlength\tabcolsep{\figstampcolsep}
+%% \centering
+%% \begin{tabular}{ll}
+%%   (a) & (b) \\
+%%   \includegraphics[width=0.5\linewidth, trim=10 60 5 8, clip]{Figs/StenholmAcker_pn_g006_0-41_9_id176-SPLUS-s29s46-072842.pdf} \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/PN_316.4731956938531--37.14456181858315_100_r.pdf}}} & \includegraphics[width=0.5\linewidth, trim=10 60 10 8, clip]{Figs/spec-0680-52200-0153-STRIPE82-0159-019049.pdf} \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/HII_351.0847562454346--0.10695578184817373_150_r.pdf}}} \\
+%% (c) & (d) \\
+%%   \includegraphics[width=0.5\linewidth, trim=10 60 10 8, clip]{Figs/spec-0982-52466-0477-STRIPE82-0103-089600.pdf} \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/CV_311.8365168802931-0.0021268467006492_100_r.pdf}}} & \includegraphics[width=0.5\linewidth, trim=10 60 10 8, clip]{Figs/spec-1033-52822-0623-STRIPE82-0134-016856.pdf} \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/SN_333.17320112679323-0.5119642601996512_150_r.pdf}}} \\
+%% (e) & (f) \\
+%%   \includegraphics[width=0.5\linewidth, trim=10 10 10 8, clip]{Figs/spec-0285-51930-0042-SPLUS-n02s23-042426.pdf} \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/wr1_180.1095757612321--1.1019334954271696_100_r.pdf}}} & \includegraphics[width=0.5\linewidth, trim=10 10 10 8, clip]{Figs/spec-9146-58042-0510-STRIPE82-0131-050516.pdf}  \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/QSO_331.37225331383246--0.5196269942518518_100_r.pdf}}}
+%%   \end{tabular}
+%%   \caption{Summary of our selection results showing the spectrum (gray line en each panel) of 
+%%           different classes of emission line sources identified in our target list. 
+%%           A spectrum of a PN (\textit{a}) from  {\sc ref}. The SDSS spectra of an external H II region (\textit{b}), 
+%%           a cataclysm variable star (\textit{c}), a super nova (\textit{d}), a WR in a galaxy (\textit{e}) 
+%%           and a QSO (\textit{f}) with red-shift of $\sim$ 2.45. 
+%%           As in Figure~\ref{fig:Spectra}, coloured square and circles symbols represent the S-PLUS
+%%           photometry. All these objects show a significance excesses on the $J0660$ filter in
+%%           comparison with the broad-bands.}
+%%   \label{fig:photo-image-knonw-objects}
+%% \end{figure*}
 
 \begin{figure*}
 %\setlength\tabcolsep{\figstampcolsep}
@@ -1021,7 +1060,7 @@ for selecting sources with strong emission lines.
   a star-forming galaxy with $z = 0.013$(\textit{c}). For this object, the H{$\alpha$} line 
   is responsible for the $J0660$ magnitude. And a Seyfert 1 with $z = 0.317$ (\textit{d}). For this last object, the excess on the $J0660$ is due to the [O III] 4959, 5007 \AA~ emission lines (\textit{d}). As in Figure~\ref{fig:photo-image-knonw-objects} coloured symbols indicate the 
   S-PLUS photometry.}
-  \label{fig:photo-image-knonw-objects1}
+  \label{fig:photo-image-knonw-objects2}
 \end{figure*}
 
 \subsection{Magnitudes and color distributions}
@@ -1048,9 +1087,7 @@ indicating that the proportion of objects with value $r$ of 19.9 is higher than 
 The fraction of object is very small at $r < 16$ for each group of objects.
 The distribution of the objects for both group increase in the range $16 \gtrsim r \gtrsim 19.9$.
 However the density as indicating the Kernel density estimation curves is higher in the
-blue sources. This implies that the fraction of sources with the magnitude range is considerable
-higher in comparison with the red group. In conclusion the blue sources tends to be brighter
-than the red ones.
+blue sources. This implies that the fraction of sources with the magnitude range is considerable higher in comparison with the red group. In conclusion the blue sources tends to be brighter than the red ones.
 
 Middle panel of figure displays the $(r - i)$ distribution of the blue and red emission line
 objects. The peaks of the $(r - i)$ distributions are distinct for the blue and red sources.
@@ -1062,10 +1099,9 @@ to successfully select blue outliers from the the Galactic Bulge Survey (GBS; \c
 
 Botton panel of Fig.~\ref{fig:diagram-distri} shows the
 $(r - J0660)$ color distribution of the blue and red objects.  The fraction of objects selected
-as emitter rises drastically with $J$0660 excess, until at sufficiently large excesses. The peaks
-of the $(r - J0660)$ color distribution are relatively different for both groups of sources.
-Having the blue sources the peaks at  $(r - J0660) = 0.5$ while for the red one the value peak
-is $(r - J0660)=0.7$.
+as emitter rises drastically with $J$0660 excess, until at sufficiently large excesses. The peaks of the $(r - J0660)$ color distribution are relatively different for both groups 
+of sources. Having the blue sources the peaks at  $(r - J0660) = 0.5$ while for the red 
+one the value peak is $(r - J0660)=0.7$.
 
 
 \section{Conclusions}
@@ -1129,13 +1165,13 @@ Development and Reform Commission. LAMOST is operated and managed by the
 National Astronomical Observatories, Chinese Academy of Sciences. 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section*{Data Availability}
 
 
-%%%%%%%%%%%%%%%%%%%% REFERENCES %%%%%%%%%%%%%%%%%%
+REFERENCES %%%%%%%%%%%%%%%%%%
 
-% The best way to enter references is to use BibTeX:
+The best way to enter references is to use BibTeX:
 
 \bibliographystyle{mnras}
 \bibliography{ref} 
@@ -1168,6 +1204,7 @@ two cluster that in agreement with previous results are the blue and red sources
   \hline 
 }
 
+\clearpage
 \section{Simbad objects}
 
 \begin{center}
@@ -1188,7 +1225,6 @@ two cluster that in agreement with previous results are the blue and red sources
 \clearpage
 \input{S-spectra-lamost.tex}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 % Don't change these lines
 \bsp	% typesetting comment
