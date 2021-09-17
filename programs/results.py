@@ -104,7 +104,7 @@ with sns.axes_style("ticks"):
     pal = sns.cubehelix_palette(start=1, rot=0, dark=-10, light=50, reverse=True, as_cmap=True)
     #pal = sns.color_palette("Paired", 19, as_cmap=True)
     #pal = sns.color_palette("bright")
-    ax = sns.kdeplot(B1, A1, zorder = 3, cmap=pal);
+    axx = sns.kdeplot(B1, A1, zorder = 3, cmap=pal);
     #ax2.plot(fit_line, 0.42917 * fit_line - 0.04333, color="k", ls="--")
     ax.set(
       xlim=[-3.5, 5.],
@@ -114,16 +114,18 @@ with sns.axes_style("ticks"):
         'weight' : 'normal',
         'size'   : 16,
         }
-    cb = fig.colorbar(scat,extend='both', ax=ax).set_label("$r-mag$", fontsize=35)
+    cb = fig.colorbar(scat, extend='both', ax=ax)#
+    cb.set_label("$r-mag$", fontsize=35)
+    cb.ax.tick_params(labelsize=30)
     #Symbol size indicates outer shell radius
-    plt.text(0.01, 0.95, 'Symbol size indicates FWHM',
-             transform=ax.transAxes, fontsize=20)
+    plt.text(0.02, 0.95, 'Symbol size indicates FWHM',
+             transform=ax.transAxes, fontsize=21)
 
     # main sequence and giant stars loci
     x1, y1 = 0.3, 0.3
     el = mpatches.Ellipse((x1, y1), 0.3, 0.4, angle=30, alpha=0.3)
     ax.annotate("Contour indicates main-sequence and giant stars loci",
-                xy=(0.1, -0.1), xytext=(-1.5, -1.), color='black', size=20,
+                xy=(0.1, -0.1), xytext=(-1.8, -1.), color='black', size=21,
                 zorder= 111, arrowprops=dict(arrowstyle="fancy",
                             color="0.5",
                             patchB=el,

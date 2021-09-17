@@ -87,7 +87,7 @@ sns.kdeplot(
 
 ax.legend(ncol=1, fontsize=20.0, title="Group", title_fontsize=30)
 ax.set(xlim=[-6.8, 2.5], ylim=[-3., 5.])#, xscale="log", yscale="log")
-ax.text(0.1, 0.93, "HCA", fontsize=20,
+ax.text(0.1, 0.93, "HAC", fontsize=20,
                                  bbox=dict(facecolor='gray', alpha=0.2),
                                                        transform=ax.transAxes)
 ax.set_aspect("equal")

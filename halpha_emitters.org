@@ -496,6 +496,17 @@ Plots with the results
 
 + What about try a plot r-mag vs b(Gal)?
 
++ the color color diagram (g-r) vs (z-g) synthetic one:
+  I calculated the redered vector. I used the programs and input files in the
+  HD external-old:
+
+: python new-programs/reddening-colors.py
+
+#+BEGIN_SRC results
+EV = 0.0: x: 1.132870000996891 y: 0.018073588174977603
+EV = 0.7: x: -0.4583375579229554 y: 0.8779161171076658
+#+END_SRC
+
 *** Clean the final tables using ML
 
 ** Linear dicriminad analysis
