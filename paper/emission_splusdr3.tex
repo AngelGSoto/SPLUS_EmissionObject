@@ -27,8 +27,8 @@
 % out the following line
 \usepackage{newtxtext,newtxmath}
 % Depending on your LaTeX fonts installation, you might get better results with one of these:
-%\usepackage{mathptmx}
-%\usepackage{txfonts}
+\usepackage{mathptmx}
+\usepackage{txfonts}
 \usepackage[T1]{fontenc}
 
 % Allow "Thomas van Noord" and "Simon de Laguarde" and alike to be sorted by"N" and "L" etc. in the bibliography.
@@ -272,7 +272,7 @@ Galactic plane and bulge.}
 
 We first constructed a sub-sample from all S-PLUS iDR3 from which we
 applied an iterative and automatic technique to select objects with
-an excess of H{$\alpha$} emission line. Once the objects were selected
+an excess of the H{$\alpha$} emission line. Once the objects were selected
 we also make a separation of them into two groups those with red and blue
 continuum by using optical colors in conjunction with unsupervised
  machine learning/statistical tools. These procedures are described below:
@@ -280,25 +280,25 @@ continuum by using optical colors in conjunction with unsupervised
 \subsection{Initial selection sample}
 \label{sec:}
 
-The first step in our selection procedure consists in the following
+The first step in our selection procedure consists of the following
 criteria to guarantee the quality of the observations of the objects:
 
 \begin{enumerate}
 \item The sources must have detection in the filters: $r$, $i$ and
-  $J0660$. To assure that, we select object must have error minor or
+  $J0660$. To assure that, we select objects that must have an error minor or
   equal to 0.2 in each of these three filters.
 
-\item Must have an $r$ magnitude until $r = 21$.
+\item Must have magnitude in the $r$-band up to 21.
   
 \end{enumerate}
 
 \subsection{Finding the main stellar locus and selecting the H{$\alpha$ emitters}}
 \label{sec:find-halpha}
 
-Once the initial cut were made, we proceed to select the objects with
-an excess of H{$\alpha$} which is represented with a relatively excess magnitude-value  of
+Once the initial cut was made, we proceed to select the objects with
+an excess of H{$\alpha$} which are represented with a relatively excess magnitude-value  on
 the  $J0660$-band in comparison with r-band filter. We first divided our sub-sample in four magnitude bins using the $r$-band magnitudes. The idea to split the sample into magnitude bins
-consists to avoid mix faint objects, which have intrinsic high photometric uncertainties with those sources with small photometric uncertainties in the same color-color diagram. If we combine sources with large and small errors, our selection criteria could be dominated by 
+consists to avoid mix faint objects, which have intrinsic high photometric uncertainties, with those sources with small photometric uncertainties in the same color-color diagram. If we combine sources with large and small errors, our selection criteria could be dominated by 
 the intrinsic scatter of the faint objects. The bins have the follow distribution:
 
 \begin{enumerate}
@@ -310,13 +310,14 @@ the intrinsic scatter of the faint objects. The bins have the follow distributio
   
 \end{enumerate}
 
-To select the emission lines we used the same method created and
+To select the emission line objects we used a similar method created and
 implemented by \citet{Witham:2008}. It is possible to do that because
- S-PLUS has similar filters to the IPHAS project, which are
+ S-PLUS has similar filters to the IPHAS project, which are the
 $r$, $J$0660 and $i$. This technique was used by \citet{Scaringi:2013}
-to identify blue objects with excess of H{$\alpha$} and after that
-\citet{Wevers:2017} also applied this methodology to create catalogue
-of candidate H{$\alpha$} emission showing an high effectiveness. In this
+to identify blue objects with H{$\alpha$} emission line.
+\citet{Wevers:2017} also applied this methodology to create a catalogue
+of H{$\alpha$} emission line candidates. These previous results show an high 
+effectiveness of the technique. In this
 order of ideas, we attempted this methodology in S-PLUS.
 
 We first generated the ($r$ - $J0660$) versus ($r$ - $i$) color-color
@@ -328,7 +329,7 @@ stellar locus. In this order of ideas, we made four interactive $\sigma$-clipped
 Once we have found the appropriate fitting for each magnitude bin, we identified
 those objects significantly above of this final fit as likely sources with
 a excess of H{$\alpha$} emission line. Objects with a significant contribution of
-H{$\alpha$} meet the condition:
+H{$\alpha$} should meet the condition:
 
 \begin{equation}
   (r - J0660)_{\mathrm{obs}} - (r - J0660)_{\mathrm{fit}} \geq C \times \sqrt{\sigma^2_{\mathrm{s}} - \sigma^2_{\mathrm{phot}}}
@@ -346,8 +347,8 @@ emitters in S-PLUS iDR3 for each magnitude bin. The continuous black lines repre
 fit and  the dashed lines indicate the 4-$\sigma$ clipping fit lines. The dotted lines are
 the cut selection criteria for the H{$\alpha$} emitters -- the 4-$\sigma$ above of the final
 fit--. Note that theses cut lines are only an approximations because to trace them,
-it is only considered the residual around the fit. The actual selection criteria used here
-also include the phothometric uncertainties in ($r$ - $J0660$) color for each individual data source as shows on the Equation~\ref{eq:criterion}.
+it is only considered the residual around the fit. The appropriate selection criteria used here
+also include the phothometric uncertainties of the ($r$ - $J0660$) color for each individual data source as shows on the Equation~\ref{eq:criterion}.
 
 \begin{figure*}
   \setlength\tabcolsep{0pt}
@@ -379,11 +380,11 @@ also include the phothometric uncertainties in ($r$ - $J0660$) color for each in
 
 After the algorithm was applied to all data, we visually inspection-ed the
 resulting list by seeing the S-spectra and corresponding colored image.
-Figure~\ref{fig:Spectra} shows an example of how looks like a
+Figure~\ref{fig:Spectra} shows an example of how looks like the
 S-spectra\footnote{S-spectra signify the S-PLUS emission in flux
-or magnitude unities of an object in all twelve bands.} of sources in
+or magnitude unities of an object in all twelve bands.} of the sources in
 magnitude unities selected with the method explained above. This object
-clearly exhibits strong H$\alpha$ emitter.
+clearly exhibits strong H$\alpha$ emission line.
 
 \begin{figure}
 \includegraphics[width=0.9\linewidth]{Figs/photopectrum_splus_HYDRA-0026-052331_Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-Final_PStotal.pdf}
@@ -393,11 +394,12 @@ clearly exhibits strong H$\alpha$ emitter.
         \rule{0ex}{0.87in}%
       }
   \rule{0.06in}{0ex}}
-\caption{S-spectra of a random object with emission lines select with algorithm explained
+\caption{S-spectra of a random object with emission lines select with the algorithm explained
   above. Squares represent the SDSS-like broad-band filters. From left to right 
   they are \(u, g, r, i~\text{and}~ z\). Circle symbols are the narrow-band filters,
   which from left to right represent \textit{J}0378, \textit{J}0395, \textit{J}0410,
-  \textit{J}0515, \textit{J}0660 and \textit{J}0861.}
+  \textit{J}0515, \textit{J}0660 and \textit{J}0861. The inset figure is the coloured image 
+  of the object which was produced by combining all twelves bands.}
 \label{fig:Spectra}
 \end{figure}
 
@@ -413,20 +415,17 @@ clearly exhibits strong H$\alpha$ emitter.
     \label{fig:emission}
 \end{figure*}
 
-Fig~\ref{fig:emission} exhibits the distribution of the emission on the
-($r - J0600$) versus ($r - i$) color-color plane. At this point we can say that
-the algorithm implemented works well in selected objects with a excess in emission
-on the $J$0660 filter. It is possible to affirm that, because the identified objects
-are located  above of the loci of the main and giant stars. The S-PLUS synthetic photometry
-of the stellar locus is represent by the contours in the diagram and was obtained by using the
-filter transmission profiles, shown in Fig.~\ref{fig:curves}, and the library of stellar
-spectral energy distributions of \citet{Pickles:1998}. This synthetic magnitudes are
-defined in the AB magnitude system \citep{Oke:1983}. The wide distribution of fonts across
+Fig~\ref{fig:emission} exhibits the distribution of the H{$\alpha$} emitters on the
+($r - J0600$) versus ($r - i$) color-color plane and the the S-PLUS synthetic photometry
+of the stellar locus. This stellar locus is represented by the contours in the diagram and was obtained by using the filter transmission profiles, shown in Fig.~\ref{fig:curves}, and the library of stellar spectral energy distributions of \citet{Pickles:1998}. This synthetic magnitudes are defined in the AB magnitude system \citep{Oke:1983}.
+At this point, we can say that
+the algorithm implemented here worked well because the sources
+are located  above of the loci of the main and giant stars. The wide distribution of fonts across
 the ($r - J060$) and ($r - i$) colours indicates that several types of objects were selected.
 For instance, higher values on the  ($r - J0660$) color of some sources could be indicating
-that they are H II regions or/and blue compact galaxies and PNe. On the hand, the 
-($r$ - $i$) color indicates the rendered sources such as SySt and young stellar objects
-or source with strong blue continuum as cataclysm variables and QSOs.
+that they are H II regions or/and blue compact galaxies and PNe. On the other hand, the 
+($r$ - $i$) color indicates the  reddened nature of sources such as SySt and young stellar objects
+or in the opposite case, sources with a strong blue continuum as cataclysm variables and QSOs.
 
 \begin{figure*}
 \includegraphics[width=0.9\linewidth]{Figs/halpha-emitters-galactic-aitoff.pdf}
@@ -441,84 +440,24 @@ or source with strong blue continuum as cataclysm variables and QSOs.
 \label{fig:aitoff-distribution}
 \end{figure*}
 
-Figure~\ref{fig:aitoff-distribution} displays the distribution of all emitters in Galactic la
-ic latitude and longitude. The density map regions represent the spatial positions of the objects
+Figure~\ref{fig:aitoff-distribution} displays the distribution of all emitters in Galactic latitude and longitude. The density map regions represent the spatial positions of the objects
 on the sky. The surface density of $J$0660-excess objects is highest near the Galactic plane.
 
 Once, we felt confident of our sample of H{$\alpha$} emission lines sources,
-we proceeded to classify the objects into two big groups; one group containing those
-objects with a strong blue continuum and another with an intense emission of the
-continuum on the red part of the spectrum. 
+we proceeded to classify the objects into two groups; one group containing those
+objects with a strong blue continuum and another formed by sources with  intense emission of the
+continuum on the red part of the spectra. 
 
 \subsection{Unsupervised machine learning/clustering techniques}
 \label{sec:clustering}
 
-In this work we are using unsupervised machine learning approaches to divided our sample
-into two groups: one representing the blue sources and the another the red sources.
+In this work we used unsupervised machine learning approaches to divided our sample
+into two groups: one representing the blue sources and the another the red ones.
 The blue are those that have ore intense emission of the continuum on the part blue of the
 spectra and the another with strong emission continuum of the red one. For that task,
 was implemented two clustering techniques; hierarchical clustering and Hierarchical
 density-based cluster selection based on the $(g - r)$ and $(z - g)$ colors and 
-compare the results between them. Given 
-that these colours will be the input of the machine learning approaches implemented here,
-we first will speak about them.
-
-\subsubsection{$(g - r)$ versus $(z - g)$ color-color diagram}
-
-\begin{figure}
-	\includegraphics[width=0.9\linewidth]{Figs/Fig-SPLUS-gr-zg.pdf}
-        \caption{The $(g - r)$ versus $(z - g)$ synthetic color-color diagram of
-          several classes of emission lines objects. Included in the diagrams, there
-          are families of CLOUDY modelled halo PNe spanning a range of properties (density
-          map region). Cyan circles represent S-PLUS photometry from observed spectra
-          Grey diamonds represent H II regions in NGC 55. Red
-          boxes display symbiotic stars, this group also includes Galactic and
-          external SySt from NGC 205 IC 10 and NGC 185,. Yellow circles correspond to
-          cataclysmic variables (CVs) from SDSS. Pink circles indicate  blue compact
-          galaxies (BCGs) from SDSS. Orange triangles refer to SDSS
-          star-forming galaxies (SDSS SFGs). SDSS QSOs at different redshift
-          ranges are shown as light blue diamonds, and YSOs from Lupus and
-          Sigma Orionis are represented by salmon stars. The diagonal line represent
-         a subjective criterion to separate the objects into two color types. {\sc Maybe 
-         is a good idea to put the reddened vector of this color-color diagram.}}
-    \label{fig:synthetic}
-\end{figure}
-
-In order to find the best color-color diagram to separating the final sample of
-emission line objects into two color types, we first attempted constructed  color-color
-diagrams by using the S-PLUS synthetic photometry of several classes of emission line
-objects\footnote{It is important to note that there are other classes of objects
-with emission lines that have not been included. Our main objective is to explore different populations and/or types of these objects by using their photometric colors.}.
-The $(g - r)$ versus $(z - g)$ color-color diagram is displayed on
-the Fig.~\ref{fig:synthetic}. The SySt span a wide range on the $(z - g)$ color,
-  from approximately -0.5 to 6.0. This wide range on the color may refer to the different
-  type spectral of the cold stellar component of the binary system. All the YSOs and many
-  SySt are located on the top-left on the diagram indicating a reddening effect of the
-  circumstellar disk for many SySt (for example for those symbiotic with a Mira star)
-  and YSOs. On the other hand, the PNe, HII regions, CVs, QSOs and emission line galaxies
-  are located on the lower-right region in the diagram. This indicates blue continuum
-  present in each classes of theses objects, mainly by the presence of the high excitation
-  star, for instance, white dwarf in planetary nebulae and cataclysm variable stars and
-  massive young stars in H II regions and the starburst galaxies. Although some SySt are located
-  in the region where appear the blue sources, this color-color diagram seems to separate
-  very well two color types, blue from red sources.
-
-\begin{figure}
-	\includegraphics[width=0.9\linewidth]{Figs/red-blue-colorObjects-gr-edit.jpg}
-        \caption{The $(g - r)$ versus $(z - g)$ color-color diagram with all the emission line
-          objects selected in S-PLUS. The inset figures represent the $(g - r)$ and  $(z - g)$
-        distributions.}
-    \label{fig:new-color}
-\end{figure}
-
-
-We constructed the $(g - r)$ versus $(z - g)$ color-color diagram using the photometry of
-our final list of H{$\alpha$} emitters, which is presented in Fig.~\ref{fig:new-color}.
-As was we expected two-color population is showed in the diagram perceptible in the level of the
-color of the density region on which yellow areas represent a higher concentration of points.
-This is re-forced by the bi-modal shape of the $(g - r)$ and $(z - g)$ color distributions (see inset plots of the Fig.~\ref{fig:new-color}). The two peaks of the $(g - r)$ and $(z - g)$
-distributions clearly correspond to blue and red sources, respectively. This histograms also
-show that the fraction of blue objects is considerable higher than the red ones.
+compare the results between them. 
 
 \subsubsection{Hierarchical agglomerative clustering}
 \label{sec:Hierar}
@@ -556,48 +495,29 @@ are performed recursively as one moves down the hierarchy. It is the inverse pro
 of \texttt{HAC}.
 
 In simple words, hierarchical (agglomerative and divisive) clustering approaches  
-can be interpreted  as an
-algorithm that groups similar objects into groups called clusters or nodes.
-The endpoint is a set of clusters, where each cluster is distinct from each other cluster,
+can be interpreted  as an algorithm that groups similar objects into groups called 
+clusters or nodes. The endpoint is a set of clusters, where each cluster 
+is distinct from each other cluster,
 and the objects within each cluster are broadly similar to each other.
 
-The ideal way to choose the number of clusters can be done by displaying the dendrogram diagram. Firstly, the hierarchical cluster output dendrogram (tree) can be implemented to obtain the desired clustering. Secondly, the dendrogram schema allows
-a convenient way to establish the entity relationship between at all levels of granularity.
-In conclusion, a dendrogram is a visualization in form of a tree showing the order
-and distances of merges during the hierarchical clustering:
 
-\begin{itemize}
-  
-     \item The $x$ axis specifies the labels. If it does not specify anything else, they
-       are the indices of the samples. This means, the number of points in nodes/clusters.
-     \item The $y$ axis represents the distances of the ``ward'' method in our case.
-       
-\end{itemize}
+%Starting from each label at the bottom, it is possible to see a vertical line up to a
+%horizontal line. The height of that horizontal line tells you about the distance
+%at which this label was merged into another label or cluster. You can find that
+%other cluster by following the other vertical line down again. If you don't
+%encounter another horizontal line, it was just merged with the other label
+%you reach, otherwise it was merged into another cluster that was formed earlier.
 
+%Hierarchical clustering can be performed with either a distance matrix or raw data.
+%When raw data is provided, the software will automatically compute a distance
+%matrix in the background. The distance matrix below shows the distance between
+%six objects.
 
-\paragraph{Dendrogram Truncation}
-
-As you might have noticed, the above is pretty big for many samples already and you
-probably have way more in real scenarios, so let me spend a few seconds on highlighting
-some other features of the \textsc{dendrogram()} function:
-
-Starting from each label at the bottom, you can see a vertical line up to a
-horizontal line. The height of that horizontal line tells you about the distance
-at which this label was merged into another label or cluster. You can find that
-other cluster by following the other vertical line down again. If you don't
-encounter another horizontal line, it was just merged with the other label
-you reach, otherwise it was merged into another cluster that was formed earlier.
-
-Hierarchical clustering can be performed with either a distance matrix or raw data.
-When raw data is provided, the software will automatically compute a distance
-matrix in the background. The distance matrix below shows the distance between
-six objects.
-
-Hierarchical clustering starts by treating each observation as a separate cluster.
-Then, it repeatedly executes the following two steps: (1) identify the two
-clusters that are closest together, and (2) merge the two most similar clusters.
-This iterative process continues until all the clusters are merged together.
-This is illustrated in the diagrams below.
+%Hierarchical clustering starts by treating each observation as a separate cluster.
+%Then, it repeatedly executes the following two steps: (1) identify the two
+%clusters that are closest together, and (2) merge the two most similar clusters.
+%This iterative process continues until all the clusters are merged together.
+%This is illustrated in the diagrams below.
 
 
 \subsubsection{Hierarchical density-based cluster selection}
@@ -605,12 +525,12 @@ This is illustrated in the diagrams below.
 
 Hierarchical density-based cluster selection (\texttt{HDBSCAN}, \citealp{Campello:2013})
 is another unsupervised machine learning algorithm that hinges on clustering.
-It is based on a slightly modified version of Density-based Spatial
-Clustering of Applications with Noise (\texttt{DBSCAN}; \citealp{Ester:1996}) which
-declare points as noise. It is a algorithm that assumes clusters that are characterized
+It is based on a slightly modified version of density-based spatial
+clustering of applications with noise (\texttt{DBSCAN}; \citealp{Ester:1996}) which
+declares points as noise. It is an algorithm that assumes clusters that are characterized
 by ``islands'' of high density in the sea of the parameter space, such
-that clusters are regarded as data partitions that have a higher density
-than their surroundings \citep{Ntwaetsile:2021}. HDBSCAN takes forward the
+clusters are regarded as data partitions that have a higher density
+than their surroundings \citep{Ntwaetsile:2021}. \texttt{HDBSCAN} takes forward the
 DBSCAN concept by introducing a hierarchy to the clustering, with ``persistent''
 clusters finally extracted from the hierarchical tree. The main advantage of
 HDBSCAN in comparison with the predecessor consists in the possibility in finding
@@ -618,35 +538,35 @@ clusters of variables densities and different shape. Following \citet{Malzer:202
 and \citet{Ntwaetsile:2021} works as follows:
 
 \begin{enumerate}
-\item In \texttt{HDBSCAN} is consider the ``core'' distance  for a point $x$, core$_k(x)$
-  which defines the distance of an object to the $k$th nearest neighbor that is an
-  efficient way of measurement of density. Low values of core$_k(x)$ represents high
-  density and vice-versa.
+\item In \texttt{HDBSCAN} is consider the ``core'' distance for a point $x$, core$_k(x)$,
+  which defines the distance of an object to the $k$th nearest neighbor. It is an
+  efficient way of measurement of density. This mean that low values of core$_k(x)$ 
+  represents high density and vice-versa.
 
 \item The ``mutual readability distance'' between two points $a$ and $b$ is defined as
   $d_{\mathrm{m}}(a, b) = \mathrm{min}{\mathrm\{core}_k(a), \mathrm{core}_k(b), d(a, b)\}$,
   where $d(a, b)$ is the distance between $a$ and $b$ according, for instance,
   Euclidean metric. The mutual readability distance allows points in dense regions
-  stay close together and those that are in lees dense regions pushed away.
+  to stay close together and those that are in less dense regions pushed away.
 
 \item The mutual readability graph is used to construct the minimum spanning tree,
-  and sorting its edges by the mutual readability distance results in a
+  and sorting its edges by the mutual readability distance resulting in a
   hierarchical tree structure. The hierarchy of connected components is
   defined by sorting the edges of the tree by distance in reverse order,
-  describing a dendrogram. This is the structure from which cluster will
+  describing a dendrogram. This is the structure from which the cluster will
   be identified.
 
-\item \texttt{HDBSCAN} allows to extract clusters of variable density, effectively
+\item \texttt{HDBSCAN} allows to extract clusters of variable density, effectively,
   by cutting the dendrogram at different points.
 
-\item The cluster tree is condensed into a simpler structure. Considering the single
-  main trunk which contains all of the data points, the tree splits into branches.
+\item The cluster tree is condensed into a simpler structure (see, for instance, Figure~\ref{fig:condensed-trees} of appendices~\ref{sec:trees}). 
+Considering the single main trunk which contains all the data points, the tree splits into branches.
   A condensed cluster hierarchy can be described by considering the number points
-  kept in each branch as it splits. If a given branch splits into two, with a branch
+  kept in each branch as it splits. If a given branch divides into two, with a branch
   containing fewer points than the minimum cluster size means, the large branch
   ``persists'' and the smaller split branch ``falls out'' of the  cluster. If
   a branch splits into two with both branches exceeding the minimum cluster size,
-  both new branches persist.
+  both new branches are conserved.
 
 \item The clusters are extracted on the notion of persistence in the hierarchy.
   The parameter $\lambda = d_{\mathrm{m}}^{-1}$ is defined, and each cluster has a
@@ -671,9 +591,9 @@ and \citet{Ntwaetsile:2021} works as follows:
   
 \end{enumerate}
 
-The algorithm starts off much the same as DBSCAN: we transform the space
+The algorithm starts off much the same as {\sc DBSCAN}: transforming the space
 according to density, exactly as DBSCAN does, and perform single linkage
-clustering on the transformed space. Instead of taking an epsilon value
+clustering on the transformed space. Instead of taking an epsilon\footnote{Epsilon parameter in {\sc DBSCAN} represents the maximum distance between two samples for one to be considered as in the neighborhood of the other. This is the most important DBSCAN parameter to choose appropriately for the data set and distance function.} value
 as a cut level for the dendrogram however, a different approach is taken:
 the dendrogram is condensed by viewing splits that result in a small number
 of points splitting off as points ``falling out of a cluster''. This results
@@ -681,24 +601,26 @@ in a smaller tree with fewer clusters that ``lose points''. That tree can then
 be used to select the most stable or persistent clusters. This process allows
 the tree to be cut at varying height, picking our varying density clusters
 based on cluster stability. The immediate advantage of this is that we can
-ave varying density clusters; the second benefit is that we have eliminated
+have varying density clusters; the second benefit is that we have eliminated
 the epsilon parameter as we no longer need it to choose a cut of the dendrogram.
 Instead we have a new parameter \texttt{min\_cluster\_size} which is used
 to determine whether points are ``falling out of a cluster'' or splitting
-to form two new clusters. This trades an unintuitive parameter for one that
-is not so hard to choose for EDA (what is the minimum size cluster I am
-willing to care about?).
+to form two new clusters. 
+%This trades an unintuitive parameter for one that
+%is not so hard to choose for EDA (what is the minimum size cluster I am
+%willing to care about?).
 
 
-Hierarchical Density-Based Spatial Clustering of Applications with Noise (Campello,
-Moulavi, and Sander 2013), (Campello et al. 2015). Performs \texttt{DBSCAN} overvarying
-epsilon values and integrates the result to find a clustering that gives the best
-stability over epsilon. This allows \texttt{HDBSCAN} to find clusters of varying densities
-(unlike \texttt{DBSCAN}), and be more robust to parameter selection. The library also
-includes support for Robust Single Linkage clustering (Chaudhuri et al. 2014),
-(Chaudhuri and Dasgupta2010), GLOSH outlier detection (Campello et al. 2015), and
-tools for visualizing and exploring cluster structures. Finally support for prediction
-and soft clustering is also available.
+%Hierarchical Density-Based Spatial Clustering of Applications with Noise (Campello,
+%Moulavi, and Sander 2013), (Campello et al. 2015). Performs \texttt{DBSCAN} overvarying
+%epsilon values and integrates the result to find a clustering that gives the best
+%stability over epsilon. 
+%This allows \texttt{HDBSCAN} to find clusters of varying densities
+%(unlike \texttt{DBSCAN}), and be more robust to parameter selection. The library also
+%includes support for Robust Single Linkage clustering (Chaudhuri et al. 2014),
+%(Chaudhuri and Dasgupta2010), GLOSH outlier detection (Campello et al. 2015), and
+%tools for visualizing and exploring cluster structures. Finally support for prediction
+%and soft clustering is also available.
 
 In the last years, \texttt{HDBSCAN} have been in astronomy for different tasks.
 \citet{Jayasinghe:2019} presented the second data release Milky Way Project (MWP), a citizen
@@ -710,24 +632,110 @@ The reliability of bubble identifications was made by using \texttt{HDBSCAN}.
 On the other hand, \citet{Webb:2020} used \texttt{HDBSCAN} for transient discovery.
 Recently, \citet{Ntwaetsile:2021} used it to group radio sources into a sequence
 of morphological classes, illustrating a simple methodology to classify and
-label new, unseen galaxies in large samples. 
+label new, unseen galaxies in large samples. This approach was also implemented to identify stellar groups in Canis Major OB1 \citep{Santos-Silva:2021}.
 
-\subsection{Grouping the H{$\alpha$} emitters into blue and red sources}
+\subsection{Grouping the H{$\alpha$} emitters into blue and red colour-types}
 \label{sec:apply-hac-hdbscan}
+
+Given that $(g - r)$ and $(z - g)$ colours are the input data to implement the machine learning approaches, we first will speak about them.
+
+\subsubsection{$(g - r)$ versus $(z - g)$ color-color diagram}
+
+\begin{figure}
+	\includegraphics[width=0.9\linewidth]{Figs/Fig-SPLUS-gr-zg.pdf}
+        \caption{The $(g - r)$ versus $(z - g)$ synthetic color-color diagram of
+          several classes of emission lines objects. Included in the diagrams, there
+          are families of CLOUDY modelled halo PNe spanning a range of properties (density
+          map region). Cyan circles represent S-PLUS photometry from observed spectra
+          Grey diamonds represent H II regions in NGC 55. Red
+          boxes display symbiotic stars, this group also includes Galactic and
+          external SySt from NGC 205 IC 10 and NGC 185,. Yellow circles correspond to
+          cataclysmic variables (CVs) from SDSS. Pink circles indicate  blue compact
+          galaxies (BCGs) from SDSS. Orange triangles refer to SDSS
+          star-forming galaxies (SDSS SFGs). SDSS QSOs at different redshift
+          ranges are shown as light blue diamonds, and YSOs from Lupus and
+          Sigma Orionis are represented by salmon stars. The diagonal dashed line represents
+         a subjective criterion to separate the objects into two color types.  The arrow
+         indicates the reddening vector with AV $\simeq$ 2 mag. {\sc Maybe 
+         is a good idea to put the reddened vector of this color-color diagram.}}
+    \label{fig:synthetic}
+\end{figure}
+
+In order to find the best color-color diagram to separating the final sample of
+emission line objects into two colour-types, we first attempted constructed  color-color
+diagrams by using the S-PLUS synthetic photometry of several classes of emission line
+objects\footnote{It is important to note that there are other classes of objects
+with emission lines that have not been included. Our main objective is to explore different populations and/or types of these objects by using their photometric colors.}.
+The $(g - r)$ versus $(z - g)$ color-color diagram is displayed on
+the Fig.~\ref{fig:synthetic}. The SySt span a wide range on the $(z - g)$ color,
+  from approximately -0.5 to 6.0. This wide range on the color may refer to the different
+  type spectral of the cold stellar component of the binary system. All the YSOs and many
+  SySt are located on the top-left on the diagram indicating a reddening effect of the
+  circumstellar disk for many SySt (for example for those symbiotic with a Mira star)
+  and YSOs. On the other hand, the PNe, HII regions, CVs, QSOs and emission line galaxies
+  are located on the lower-right region of the diagram. This indicates blue continuum
+  present in each classes of theses objects, mainly by the presence of the high excitation
+  star, for instance, white dwarf in planetary nebulae and cataclysm variable stars and
+  massive young stars in H II regions and starburst galaxies. Although some SySt are located
+  in the region where appear the blue sources, this color-color diagram seems to separate
+  very well two color types, blue from red sources. The dashed line is an attempt to limit
+   both regions, the blue and red zone.
+  
+  \begin{figure}
+	\includegraphics[width=0.9\linewidth]{Figs/red-blue-colorObjects-gr-edit.jpg}
+        \caption{The $(g - r)$ versus $(z - g)$ color-color diagram with all the emission line
+        objects selected in S-PLUS. The inset figures represent the $(g - r)$ and  $(z - g)$
+        colour distributions.}
+    \label{fig:new-color}
+\end{figure}
+
+
+We constructed the $(g - r)$ versus $(z - g)$ color-color diagram using 
+our final list of H{$\alpha$} emitters, which is presented in Fig.~\ref{fig:new-color}.
+As was we expected two-color population is showed in the diagram perceptible in the level of the
+color of the density region on which yellow areas represent a higher concentration of points.
+This is re-forced by the bi-modal shape of the $(g - r)$ and $(z - g)$ color distributions (see inset plots of the Fig.~\ref{fig:new-color}). The two peaks of the $(g - r)$ and $(z - g)$
+distributions clearly correspond to blue and red sources, respectively. This histograms also
+show that the fraction of blue objects is considerable higher than the red ones.
 
 \subsubsection{\texttt{HAC}}
 
+The ideal way to choose the number of clusters can be done by displaying the \textbf{dendrogram diagram}. Firstly, the hierarchical cluster output dendrogram (tree; see for instance Figure~\ref{fig:condensed-trees}) can be implemented to obtain the desired clustering. Secondly, the dendrogram schema allows 
+a convenient way to establish the entity-relationship between at all levels of granularity.
+In conclusion, a dendrogram is a visualization in form of a tree showing the order
+and distances of merges during the hierarchical clustering:
+
+\begin{itemize}
+  
+     \item The $x$-axis specifies the labels. If it does not specify anything else, they
+           are the indices of the samples. This means, the number of points in nodes/clusters.
+     \item The $y$-axis represents the distances of the ``ward'' method. In other words,
+           this axis is a measurement of the closeness of the clusters or data points.
+       
+\end{itemize}
+
+We first generated the dendrogram diagram to see the possibles clusters that can be found with
+\texttt{HAC}. The dendrogram diagram sometimes can be pretty big for many samples, 
+especially in the
+context of the big data and the visualization of the cluster can be difficult. However, the \textsc{dendrogram()} function, which is 
+include in the python package \texttt{scipy}\footnote{https://www.scipy.org/}, allow us to generate this diagram, and has a feature to allow a better visualization of them. 
+This is the \textit{Dendrogram Truncation}. 
+
+Figure~\ref{fig:dendrogram} exhibits the truncated dendrogram plot based on the colours
+parameters. This only shows the last 12 nodes out of all merges. Note that most labels are not showing. This is because all other data were already merged into clusters before the last 12 merges. From the diagram is perceptive that the longest distances correspond to 
+the two last merged that are the two clusters that we desire to produce with 
+the hierarchical clustering algorithm.
+
 \begin{figure}
 	\includegraphics[width=0.9\linewidth]{Figs/Customer-Dendrograms.pdf}
-    \caption{Costomer dendrogram...}
+    \caption{Truncated dendrogram of complete-linkage hierarchical clustered based on $(g - r)$ and $(z - g)$ colours. The cluster sizes are exposed in the brackets for the 12 truncated clusters.}
     \label{fig:dendrogram}
 \end{figure}
 
 \begin{figure}
 	\includegraphics[width=0.9\linewidth]{Figs/blued-red-hierarchical.pdf}
     \caption{The $(g - r)$ versus $(z - g)$ color-color diagram with the two population
-    found bi implementing \texttt{HAC} algorithm. The blue symbols represent the sources with 
-    intense blue continuum and the red symbols are the objects with intense red continuum.}
+    found by implementing \texttt{HAC} algorithm. The blue and red symbols represent the sources with intense blue continuum and those with intense red continuum, respectively. The straight line is the same line of Figure~\ref{fig:synthetic}.}
     \label{fig:hierar}
 \end{figure}
 
@@ -735,14 +743,13 @@ In this work, we implemented {\sc hac} by using the python machine learning libr
 \texttt{Scikit-learn}\footnote{\url{https://scikit-learn.org/stable/}} \citep{Pedregosa:2011}.
 There are some parameters to have in count
 when the algorithm is applied: \texttt{n\_clusters} which is the number cluster to find. Given
-that our goal is to divide our sample in two groups we set this value in 2. \texttt{Affinity},
-Metric used to compute the linkage. We found that a simple ``Euclidean'' distance metric was
+that our goal is to divide our sample in two groups we set this value in "2". \texttt{Affinity} the is the "metric" used to compute the linkage. We found that a simple ``Euclidean'' distance metric is
 effective. \texttt{Linkage} which determines which distance to use between sets of observation.
 The algorithm merge the pairs of cluster that minimize this criterion. Here was implemented
 ``ward'' which minimizes the variance of the clusters being merged. As was mentioned,
 the input variables are the colors; ($g - r$) and ($z - g$).
 
-Fig.~\ref{fig:dendrogram} shows the dendrogram truncated diagram visualization that
+Figure.~\ref{fig:dendrogram} shows the dendrogram truncated diagram visualization that
 shows the branching of the sample from the main root. And Fig.~\ref{fig:hierar} shows
 the position of the two groups that resulted after to applying \texttt{HAC} in the
 color-color diagram. The two clusters represent the blue sources (blue simbols)
@@ -753,8 +760,18 @@ emitter is bigger than the red one.
 
 \subsubsection{\texttt{HDBSCAN}}
 
-We also used \texttt{HDBSCAN} to separate the blue sources from the red ones. This just for
-comparing the performance of two algorithms and show that the our resulted are consistent.
+\begin{figure*}
+\centering
+\begin{tabular}{l l}
+  \includegraphics[width=0.5\linewidth, trim=10 10 5 8, clip]{Figs/blued-red-hdbscan.pdf}
+   \includegraphics[width=0.5\linewidth, trim=10 10 5 8, clip]{Figs/blue-red-hdbscan-soft-alternative.pdf}
+  \end{tabular}  
+  \caption{As Figure~\ref{fig:synthetic} but with the results after to apply \texttt{HDBSCAN} (\textit{left panel}) to the sample of H{$\alpha$}. The blue and red symbols correspond to blue and red sources, respectively. Gray symbols are the sources classified as noise by \texttt{HDBSCAN}. And the results after apply a soft clustering to the \texttt{HDBSCAN} results (\textit{right panel}). The straight line is the same line as Figure~\ref{fig:synthetic}.}
+\label{fig:hdbscan}
+\end{figure*}
+
+We also used \texttt{HDBSCAN} to separate the blue sources from the red ones. This is just for
+comparing the performance of two algorithms and show that the our results are consistent.
 We used the python implementation of \texttt{HDBSCAN}\footnote{\url{https://hdbscan.readthedocs.io/en/latest/}}
 \citep{McInnes:2017}. Like \texttt{HAC}, in addition to the colors input
 parameters,  there are key parameters that should be considered  when the algorithm is
@@ -764,8 +781,8 @@ of samples''. The former refers to the smallest size grouping that we wish to co
 We have adopted the value ``80''. The latter provides a measure of how conservative we want our
 clustering to be and expressed as the fraction of data classified as noise.
 The value implemented was ``40''. With this configuration of our model we found
-two cluster. If we use values of minimum number of samples smaller than ``40'' several small
-cluster are found that do not make sense.
+two cluster. If we use values of minimum number of samples smaller than ``40'' 
+several small cluster are found that do not make sense.
 
 Left panel of Fig~\ref{fig:hdbscan} the resulted cluster found with \texttt{HDBSCAN}. Two group are
 found and these results are consistent with results found with  \texttt{HAC}.
@@ -778,7 +795,7 @@ The main difference between the two algorithm is that  \texttt{HDBSCAN}
 is much conservative, then many data points are classified as noise. The two final cluster
 contain, which we are labeled blue and red sources contain xxx and xxx objects, respectively.
 
-\subsection{Soft clustering for \texttt{HDBSCAN}}
+\subsubsection{Soft clustering for \texttt{HDBSCAN}}
 
 Perhaps, the main disadvantage of \texttt{HDBSCAN} is that many of the sources are labelled
 as ``noise''. This means that some sources are not assigned to any cluster. As was mentioned,
@@ -789,14 +806,13 @@ of ``soft clustering''. We have carried out here soft
 clustering for \texttt{HDBSCAN} to assign every object to its most likely cluster on which belong.
 This means that with this approach, points are not assigned cluster labels, instead are
 assigned a vector of probabilities. The probability value at the $i$th entry of the vector
-is the probability that a data point is a member of the $i$th cluster. We can then simply
+is the probability that a data point is a member of the $i$th cluster. We can, then, simply
 assign cluster labels for every point by taking the most likely cluster it belongs to,
 using probability thresholds. Soft clustering for \texttt{HDBSCAN} is based on the
 Global-Local Outlier Score from Hierarchies (GLOSH) algorithm \citep{Campello:2015}
-and combines this with a
-measure of distance from a given cluster to produce an estimate of the probability that any
-given data point belongs to any of the fixed clusters extracted from the
-condensed tree.
+and combines this with a measure of distance from a given cluster to produce 
+an estimate of the probability that any given data point belongs to any of the fixed 
+clusters extracted from the condensed tree.
 
 The right panel of Fig.~\ref{fig:hdbscan} shows at what most likely cluster belongs the data
 points classified as the noise by \texttt{HDBSCAN}. We have used blue and red colors for the
@@ -810,45 +826,41 @@ to every group.
 \section{Results and discussion}
 \label{sec:results}
 
+\subsection{Matches with other databases}
+\label{sec:matches}
 We found a total of 389 emission line sources in all S-PLUS DR3.
 To understand the nature of the objects  and the fractional
-contribution of different classes
-of objects with emission lines to the overall sample cross-matching
-with some catalogs available were carried out.
+contribution of different classes of objects with emission lines to the overall sample cross-matching with some catalogs available were carried out.
+
+\subsubsection{Simbad}
 
 \begin{table*}
 \centering
 \caption{A summary of the results obtained of the positional cross-match between
-         between the S-PLUS list of emission line objects and the SIMBAD database.
-          We used a search radios of 2 arcsec. 
-                                               }
+        between the S-PLUS list of emission line objects and the SIMBAD database.
+        We used a search radios of 2 arcsec.}
 \label{tab:simbad-sources}
 \begin{tabular}{lccc} % four columns, alignment for each
   \hline
 Main type    & Associated SIMBAD           & Number of S-PLUS objects    \\
              & types                        &  with SIMBAD match         \\
 \hline
-H II region                & HII                     & 26                \\
-Planetary nebula           & PN                      & 1                 \\
-Supernova                  & SN, Candidate\_SN*      & 9                 \\
-Nova                       & Nova                    & 1                 \\
+Nebulae                & HII, PN, SN, Candidate\_SN*, Nova  & 37               \\
 Cataclysmic variable star  & CataclyV*, Candidate\_CV* & 30              \\
 Variable star of RR Lyr type & RRLyr, Candidate\_RRLyr & 19              \\
 X-ray source                & HMXB, X                  & 6               \\
 Eclipsing binary            & EB*                    & 8                 \\            
-BL Lac - type object        & BLLac                  & 2                 \\
 Emission object             & EmObj                  & 4                 \\
 Star                        & star, WD*, Candidate\_WD*, Blue, BlueSG*, PM*, low-mass* & 57 \\
 UV-emission source          & UV                     & 2                 \\
 Cluster of stars            & Cl*                    & 3                 \\
 Far-infrared source         & FIR                    & 2                 \\
 Mid-infrared source         & MIR                    & 1                 \\
-Radio-source                & Radio                  & 7                 \\
+Radio-source                & Radio                  & 7                \\
 Molecular cloud             & MolCld                 & 2                 \\
 Emission line galaxy        & EmG, HII\_G, StarburstG, BlueCompG & 102   \\
 Part of a galaxy            & PartofG                & 9                 \\
 Interacting galaxies        & IG                     & 10                \\
-Radio galaxy                & RadioG                 & 2                 \\
 Galaxy in pair of galaxies      & GinPair            & 12                \\
 Galaxy in group of galaxies     & GinGroup           & 18                \\
 Galaxy in cluster of galaxies   & GinCl              & 23                \\
@@ -856,9 +868,7 @@ Low surface brightness galaxy   & LSB\_G             & 10                \\
 Brightest galaxy in a cluster   & BClG               & 3                 \\
 Globular cluster            & GlCl                   & 1                 \\
 QSO                         & QSO, QSO\_Candidate    & 225               \\
-AGN                         & AGN, AGN\_Candidate    & 18                \\
-Seyfert 1                   & Seyfert\_1             & 38                \\
-Seyfert 2                   & Seyfert\_2             & 7                 \\
+AGN                         & AGN, AGN\_Candidate, Seyfert\_1, Seyfert\_2, BLLac, RadioG  & 67  \\
 Galaxy                      &  Galaxy                & 421               \\
 Possible gravitationally lensed image & Possible\_lensImage & 1          \\
 \hline
@@ -867,150 +877,14 @@ Total                       &                               & 10         \\
 \end{tabular}
 \end{table*}
 
-\subsection{Simbad}
-
-We made cross-match between our sample of objects with a excess of emission of
-the $J$0660 and SIMBAD. We searched for all objects in SIMBAD using a radius of 2 arcsec
+We made cross-match between our sample of objects with excesses of emission on
+the $J$0660 filter and SIMBAD database. We searched for all objects using a radius of 2 arcsec
 around the position of the optical source in question. We found 1000
 matches that include a great variety of emission line objects. In table
 \ref{tab:simbad-sources} is showed the different categories of objects found
-in SIMBAD.
+with SIMBAD coincidence.
 
-\subsubsection{Nebulae}
-
-As was mentioned, objects with nebulosity include several
-types of objects such as H II region and planetary nebulae.
-The H II regions are objects with gas that being ionized by
-amounts of UV light come from massive stars (OB type) on which
-are formed the emission lines. In theses clouds of ionized gas,
-new stars are formed. Unlike H II regions, planetary nebulae
-represent the final stages of low- and intermediate-mass stars
-where the gas previously ejected in the phase of AGB is ionized
-by the high energetic radiation come from their central stars.
-
-In our list of H{$\alpha$} emission line a PN appears cataloged in SIMBAD 
-on which the S-PLUS photometry and spectrum is displyed on panel (\textit{a}) 
-of Fig~\ref{fig:photo-image-knonw-objects}. Emission lines like H{$\alpha$} 
-and [N II] are clearly perceptive in its spectrum, agreeing with PLUS photometry.
-This objects is a very interesting because is one of the twelves PNe that belong
-to the Galactic halo. These PNe are low metallizite and present large velocities that
-can give count of the origin and nuclesintheis of the early universe. 30 objects 
-cataloged as HII regions on the SIMBAD database are in our list of H{$\alpha$} emitters. 
-Panel (\textit{b}) oh the figure shows the S-PLUS photometry and SDSS spectrum 
-of the extragalactic HII region GALEX 2417063145906373262.   
-
-\subsubsection{Binary systems}
-25 known CVs and 5 candidate CVs (from SIMBAD) were selected with algorithm.
-CVs are binary systems of very short orbital period, in which a low-mass and
-early-type star fills its Roche region and transfers mass to a companion stars,
-a dwarf white \citep{Patterson:1984}. Fig.~\ref{fig:photo-image-knonw-objects} the S-PLUS
-photometry overlapped to the SDSS spectrum of the CV FASTT 1560. As expected,
-this object was classified as blue source by the machine learning approaches.
-Other binary system in our list are the X-binary sources, eclipsing binary, variable
-stars of RR Lyr type. 
-
-\subsubsection{Stars}
-Several stars were selected as shows the matches with SIMBAD.
-The SIMBAD types include normal stars, white dwarf stars (WD*), white dwarf
-candidates (Candidate\_WD*), blue stars, blue super-giant stars (BlueSG*), high
-proper-motion stars (PM*) and low-mass star (low-mass*; M<1M$_\odot$). All these
-objects appears in the S-PLUS catalog as H{$\alpha$} emitters. Some of them 
-can be early/late-type emission-line stars and/or different types of stars with
-the H{$\alpha$} emission lines. Although some of these stars could represent the 
-fraction of contaminant of our sample.
-
-\subsubsection{Galaxies}
-Emission line galaxies also were selected. This category include
-several class of galaxies according to SIMBAD types: emission-line galaxy (EmG),
-blue compact galaxy (BlueCompG), HII galaxy (HII G), galaxy in cluster of galaxies
-(GinCl), galaxy in group of galaxies (GinGroup), low surface brightness galaxy
-(LSB G), interacting galaxies (IG), part of a Galaxy (PartofG), Seyfert 1 and
-Seyfert 2 galaxies, AGN and galaxy.
-
-All the emission line galaxies of these category form part of the universe local.
-This mean that their redshift cover the range on which the H{$\alpha$} emission line still
-falls into the $J0660$ filter. Objects with $ z >  0.02$ the  H{$\alpha$} is outside 
-of the $J0660$ filter. Table~\ref{tab:simbad} of the appendices shows the red-shift of the
-emission line galaxies of our sample that have SIMBAD matches. Many of the galaxies have 
-small red-shift values probing that mostly of these galaxies are real H{$\alpha$} emitters. 
-In these kind of galaxies such as the blue 
-compact and/or H II galaxies their starburst regions that consist of ensemble of massive 
-ionizing stars and their respective giant H II regions cover the extension of the optical 
-images and the emission lines of their spectra. Fig.~\ref{fig:photo-image-knonw-objects2}
-shows the SDSS spectra and S-PLUS photometry of the H II galaxy 6dFGS gJ012646.5-003845 
-(panel \textit{a}) and of the radio galaxy NVSS J025557+004132. The H II galaxy is classified 
-as blue source while the radio galaxy as red by the machine learning algorithm. 
-
-On the other hand, several AGN, Seyfert 1 and Seyfert 2 galaxies have red-shift 
-between 0.31 and 0.37 indicating that the excess on the $J0660$ filter
-is not due to the H{$\alpha$} emission but if due to the H{$\beta$} and [O III] 4959, 5007 \AA~ 
-emission lines. These emission lines at the red-shift range $0.306 < z < 0.376$ are detected in the $J0660$ band. It is well known that the AGNs have very strong emission 
-lines such as H{$\beta$}, [0 III] 4959, 5007 \AA~and H{$\alpha$}.
-
-One interesting discussion here, is that the type part of a Galaxy (PartofG)
-on SIMBAD are actually galaxies with Wolf-Rayet (WR) signature in the low red shift
-universe also named ``WR galaxy'' \citep{Osterbrock:1982}. WR stars in galaxies
-is perceptible in their spectra with strong emission lines such as H{$\alpha$}
-and [NII]. These spectral features can be of them very similar to extragalactic
-H II regions present typically of the outskirt of spiral galaxies. Panel (\textit{e}) 
-of Fig.~\ref{fig:photo-image-knonw-objects} displays the S-PLUS and SDSS spectra 
-of the  Wolf-Rayet [BKD2008] WR 14 which belong to the galaxy ??.
-
-Many of the objects have as main type ``galaxy'' in SIMBAD. This galaxies
-could be spiral galaxies on which the star formation is present. It is known
-that in the spiral arms of the galaxies are present H II regions as well as
-neutral gas (H I) and molecular gas. Actually some of these galaxies haves for
-secondary type H I. The reservoir of H I gas in galaxies must ultimately
-feed their star formation, after cooling and forming molecular
-clouds \citep{van-Driel:2016}. Fig. shows the S-PLUS photometry and
-the SDSS spectra of star-forming galaxy with clearly emission lines.
-Note that almost all these galaxies are classified as blue color 
-type objects by the \texttt{HAC} and \texttt{HDBSCAN}.
-However, Mostly of the Seyfert 2 galaxies and a handful of galaxies are classified as
-red sources, why?
-
-\subsubsection{QSOs}
-Other extragalactic objects with emission lines that were selected are the
-QSOs. In the case of the QSOs is not the H{$\alpha$} emission line who impact
-on the $J$0660 filter. This filter is affected by strong emission lines present in
-these objects that to specific redshift drop into the $J$0660 filter.
-Some of these emission lines are H{$\beta$}, C {\sc IV} 1550 \AA, C {\sc III]} 1909 \AA,
-  Mg {\sc II} 2798 \AA~(see, also \citealp{Gutierrez:2020, Nakazono:2021}).
-  All the objects were classified as blue sources which was the expected.
-  Fig. show the S-PLUS photomerty and SDSS spectrum of the QSO 2SLAQ J220529.34-003110.6
-  which has red-shift of $\sim$2.45 indicating that the emission line corresponds to
-  the line C {\sc III]}.
-  
-
-  \subsubsection{Other type of objects}
-  
-  Miscellanies the objects were selected as H{$\alpha$} emitters which are cataloged on 
-  SIMBAD as it can see in the table~\ref{tab:simbad-sources}. They are included FIR 
-  sources, MIR objects, molecular clouds, 
-
-\subsection{SDSS and LAMOST}
-
-We also made cross-match between the sample of H{$\alpha$} emission line objects and SDSS DR16
-\citep{Ahumada:2020}. We have used the 2$\sigma$ error circle as the cross-matching radius.
-We got 200 spectra from which 195 objects exhibit strong emission lines. 5 objects do not show
-emission lines, they probably are stars or galaxies.
-
-We also cross-correlate our list with Large Sky Area Multi-Object Fiber Spectroscopic Telescope
-(LAMOST; \citealp{Wu:2011}) using a radius of 2 arcsec for the match.  These spectra also
-show strong emission lines. These results shows that this technique actually are very effective
-for selecting sources with strong emission lines.
-
-\begin{figure*}
-\centering
-\begin{tabular}{l l}
-  \includegraphics[width=0.5\linewidth, trim=10 10 5 8, clip]{Figs/blued-red-hdbscan.pdf}
-   \includegraphics[width=0.5\linewidth, trim=10 10 5 8, clip]{Figs/blue-red-hdbscan-soft-alternative.pdf}
-  \end{tabular}  
-  \caption{$(r - g)$ versus $(g - z)$ color-color diagram to separate the blue objects 
-  from the red ones.}
-\label{fig:hdbscan}
-\end{figure*}
-
+\paragraph{Nebulae.}
 
 \begin{figure*}
 %\setlength\tabcolsep{\figstampcolsep}
@@ -1019,15 +893,12 @@ for selecting sources with strong emission lines.
   (a) & (b) \\
   \includegraphics[width=0.5\linewidth, trim=10 60 5 8, clip]{Figs/StenholmAcker_pn_g006_0-41_9_id176-SPLUS-s29s46-072842.pdf} \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/PN_316.4731956938531--37.14456181858315_100_r.pdf}}} & \includegraphics[width=0.5\linewidth, trim=10 60 10 8, clip]{Figs/spec-0680-52200-0153-STRIPE82-0159-019049.pdf} \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/HII_351.0847562454346--0.10695578184817373_150_r.pdf}}} \\
 (c) & (d) \\
-  \includegraphics[width=0.5\linewidth, trim=10 60 10 8, clip]{Figs/spec-0982-52466-0477-STRIPE82-0103-089600.pdf} \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/CV_311.8365168802931-0.0021268467006492_100_r.pdf}}} & \includegraphics[width=0.5\linewidth, trim=10 60 10 8, clip]{Figs/spec-1033-52822-0623-STRIPE82-0134-016856.pdf} \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/SN_333.17320112679323-0.5119642601996512_150_r.pdf}}} \\
-(e) & (f) \\
-  \includegraphics[width=0.5\linewidth, trim=10 10 10 8, clip]{Figs/spec-0285-51930-0042-SPLUS-n02s23-042426.pdf} \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/wr1_180.1095757612321--1.1019334954271696_100_r.pdf}}} & \includegraphics[width=0.5\linewidth, trim=10 10 10 8, clip]{Figs/spec-9146-58042-0510-STRIPE82-0131-050516.pdf}  \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/QSO_331.37225331383246--0.5196269942518518_100_r.pdf}}}
+  \includegraphics[width=0.5\linewidth, trim=10 60 10 8, clip]{Figs/spec-0982-52466-0477-STRIPE82-0103-089600.pdf} \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/CV_311.8365168802931-0.0021268467006492_100_r.pdf}}} & \includegraphics[width=0.5\linewidth, trim=10 60 10 8, clip]{Figs/spec-1033-52822-0623-STRIPE82-0134-016856.pdf} \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/SN_333.17320112679323-0.5119642601996512_150_r.pdf}}} 
   \end{tabular}
   \caption{Summary of our selection results showing the spectrum (gray line en each panel) of 
           different classes of emission line sources identified in our target list. 
           A spectrum of a PN (\textit{a}) from  {\sc ref}. The SDSS spectra of an external H II region (\textit{b}), 
-          a cataclysm variable star (\textit{c}), a super nova (\textit{d}), a WR in a galaxy (\textit{e}) 
-          and a QSO (\textit{f}) with red-shift of $\sim$ 2.45. 
+          a cataclysm variable star (\textit{c}), a super nova (\textit{d}).
           As in Figure~\ref{fig:Spectra}, coloured square and circles symbols represent the S-PLUS
           photometry. All these objects show a significance excesses on the $J0660$ filter in
           comparison with the broad-bands.}
@@ -1046,13 +917,156 @@ for selecting sources with strong emission lines.
         \includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/Seyfer1_option2_310.91682422695794-0.481551561964735_100_r.pdf}\\
         \rule{0ex}{3.7cm}%
       }
-  \rule{4.1cm}{0ex}} 
+  \rule{4.1cm}{0ex}} \\
+  (e) & (f) \\
+  \includegraphics[width=0.5\linewidth, trim=10 10 10 8, clip]{Figs/spec-0285-51930-0042-SPLUS-n02s23-042426.pdf} \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/wr1_180.1095757612321--1.1019334954271696_100_r.pdf}}} & \includegraphics[width=0.5\linewidth, trim=10 10 10 8, clip]{Figs/spec-9146-58042-0510-STRIPE82-0131-050516.pdf}  \llap{\raisebox{3.7cm}{\includegraphics[width=0.2\linewidth, trim=200 10 300 30, clip]{Figs/QSO_331.37225331383246--0.5196269942518518_100_r.pdf}}}
   \end{tabular}
   \caption{SDSS spectra of a H II galaxy with $z = 0.006$ (\textit{a}), a radio galaxy with $z = 0.014$ (\textit{b}), 
   a star-forming galaxy with $z = 0.013$(\textit{c}). For this object, the H{$\alpha$} line 
-  is responsible for the $J0660$ magnitude. And a Seyfert 1 with $z = 0.317$ (\textit{d}). For this last object, the excess on the $J0660$ is due to the [O III] 4959, 5007 \AA~ emission lines (\textit{d}). As in Figure~\ref{fig:photo-image-knonw-objects} coloured symbols indicate the S-PLUS photometry.}
+  is responsible for the $J0660$ magnitude. And a Seyfert 1 with $z = 0.317$ (\textit{d}). For this last object, the excess on the $J0660$ is due to the [O III] 4959, 5007 \AA~ emission lines. a WR in a galaxy (\textit{e}) 
+          and a QSO (\textit{f}) with red-shift of $\sim$ 2.45.  As in Figure~\ref{fig:photo-image-knonw-objects} coloured symbols indicate the S-PLUS photometry.}
   \label{fig:photo-image-knonw-objects2}
 \end{figure*}
+
+As was mentioned, objects with nebulosity are include several
+types of objects such as H II region, planetary nebulae or, supernova
+remnants (SNRs). Such sources in our Galaxy and other nearby galaxies were
+identified here. The H II regions are objects with gas that being ionized by
+amounts of UV light come from massive stars (OB type) on which
+are formed the emission lines. In theses clouds of ionized gas,
+new stars are formed. Unlike H II regions, planetary nebulae
+represent the final stages of low- and intermediate-mass stars
+where the gas previously ejected in the phase of AGB is ionized
+by the high energetic radiation come from their central stars.
+
+In our list of H{$\alpha$} emission line objects a PN appears cataloged in SIMBAD 
+on which the S-PLUS photometry and spectrum is displyed on panel (\textit{a}) 
+of Fig~\ref{fig:photo-image-knonw-objects}. Emission lines like H{$\alpha$} 
+and [N II] are clearly perceptive in its spectrum, agreeing with PLUS photometry.
+This objects is a very interesting because is one of the twelves PNe that belong
+to the Galactic halo. These PNe are low metallizite and present large velocities that
+can give count of the origin and nuclesintheis of the early universe. 30 objects 
+cataloged as HII regions on the SIMBAD database are in our list of H{$\alpha$} emitters. 
+Panel (\textit{b}) oh the figure shows the S-PLUS photometry and SDSS spectrum 
+of the extragalactic HII region GALEX 2417063145906373262.  
+
+Supernova and nova are other type of emission lie objects on which shell of gas arise from
+evolved stars. The physical nature on the gas of them is different to the typical gaseous 
+nebulae (H II regions and planetary nebulae). The general energy-input mechanism is quiet different in each case. 
+However, the emission-line spectra show general similarities, indicating that when the 
+ionized gas is heating tends 
+to produce the same emission-line photons, regardless of the mechanisms by which high temperature and ionization are produced. 
+In agreement with SIMBAD coincidences, supernovas and novas are 
+in our list as show table~\ref{tab:simbad-sources}. Panel \textit{d} of
+Figure~\ref{fig:photo-image-knonw-objects} exhibits the SDSS spectrum, S-PLUS photometry 
+and coloured image of an extragalatic SN. The emission lines are clearly perceptively in its spectrum. 
+
+\paragraph{Binary systems.}
+25 known CVs and 5 candidate CVs (from SIMBAD) were selected with the algorithm.
+CVs are binary systems of very short orbital period, in which a low-mass and
+early-type star fills its Roche region and transfers mass to a companion stars,
+a dwarf white \citep{Patterson:1984}. Fig.~\ref{fig:photo-image-knonw-objects} the S-PLUS
+photometry overlapped to the SDSS spectrum of the CV FASTT 1560. As expected,
+this object was classified as blue source by the machine learning approaches.
+Other binary system in our list are the X-binary sources and eclipsing binary. 
+That type of object is expected to be in our sample because majority of them 
+are known to be H{$\alpha$} emitters.
+
+\paragraph{Stars.}
+Several stars were selected as shows the  SIMBAD matches.
+The SIMBAD types include normal stars, white dwarf stars (WD*), white dwarf
+candidates (Candidate\_WD*), blue stars, blue super-giant stars (BlueSG*), high
+proper-motion stars (PM*) and low-mass star (low-mass*; M<1M$_\odot$). All these
+objects appears in the S-PLUS catalog as H{$\alpha$} emitters. Some of them 
+can be early/late-type emission-line stars and/or different types of stars with
+the H{$\alpha$} emission lines. Although some of these stars could represent the 
+fraction of contaminants of our sample. There are also matches to variable
+stars of RR Lyr type as well as candidates of them.
+
+\paragraph{Galaxies.}
+Emission line galaxies also were selected. This category include
+several class of galaxies according to SIMBAD types: emission-line galaxy (EmG),
+blue compact galaxy (BlueCompG), HII galaxy (HII G), galaxy in cluster of galaxies
+(GinCl), galaxy in group of galaxies (GinGroup), low surface brightness galaxy
+(LSB G), interacting galaxies (IG), part of a Galaxy (PartofG), Seyfert 1 and
+Seyfert 2 galaxies, AGN and galaxy.
+
+All the emission line galaxies of these category form part of the universe local.
+This mean that their reds-hift cover the range on which the H{$\alpha$} emission line still
+falls into the $J0660$ filter. Objects with $ z >  0.02$ the  H{$\alpha$} is outside 
+of the $J0660$ filter. Table~\ref{tab:simbad} of the appendices shows the red-shift of the
+emission line galaxies of our sample that have SIMBAD matches. Many of the galaxies have 
+small red-shift values probing that mostly of these galaxies are real H{$\alpha$} emitters. 
+In these kind of galaxies such as the blue 
+compact and/or H II galaxies their starburst regions that consist of ensemble of massive 
+ionizing stars and their respective giant H II regions cover the extension of the optical 
+images and the emission lines of their spectra. Fig.~\ref{fig:photo-image-knonw-objects2}
+shows the SDSS spectra and S-PLUS photometry of the H II galaxy 6dFGS gJ012646.5-003845 
+(panel \textit{a}) and of the radio galaxy NVSS J025557+004132 (panel \textit{b}). The H II galaxy is classified 
+as blue source while the radio galaxy as red by the machine learning algorithm which is obvious from their spectra. 
+
+On the other hand, several AGN, Seyfert 1 and Seyfert 2 galaxies have red-shift 
+between 0.31 and 0.37 indicating that the excess on the $J0660$ filter
+is not due to the H{$\alpha$} emission but if due to the H{$\beta$} and [O III] 4959, 5007 \AA~ 
+emission lines. These emission lines at the red-shift range $0.306 < z < 0.376$ are detected in the $J0660$ band. 
+It is well known that the AGNs have very strong emission 
+lines such as H{$\beta$}, [0 III] 4959, 5007 \AA~and H{$\alpha$}. 
+
+One interesting discussion here, is that the type part of a Galaxy (PartofG)
+on SIMBAD are actually galaxies with Wolf-Rayet (WR) signature in the low red shift
+universe also named ``WR galaxy'' \citep{Osterbrock:1982}. WR stars in galaxies
+is perceptible in their spectra with strong emission lines such as H{$\alpha$}
+and [NII]. These spectral features can be of them very similar to extragalactic
+H II regions present typically of the outskirt of spiral galaxies. Panel (\textit{e}) 
+of Fig.~\ref{fig:photo-image-knonw-objects} displays the S-PLUS and SDSS spectra 
+of the  Wolf-Rayet [BKD2008] WR 14 which belong to the galaxy ??.
+
+Many of the objects have as main type ``galaxy'' in SIMBAD. This galaxies
+could be spiral galaxies on which the star formation is present. It is known
+that in the spiral arms of the galaxies are present H II regions as well as
+neutral gas (H I) and molecular gas. Actually some of these galaxies haves for
+secondary type H I. The reservoir of H I gas in galaxies must ultimately
+feed their star formation, after cooling and forming molecular
+clouds \citep{van-Driel:2016}. Fig. shows the S-PLUS photometry and
+the SDSS spectra of star-forming galaxy with clearly strong emission lines.
+Note that almost all these galaxies are classified as blue color 
+type objects by the \texttt{HAC} and \texttt{HDBSCAN}.
+However, Mostly of the Seyfert 2 and radio galaxies and a handful of galaxies are classified as
+red sources. The objects with galaxies in SIMBAD could that belong to the red sub-sample are nearby, red, giant early-type galaxies with emission lines, mainly, they could be LINERS, AGB or radio galaxies \citep{Capetti:2011}.
+
+\paragraph{QSOs.}
+
+Other extragalactic objects with emission lines that were selected are the
+QSOs. In the case of the QSOs is not the H{$\alpha$} emission line who impact
+on the $J$0660 filter. This filter is affected by strong emission lines present in
+these objects that to specific redshift drop into the $J$0660 filter.
+Some of these emission lines are H{$\beta$}, C {\sc IV} 1550 \AA, C {\sc III]} 1909 \AA,
+  Mg {\sc II} 2798 \AA~(see, also \citealp{Gutierrez:2020, Nakazono:2021}).
+  All the objects were classified as blue sources which was the expected. Panel \textit{f} of
+  Figure~\ref{fig:photo-image-knonw-objects2} show the S-PLUS photomerty and SDSS spectrum of the QSO 2SLAQ J220529.34-003110.6
+  which has red-shift of $\sim$2.45 indicating that the emission line corresponds to
+  the line C {\sc III]}.
+  
+\paragraph{Other type of objects.}
+  
+  Miscellanies the objects were selected as H{$\alpha$} emitters that appear classified on
+  SIMBAD as it can see in the table~\ref{tab:simbad-sources}. They are included cluster of stars, FIR sources, MIR objects, molecular clouds, UV-emission source,  among other
+
+\subsubsection{SDSS and LAMOST}
+
+We also made cross-match between the sample of H{$\alpha$} emission line objects and SDSS DR16
+\citep{Ahumada:2020}. We have used a 2$\sigma$ error circle as the cross-matching radius.
+We got 200 spectra from which 195 objects exhibit strong emission lines. 5 objects do not show
+emission lines, they probably are stars or galaxies.
+
+We also cross-correlate our list with Large Sky Area Multi-Object Fiber Spectroscopic Telescope
+(LAMOST; \citealp{Wu:2011}) using a radius of 2 arcsec for the match.  These spectra also
+show strong emission lines. These results shows that this technique actually are very effective
+for selecting sources with strong emission lines.
+
+By These spectra correspond to HII regions, cataclysm variables, SN, emission line galaxies (blue compact galaxies, H II galaxies, star forming galaxies, among others), AGN (Seyfert 1 and 2), 
+and QSOs. However, more detailed analyzed are necessary to see that other possibles type 
+of objects are included in these samples of spectra.
 
 \subsection{Magnitudes and color distributions}
 
@@ -1077,8 +1091,9 @@ $r \sim 19.9$. However, the density at the peak is higher in red sources than th
 indicating that the proportion of objects with value $r$ of 19.9 is higher than the blue sources.
 The fraction of object is very small at $r < 16$ for each group of objects.
 The distribution of the objects for both group increase in the range $16 \gtrsim r \gtrsim 19.9$.
-However the density as indicating the Kernel density estimation curves is higher in the
-blue sources. This implies that the fraction of sources with the magnitude range is considerable higher in comparison with the red group. In conclusion the blue sources tends to be brighter than the red ones.
+However, the density as indicating the Kernel density estimation curves is higher in the
+blue sources. This implies that the fraction of sources with the magnitude range is considerable higher
+in comparison with the red group. In conclusion the blue sources tends to be brighter than the red ones.
 
 Middle panel of figure displays the $(r - i)$ distribution of the blue and red emission line
 objects. The peaks of the $(r - i)$ distributions are distinct for the blue and red sources.
@@ -1089,27 +1104,30 @@ For instance, \citet{Wevers:2017} used different algorithms based on the  $(r - 
 to successfully select blue outliers from the the Galactic Bulge Survey (GBS; \citealp{Jonker:2011}).
 
 Botton panel of Fig.~\ref{fig:diagram-distri} shows the
-$(r - J0660)$ color distribution of the blue and red objects.  The fraction of objects selected
+$(r - J0660)$ color distribution of the blue and red objects. The fraction of objects selected
 as emitter rises drastically with $J$0660 excess, until at sufficiently large excesses. The peaks of the $(r - J0660)$ color distribution are relatively different for both groups 
 of sources. Having the blue sources the peaks at  $(r - J0660) = 0.5$ while for the red 
-one the value peak is $(r - J0660)=0.7$.
+ones the value peak is $(r - J0660)=0.7$.
 
 
 \section{Conclusions}
 
 We have created an usefully and important sample of emission line objects.
-By identifying the locus of main-sequence and giant star and considering as
-$J0660$-excess the objects that above of the locus, we have found
-the emission line sources in S-PLUS DR3. In agreement with the results after
-to find the coincidences with SIMBAD several type of emission objects are included
-in our list which including nebulae, binary systems, stars, emission line galaxies,
-quasars, globular clusters among other. \\
+By identifying the locus of main-sequence and giant star on the ($r - J0660$) versus ($r - i$) colour-colour diagram and considering objects 
+with H$\alpha$-excess, those located above of this locus. The sample contains 9,000 sources
+that were identify as H{$\alpha$} emitters.
+In agreement with the SIMBAD coincidences several classes of emission line objects are
+in our list, including nebulae, binary systems, variable stars, x-ray sources, emission line galaxies, quasars, globular clusters among other.   \\
+La gran ventaja aqui en comparación con trabajos previos, es que nosotros estamos proporcionando
+una muestra importante de emisores de H$\alpha$ en 12 bandas. 7 filtros estrechos y 5 de banda ancha, cubriendo el rango
+en longitud de onda desde $\sim 3000$ hasta $\sim 9000$ \AA. Es decir que mucha más información se puede estraer 
+de ellos en futors trabjaos sólo con fotometría de S-PLUS.
 
-We also found that using the colors $g - r$ and $(z - g)$ is very efficient to separate
+We found that the $g - r$ versus $(z - g)$ color-color diagram works well in separating
 the blue sources from the red ones. \\
 
-We also found that using this colors as the input to implement unsupervised machine 
-learning in better to group the source in the red or blue sources.
+We also found that using this colors as the input parameters to implement unsupervised machine 
+learning is better to group or classify sources in color types.
 
 \section*{Acknowledgements}
 
@@ -1175,16 +1193,17 @@ National Astronomical Observatories, Chinese Academy of Sciences.
 \section{Condensed Trees}
 \label{sec:trees}
 
-The question now is what does the cluster hierarchy look like - which
-clusters are near each other, or could perhaps be merged, and which
-are far apart. We can access the basic hierarchy via the \texttt{condensed\_tree\_}
-attribute of the clusterer object. It is possible to see that \texttt{HDBSCAN} has found
-two cluster that in agreement with previous results are the blue and red sources.
+The condensed Trees is a diagram for \texttt{HDBSCAN} that allows to see the cluster hierarchy as a dendrogram.  It can be displayed via the \texttt{condensed\_tree\_}
+attribute of the \texttt{HDBSCAN} package. Figure~\ref{fig:condensed-trees} shows
+the condensed trees which was obtained by using the ($r - g$) and ($g - z$) colours as the
+the input parameters. It is possible to see that \texttt{HDBSCAN} has found
+two clusters in agreement with previous results. This means that they represent the blue and red sources.  
 
 \begin{figure*}
 	\includegraphics[width=0.9\linewidth]{Figs/cluster-hierarchy-hdbscan.pdf}
-        \caption{Branches were selected by the HDBSCAN* algorithm.}
-    \label{fig:treess}
+        \caption{The condensed Trees for our sample of H{$\alpha$} emitters. 
+        The width and color of each branch represent the number of points in the cluster at that level. The orange and blue ellipses represent the branches selected by the \texttt{HDBSCAN} algorithm.}
+    \label{fig:condensed-trees}
 \end{figure*}
 
 \newcommand\TableHeader{
