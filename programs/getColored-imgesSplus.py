@@ -96,7 +96,6 @@ ax1.tick_labels.set_font(size=22, weight='medium', stretch='normal', family='san
 #ax1.list_layers()
 #ax1.show_markers(ra, dec, layer='marker', edgecolor='green', facecolor='none', marker='o', s=10, alpha=0.9, linewidths=60)#, layer='marker_set_1', edgecolor='black', facecolor='none', s=30, alpha=0.5, linewidths=20)
 
-
 # ax1.axis_labels.hide_y()
 # ax1.tick_labels.hide_y()
 

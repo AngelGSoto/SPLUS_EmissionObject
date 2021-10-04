@@ -4,11 +4,11 @@ import argparse
 import os
 
 parser = argparse.ArgumentParser(
-    description="""Firts table from the S-PLUS catalogs """)
+    description="""Firts table from the S-PLUS catalogs""")
 
 parser.add_argument("source", type=str,
                     default=" teste-program",
-                    help="Name of catalog, taken the prefix ")
+                    help="Name of catalog, taken the prefix")
 
 cmd_args = parser.parse_args()
 file_ = cmd_args.source + ".dat"
@@ -28,3 +28,4 @@ df.to_csv(dffile)
 #ASCII
 asciifile = file_.replace(".dat", "-hydra.ecsv")
 tab.write(asciifile, format="ascii.ecsv")
+
