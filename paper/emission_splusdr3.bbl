@@ -52,6 +52,12 @@ Campello R. J. G.~B.,  Moulavi D.,   Sander J.,  2013, in Pei J.,  Tseng V.~S.,
 Campello R.,  Moulavi D.,  Zimek A.,   Sander J.,  2015, \mn@doi [A C M
   Transactions on Knowledge Discovery from Data] {10.1145/2733381}, 10, 1
 
+\bibitem[\protect\citeauthoryear{{Capetti} \& {Baldi}}{{Capetti} \&
+  {Baldi}}{2011}]{Capetti:2011}
+{Capetti} A.,  {Baldi} R.~D.,  2011, \mn@doi [\aap]
+  {10.1051/0004-6361/201016388}, \href
+  {https://ui.adsabs.harvard.edu/abs/2011A&A...529A.126C} {529, A126}
+
 \bibitem[\protect\citeauthoryear{{Cenarro} et~al.,}{{Cenarro}
   et~al.}{2018}]{Cenarro:2018}
 {Cenarro} A.~J.,  et~al., 2018, preprint, \href
@@ -222,6 +228,11 @@ Pedregosa F.,  et~al., 2011, Journal of Machine Learning Research, 12, 2825
   {10.1071/AS09046}, \href
   {https://ui.adsabs.harvard.edu/abs/2010PASA...27..166S} {27, 166}
 
+\bibitem[\protect\citeauthoryear{{Santos-Silva} et~al.,}{{Santos-Silva}
+  et~al.}{2021}]{Santos-Silva:2021}
+{Santos-Silva} T.,  et~al., 2021, arXiv e-prints, \href
+  {https://ui.adsabs.harvard.edu/abs/2021arXiv210806234S} {p. arXiv:2108.06234}
+
 \bibitem[\protect\citeauthoryear{{Scaringi}, {Groot}, {Verbeek}, {Greiss},
   {Knigge}  \& {K{\"o}rding}}{{Scaringi} et~al.}{2013}]{Scaringi:2013}
 {Scaringi} S.,  {Groot} P.~J.,  {Verbeek} K.,  {Greiss} S.,  {Knigge} C.,
@@ -234,6 +245,11 @@ Pedregosa F.,  et~al., 2011, Journal of Machine Learning Research, 12, 2825
   R.~C.,   {Steeghs} D.,  2000, \mn@doi [\mnras]
   {10.1046/j.1365-8711.2000.03240.x}, \href
   {https://ui.adsabs.harvard.edu/abs/2000MNRAS.313..533S} {313, 533}
+
+\bibitem[\protect\citeauthoryear{{Taylor}}{{Taylor}}{2005}]{Taylor:2005}
+{Taylor} M.~B.,  2005, in {Shopbell} P.,  {Britton} M.,   {Ebert} R.,  eds,
+  Astronomical Society of the Pacific Conference Series Vol. 347, Astronomical
+  Data Analysis Software and Systems XIV. p.~29
 
 \bibitem[\protect\citeauthoryear{{Viironen} et~al.,}{{Viironen}
   et~al.}{2009}]{Viirone:2009}
