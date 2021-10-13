@@ -19,7 +19,7 @@ from astropy.visualization import hist
 from astroML.datasets import fetch_imaging_sample, fetch_sdss_S82standards
 from astroML.crossmatch import crossmatch_angular
 
-# Read the file
+# Read the files
 parser = argparse.ArgumentParser(
     description="""Make a spectras""")
 
