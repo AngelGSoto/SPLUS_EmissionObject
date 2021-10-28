@@ -334,7 +334,7 @@ We then implemented an iterative $\sigma$-clipping technique so that, by constru
  the fit and $\sigma_{\mathrm{phot}}$ is the error on the observed $(r - J0660)$ colour idex.
  $C$ is a constant which has the value 4 following \citet{Wevers:2017}.
 The fits were carried out with the aid of the python library. \texttt{astropy.modeling}
-\footnote{https://docs.astropy.org/en/stable/modeling/index.html}
+\footnote{\url{https://docs.astropy.org/en/stable/modeling/index.html}}
 
 Figure~\ref{fig:criteria-color-plot} illustrates the procedure applied. The continuous black lines represent the initial
 fit and  the dashed lines indicate the 4-$\sigma$ clipping fit lines. The dotted lines are
@@ -744,36 +744,46 @@ show that the fraction of blue objects is considerable higher than the red ones.
 \subsubsection{\texttt{HAC}}
 
 The ideal way to choose the number of clusters can be done by displaying the \textbf{dendrogram diagram}.
-Firstly, the hierarchical cluster output dendrogram (tree; see for instance Figure~\ref{fig:dendrogram}) 
+Firstly, the hierarchical cluster output dendrogram %\sout{(tree; see for instance %Figure~\ref{fig:dendrogram})} 
 can be implemented to obtain the desired clustering. Secondly, the dendrogram schema allows 
-a convenient way to establish the entity-relationship between at all levels of granularity.
-In conclusion, a dendrogram is a visualization in form of a tree showing the order
-and distances of merges during the hierarchical clustering:
+a convenient way to establish the entity-relationship at all levels of granularity.
+
+Figure~\ref{fig:dendrogram} illustrates the use of a dendrogram based on the $(g - r)$ and $(z - g)$ colours 
+of H$\alpha$ emitters.
+It highlights 
+%\sout{In conclusion, a dendrogram is a visualization in form of a tree showing} 
+the order
+and distances of groups in  the hierarchical clustering, stopping at 12 nodes:
 
 \begin{itemize}
   
-     \item The $x$-axis specifies the labels. If it does not specify anything else, they
-           are the indices of the samples. This means, the number of points in nodes/clusters.
-     \item The $y$-axis represents the distances of the ``ward'' method. In other words,
-           this axis is a measurement of the closeness of the clusters or data points.
+     \item The $x$-axis specifies the %\sout{labels. If it does not specify anything else, they
+           %are the indices of the samples. This means, the number of points in nodes/clusters}.
+           population in the nodes in a given level of grouping -- that summed up correspond to the total number of elements under investigation.
+     \item The $y$-axis represents the %\sout{distances of the ``ward'' method. In other words,
+           %this axis} 
+           ``distance'', which is a measurement of the closeness of the clusters or data points in different levels of clustering.
        
 \end{itemize}
 
-We first generated the dendrogram diagram to see the possibles clusters that can be found with
-\texttt{HAC}. The dendrogram diagram sometimes can be pretty big for many samples, 
-especially in the
-context of the big data and the visualization of the cluster can be difficult. However, 
-the \textsc{dendrogram()} function, which is 
-include in the python package \texttt{scipy}\footnote{https://www.scipy.org/}, allows us 
-to generate this diagram, and has a feature to allow a better visualization of them. 
-This is the \textit{Dendrogram Truncation}. 
+Reading the diagram from the top to the bottom, we see that all systems are divided after the very first level from the top already into (only) two groups: coincidentally, they correspond to the red and blue populations of H$\alpha$ emitters presented in Fig.~\ref{fig:new-color} as it is showed in Fig.~\ref{fig:hierar}. From that point on, the groups were subdivided without evident distinction, and truncation was thus assumed when the 12-node level was reached. The truncation is an usual procedure when dealing with big data. 
 
-Figure~\ref{fig:dendrogram} exhibits the truncated dendrogram plot based on the colours
-parameters. This only shows the last 12 nodes out of all merges. Note that most labels are not showing. 
-This is because all other data were already merged into clusters before the last 12 merges. 
-From the diagram is perceptive that the longest distances correspond to 
-the two last merged that are the two clusters that we desire to produce with 
-the hierarchical clustering algorithm.
+%\sout{We first generated the dendrogram diagram to see the possibles clusters that can be %found with
+%\texttt{HAC}. The dendrogram diagram sometimes can be pretty big for many samples, especially %in the
+%context of the big data and the visualization of the cluster can be difficult.} 
+
+%\sout{However, 
+%the \textsc{dendrogram()} function, which is 
+%include in the python package \texttt{scipy}\footnote{https://www.scipy.org/}, allows us 
+%to generate this diagram, and has a feature to allow a better visualization of them. 
+%This is the \textit{Dendrogram Truncation}.} 
+
+%\sout{Figure~\ref{fig:dendrogram} exhibits the truncated dendrogram plot based on the colours
+%parameters. This only shows the last 12 nodes out of all merges. Note that most labels are not showing. 
+%This is because all other data were already merged into clusters before the last 12 merges. 
+%From the diagram is perceptive that the longest distances correspond to 
+%the two last merged that are the two clusters that we desire to produce with 
+%the hierarchical clustering algorithm.}
 
 \begin{figure}
 	\includegraphics[width=0.9\linewidth]{Figs/Customer-Dendrograms.pdf}
@@ -792,24 +802,34 @@ the hierarchical clustering algorithm.
 \end{figure}
 
 In this work, we implemented {\sc hac} by using the python machine learning library
-\texttt{Scikit-learn}\footnote{\url{https://scikit-learn.org/stable/}} \citep{Pedregosa:2011}.
-There are some parameters to have in count
-when the algorithm is applied: \texttt{n\_clusters} which is the number cluster to find. Given
-that our goal is to divide our sample in two groups we set this value in "2". \texttt{Affinity}
-the is the "metric" used to compute the linkage. We found that a simple ``Euclidean'' distance metric is
-effective. \texttt{Linkage} which determines which distance to use between sets of observation.
+\texttt{Scikit-learn}\footnote{\url{https://scikit-learn.org/stable/}} \citep{Pedregosa:2011}. Then we use the \textsc{dendrogram()} function, which is 
+include in the Python package \texttt{scipy}\footnote{\url{https://www.scipy.org/}}, and the task \textit{Dendrogram Truncation}
+to generate the (truncated) dendrogram.
+There are  parameters to  be taken into account
+when the algorithm is applied to the data: \texttt{n\_clusters}, \texttt{Affinity}, and \texttt{Linkage}.
+\texttt{n\_clusters} 
+defines the number of clusters expected by the user.
+Given that our goal is to divide our sample \out{in} into two groups. we set this  parameter to "2". \texttt{Affinity} 
+determine
+the "metric" to compute the linkage. 
+We have found that a simplistic metric, the ``Euclidean'', is effective for our purpose.
+%\sout{We found that a simple ``Euclidean'' distance metric is
+%effective.} 
+\comment{Eu não entendi essa frase:} \texttt{Linkage} determines which distance to use between sets of observation. \luis{Linkage criterion determines the distance between sets of observations based on the pairwise distances between observations.}
 The algorithm merge the pairs of cluster that minimize this criterion. Here was implemented
-``ward'' which minimizes the variance of the clusters being merged. As was mentioned,
+``ward'' \comment{(Quais são as outras opções?)} \luis{Na verdade só tem ward method, vou rescribir a frase.} which minimizes the variance of the clusters \comment{(Eu não sei o que é variancia de clusters: variância do que?)} \luis{Ward usa error sum of squares que a minima varianza dos dados de cada cluster} being merged. As it was mentioned,
 the input variables are the colors; ($g - r$) and ($z - g$).
 
-Figure.~\ref{fig:dendrogram} shows the dendrogram truncated diagram visualization that
-shows the branching of the sample from the main root. And Fig.~\ref{fig:hierar} shows
-the position of the two groups that resulted after to applying \texttt{HAC} in the
-color-color diagram. The two clusters represent the blue sources (blue simbols)
-and red sources (blue symbols) as already by analyzing the diagram of the
-Fig.~\ref{fig:synthetic}. Now, we have divided our list in two groups in agreement
+%\sout{Figure.~\ref{fig:dendrogram} shows the dendrogram truncated diagram visualization that
+%shows the branching of the sample from the main root. And Fig.~\ref{fig:hierar} shows
+%the position of the two groups that resulted after to applying \texttt{HAC} in the
+%color-color diagram. The two clusters represent the blue sources (blue simbols)
+%and red sources (blue symbols) as already by analyzing the diagram of the
+%Fig.~\ref{fig:synthetic}.} 
+At this point, 
+we have divided our list  into two groups in agreement
 with the nature of their continuum. We found that the number of blue H{$\alpha$}
-emitter is bigger than the red one.
+emitters is bigger than the red one.
 
 \subsubsection{\texttt{HDBSCAN}}
 
@@ -826,58 +846,93 @@ emitter is bigger than the red one.
 \label{fig:hdbscan}
 \end{figure*}
 
-We also used \texttt{HDBSCAN} to separate the blue sources from the red ones. This is just for
-comparing the performance of two algorithms and show that the our results are consistent.
-We used the python implementation of \texttt{HDBSCAN}\footnote{\url{https://hdbscan.readthedocs.io/en/latest/}}
+For the sake of comparison with results from \texttt{HAC}, we also used \texttt{HDBSCAN} to separate the blue sources from the red ones. 
+%\sout{This is just for
+%comparing the performance of two algorithms and show that the our results are consistent.}
+The main difference between these two algorithms is that  \texttt{HDBSCAN}
+is more conservative so that many data points are classified as noise.
+For this purpose, we used the Python implementation of \texttt{HDBSCAN}\footnote{\url{https://hdbscan.readthedocs.io/en/latest/}}
 \citep{McInnes:2017}. Like \texttt{HAC}, in addition to the colors input
 parameters,  there are key parameters that should be considered  when the algorithm is
-applied. ``Euclidean'' metric is implemented which results to be very efficient. The two most
-critical parameters to be implemented are the ``minimum cluster size'' and ``minimum number
+applied. 
+Regarding the metric, it is assumed the ``Euclidian''.
+%\sout{``Euclidean'' metric is implemented which results to be very efficient.} 
+The two most critical parameters 
+%\sout{to be implemented} 
+are the ``minimum cluster size'' and ``minimum number
 of samples''. The former refers to the smallest size grouping that we wish to consider a cluster.
-We have adopted the value ``80''. The latter provides a measure of how conservative we want 
-our clustering to be and expressed as the fraction of data classified as noise.
-The value implemented was ``40''. With this configuration of our model, we found
-two cluster. If we use values of minimum number of samples smaller than ``40'' 
-several small cluster are found.
+We have adopted the value ``80''. 
+\comment{(Eu não entendi o que você quer dizer com a frase seguinte:)} \luis{mudei um pouco a frase.}
+The latter provides a measure of how conservative we want 
+our clustering to be, expressed as the fraction of data classified as noise.
+The value implemented was ``40''. With this configuration 
+of our model, 
+we found
+two 
+clusters. 
+Several small clusters are found when assuming values for the minimum number of samples smaller than 40.
+%\sout{If we use values of minimum number of samples smaller than ``40'' several small cluster %are found.}
 
-Left panel of Fig~\ref{fig:hdbscan} the resulted cluster found with \texttt{HDBSCAN}. Two group are
-found and these results are consistent with results found with  \texttt{HAC}.
+Left panel of Fig.~\ref{fig:hdbscan} 
+shows 
+the two 
+clusters found with \texttt{HDBSCAN}
+\rlopes{, one containing XX red and the other with YY blue sources}. 
+This result is fully consistent with those from \texttt{HAC}: the two primary clusters from \texttt{HDBSCAN} are located in the same region in
+the ($g - r$)-($z - g$) diagram where lie the groups found with the \texttt{HAC}.
+\comment{(Aqui eu acho que ficaria legal dizer qual é a porcentagem da amostra azul de um método ser identiicada no outromodelo; o mesmo para a vermelha.)}
 In fact, by applying the
-\texttt{condensed\_tree\_} to the data colors two clusters are selected (for more detail about
-\texttt{condensed\_tree\_} attribute see appendix~\ref{sec:trees} and related
-Fig.~\ref{fig:treess}). The two primary clusters are located in the same region in
-the ($g - r$) versus ($z - g$) color-color diagram where lie the group found by the other algorithm.
-The main difference between the two algorithm is that  \texttt{HDBSCAN}
-is much conservative, then many data points are classified as noise. The two final cluster
-contain, which we are labeled blue and red sources contain xxx and xxx objects, respectively.
+\texttt{condensed\_tree\_} to the data colors two clusters are selected 
+(see Appendix~\ref{sec:trees} for more details about \texttt{condensed\_tree\_} attribute.)
+%\sout{(for more detail about
+%\texttt{condensed\_tree\_} attribute see appendix~\ref{sec:trees} and related
+%Fig.~\ref{fig:treess}).} 
+%\sout{The two primary clusters are located in the same region in
+%the ($g - r$) versus ($z - g$) color-color diagram where lie the group found by the other %algorithm.}
+%\sout{The main difference between the two algorithm is that  \texttt{HDBSCAN}
+%is much conservative, then many data points are classified as noise.} 
+%\sout{The two final cluster
+%contain, which we are labeled blue and red sources contain xxx and xxx objects, respectively.}
 
 \subsubsection{Soft clustering for \texttt{HDBSCAN}}
 
 Perhaps, the main disadvantage of \texttt{HDBSCAN} is that many of the sources are labelled
-as ``noise''. This means that some sources are not assigned to any cluster. As was mentioned,
+as ``noise''
+so that they are not assigned to any cluster. As mentioned,
 this comes from the conservative nature of \texttt{HDBSCAN}
-and the fact that these data sources are located far away of the cluster cores.
-An alternative to avoid the outliers (noises) classifications consists to use the concept 
-of ``soft clustering''. We have carried out here soft
-clustering for \texttt{HDBSCAN} to assign to every object to its most likely cluster on which belong.
-This means that with this approach, points are not assigned cluster labels, instead are
-assigned a vector of probabilities. The probability value at the $i$th entry of the vector
-is the probability that a data point is a member of the $i$th cluster. We can, then, simply
+and the fact that these data \comment{(``These'', quais?)} sources (noise) are located far away of the cluster cores.
+An alternative 
+way
+to avoid 
+outliers (noises) classifications consists to use the concept 
+of ``soft clustering''\footnote{\url{https://hdbscan.readthedocs.io/en/latest/soft_clustering_explanation.html}}. We have carried out here soft
+clustering 
+from 
+\texttt{HDBSCAN} to assign every object to 
+a cluster that they most likely belong to.
+With this approach, points are not assigned in a deterministic way to clusters 
+but to a vector of probabilities as a measure of belonging to different  clusters: the probability value at the $i$th entry of the vector
+is the probability that a data point is a member of the $i$th cluster. 
+We can, then, simply
 assign cluster labels for every point by taking the most likely cluster it belongs to,
-using probability thresholds. Soft clustering for \texttt{HDBSCAN} is based on the
-Global-Local Outlier Score from Hierarchies (GLOSH) algorithm \citep{Campello:2015}
-and combines this with a measure of distance from a given cluster to produce 
-an estimate of the probability that any given data point belongs to any of the fixed 
-clusters extracted from the condensed tree.
+using probability thresholds. Soft clustering
+\comment{(Já li essa denominação antes mas agora me pergunto: o que é soft clustering? Indicar aqui uma seção do texto na qual já foi explicado isso?)}
+for \texttt{HDBSCAN} is achieved through an outlier score modification to 
+consider how much an outlier is relative to each cluster, which is based on the
+Global-Local Outlier Score from Hierarchies (GLOSH) algorithm \citep{Campello:2015}.
+This is combined with a measure of distance from a given cluster to produce an estimate of the probability that any given data point belongs to any of the fixed groups drawn from the condensed tree. \comment{(Euachei que essa frase ficou muito grande; estou com receio de mudar e alterar o contexto. Veja plsse você consegue uma versão mais clara, talvez dividindo o conteúdo em duas frases)} \luis{Mudei um pouco esta frase, dividí em duas}.
 
 The right panel of Fig.~\ref{fig:hdbscan} shows at what most likely cluster belongs the data
 points classified as the noise by \texttt{HDBSCAN}. We have used blue and red colors for the
 points that have the highest probability of being in the blue and red groups, respectively.
 This fills out the clusters nicely. We see that there were many noise points that are most
-likely to belong to the clusters we would expect, e. g. in agreement we the results obtained
-with \texttt{HAC}. Indeed, We now have improved our classification of our list into blue and 
+likely to belong to the clusters we would expect, e.g. in agreement 
+\sout{we the} 
+\rlopes{with} 
+results obtained
+with \texttt{HAC}. Indeed, we now have improved our classification of our list into blue and 
 red sources because we have estimated the probability of each source to belong
-to each group.
+to each group \comment{(Eu não gostei muito dessa frase. Me pareceu deixar algo solto.)}.
 
 \section{Results and discussion}
 \label{sec:results}
@@ -1221,6 +1276,8 @@ even symbiotic stars.
 
 \section*{Acknowledgements}
 
+\rlopes{RLO acknowledges financial support from the Brazilian institutions CNPq (PQ-312705/2020-4) and FAPESP (\#2020/00457-4).}
+
 The S-PLUS project, including the T80-South robotic telescope and
 the S-PLUS scientific survey, was founded as a partnership between the
 Fundação de Amparo à Pesquisa do Estado de S\~{a}o Paulo
@@ -1265,8 +1322,8 @@ National Astronomical Observatories, Chinese Academy of Sciences.
 
 Scientific software
 and databases used in this work include 
-TOPCAT\footnote{http://www.star.bristol.ac.uk/~mbt/topcat/} \citep{Taylor:2005}, 
-simbad and vizier from Strasbourg Astronomical Data Center (CDS)\footnote{https://cds.u-strasbg.fr/} 
+TOPCAT\footnote{\url{http://www.star.bristol.ac.uk/~mbt/topcat/}} \citep{Taylor:2005}, 
+simbad and vizier from Strasbourg Astronomical Data Center (CDS)\footnote{\url{https://cds.u-strasbg.fr/}} 
 and the following  python packages: numpy, astropy, matplotlib, seaborn, scikit-learn.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
