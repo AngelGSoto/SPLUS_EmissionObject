@@ -900,15 +900,15 @@ Perhaps, the main disadvantage of \texttt{HDBSCAN} is that many of the sources a
 as ``noise''
 so that they are not assigned to any cluster. As mentioned,
 this comes from the conservative nature of \texttt{HDBSCAN}
-and the fact that these data \comment{(``These'', quais?)} sources (noise) are located far away of the cluster cores.
+and the fact that these data sources (noise) are located far away of the cluster cores.
 An alternative 
 way
 to avoid 
 outliers (noises) classifications consists to use the concept 
-of ``soft clustering''\footnote{\url{https://hdbscan.readthedocs.io/en/latest/soft_clustering_explanation.html}}. We have carried out here soft
+of ``soft clustering'' (also known as fuzzy clustering). We have carried out here soft
 clustering 
 from 
-\texttt{HDBSCAN} to assign every object to 
+\texttt{HDBSCAN}\footnote{\url{https://hdbscan.readthedocs.io/en/latest/soft_clustering_explanation.html}} to assign every object to 
 a cluster that they most likely belong to.
 With this approach, points are not assigned in a deterministic way to clusters 
 but to a vector of probabilities as a measure of belonging to different  clusters: the probability value at the $i$th entry of the vector
@@ -927,12 +927,11 @@ points classified as the noise by \texttt{HDBSCAN}. We have used blue and red co
 points that have the highest probability of being in the blue and red groups, respectively.
 This fills out the clusters nicely. We see that there were many noise points that are most
 likely to belong to the clusters we would expect, e.g. in agreement 
-\sout{we the} 
-\rlopes{with} 
+with 
 results obtained
 with \texttt{HAC}. Indeed, we now have improved our classification of our list into blue and 
 red sources because we have estimated the probability of each source to belong
-to each group \comment{(Eu não gostei muito dessa frase. Me pareceu deixar algo solto.)}.
+to each group \comment{(Eu não gostei muito dessa frase. Me pareceu deixar algo solto.)} \luis{Adicionei a seguinte frase, talvez feche melhor o paragrafo}. Instead of forcing the algorithm to make a decision as to which group a data point belongs to, just like \texttt{HAC} does, we have quantified the likelihood of a given observation belonging to any of the two clusters found in our data set, see, for instance, the two last columns of Table~\ref{tab:simbad}.  
 
 \section{Results and discussion}
 \label{sec:results}
@@ -952,7 +951,7 @@ to the overall sample cross-matching with some catalogs available were carried o
         between the S-PLUS list of emission line objects and the SIMBAD database.
         We used a search radios of 2 arcsec.}
 \label{tab:simbad-sources}
-\begin{tabular}{lccc} % four columns, alignment for each
+\begin{tabular}{lll} % four columns, alignment for each
   \hline
 Main type    & Associated SIMBAD           & Number of S-PLUS objects    \\
              & types                        &  with SIMBAD match         \\
@@ -980,7 +979,7 @@ Low surface brightness galaxy   & LSB\_G             & 10                \\
 Brightest galaxy in a cluster   & BClG               & 3                 \\
 Globular cluster            & GlCl                   & 1                 \\
 QSO                         & QSO, QSO\_Candidate    & 225               \\
-AGN                         & AGN, AGN\_Candidate, Seyfert\_1, Seyfert\_2, BLLac, RadioG  & 67  \\
+AGN                         & AGN, AGN\_Candidate, Seyfert\_1, Seyfert\_2, BLLac, RadioG & 67\\
 Galaxy                      &  Galaxy                & 421               \\
 Possible gravitationally lensed image & Possible\_lensImage & 1          \\
 \hline
