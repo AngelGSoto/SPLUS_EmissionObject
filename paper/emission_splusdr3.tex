@@ -606,11 +606,16 @@ cluster size. If a given branch divides into two, with a branch
   cluster. Any point in the sample that does not fall into one of the selected
   clusters is defined as noise.
 
-%\item \sout{(Por favor tente expressar esse item de uma meneira melhor; eu estou com receio de %mudar e alterar o sentido; depois marque-o, e eu retornarei a esse ponto para ver)} The %selected cluster are used to the label points. Furthermore, the definition
+%\item \sout{(Por favor tente expressar esse item de uma meneira melhor; eu estou com receio de %mudar e alterar o sentido; depois marque-o, e eu retornarei a esse ponto para ver)} 
+%The selected clusters can be used to label points. The concept 
   %of $\lambda_p$ within a cluster, when normalized between O and 1 provides a means
   %of characterization a probability that a given point belongs to the cluster or
   %alternative a measure of the strength of membership. 
   
+  \item \luis{By adopting the \texbf{soft clustering} or \texbf{fuzzy clustering} technique is possible to
+  mitigates the need to establish or define had cluster membership limit. In fact, each source
+  has finite probability of belonging to every selected cluster. In this approach all points 
+  (including noises) are not assigned to cluster label, but are instead assigned to a vector of probabilities, which its length is equal to the number of clusters found. With this can be solved the noise classification.}
 \end{enumerate}
 
 The {\sc HDBSCAN} algorithm starts off much the same as {\sc DBSCAN}: transforming the space
@@ -905,7 +910,7 @@ An alternative
 way
 to avoid 
 outliers (noises) classifications consists to use the concept 
-of ``soft clustering'' (also known as fuzzy clustering). We have carried out here soft
+of ``soft clustering'' (see section~\ref{sec:hdbscan}). We have carried out here soft
 clustering 
 from 
 \texttt{HDBSCAN}\footnote{\url{https://hdbscan.readthedocs.io/en/latest/soft_clustering_explanation.html}} to assign every object to 
