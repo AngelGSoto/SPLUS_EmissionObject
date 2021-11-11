@@ -27,8 +27,8 @@
 % out the following line
 \usepackage{newtxtext,newtxmath}
 % Depending on your LaTeX fonts installation, you might get better results with one of these:
-\usepackage{mathptmx}
-\usepackage{txfonts}
+%\usepackage{mathptmx}
+%\usepackage{txfonts}
 \usepackage[T1]{fontenc}
 
 % Allow "Thomas van Noord" and "Simon de Laguarde" and alike to be sorted by"N" and "L" etc. in the bibliography.
@@ -612,8 +612,8 @@ cluster size. If a given branch divides into two, with a branch
   %of characterization a probability that a given point belongs to the cluster or
   %alternative a measure of the strength of membership. 
   
-  \item \luis{By adopting the \texbf{soft clustering} or \texbf{fuzzy clustering} technique is possible to
-  mitigates the need to establish or define had cluster membership limit. In fact, each source
+  \item \luis{Adopting the \texbf{soft clustering} or \texbf{fuzzy clustering} technique is possible to
+  mitigate the need to establish or define had cluster membership limit. In fact, each source
   has finite probability of belonging to every selected cluster. In this approach all points 
   (including noises) are not assigned to cluster label, but are instead assigned to a vector of probabilities, which its length is equal to the number of clusters found. With this can be solved the noise classification.}
 \end{enumerate}
@@ -821,8 +821,8 @@ We have found that a simplistic metric, the ``Euclidean'', is effective for our 
 %\sout{We found that a simple ``Euclidean'' distance metric is
 %effective.} 
 \comment{Eu não entendi essa frase:} \texttt{Linkage} determines which distance to use between sets of observation. \luis{Linkage criterion determines the distance between sets of observations based on the pairwise distances between observations.}
-The algorithm merge the pairs of cluster that minimize this criterion. Here was implemented
-``ward'' \comment{(Quais são as outras opções?)} \luis{Na verdade só tem ward method, vou rescribir a frase.} which minimizes the variance of the clusters \comment{(Eu não sei o que é variancia de clusters: variância do que?)} \luis{Ward usa error sum of squares que a minima varianza dos dados de cada cluster} being merged. As it was mentioned,
+The algorithm merge the pairs of cluster that minimize this criterion. \texttt{Ward's method} is used 
+``ward'' \comment{(Quais são as outras opções?)} to minimize the variance of the clusters being merged \comment{(Eu não sei o que é variancia de clusters: variância do que?)}\luis{Mudei a frase}. Ward uses error sum of squares to measurements the variance between the clusters. Then, the two clusters with the smallest error sum of squares will form a new cluster.  As it was mentioned,
 the input variables are the colors; ($g - r$) and ($z - g$).
 
 %\sout{Figure.~\ref{fig:dendrogram} shows the dendrogram truncated diagram visualization that
@@ -954,7 +954,9 @@ to the overall sample cross-matching with some catalogs available were carried o
 \centering
 \caption{A summary of the results obtained of the positional cross-match between
         between the S-PLUS list of emission line objects and the SIMBAD database.
-        We used a search radios of 2 arcsec.}
+        We used a search radios of 2 arcsec. SIMBAD categories of
+        objects are listed in the first column. The numbers of objects of each SIMBAD 
+        category are exposed in the third column.}
 \label{tab:simbad-sources}
 \begin{tabular}{lll} % four columns, alignment for each
   \hline
@@ -1039,8 +1041,11 @@ with SIMBAD coincidence.
   \end{tabular}
   \caption{SDSS spectra of a H II galaxy with $z = 0.006$ (\textit{a}), a radio galaxy with $z = 0.014$ (\textit{b}), 
   a star-forming galaxy with $z = 0.013$(\textit{c}). For this object, the H{$\alpha$} line 
-  is responsible for the $J0660$ magnitude. And a Seyfert 1 with $z = 0.317$ (\textit{d}). For this last object, the excess on the $J0660$ is due to the [O III] 4959, 5007 \AA~ emission lines. a WR in a galaxy (\textit{e}) 
-          and a QSO (\textit{f}) with red-shift of $\sim$ 2.45.  As in Figure~\ref{fig:photo-image-knonw-objects} coloured symbols indicate the S-PLUS photometry.}
+  is responsible for the $J0660$ magnitude. And a Seyfert 1 with $z = 0.317$ (\textit{d}). 
+  For this last object, the excess on the $J0660$ is due to the [O III] 4959, 5007 \AA~ emission lines. 
+  a WR in a galaxy (\textit{e}) 
+          and a QSO (\textit{f}) with red-shift of $\sim$ 2.45.  As in Figure~\ref{fig:photo-image-knonw-objects} coloured 
+          symbols indicate the S-PLUS photometry.}
   \label{fig:photo-image-knonw-objects2}
 \end{figure*}
 
@@ -1071,9 +1076,8 @@ evolved stars. The physical nature on the gas of them is different to the typica
 nebulae (H II regions and planetary nebulae). The general energy-input mechanism is quiet 
 different in each case. 
 However, the emission-line spectra show general similarities, indicating that when the 
-ionized gas is heating tends 
-to produce the same emission-line photons, regardless of the mechanisms by which 
-high temperature and ionization are produced. 
+ionized gas is heating tends to produce the same emission-line photons, regardless 
+of the mechanisms by which high temperature and ionization are produced. 
 In agreement with SIMBAD coincidences, supernovas and novas are 
 in our list as show table~\ref{tab:simbad-sources}. Panel \textit{d} of
 Figure~\ref{fig:photo-image-knonw-objects} exhibits the SDSS spectrum, S-PLUS 
@@ -1081,14 +1085,14 @@ photometry and coloured image of an extragalatic SN. The emission lines are
 clearly perceptively in its spectrum. 
 
 \paragraph{Binary systems.}
-25 known CVs and 5 candidate CVs (from SIMBAD) were selected with the algorithm.
-CVs are binary systems of very short orbital period, in which a low-mass and
+25 known CV and 5 candidate CV were selected with the algorithm.
+CV are binary systems of very short orbital period, in which a low-mass and
 early-type star fills its Roche region and transfers mass to a companion stars,
 a dwarf white \citep{Patterson:1984}. Fig.~\ref{fig:photo-image-knonw-objects} 
-the S-PLUS photometry overlapped to the SDSS spectrum of the CV FASTT 1560. 
+shows the S-PLUS photometry overlapped to the SDSS spectrum of the CV FASTT 1560. 
 As expected, this object was classified as blue source by the machine learning approaches.
 Other binary system in our list are the X-binary sources and eclipsing binary. 
-That type of object is expected to be in our sample because majority of them 
+That type of object is expected to be in our sample because majority of them
 are known to be H{$\alpha$} emitters.
 
 \paragraph{Stars.}
@@ -1103,14 +1107,14 @@ fraction of contaminants of our sample. There are also matches to variable
 stars of RR Lyr type as well as candidates of them.
 
 \paragraph{Galaxies.}
-Emission line galaxies also were selected. This category include
-several class of galaxies according to SIMBAD types: emission-line galaxy (EmG),
-blue compact galaxy (BlueCompG), HII galaxy (HII G), galaxy in cluster of galaxies
+Emission line galaxies also were selected. This category includes
+several class of galaxies according to SIMBAD: emission-line galaxy (EmG),
+blue compact galaxy (BlueCompG), H II galaxy (HII G), galaxy in cluster of galaxies
 (GinCl), galaxy in group of galaxies (GinGroup), low surface brightness galaxy
 (LSB G), interacting galaxies (IG), part of a Galaxy (PartofG), Seyfert 1 and
-2 galaxies, AGN and galaxies.
+2 galaxies, AGN.
 
-All the emission line galaxies of these category form part of the universe local.
+Many of the emission line galaxies of these category form part of the universe local.
 This mean that their reds-hift cover the range on which the H{$\alpha$} emission line still
 falls into the $J0660$ filter. Objects with $ z >  0.02$ the  H{$\alpha$} is outside 
 of the $J0660$ filter. Table~\ref{tab:simbad} of the appendices shows the red-shift of the
@@ -1122,41 +1126,41 @@ ionizing stars and their respective giant H II regions cover the extension of th
 images and the emission lines of their spectra. Fig.~\ref{fig:photo-image-knonw-objects2}
 shows the SDSS spectra and S-PLUS photometry of the H II galaxy 6dFGS gJ012646.5-003845 
 (panel \textit{a}) and of the radio galaxy NVSS J025557+004132 (panel \textit{b}). 
-The H II galaxy is classified 
-as blue source while the radio galaxy as red by the machine learning 
-algorithm which is obvious from their spectra. 
+The H II galaxy is classified  as blue source while the radio galaxy as red by the 
+machine learning algorithm which is obvious from their spectra. 
 
 On the other hand, several AGN, Seyfert 1 and Seyfert 2 galaxies have red-shift 
-between 0.31 and 0.37 indicating that the excess on the $J0660$ filter
-is not due to the H{$\alpha$} emission but if due to the H{$\beta$} and [O III] 4959, 5007 \AA~ 
-emission lines. These emission lines at the red-shift range $0.306 < z < 0.376$ are detected 
-in the $J0660$ band. 
+between 0.306 and 0.376 indicating that the excess on the $J0660$ filter
+is not due to the H{$\alpha$} emission line but if due to the H{$\beta$} 
+and [O III] 4959, 5007 \AA~ emission lines. %These emission lines at the red-shift range $0.306 < z < 0.376$ are detected 
+%in the $J0660$ band. 
 It is well known that the AGNs have very strong emission 
 lines such as H{$\beta$}, [0 III] 4959, 5007 \AA~and H{$\alpha$}. 
 
 One interesting discussion here, is that the SIMBAD type part of a Galaxy (PartofG)
  are actually galaxies with Wolf-Rayet (WR) signature in the low red shift
 universe also named ``WR galaxy'' \citep{Osterbrock:1982}. WR stars in galaxies
-is perceptible in their spectra with strong emission lines such as H{$\alpha$}
+is perceptible in their spectra which have strong emission lines such as H{$\alpha$}
 and [NII]. These spectral features can be of them very similar to extragalactic
 H II regions present typically of the outskirt of spiral galaxies. Panel (\textit{e}) 
 of Fig.~\ref{fig:photo-image-knonw-objects} displays the S-PLUS and SDSS spectra 
 of the galaxy with Wolf-Rayet signature [BKD2008] WR 14.
 
-On the other hand, many of the objects have as main type ``galaxy'' in SIMBAD.
+Some objects have simply as main type ``galaxy'' in SIMBAD.
 This galaxies could be spiral galaxies on which the star formation is present. 
 It is known that in the spiral arms of the galaxies are present H II regions 
 as well as neutral gas (H I) and molecular gas. Actually some of these galaxies 
 haves for secondary type H I. The reservoir of H I gas in galaxies must ultimately
 feed their star formation, after cooling and forming molecular
-clouds \citep{van-Driel:2016}. Panel \textit{c} of Figure~\ref{fig:photo-image-knonw-objects2} shows the 
-S-PLUS photometry and the SDSS spectra of star-forming galaxy. The SDSS spectrum 
+clouds \citep{van-Driel:2016}. Panel \textit{c} of Figure~\ref{fig:photo-image-knonw-objects2} 
+shows the S-PLUS photometry and the SDSS spectra of a star-forming galaxy. The SDSS spectrum 
 clearly exhibits strong emission lines. Note that almost all these galaxies are 
-classified as bluer objects
-by \texttt{HAC} and \texttt{HDBSCAN}.
+classified as bluer objects by \texttt{HAC} and \texttt{HDBSCAN}.
 However, mostly of the Seyfert 2 and radio-galaxies and an handful of 
 galaxies are classified as red sources. 
-These galaxies, belonging to the red sub-sample, are probably nearby, red early-type galaxies with emission lines, mainly, they could be LINERS, AGB or radio galaxies \citep{Capetti:2011}.
+These galaxies, belonging to the red sub-sample, are probably nearby, 
+red early-type galaxies with emission lines, mainly, they could be LINERS, 
+AGB or radio galaxies \citep{Capetti:2011}.
 
 \paragraph{QSOs.}
 
@@ -1175,8 +1179,8 @@ Some of these emission lines are H{$\beta$}, C {\sc IV} 1550 \AA, C {\sc III]} 1
 \paragraph{Other type of objects.}
   
   Miscellanies the objects were selected as H{$\alpha$} emitters that appear classified on
-  SIMBAD as it can see in the table~\ref{tab:simbad-sources}. They are included cluster of stars,
-  FIR sources, MIR objects, molecular clouds, UV-emission source,  among other.
+  SIMBAD as it can see in the table~\ref{tab:simbad-sources}. They are included cluster of stars, 
+  FIR sources, MIR objects, molecular clouds, UV-emission source, among other.
 
 \subsubsection{SDSS and LAMOST}
 
@@ -1379,7 +1383,12 @@ and red sources.
 \begin{center}
 \onecolumn
 \begin{longtable}{l r r c c c c c}
- \caption{Simbad sources. \label{tab:simbad}}\\
+ \caption{Objects from the SIMBAD data base. The first column presents the ID SIMBAD of the source in question. 
+Right ascension and declination are shown in the second and third columns, respectively. 
+The type is given in the fourth column. The red-shift, if exist in SIMBAD, is displayed in 
+the fifth column. The colour-type classification performed with \textsc{HAC} algorithm is 
+presented in the sixth column. The seventh and eighth columns show the probability estimated 
+from \textsc{hdbscan} approach to being a blue and red source, respectively.. \label{tab:simbad}}\\
  \TableHeader\endfirsthead 
  \caption[]{--continued}\\
  \TableHeader\endhead
@@ -1389,9 +1398,11 @@ and red sources.
  \end{center}
 
 %\clearpage
+\section{SDSS spectra}
 \input{S-spectra-sdss.tex}
 
 \clearpage
+\section{Lamost spectra}
 \input{S-spectra-lamost.tex}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
