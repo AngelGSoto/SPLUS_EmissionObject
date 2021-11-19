@@ -372,7 +372,7 @@ I write a script to download the colored images and make them for publication:
  Name = cmd_args.name
 
  # Connect
- conn = splusdata.connect('Luis', 'plutarco*80')
+ conn = splusdata.connect(' ', ' ')
 
  # Getting the colored imge
  img = conn.twelve_band_img(ra, dec, radius=rad, noise=0.15, saturation=0.15)
