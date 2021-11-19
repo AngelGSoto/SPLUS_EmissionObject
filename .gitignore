@@ -52,7 +52,8 @@ iDR3_n4/LAMOST-spectra-all/*.txt
 iDR3_n4/SDSS-spectra-all/*_url.txt
 iDR3_n4/SDSS-spectra-all/coor-halpha*
 iDR3_n4/SDSS-spectra-all-again/*
-
+paper/Figs/Figs-sdss/spec-*
+*.zip
 
 
 

@@ -42,3 +42,8 @@ print("#############################################")
 # Save the final file
 asciifile = file2.replace(".ecsv", "-remain.ecsv")
 tab1[mask].write(asciifile, format="ascii.ecsv", overwrite=True)
+
+# Save dataframe
+asciifile_df = file2.replace(".ecsv", "-remain.csv")
+df = (tab1[mask].to_pandas())
+df.to_csv(asciifile_df, index=False)

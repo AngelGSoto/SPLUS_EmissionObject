@@ -1506,3 +1506,295 @@ emission line of the QSO fall into the J0660 filter are:
 
 Now we need to do the table latex with the Redshift
 
+* Final list
+
+Merging the old table and the new one:
+
+#+name: merge
+#+BEGIN_SRC python :return asciifile :results file
+  from astroquery.simbad import Simbad
+  import astropy.coordinates as coord
+  import astropy.units as u
+  from astropy.table import Table, vstack
+  from astropy.coordinates import SkyCoord 
+  import numpy as np
+  from scipy.constants import constants
+  
+  # Read the tables
+  tab1 = Table.read("Final-list/Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-takeoutrepeat-Final.ecsv", format="ascii.ecsv")
+  tab2 = Table.read("Final-list/Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-takeoutrepeat-Final-remain-Final.ecsv", format="ascii.ecsv")
+  
+  # Merging tables 
+  table_final = vstack([tab1, tab2])
+  
+  # save the table resulting
+  asciifile = "Final-list/Final-list-emitters-radec.ecsv"
+  table_final.write(asciifile, format="ascii.ecsv")  
+  
+  # pandas
+  df_table_final = table_final.to_pandas()
+  df_asciifile = "Final-list/Final-list-emitters-radec.csv"
+  df_table_final.to_csv(df_asciifile, index = False)
+  
+  
+#+END_SRC
+
+#+RESULTS: merge
+[[file:Final-list/Final-list-emitters-radec.ecsv]]
+
+- Now we count each class of object. 
+
+#+name: simbad-data-final
+#+BEGIN_SRC python :tangle /programs/simbad-data-final.py 
+  #from __future__ import print_function
+  import numpy as np
+  from sklearn import metrics
+  from scipy.optimize import curve_fit
+  import pandas as pd
+  from astropy.table import Table
+  import seaborn as sns
+  from astropy.stats import sigma_clip
+  import matplotlib.pyplot as plt
+  from matplotlib.font_manager import FontProperties
+  from sklearn.metrics import mean_squared_error
+  from astropy.modeling import models, fitting
+  import argparse
+  import sys
+  import os
+  from pathlib import Path
+  ROOT_PATH = Path("paper/Figs")
+  
+  df = pd.read_csv("Final-list/simbad-final.csv")
+  print(df.columns)
+  
+  # MASKs
+  m1 = df['main_type'] == 'AGN_Candidate'
+  m2 = df['main_type'] == 'AGN'
+  m3 = df['main_type'] == 'EmG'
+  m4 = df['main_type'] == 'GinGroup'
+  m5 = df['main_type'] == 'Galaxy'
+  m6 = df['main_type'] == 'Candidate_CV*'
+  m7 = df['main_type'] == 'RRLyr'
+  m8 = df['main_type'] == 'SN'
+  m9 = df['main_type'] == 'HII'
+  m11 = df['main_type'] == 'CataclyV*'
+  m12 = df['main_type'] == 'FIR'
+  m13 = df['main_type'] == 'GinCl'
+  m14 = df['main_type'] == 'HII_G'
+  m15 = df['main_type'] == 'Seyfert_1'
+  m17 = df['main_type'] == 'Star'
+  m18 = df['main_type'] == 'PartofG'
+  m19 = df['main_type'] == 'RadioG'
+  m20 = df['main_type'] == 'IG'
+  m21 = df['main_type'] == 'QSO'
+  m22 = df['main_type'] == 'EB*'
+  m23 = df['main_type'] == 'Radio'
+  m24 = df['main_type'] == 'Seyfert_2'
+  m26 = df['main_type'] == 'X'
+  m27 = df['main_type'] == 'MolCld'
+  m28 = df['main_type'] == 'Cl*'
+  m29 = df['main_type'] == 'HMXB'
+  m30 = df['main_type'] == 'GinPair'
+  m31 = df['main_type'] == 'LSB_G'
+  m32 = df['main_type'] == 'WD*'
+  m33 = df['main_type'] == 'Candidate_RRLyr'
+  m34 = df['main_type'] == 'PN'
+  m35 = df['main_type'] == 'Blue'
+  m36 = df['main_type'] == 'EmObj'
+  m37 = df['main_type'] == 'BlueSG*'
+  m38 = df['main_type'] == 'StarburstG'
+  m39 = df['main_type'] == 'low-mass*'
+  m40 = df['main_type'] == 'BlueCompG'
+  m41 = df['main_type'] == 'UV'
+  m42 = df['main_type'] == 'Candidate_WD*'
+  m43 = df['main_type'] == 'MIR'
+  m44 = df['main_type'] == 'Radio(cm)'
+  m45 = df['main_type'] == 'Candidate_SN*'
+  m46 = df['main_type'] == 'QSO_Candidate'
+  m47 = df['main_type'] == 'BLLac'
+  m48 = df['main_type'] == 'PM*'
+  m49 = df['main_type'] == 'Possible_lensImage'
+  m51 = df['main_type'] == 'Nova'
+  m52 = df['main_type'] == 'BClG'
+  m53 = df['main_type'] == 'GlCl'
+  m54 = df['main_type'] == 'V*'
+  m55 = df['main_type'] == 'Transient'
+  m56 = df['main_type'] == 'Unknown'
+  m57 = df['main_type'] == 'Candidate_EB*'
+  m58 = df['main_type'] == 'Seyfert'
+  
+  # Making the tables with individual object classes
+  df_agn = pd.concat([df[m1], df[m2], df[m58]])
+  df_EmG = pd.concat([df[m3], df[m14], df[m38], df[m40]])
+  df_GinGroup = df[m4]
+  df_pn = df[m34] 
+  df_gal = df[m5]
+  df_qso = pd.concat([df[m21], df[m46]])
+  df_cv = pd.concat([df[m6], df[m11]])
+  df_hii = df[m9]
+  df_star = df[m17]
+  df_sn = pd.concat([df[m8], df[m45]])
+  df_rrly = pd.concat([df[m7], df[m33]])
+  df_fir = df[m12]
+  df_GinCl = df[m13]
+  df_Seyfert_1 = df[m15]
+  df_Seyfert_2 = df[m24]
+  df_PartofG = df[m18]
+  df_RadioG = df[m19]
+  df_IG = df[m20]
+  df_EB = pd.concat([df[m22], df[m57]])
+  df_Radio = pd.concat([df[m23], df[m44]])
+  df_X = df[m26]
+  df_MolCld = df[m27]
+  df_cl = df[m28]
+  df_HMXB = df[m29]
+  df_GinPair = df[m30]
+  df_LSB_G = df[m31]
+  df_WD = pd.concat([df[m32], df[m42]])
+  df_Blue = df[m35]
+  df_EmObj = df[m36]
+  df_BlueSG = df[m37]
+  df_low_mass = df[m39]
+  df_uv = df[m41]
+  df_mier = df[m43]
+  df_BLLac = df[m47]
+  df_pm = df[m48]
+  df_Possible_lensImage = df[m49]
+  df_nova = df[m51]
+  df_bclg = df[m52]
+  df_glcl = df[m53]
+  df_v = df[m54]
+  df_tran = df[m55]
+  df_unk = df[m56]
+  
+  # Countaining the sources of each class 
+  list_numbers = ["H II regions", "PN", "CV", "SN", "Nova", "BL Lac",
+		  "Variable Star of RR Lyr type",
+		  "Star", "WD", "Cluster of Stars", "HMXB", "Far-Infrared source",
+		  "Eclipsing binary", "Blue object", "Emission Object", "Blue supergiant star",
+		  "Low-mass star", "UV-emission source", "MIER", "Possible lens Image"
+		  "Galaxy", "Galaxy in Pair of Galaxies",
+		  "Emission line galaxies",
+		  "QSO", "AGN", "Part of a Galaxy", "X-ray source", "Molecular Cloud",
+		  "Galaxy in Group of Galaxies", "Radio-source", "Interacting Galaxies",
+		  "Low Surface Brightness Galaxy", "Radio Galaxy", "Galaxy in Cluster of Galaxies"
+		  "High proper-motion Star", "Seyfert 1", "Seyfert 2",
+		  "Brightest galaxy in a Cluster", "Globular Cluster", "Variable star", "Transient",
+                   "Unknown"]
+  
+#+END_SRC
+
+#+RESULTS: simbad-data-final
+: None
+
+#+BEGIN_SRC python :return filejson_resu :results file :noweb yes :results output
+  import json
+  <<simbad-data-final>>
+  dict_class = {"H II regions": len(df_hii),
+		"PN": len(df_pn),
+		"CV": len(df_cv),
+		"SN": len(df_sn),
+		"Nova": len(df_nova),
+		"BL Lac": len(df_BLLac),
+		"RR Lyr": len(df_rrly),
+		"Star": len(df_star),
+		"WD": len(df_WD),
+		"Cluster of Stars": len(df_cl),
+		"HMXB": len(df_HMXB),
+		"Far-Infrared source": len(df_fir),
+		"Eclipsing binary": len(df_EB),
+		"Blue object": len(df_Blue),
+		"Emission Object": len(df_EmObj),
+		"Blue supergiant star": len(df_BlueSG),
+		"Low-mass star": len(df_low_mass),
+		"UV-emission source": len(df_uv),
+		"MIER": len(df_mier),
+		"Possible lens Image": len(df_Possible_lensImage),
+		"Galaxy": len(df_gal),
+		"Galaxy in Pair of Galaxies": len(df_GinPair),
+		"Emission line galaxies": len(df_EmG),
+		"QSO": len(df_qso),
+		"AGN": len(df_agn),
+		"Part of a Galaxy": len(df_PartofG),
+		"X-ray source": len(df_X),
+		"Molecular Cloud": len(df_MolCld),
+		"Galaxy in Group of Galaxies": len(df_GinGroup),
+		"Radio-source": len(df_Radio),
+		"Interacting Galaxies": len(df_IG),
+		"Low Surface Brightness Galaxy": len(df_LSB_G),
+		"Radio Galaxy": len(df_RadioG),
+		"Galaxy in Cluster of Galaxies": len(df_GinCl),
+		"High proper-motion Star": len(df_pm),
+		"Seyfert 1": len(df_Seyfert_1),
+		"Seyfert 2": len(df_Seyfert_2),
+		"Brightest galaxy in a Cluster": len(df_bclg),
+		"Globular Cluster": len(df_glcl),
+                "Variable star": len(df_v),
+                "Transient": len(df_tran),
+                "Unknown": len(df_unk)}
+  n_total = []
+  for key, value in dict_class.items():
+      n_total.append(value)
+  print("Number total of objects is,", np.sum(n_total))
+
+  filejson_resu = "Final-list/simbad-resuming-final.json"
+  with open(filejson_resu, "w") as f:
+      json.dump(dict_class, f, indent=2)
+  
+#+END_SRC
+
+#+RESULTS:
+[[file:Index(['ID', 'RA', 'DEC', 'main_id', 'ra_x', 'dec_x', 'coo_err_maj',
+       'coo_err_min', 'coo_err_angle', 'nbref', 'ra_sexa', 'dec_sexa',
+       'main_type', 'other_types', 'radvel', 'redshift', 'sp_type',
+       'morph_type', 'plx', 'pmra', 'pmdec', 'size_maj', 'size_min',
+       'size_angle', 'B', 'V', 'R_x', 'J', 'H', 'K', 'u', 'g', 'r_xa', 'i',
+       'z', 'angDist'],
+      dtype='object')
+Number total of objects is, 1052
+]]
+
+** Getting more parameters
+
+I need the final  table with more parameters, especially, with magnitudes.
+- Running the splus python package to make match.
+
+: python programs/match-splus-database.py
+
+I don't understand why I have repeat objects, I mean with the same ID.
+Eliminate duplicate  objects.
+
+#+BEGIN_SRC python :return newtabfile_ :results file :noweb yes 
+import pandas as pd
+from astropy.table import Table, vstack
+import numpy as np
+from pathlib import Path
+
+ROOT = Path("Final-list/") 
+
+tab = Table.read(ROOT/ "Final-list-emitters-allparam.ecsv", format="ascii.ecsv")
+
+# Eliminate duplicates
+sources, idu = [], []
+for i, source in  enumerate(tab['ID']):
+    if source in sources:
+        idu.append(i)
+    sources.append(source)
+if idu:
+    tab.remove_rows(idu)
+
+newtabfile_ = "Final-list-emitters-allparam-unique.ecsv"
+tab.write(ROOT / newtabfile_, format="ascii.ecsv")
+
+# pandas
+df_tab = tab.to_pandas()
+df_newtabfile_ = "Final-list-emitters-allparam-unique.csv"
+df_tab.to_csv(ROOT / df_newtabfile_, index = False)
+
+#+END_SRC
+
+#+RESULTS:
+[[file:Final-list-emitters-allparam-unique.ecsv]]
+
+
+
