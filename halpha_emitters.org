@@ -1542,6 +1542,8 @@ Merging the old table and the new one:
 #+RESULTS: merge
 [[file:Final-list/Final-list-emitters-radec.ecsv]]
 
+** Simbad matches
+
 - Now we count each class of object. 
 
 #+name: simbad-data-final
