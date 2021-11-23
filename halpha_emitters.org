@@ -1551,11 +1551,9 @@ Merging the old table and the new one:
   #from __future__ import print_function
   import numpy as np
   from sklearn import metrics
-  from scipy.optimize import curve_fit
   import pandas as pd
   from astropy.table import Table
   import seaborn as sns
-  from astropy.stats import sigma_clip
   import matplotlib.pyplot as plt
   from matplotlib.font_manager import FontProperties
   from sklearn.metrics import mean_squared_error
@@ -1746,15 +1744,36 @@ Merging the old table and the new one:
 #+END_SRC
 
 #+RESULTS:
-[[file:Index(['ID', 'RA', 'DEC', 'main_id', 'ra_x', 'dec_x', 'coo_err_maj',
-       'coo_err_min', 'coo_err_angle', 'nbref', 'ra_sexa', 'dec_sexa',
-       'main_type', 'other_types', 'radvel', 'redshift', 'sp_type',
+[[file:Index(['Field', 'ID', 'RA', 'DEC', 'FWHM', 'ISOarea', 'KRON_RADIUS', 'MU_MAX',
+       'nDet_PStotal', 'PhotoFlagDet', 'u_PStotal', 'J0378_PStotal',
+       'J0395_PStotal', 'J0410_PStotal', 'J0430_PStotal', 'g_PStotal',
+       'J0515_PStotal', 'r_PStotal', 'J0660_PStotal', 'i_PStotal',
+       'J0861_PStotal', 'z_PStotal', 'e_u_PStotal', 'e_J0378_PStotal',
+       'e_J0395_PStotal', 'e_J0410_PStotal', 'e_J0430_PStotal', 'e_g_PStotal',
+       'e_J0515_PStotal', 'e_r_PStotal', 'e_J0660_PStotal', 'e_i_PStotal',
+       'e_J0861_PStotal', 'e_z_PStotal', 'main_id', 'ra_x', 'dec_x',
+       'coo_err_maj', 'coo_err_min', 'coo_err_angle', 'nbref', 'ra_sexa',
+       'dec_sexa', 'main_type', 'other_types', 'radvel', 'redshift', 'sp_type',
        'morph_type', 'plx', 'pmra', 'pmdec', 'size_maj', 'size_min',
        'size_angle', 'B', 'V', 'R_x', 'J', 'H', 'K', 'u', 'g', 'r_xa', 'i',
        'z', 'angDist'],
       dtype='object')
-Number total of objects is, 1052
-]]
+Number total of objects is, 1041
+
++ Getting only simbad sorces.
+
+#+BEGIN_SRC python :return filename :results file :noweb yes
+  <<simbad-data-final>>
+  
+  # Saving subtables (QSO)
+  filename = "Final-list/QSO-simbad-final.csv"
+  df_qso.to_csv(filename, index = False)
+  
+#+END_SRC
+
+#+RESULTS:
+[[file:Final-list/QSO-simbad-final.csv]]
+
 
 ** Getting more parameters
 
@@ -1799,4 +1818,417 @@ df_tab.to_csv(ROOT / df_newtabfile_, index = False)
 [[file:Final-list-emitters-allparam-unique.ecsv]]
 
 
+** GAIA
+:PROPERTIES:
+:header-args: :noweb yes :dir Final-list
+:END:
+
+I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
+
+#+name: read-gaia-table
+#+BEGIN_SRC python
+  df = pd.read_csv("Gaia-Final-list-emitters-allparam-unique.csv")
+#+END_SRC
+
+#+name: qso-read-gaia-table
+#+BEGIN_SRC python
+  df_qso = pd.read_csv("GAIA-QSO-simbad-final.csv")
+#+END_SRC
+
+
+#+name: gaia-match
+#+BEGIN_SRC python :results output
+  import numpy as np
+  import json
+  import matplotlib.pyplot as plt
+  from  astropy.table import Table
+  import pandas as pd
+  import seaborn as sns
+  from scipy.stats import gaussian_kde
+
+  <<read-gaia-table>>
+  <<qso-read-gaia-table>>
+
+  lgd_kws = {'frameon': True, 'fancybox': True, 'shadow': True}
+
+  # removing inf or nan values
+  col = ["phot_g_mean_mag", "bp_rp"] 
+  df_new = df[col] 
+  df_new1 =  df_new.dropna()
+
+  # G-mag
+  Gmag = np.array(df_new1["phot_g_mean_mag"]) 
+  
+  # Color
+  #cbp_rpmag = df["phot_bp_mean_mag"] - df["phot_rp_mean_mag"]
+  bp_rpmag = np.array(df_new1["bp_rp"])
+
+  # Calculate the point density
+  xy = np.vstack([bp_rpmag, Gmag])
+  z = gaussian_kde(xy)(xy)
+
+  # Sort the points by density, so that the densest points are plotted last
+  idx = z.argsort()
+  x, y, z = bp_rpmag[idx], Gmag[idx], z[idx]
+  
+ 
+  # QSO
+  Gmag_qso = df_qso["phot_g_mean_mag"]
+  bp_rpmag_qso = df_qso["bp_rp"]
+  colors = ["cerulean",]
+  colors = sns.xkcd_palette(colors)
+  
+#+END_SRC
+
+
+#+BEGIN_SRC python :return pltfile :results file 
+  
+  <<gaia-match>>
+  
+  pltfile = 'color-mag-gaia.pdf'
+  sns.set_style('ticks')
+  fig = plt.figure(figsize=(6, 7))
+  ax = fig.add_subplot(111)
+  
+  ax.scatter(x, y, c=z, s=50, edgecolor=['none'])
+  ax.scatter(bp_rpmag_qso, Gmag_qso, c = colors, edgecolor=['black'], alpha = 0.4, s = 50)
+  #plt.scatter(bp_rpmag, Gmag, alpha=0.8)
+  plt.xlabel(r'$G_{BP} - G_{RP}$')
+  plt.ylabel(r'$G$')
+  #ax.set_xlim(-30.0, 390.0)
+  #ax.set_ylim(-90.0, 90.0)
+  ax.legend(prop={'family': 'monospace', 'size': 'x-small'}, **lgd_kws)
+  plt.gca().invert_yaxis()
+  fig.savefig(pltfile)     
+  
+#+END_SRC
+
+#+RESULTS:
+[[file:Final-list/color-mag-gaia.pdf]]
+
+
+#+BEGIN_SRC python :return pltfile :results file :results output
+  
+  <<gaia-match>>
+  
+  # Absolute magnitude
+
+  # removing inf or nan values
+  col = ["parallax", "phot_g_mean_mag", "bp_rp"] 
+  df_new = df[col] 
+  df_new1 =  df_new.dropna()
+
+  # G-mag
+  Gmag_abs = np.array(df_new1["phot_g_mean_mag"]) + 5*np.log10(np.array(df_new1["parallax"] / 1000.)) + 5
+  
+  # Color
+  bp_rpmag = np.array(df_new1["bp_rp"])  
+
+  # Creating new pandas table
+  data = {'G_abs':Gmag_abs,
+          'bp_rp':bp_rpmag}
+  df_result = pd.DataFrame(data)
+  
+  df_result_new = df_result.dropna()
+  
+  G_abs = np.array(df_result_new["G_abs"])
+  bp_rp = np.array(df_result_new["bp_rp"])
+  # Calculate the point density
+  xy = np.vstack([bp_rp, G_abs])
+  z = gaussian_kde(xy)(xy)
+
+  # Sort the points by density, so that the densest points are plotted last
+  idx = z.argsort()
+  x, y, z = bp_rp[idx], G_abs[idx], z[idx]
+
+  # QSO
+  Gmag_qso_abs = df_qso["phot_g_mean_mag"] + 5*np.log10(np.array(df_qso["parallax"] / 1000.)) + 5
+  bp_rpmag_qso = df_qso["bp_rp"]
+  colors = ["cerulean",]
+  colors = sns.xkcd_palette(colors)
+
+  pltfile = 'color-mag_abs-gaia.pdf'
+  sns.set_style('ticks')
+  fig = plt.figure(figsize=(6, 7))
+  ax = fig.add_subplot(111)
+  
+  ax.scatter(x, y, c=z, s=50, edgecolor=['none'])
+  ax.scatter(bp_rpmag_qso, Gmag_qso_abs, c = colors, edgecolor=['black'], alpha = 0.4, s = 50)
+  #plt.scatter(bp_rpmag, Gmag_abs, alpha=0.8)
+  plt.xlabel(r'$G_{BP} - G_{RP}$')
+  plt.ylabel(r'$M_G + A_G$')
+  #ax.set_xlim(-30.0, 390.0)
+  #ax.set_ylim(-90.0, 90.0)
+  ax.legend(prop={'family': 'monospace', 'size': 'x-small'}, **lgd_kws)
+  plt.gca().invert_yaxis()
+  fig.savefig(pltfile)     
+  
+#+END_SRC
+
+#+RESULTS:
+[[file:Final-list]]
+
+#+BEGIN_SRC python :return pltfile :results file :results output
+  
+  <<gaia-match>>
+  
+
+  # removing inf or nan values
+  col = ["parallax"] 
+  df_new = df[col] 
+  df_new1 =  df_new.dropna()
+
+  d = 1 / df_new1["parallax"] 
+
+  # QSOs from simbad
+  df_qso_new = df_qso[col] 
+  df_qso_new1 =  df_qso_new.dropna()
+
+  d_qso = 1 / df_qso_new1["parallax"] 
+
+  pltfile = 'dist-distance-gaia.pdf'
+  with sns.axes_style("ticks"):
+    # Bar diagram
+    fig, ax1 = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
+    plt.xlabel(r"$D(Kpc)$", fontsize=33)
+    plt.ylabel(r"Density", fontsize=33)
+    plt.tick_params(axis='x', labelsize=33) 
+    plt.tick_params(axis='y', labelsize=33)
+    d = [x for x in d]
+    sns.distplot(d,norm_hist=True, kde=False, ax=ax1,
+                 bins=2000, color='r')
+    d_qso = [x for x in d_qso]
+    sns.distplot(d_qso, norm_hist=True, kde=False, ax=ax1,
+                 bins=2000, color='b')
+                
+    ax1.set(xlim=[-50, 70])
+    #ax.legend(loc='upper left')
+    ymax = ax1.get_ybound()[1]
+    sns.despine()
+    plt.tight_layout()
+    plt.savefig(pltfile)
+  
+#+END_SRC
+
+#+RESULTS:
+[[file:Final-list]]
+
+*** GAIA distance from Bailer-Jones et al.
+
+#+name: read-gaia-distance-table
+#+BEGIN_SRC python
+  df_dis = pd.read_csv("Gaia-distance-Final-list-emitters-allparam-unique.csv")
+#+END_SRC
+
+#+name: qso-read-gaia-distance-table
+#+BEGIN_SRC python
+  df_qso_dis = pd.read_csv("GAIA-QSO-distance-simbad-final.csv")
+#+END_SRC
+
+#+name: gaia-match-distance
+#+BEGIN_SRC python :results output
+  import numpy as np
+  import json
+  import matplotlib.pyplot as plt
+  from  astropy.table import Table
+  import pandas as pd
+  import seaborn as sns
+  from scipy.stats import gaussian_kde
+
+  <<read-gaia-distance-table>>
+  <<qso-read-gaia-distance-table>>
+
+  lgd_kws = {'frameon': True, 'fancybox': True, 'shadow': True}
+
+  # removing inf or nan values
+  col = ["phot_g_mean_mag", "bp_rp"] 
+  df_new = df_dis[col] 
+  df_new1 =  df_new.dropna()
+
+  # G-mag
+  Gmag = np.array(df_new1["phot_g_mean_mag"]) 
+  
+  # Color
+  #cbp_rpmag = df["phot_bp_mean_mag"] - df["phot_rp_mean_mag"]
+  bp_rpmag = np.array(df_new1["bp_rp"])
+
+  # Calculate the point density
+  xy = np.vstack([bp_rpmag, Gmag])
+  z = gaussian_kde(xy)(xy)
+
+  # Sort the points by density, so that the densest points are plotted last
+  idx = z.argsort()
+  x, y, z = bp_rpmag[idx], Gmag[idx], z[idx]
+  
+  # QSO
+  Gmag_qso = df_qso_dis["phot_g_mean_mag"]
+  bp_rpmag_qso = df_qso_dis["bp_rp"]
+  colors = ["cerulean",]
+  colors = sns.xkcd_palette(colors)
+  
+#+END_SRC
+
+
+#+BEGIN_SRC python :return pltfile :results file :results output
+  
+  <<gaia-match-distance>>
+  
+  # Absolute magnitude
+
+  # removing inf or nan values
+  col = ["rgeo", "phot_g_mean_mag", "bp_rp"] 
+  df_new = df_dis[col] 
+  df_new1 =  df_new.dropna()
+
+  # G-mag
+  Gmag_abs = np.array(df_new1["phot_g_mean_mag"]) - 5*np.log10(np.array(df_new1["rgeo"])) + 5
+  
+  # Color
+  bp_rpmag = np.array(df_new1["bp_rp"])  
+
+  # Creating new pandas table
+  data = {'G_abs':Gmag_abs,
+          'bp_rp':bp_rpmag}
+  df_result = pd.DataFrame(data)
+  
+  df_result_new = df_result.dropna()
+  
+  G_abs = np.array(df_result_new["G_abs"])
+  bp_rp = np.array(df_result_new["bp_rp"])
+  # Calculate the point density
+  xy = np.vstack([bp_rp, G_abs])
+  z = gaussian_kde(xy)(xy)
+
+  # Sort the points by density, so that the densest points are plotted last
+  idx = z.argsort()
+  x, y, z = bp_rp[idx], G_abs[idx], z[idx]
+
+  # QSO
+  Gmag_qso_abs = df_qso_dis["phot_g_mean_mag"] - 5*np.log10(np.array(df_qso_dis["rgeo"])) + 5
+  bp_rpmag_qso =  df_qso_dis["bp_rp"]
+  colors = ["cerulean",]
+  colors = sns.xkcd_palette(colors)
+
+  pltfile = 'color-mag_abs-gaia-distance.pdf'
+  sns.set_style('ticks')
+  fig = plt.figure(figsize=(6, 7))
+  ax = fig.add_subplot(111)
+  
+  ax.scatter(x, y, c=z, s=50, edgecolor=['none'])
+  ax.scatter(bp_rpmag_qso, Gmag_qso_abs, c = colors, edgecolor=['black'], alpha = 0.4, s = 50)
+  #plt.scatter(bp_rpmag, Gmag_abs, alpha=0.8)
+  plt.xlabel(r'$G_{BP} - G_{RP}$')
+  plt.ylabel(r'$M_G + A_G$')
+  #ax.set_xlim(-30.0, 390.0)
+  #ax.set_ylim(-90.0, 90.0)
+  ax.legend(prop={'family': 'monospace', 'size': 'x-small'}, **lgd_kws)
+  plt.gca().invert_yaxis()
+  fig.savefig(pltfile)     
+  
+#+END_SRC
+
+#+BEGIN_SRC python :return pltfile :results file :results output
+  
+  <<gaia-match-distance>>
+  
+  # Absolute magnitude
+
+  # removing inf or nan values
+  col = ["rgeo", "phot_g_mean_mag", "bp_rp"] 
+  df_new = df_dis[col] 
+  df_new1 =  df_new.dropna()
+
+  # G-mag
+  d = np.array(df_new1["rgeo"])
+  
+  # Color
+  bp_rpmag = np.array(df_new1["bp_rp"])  
+
+  # Creating new pandas table
+  data = {'d':d,
+          'bp_rp':bp_rpmag}
+  df_result = pd.DataFrame(data)
+  
+  df_result_new = df_result.dropna()
+  
+  d_final = np.array(df_result_new["d"]) / 1000.
+  bp_rp = np.array(df_result_new["bp_rp"])
+  # Calculate the point density
+  xy = np.vstack([bp_rp, d_final])
+  z = gaussian_kde(xy)(xy)
+
+  # Sort the points by density, so that the densest points are plotted last
+  idx = z.argsort()
+  x, y, z = bp_rp[idx], d_final[idx], z[idx]
+
+  # QSO
+  d_qso = np.array(df_qso_dis["rgeo"]) / 1000.
+  bp_rpmag_qso =  df_qso_dis["bp_rp"]
+  colors = ["cerulean",]
+  colors = sns.xkcd_palette(colors)
+
+  pltfile = 'color-distance-gaia-Bailer.pdf'
+  sns.set_style('ticks')
+  fig = plt.figure(figsize=(6, 7))
+  ax = fig.add_subplot(111)
+  
+  ax.scatter(x, y, c=z, s=50, edgecolor=['none'])
+  ax.scatter(bp_rpmag_qso, d_qso, c = colors, edgecolor=['black'], alpha = 0.4, s = 50)
+  #plt.scatter(bp_rpmag, Gmag_abs, alpha=0.8)
+  plt.xlabel(r'$G_{BP} - G_{RP}$')
+  plt.ylabel(r'$D (Kpc)$')
+  #ax.set_xlim(-30.0, 390.0)
+  #ax.set_ylim(-90.0, 90.0)
+  ax.legend(prop={'family': 'monospace', 'size': 'x-small'}, **lgd_kws)
+  plt.gca().invert_yaxis()
+  fig.savefig(pltfile)     
+  
+#+END_SRC
+
+#+RESULTS:
+[[file:Final-list]]
+
+#+BEGIN_SRC python :return pltfile :results file :results output
+  
+  <<gaia-match-distance>>
+  
+  # removing inf or nan values
+  col = ["rgeo"] 
+  df_new = df_dis[col] 
+  df_new1 =  df_new.dropna()
+  
+  d = df_new1["rgeo"] / 1000.
+  
+  # QSOs from simbad
+  df_qso_new = df_qso_dis[col] 
+  df_qso_new1 =  df_qso_new.dropna()
+  
+  d_qso = df_qso_new1["rgeo"] / 1000.
+  
+  pltfile = 'dist-distance-Bailer-gaia.pdf'
+  with sns.axes_style("ticks"):
+    # Bar diagram
+    fig, ax1 = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
+    plt.xlabel(r"$D(Kpc)$", fontsize=33)
+    plt.ylabel(r"Density", fontsize=33)
+    plt.tick_params(axis='x', labelsize=33) 
+    plt.tick_params(axis='y', labelsize=33)
+    d = [x for x in d]
+    sns.distplot(d,norm_hist=True, kde=True, ax=ax1,
+		 bins=30, color='r', label = r"All H_${\alpha}$ emitters")
+    d_qso = [x for x in d_qso]
+    sns.distplot(d_qso, norm_hist=True, kde=True, ax=ax1,
+		 bins=30, color='b', label = r"Known QSO in H_${\alpha}$ emitters list")
+  
+    ax1.set(xlim=[-1, 15])
+    ax1.legend(loc='upper right')
+    ymax = ax1.get_ybound()[1]
+    sns.despine()
+    plt.tight_layout()
+    plt.savefig(pltfile)
+  
+#+END_SRC
+
+#+RESULTS:
+[[file:Final-list]]
 
