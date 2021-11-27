@@ -27,8 +27,8 @@
 % out the following line
 \usepackage{newtxtext,newtxmath}
 % Depending on your LaTeX fonts installation, you might get better results with one of these:
-%\usepackage{mathptmx}
-%\usepackage{txfonts}
+\usepackage{mathptmx}
+\usepackage{txfonts}
 \usepackage[T1]{fontenc}
 
 % Allow "Thomas van Noord" and "Simon de Laguarde" and alike to be sorted by"N" and "L" etc. in the bibliography.
@@ -822,7 +822,7 @@ We have found that a simplistic metric, the ``Euclidean'', is effective for our 
 %effective.} 
 \comment{Eu não entendi essa frase:} \texttt{Linkage} determines which distance to use between sets of observation. \luis{Linkage criterion determines the distance between sets of observations based on the pairwise distances between observations.}
 The algorithm merge the pairs of cluster that minimize this criterion. \texttt{Ward's method} is used 
-``ward'' \comment{(Quais são as outras opções?)} to minimize the variance of the clusters being merged \comment{(Eu não sei o que é variancia de clusters: variância do que?)}\luis{Mudei a frase}. Ward uses error sum of squares to measurements the variance between the clusters. Then, the two clusters with the smallest error sum of squares will form a new cluster.  As it was mentioned,
+``ward'' \comment{(Quais são as outras opções?)} to minimize the variance of the clusters being merged \comment{(Eu não sei o que é variancia de clusters: variância do que?)}\luis{Mudei a frase} \comment{(Joia. Mas ao dizer Ward's method a gente precisade uma referência. Ainda não entendi sobre a variance. De qual medida, exatamente?)}. Ward uses error sum of squares to measurements the variance between the clusters. Then, the two clusters with the smallest error sum of squares will form a new cluster.  As it was mentioned,
 the input variables are the colors; ($g - r$) and ($z - g$).
 
 %\sout{Figure.~\ref{fig:dendrogram} shows the dendrogram truncated diagram visualization that
@@ -870,7 +870,9 @@ We have adopted the value ``80''.
 \comment{(Eu não entendi o que você quer dizer com a frase seguinte:)} \luis{mudei um pouco a frase.}
 The latter provides a measure of how conservative we want 
 our clustering to be, expressed as the fraction of data classified as noise.
-The value implemented was ``40''. With this configuration 
+The value implemented was ``40''.
+\comment{(80 ou 40? Mais acima você fez menção a 80.)}
+With this configuration 
 of our model, 
 we found
 two 
@@ -921,11 +923,11 @@ is the probability that a data point is a member of the $i$th cluster.
 We can, then, simply
 assign cluster labels for every point by taking the most likely cluster it belongs to,
 using probability thresholds. Soft clustering
-\comment{(Já li essa denominação antes mas agora me pergunto: o que é soft clustering? Indicar aqui uma seção do texto na qual já foi explicado isso?)}
+\comment{(Já li essa denominação antes mas agora me pergunto: o que é soft clustering? Indicar aqui uma seção do texto na qual já foi explicado isso?)} \luis{Mais acima coloquei uma indicaçao onde já foi explicado}
 for \texttt{HDBSCAN} is achieved through an outlier score modification to 
 consider how much an outlier is relative to each cluster, which is based on the
 Global-Local Outlier Score from Hierarchies (GLOSH) algorithm \citep{Campello:2015}.
-This is combined with a measure of distance from a given cluster to produce an estimate of the probability that any given data point belongs to any of the fixed groups drawn from the condensed tree. \comment{(Euachei que essa frase ficou muito grande; estou com receio de mudar e alterar o contexto. Veja plsse você consegue uma versão mais clara, talvez dividindo o conteúdo em duas frases)} \luis{Mudei um pouco esta frase, dividí em duas}.
+This is combined with a measure of distance from a given cluster to \sout{produce an} estimate \sout{of} the probability that any given data point belongs to any of the fixed groups drawn from the condensed tree. \sout{\comment{(Euachei que essa frase ficou muito grande; estou com receio de mudar e alterar o contexto. Veja plsse você consegue uma versão mais clara, talvez dividindo o conteúdo em duas frases)} \luis{Mudei um pouco esta frase, dividí em duas}.}
 
 The right panel of Fig.~\ref{fig:hdbscan} shows at what most likely cluster belongs the data
 points classified as the noise by \texttt{HDBSCAN}. We have used blue and red colors for the
@@ -935,20 +937,31 @@ likely to belong to the clusters we would expect, e.g. in agreement
 with 
 results obtained
 with \texttt{HAC}. Indeed, we now have improved our classification of our list into blue and 
-red sources because we have estimated the probability of each source to belong
-to each group \comment{(Eu não gostei muito dessa frase. Me pareceu deixar algo solto.)} \luis{Adicionei a seguinte frase, talvez feche melhor o paragrafo}. Instead of forcing the algorithm to make a decision as to which group a data point belongs to, just like \texttt{HAC} does, we have quantified the likelihood of a given observation belonging to any of the two clusters found in our data set, see, for instance, the two last columns of Table~\ref{tab:simbad}.  
+red sources\rlopes{:} 
+\sout{because we have estimated the probability of each source to belong
+to each group \comment{(Eu não gostei muito dessa frase. Me pareceu deixar algo solto.)} \luis{Adicionei a seguinte frase, talvez feche melhor o paragrafo}.} instead of forcing the algorithm to make a decision as to which group a data point belongs to, just like \texttt{HAC} does, we have quantified the likelihood of a given observation belonging to any of the two clusters found in our data set (see, for instance, the two last columns of Table~\ref{tab:simbad}).  
 
 \section{Results and discussion}
 \label{sec:results}
 
-\subsection{Matches with other databases}
-\label{sec:matches}
-We found a total of 389 emission line sources in all S-PLUS DR3.
-To understand the nature of the objects  and the fractional
-contribution of different classes of objects with emission lines
-to the overall sample cross-matching with some catalogs available were carried out.
+%\subsection{Matches with \rlopes{SIMBAD sources}}
+%\label{sec:matches}
 
-\subsubsection{Simbad}
+We found a total of 9,200 emission line sources in \sout{all} \rlopes{the} S-PLUS DR3 \rlopes{(Table XX)}.
+\sout{To understand the nature of the objects and} The fractional contribution of different classes of objects 
+\sout{with emission lines}
+to the overall sample 
+\rlopes{was evaluated by} 
+cross-matching 
+\rlopes{it} with \rlopes{SIMBAD sources, assuming the classifications that are eventually listed there}.\footnote{http://simbad.u-strasbg.fr/simbad/} 
+\rlopes{Also, we explore optical spectra available in the SDSS DR16 \citep{Ahumada:2020} and in the Large Sky Area Multi-Object Fiber Spectroscopic Telescope
+(LAMOST; \citealp{Wu:2011}).}
+\sout{some catalogs available were carried out}.
+\comment{GAIA.} 
+\rlopes{In all cases, we assumed the angular distance in the sky-plane between sources considering positive matches those of mutually closest sources within a given limit ($d_{max,proj}$).
+}
+
+\subsection{Matches with SIMBAD sources}
 
 \begin{table*}
 \centering
@@ -990,19 +1003,24 @@ AGN                         & AGN, AGN\_Candidate, Seyfert\_1, Seyfert\_2, BLLac
 Galaxy                      &  Galaxy                & 421               \\
 Possible gravitationally lensed image & Possible\_lensImage & 1          \\
 \hline
-Total                       &                               & 10         \\
+Total                       &                               & 1000         \\
 \hline
 \end{tabular}
 \end{table*}
 
-We made cross-match between our sample of objects with excesses of emission on
-the $J$0660 filter and SIMBAD database. We searched for all objects using a radius of 2 arcsec
-around the position of the optical source in question. We found 1000
-matches that include a great variety of emission line objects. In table
-\ref{tab:simbad-sources} is showed the different categories of objects found
-with SIMBAD coincidence.
+\sout{We made cross-match between our sample of objects with excesses of emission on
+the $J$0660 filter and SIMBAD database. 
+We searched for all objects using a radius of 2 arcsec
+around the position of the optical source in question.} 
+We found 1000
+ \rlopes{positive} matches 
+\rlopes{of SIMBAD sources and emission line objects of our catalog by assuming $d_{max,proj}$\,=\,2\,arcsec.} 
+\sout{that include a great variety of emission line objects.} \rlopes{The results are described below and resumed} in Table
+\ref{tab:simbad-sources}. 
+\sout{is showed the different categories of objects found
+with SIMBAD coincidence.}
 
-\paragraph{Nebulae.}
+\subsubsection{Nebulae.}
 
 \begin{figure*}
 %\setlength\tabcolsep{\figstampcolsep}
@@ -1049,16 +1067,28 @@ with SIMBAD coincidence.
   \label{fig:photo-image-knonw-objects2}
 \end{figure*}
 
-As was mentioned, several classes of objects with nebulosity are listed in our sample. 
-Those include H II region, planetary nebulae and supernova
-remnants (SNRs). Such sources in our Galaxy and nearby galaxies were
-identified here. The H II regions are objects with gas that being ionized by
-amounts of UV light come from massive stars (OB type) on which
-are formed the emission lines. In theses clouds of ionized gas,
-new stars are formed. Unlike H II regions, planetary nebulae
-represent the final stages of low- and intermediate-mass stars
-where the gas previously ejected in the phase of AGB is ionized
-by the high energetic radiation come from their central stars.
+As \rlopes{it} was mentioned, several classes of objects with \sout{nebulosity} \rlopes{diffuse appearance and/or nebular lines}
+\comment{(é correto dizer isso, de que tem fontes com aparência difuse e/ou nebular lines? Você viu isso?)}
+\rlopes{in our Galaxy and in nearby galaxies} are listed in our sample, 
+\rlopes{most being} \sout{Those include} H II region\rlopes{s}, planetary nebulae \rlopes{(PNs),} and supernova
+remnants (SNRs). 
+\sout{Such sources in our Galaxy and nearby galaxies were identified here.} 
+\sout{The} H II regions \sout{are objects with} \rlopes{abridge} gas \sout{that} being ionized by 
+\sout{amounts of} 
+UV light 
+\sout{come} 
+from early, massive stars (OB type) \sout{on which are formed the} \rlopes{and displaying} emission lines. 
+\sout{In theses clouds of ionized gas,
+new stars are formed.} 
+Unlike H II regions, planetary nebulae
+\rlopes{belong to an old population} \sout{represent} \rlopes{as they are} the final stages of low- and intermediate-mass stars
+\rlopes{from which} 
+\sout{where} 
+the gas previously ejected in the phase of AGB is ionized by the high energetic radiation \sout{come} 
+from 
+\sout{their central stars} 
+\rlopes{the hot stellar remnant core}. \comment{(Como você falou de regiões HII e PNs, eu senti falta de ler alguma coisa sobre a terceira coisa citada, que foram as SNRs. Tem uma pausa, você fala de uma PN no parágrafo a seguir, e só depois fala de SNRs. Sugiro que fale aqui sobre SNRs mas de forma mais reduzida e sem repetição (que transplante para aqui o que tem no último parágrafo desta seção, mas de forma resumida e direta. O leitor não espera que expliquemos o que são: ele quer ver o que achamos. Mas uma explicadinha básica faz bem. Básica :))}
+\rlopes{Supernova or even nova also display nebular emission from ev olved stars but from energy-input mechanism quiet different in each case.}
 
 In our list of H{$\alpha$} emission line objects a PN appears cataloged in SIMBAD 
 on which the S-PLUS photometry and SDSS spectrum is displayed on panel (\textit{a}) 
@@ -1071,7 +1101,7 @@ cataloged as HII regions on the SIMBAD database are in our list of H{$\alpha$} e
 Panel (\textit{b}) oh the figure shows the S-PLUS photometry and SDSS spectrum 
 of the extragalactic HII region GALEX 2417063145906373262.  
 
-Supernova and nova are other type of emission lie objects on which shell of gas arise from
+\sout{Supernova and nova are other type of emission lie objects on which shell of gas arise from
 evolved stars. The physical nature on the gas of them is different to the typical gaseous 
 nebulae (H II regions and planetary nebulae). The general energy-input mechanism is quiet 
 different in each case. 
@@ -1079,13 +1109,14 @@ However, the emission-line spectra show general similarities, indicating that wh
 ionized gas is heating tends to produce the same emission-line photons, regardless 
 of the mechanisms by which high temperature and ionization are produced. 
 In agreement with SIMBAD coincidences, supernovas and novas are 
-in our list as show table~\ref{tab:simbad-sources}. Panel \textit{d} of
+in our list as show table~\ref{tab:simbad-sources}.}
+Panel \textit{d} of
 Figure~\ref{fig:photo-image-knonw-objects} exhibits the SDSS spectrum, S-PLUS 
 photometry and coloured image of an extragalatic SN. The emission lines are 
 clearly perceptively in its spectrum. 
 
-\paragraph{Binary systems.}
-25 known CV and 5 candidate CV were selected with the algorithm.
+\subsubsection{Binary systems.}
+25 known \sout{CV} \rlopes{CVs} and 5 \sout{candidate} CV \rlopes{candidates} were selected with the algorithm \comment{(Qual algoritmo?)}.
 CV are binary systems of very short orbital period, in which a low-mass and
 early-type star fills its Roche region and transfers mass to a companion stars,
 a dwarf white \citep{Patterson:1984}. Fig.~\ref{fig:photo-image-knonw-objects} 
@@ -1095,7 +1126,7 @@ Other binary system in our list are the X-binary sources and eclipsing binary.
 That type of object is expected to be in our sample because majority of them
 are known to be H{$\alpha$} emitters.
 
-\paragraph{Stars.}
+\subsubsection{Stars.}
 Several stars were selected as shows the  SIMBAD matches.
 The SIMBAD types include normal stars, white dwarf stars (WD*), white dwarf
 candidates (Candidate\_WD*), blue stars, blue super-giant stars (BlueSG*), high
@@ -1106,7 +1137,7 @@ the H{$\alpha$} emission lines. Although some of these stars could represent the
 fraction of contaminants of our sample. There are also matches to variable
 stars of RR Lyr type as well as candidates of them.
 
-\paragraph{Galaxies.}
+\subsubsection{Galaxies.}
 Emission line galaxies also were selected. This category includes
 several class of galaxies according to SIMBAD: emission-line galaxy (EmG),
 blue compact galaxy (BlueCompG), H II galaxy (HII G), galaxy in cluster of galaxies
@@ -1162,7 +1193,7 @@ These galaxies, belonging to the red sub-sample, are probably nearby,
 red early-type galaxies with emission lines, mainly, they could be LINERS, 
 AGB or radio galaxies \citep{Capetti:2011}.
 
-\paragraph{QSOs.}
+\subsubsection{QSOs.}
 
 Other extragalactic objects with emission lines that were selected are the
 QSOs. In the case of the QSOs is not the H{$\alpha$} emission line that affects
@@ -1176,13 +1207,13 @@ Some of these emission lines are H{$\beta$}, C {\sc IV} 1550 \AA, C {\sc III]} 1
   which has red-shift of $\sim$2.45 indicating that the emission line corresponds to
   the line C {\sc III]}.
   
-\paragraph{Other type of objects.}
+\subsubsection{Other type of objects.}
   
   Miscellanies the objects were selected as H{$\alpha$} emitters that appear classified on
   SIMBAD as it can see in the table~\ref{tab:simbad-sources}. They are included cluster of stars, 
   FIR sources, MIR objects, molecular clouds, UV-emission source, among other.
 
-\subsubsection{SDSS and LAMOST}
+\subsection{SDSS and LAMOST}
 
 We also made cross-match between the sample of H{$\alpha$} emission line objects and SDSS DR16
 \citep{Ahumada:2020}. We have used a 2$\sigma$ error circle as the cross-matching radius.
@@ -1198,6 +1229,8 @@ Comparing with These spectra mainly correspond to HII regions, cataclysm variabl
 (blue compact galaxies, H II galaxies, star-forming galaxies, among others), AGN (Seyfert 1 and 2), and QSOs. 
 However, more detailed analyzes are necessary to see that other possibles types 
 of objects are included in these samples of spectra.
+
+\subsection{GAIA}
 
 \subsection{Magnitudes and color distributions}
 

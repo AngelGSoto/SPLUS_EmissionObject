@@ -78,11 +78,13 @@ for file_name in file_list:
 ###############################################
 # New colors    ###############################
 ###############################################
-m = (table["e_G_PStotal"] <= 0.2) & (table["e_R_PStotal"] <= 0.2) & (table["e_Z_PStotal"] <= 0.2)
-m1 = (table["e_U_PStotal"] <= 0.2) & (table["e_G_PStotal"] <= 0.2) & (table["e_R_PStotal"] <= 0.2) 
-zg = table['Z_PStotal'] - table['G_PStotal']
-gr = table['G_PStotal'] - table['R_PStotal']
-ug = table['U_PStotal'] - table['G_PStotal']
+m = (table["e_g_PStotal"] <= 0.2) & (table["e_r_PStotal"] <= 0.2) & (table["e_z_PStotal"] <= 0.2)
+m1 = (table["e_u_PStotal"] <= 0.2) & (table["e_g_PStotal"] <= 0.2) & (table["e_r_PStotal"] <= 0.2) 
+zg = table['z_PStotal'] - table['g_PStotal']
+gr = table['g_PStotal'] - table['r_PStotal']
+ug = table['u_PStotal'] - table['g_PStotal']
+ri = table['r_PStotal'] - table['i_PStotal']
+rj0660 = table['r_PStotal'] - table['J0660_PStotal']
 
 ##############################################
 # Plots
@@ -97,8 +99,8 @@ with sns.axes_style("ticks"):
     plt.tick_params(axis='x', labelsize=35) 
     plt.tick_params(axis='y', labelsize=35)
     maskfw = table["FWHM"] < 240
-    scat = ax.scatter(table['r - i'][maskfw], table['r - J0660'][maskfw], s=5*table["FWHM"][maskfw], edgecolor='black',
-                             c=table["R_PStotal"][maskfw], alpha=0.7, zorder = 2, cmap='RdBu_r')
+    scat = ax.scatter(ri[maskfw], rj0660[maskfw], s=5*table["FWHM"][maskfw], edgecolor='black',
+                             c=table["r_PStotal"][maskfw], alpha=0.7, zorder = 2, cmap='RdBu_r')
     #pal = sns.dark_palette("magma", as_cmap=True)
     #pal = sns.cubehelix_palette(as_cmap=True)
     pal = sns.cubehelix_palette(start=1, rot=0, dark=-10, light=50, reverse=True, as_cmap=True)
@@ -218,7 +220,7 @@ with sns.axes_style("ticks"):
     plt.ylabel(r"Density", fontsize=33)
     plt.tick_params(axis='x', labelsize=33) 
     plt.tick_params(axis='y', labelsize=33)
-    r_j0660 = [x for x in table["r - J0660"]]
+    r_j0660 = [x for x in rj0660]
     g = sns.distplot(r_j0660, 
                  norm_hist=True, kde=True, ax=ax1,
                  bins=20, hist_kws=dict(range=[-3.0, 3.0], color='r')
@@ -236,7 +238,7 @@ with sns.axes_style("ticks"):
     plt.ylabel(r"Density", fontsize=33)
     plt.tick_params(axis='x', labelsize=33) 
     plt.tick_params(axis='y', labelsize=33)
-    r_i = [x for x in table["r - i"]]
+    r_i = [x for x in ri]
     sns.distplot(r_i, 
                  norm_hist=True, kde=True, ax=ax2,
                  bins=20, hist_kws=dict(range=[-3.0, 3.0], color='r')
@@ -254,7 +256,7 @@ with sns.axes_style("ticks"):
     #plt.ylabel(r"Density", fontsize=28)
     plt.tick_params(axis='x', labelsize=33) 
     plt.tick_params(axis='y', labelsize=33)
-    r = [x for x in table["R_PStotal"]]
+    r = [x for x in table["r_PStotal"]]
     sns.distplot(r, 
                  norm_hist=False, kde=True, ax=ax3,
                  bins=20)#, hist_kws=dict(range=[-3.0, 3.0])
@@ -287,7 +289,7 @@ with sns.axes_style("ticks"):
     plt.ylabel(r"r", fontsize=33)
     plt.tick_params(axis='x', labelsize=33) 
     plt.tick_params(axis='y', labelsize=33)
-    density_scatter(b_rad, table["R_PStotal"], ax=ax4)
+    density_scatter(b_rad, table["r_PStotal"], ax=ax4)
     #ax4.set(xlim=[-0.7, 1.8])
     #ax.legend(loc='upper left')
     sns.despine()
