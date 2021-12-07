@@ -24,16 +24,16 @@ sns.set_color_codes()
 ROOT_PATH = Path("../paper/Figs")
 
 # Read the file
-table = Table.read("../iDR3_n4/Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-Final.ecsv", format="ascii.ecsv")
+table = Table.read("../iDR3_n4/Final-list-emitters-allparam-unique.ecsv", format="ascii.ecsv")
 
 # Colors
-m = (table["e_G_PStotal"] <= 0.2) & (table["e_I_PStotal"] <= 0.2) & (table["e_Z_PStotal"] <= 0.2)
-m1 =  (table["e_U_PStotal"] <= 0.2) &(table["e_G_PStotal"] <= 0.2) & (table["e_I_PStotal"] <= 0.2) 
-zg = table['Z_PStotal'][m] - table['G_PStotal'][m]
-gr = table['G_PStotal'][m] - table['R_PStotal'][m]
-ri = table['R_PStotal'][m] - table['I_PStotal'][m]
-ug = table['U_PStotal'][m1] - table['G_PStotal'][m1]
-gr_ = table['G_PStotal'][m1] - table['R_PStotal'][m1]
+m = (table["e_g_PStotal"] <= 0.2) & (table["e_i_PStotal"] <= 0.2) & (table["e_z_PStotal"] <= 0.2)
+m1 =  (table["e_u_PStotal"] <= 0.2) &(table["e_g_PStotal"] <= 0.2) & (table["e_i_PStotal"] <= 0.2) 
+zg = table['z_PStotal'][m] - table['g_PStotal'][m]
+gr = table['g_PStotal'][m] - table['r_PStotal'][m]
+ri = table['r_PStotal'][m] - table['i_PStotal'][m]
+ug = table['u_PStotal'][m1] - table['g_PStotal'][m1]
+gr_ = table['g_PStotal'][m1] - table['r_PStotal'][m1]
 
 # Create an array
 X = np.array(list(zip(zg, gr)))
@@ -42,7 +42,7 @@ print("Shape:", X.shape)
 X_std = StandardScaler().fit_transform(X)
 
 # Applying HDBSCAN
-clusterer = hdbscan.HDBSCAN(min_samples=40, min_cluster_size=80, prediction_data=True).fit(X_std)
+clusterer = hdbscan.HDBSCAN(min_samples=40, min_cluster_size=80, prediction_data=True).fit(X_std) # 40 60
 labels_h = clusterer.labels_
 
 # Number of clusters in labels, ignoring noise if present.
@@ -74,12 +74,12 @@ mask1 = table_["Label"] == 0
 mask2 = table_["Label"] == 1
 
 # Making the colors
-zg_0 = table_['Z_PStotal'][mask0] - table_['G_PStotal'][mask0]
-gr_0 = table_['G_PStotal'][mask0] - table_['R_PStotal'][mask0]
-zg_1 = table_['Z_PStotal'][mask1] - table_['G_PStotal'][mask1]
-gr_1 = table_['G_PStotal'][mask1] - table_['R_PStotal'][mask1]
-zg_2 = table_['Z_PStotal'][mask2] - table_['G_PStotal'][mask2]
-gr_2 = table_['G_PStotal'][mask2] - table_['R_PStotal'][mask2]
+zg_0 = table_['z_PStotal'][mask0] - table_['g_PStotal'][mask0]
+gr_0 = table_['g_PStotal'][mask0] - table_['r_PStotal'][mask0]
+zg_1 = table_['z_PStotal'][mask1] - table_['g_PStotal'][mask1]
+gr_1 = table_['g_PStotal'][mask1] - table_['r_PStotal'][mask1]
+zg_2 = table_['z_PStotal'][mask2] - table_['g_PStotal'][mask2]
+gr_2 = table_['g_PStotal'][mask2] - table_['r_PStotal'][mask2]
 
 # Soft clustering
 soft_clusters = hdbscan.all_points_membership_vectors(clusterer)
@@ -94,7 +94,7 @@ table_.write(asciifile, format="ascii.ecsv")
 # Equation constructed form synthetic phometry
 # Limiting the blue and red region
 x_new = np.linspace(-15.0, 1000, 200)
-y = 0.47*x_new + 1.55
+y = 0.47*x_new + 1.5
 
 #############################################################
 #Plot the results  ##########################################
@@ -135,7 +135,7 @@ ax1.scatter(
         marker="o",
         c=sns.xkcd_rgb["dark pink"],
         label="Red",
-        edgecolors="w", zorder=4
+        edgecolors="w", zorder=3
     )
 
 ax1.scatter(
@@ -144,14 +144,14 @@ ax1.scatter(
         marker="o",
         c=sns.xkcd_rgb["cerulean"],
         label="Blue",
-        edgecolors="w", zorder=3
+        edgecolors="w", zorder=4
     )
 
 sns.kdeplot(
     zg_2,
     gr_2,
     ax=ax1,
-    norm=PowerNorm(0.5), zorder=3,
+    norm=PowerNorm(0.5), zorder=5,
         cmap="Blues",
  )
 
@@ -159,7 +159,7 @@ sns.kdeplot(
     zg_1,
     gr_1,
     ax=ax1,
-    norm=PowerNorm(0.5), zorder=5,
+    norm=PowerNorm(0.5), zorder=3,
         cmap="Reds",
  )
 
@@ -245,12 +245,14 @@ fig, ax3 = plt.subplots(figsize=(10, 7))
 plt.xlabel('sample index',  fontsize= 25)
 plt.ylabel('distance', fontsize= 25)
 plt.tick_params(axis='y', labelsize=25)
-dend = shc.dendrogram(shc.linkage(X, method='ward'),
+dend = shc.dendrogram(shc.linkage(X_std, method='ward'),
                       truncate_mode='lastp',
                       p=12,  # show only the last p merged clusters
                       leaf_rotation=45.,
                       leaf_font_size=18.,
                       show_contracted=True, )
+#dend = shc.dendrogram(shc.linkage(X, method='ward'))
+
 # dendrogram(
 #     X,
 #     truncate_mode='lastp',  # show only the last p merged clusters
