@@ -94,7 +94,7 @@ table_.write(asciifile, format="ascii.ecsv")
 # Equation constructed form synthetic phometry
 # Limiting the blue and red region
 x_new = np.linspace(-15.0, 1000, 200)
-y = 0.47*x_new + 1.5
+y = 0.47*x_new + 1.65
 
 #############################################################
 #Plot the results  ##########################################
@@ -131,9 +131,9 @@ ax1.scatter(
 
 ax1.scatter(
         zg_1,
-        gr_1,
+        gr_1,              
         marker="o",
-        c=sns.xkcd_rgb["dark pink"],
+        c=sns.xkcd_rgb["cerulean"],
         label="Red",
         edgecolors="w", zorder=3
     )
@@ -142,7 +142,7 @@ ax1.scatter(
         zg_2,
         gr_2,
         marker="o",
-        c=sns.xkcd_rgb["cerulean"],
+        c=sns.xkcd_rgb["dark pink"],
         label="Blue",
         edgecolors="w", zorder=4
     )
@@ -152,7 +152,7 @@ sns.kdeplot(
     gr_2,
     ax=ax1,
     norm=PowerNorm(0.5), zorder=5,
-        cmap="Blues",
+        cmap="Reds",
  )
 
 sns.kdeplot(
@@ -160,7 +160,7 @@ sns.kdeplot(
     gr_1,
     ax=ax1,
     norm=PowerNorm(0.5), zorder=3,
-        cmap="Reds",
+        cmap="Blues",
  )
 
 ax1.legend(ncol=1, fontsize=20.0, title="Group", title_fontsize=30)
@@ -182,8 +182,8 @@ cluster_colors = [color_palette[np.argmax(x)]
                   for x in soft_clusters]
 
 # Mask to high probabilites to belong
-mask_blue = soft_clusters[:,1] > soft_clusters[:,0]
-mask_red = soft_clusters[:,0] > soft_clusters[:,1]
+mask_red = soft_clusters[:,1] > soft_clusters[:,0]
+mask_blue = soft_clusters[:,0] > soft_clusters[:,1]
 
 
 fig, ax2 = plt.subplots(figsize=(12, 12))
@@ -217,13 +217,13 @@ ax2.scatter(
         marker="o",
         c=sns.xkcd_rgb["cerulean"],
         label="Blue",
-        edgecolors="w", zorder=3
+        edgecolors="w", zorder=5
     )
 
 sns.kdeplot(
     zg[mask_blue], gr[mask_blue],
     ax=ax2,
-    norm=PowerNorm(0.5), zorder=3,
+    norm=PowerNorm(0.5), zorder=6,
         cmap="Blues",
  )
 
@@ -232,7 +232,7 @@ ax2.text(0.05, 1.11, "Soft Clustering for HDBSCAN", fontsize=20,
                                  bbox=dict(facecolor='gray', alpha=0.2),
                                                        transform=ax.transAxes)
 ax2.set_aspect("equal")
-#ax.set(xlabel=r"$z - g$", ylabel=r"$g - r$")
+#ax.set(xlabel=r"$z - g$", ylabel=r"$g -a r$")
 fig.savefig(ROOT_PATH / "blue-red-hdbscan-soft-alternative.pdf")
 plt.clf()
 
