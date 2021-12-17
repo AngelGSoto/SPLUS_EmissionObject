@@ -117,7 +117,7 @@ with sns.axes_style("ticks"):
         'size'   : 16,
         }
     cb = fig.colorbar(scat, extend='both', ax=ax)#
-    cb.set_label("$r-mag$", fontsize=35)
+    cb.set_label("$r[mag]$", fontsize=35)
     cb.ax.tick_params(labelsize=30)
     #Symbol size indicates outer shell radius
     plt.text(0.02, 0.95, 'Symbol size indicates FWHM',
