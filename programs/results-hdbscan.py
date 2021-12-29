@@ -24,7 +24,7 @@ sns.set_color_codes()
 ROOT_PATH = Path("../paper/Figs")
 
 # Read the file
-table = Table.read("../iDR3_n4/Final-list-emitters-allparam-unique.ecsv", format="ascii.ecsv")
+table = Table.read("Final-list-emitters-allparam-unique.ecsv", format="ascii.ecsv")
 
 # Colors
 m = (table["e_g_PStotal"] <= 0.2) & (table["e_i_PStotal"] <= 0.2) & (table["e_z_PStotal"] <= 0.2)
@@ -87,9 +87,14 @@ soft_clusters = hdbscan.all_points_membership_vectors(clusterer)
 table_["P(red)"] = soft_clusters[:,0]
 table_["P(Blue)"] = soft_clusters[:,1]
 
-#Save the table
-asciifile = "../iDR3_n4/Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-Final-hdbscan.ecsv" 
+#Save the tables
+asciifile = "Final-list-emitters-allparam-unique-hdbscan.ecsv" 
 table_.write(asciifile, format="ascii.ecsv")
+df_hd = table_.to_pandas()
+df_hd.to_csv("Final-list-emitters-allparam-unique-hdbscan.csv", index=False)
+
+table_[mask1].write("Final-list-emitters-allparam-unique-hdbscan-group0.ecsv", format="ascii.ecsv")
+table_[mask2].write("Final-list-emitters-allparam-unique-hdbscan-group1.ecsv", format="ascii.ecsv")
 
 # Equation constructed form synthetic phometry
 # Limiting the blue and red region
