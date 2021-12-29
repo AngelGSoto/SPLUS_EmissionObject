@@ -83,9 +83,10 @@ gr_2 = table_['g_PStotal'][mask2] - table_['r_PStotal'][mask2]
 
 # Soft clustering
 soft_clusters = hdbscan.all_points_membership_vectors(clusterer)
+print(soft_clusters)
 
-table_["P(red)"] = soft_clusters[:,0]
-table_["P(Blue)"] = soft_clusters[:,1]
+table_["P(Blue)"] = soft_clusters[:,0]
+table_["P(Red)"] = soft_clusters[:,1]
 
 #Save the tables
 asciifile = "Final-list-emitters-allparam-unique-hdbscan.ecsv" 

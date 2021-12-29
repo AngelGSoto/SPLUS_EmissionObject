@@ -35,16 +35,16 @@ def format_DEC(dec):
         return s
 
 def replace_1(colum):
-    if '[' in colum:
-        return colum.replace('[', '$[$')
+    if '[' and ']' in colum:
+        return colum.replace('[', '$[$').replace(']', '$]$')
     else:
         return colum
 
-def replace_2(colum1):
-    if ']' in colum1:
-        return colum1.replace(']', '$]$')
-    else:
-        return colum1
+# def replace_2(colum1):
+#     if ']' in colum1:
+#         return colum1.replace(']', '$]$')
+#     else:
+#         return colum1
 
 def replace_3(colum2):
     if '_' in colum2:
@@ -74,13 +74,13 @@ def z_fmt(z):
     return "{:.3f}".format(z)
 
 # Read the files
-df = pd.read_csv("simbad.csv")
+df = pd.read_csv("simbad-final.csv")
 
-df_blue = pd.read_csv("Simbad-Blue0-Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-Final.csv")
+df_blue = pd.read_csv("Blue0-Final-list-emitters-allparam-unique-simbad.csv")
 
-df_red = pd.read_csv("Simbad-Red1-Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-Final.csv")
+df_red = pd.read_csv("Red1-Final-list-emitters-allparam-unique-simbad.csv")
 
-df_hdbscan = pd.read_csv("Simbad-hdbscan-Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-Final.csv")
+df_hdbscan = pd.read_csv("Final-list-emitters-allparam-unique-hdbscan-simbad.csv")
 
 
 # Replace values on Label
@@ -100,7 +100,7 @@ tab_hdbscan.sort('RA')
 
 
 blue = [prob_fmt(a) for a in tab_hdbscan['P(Blue)']]
-red = [prob_fmt(a) for a in tab_hdbscan['P(red)']]
+red = [prob_fmt(a) for a in tab_hdbscan['P(Red)']]
 
 # tab_hdbscan['P(Blue)'].format = "%.2f"
 # tab_hdbscan['P(red)'].format = "%.2f"
@@ -151,7 +151,7 @@ column_formats = {}
 column_formats['RA'] = format_RA
 column_formats['DEC'] = format_DEC
 column_formats['Id Simbad'] = replace_1
-column_formats['Id Simbad'] = replace_2
+#column_formats['Id Simbad'] = replace_2
 column_formats['Type'] = replace_3
 #column_formats['Redshift'] = replace_4
 column_formats['Redshift'] = z_fmt
