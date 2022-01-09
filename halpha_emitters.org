@@ -1133,7 +1133,7 @@ Trying to get the Redshift of the QSOs from simbad.
 #+END_SRC
 
 #+RESULTS: QSO-simbad
-[[file:iDR3_n4/QSO-simabad-redshift.ecsv]]
+[[file:iDR3_n4/QSO-simbad-redshift.ecsv]]
 
 + <2021-08-03 ter> Making latex file with number of each class of objects with matches on SIMBAD.
   I decided to make the table by hand. So I just will to make a table with the number of
@@ -1891,7 +1891,7 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
   ax = fig.add_subplot(111)
   
   ax.scatter(x, y, c=z, s=50, edgecolor=['none'])
-  ax.scatter(bp_rpmag_qso, Gmag_qso, c = colors, edgecolor=['black'], alpha = 0.4, s = 50)
+  #ax.scatter(bp_rpmag_qso, Gmag_qso, c = colors, edgecolor=['black'], alpha = 0.4, s = 50)
   #plt.scatter(bp_rpmag, Gmag, alpha=0.8)
   plt.xlabel(r'$G_{BP} - G_{RP}$')
   plt.ylabel(r'$G$')
@@ -2013,7 +2013,8 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
 #+RESULTS:
 [[file:Final-list]]
 
-*** GAIA distance from Bailer-Jones et al.
+*** GAIA distance from Bailer-Jones et al. 2021
+    I used  =rgeo= =[pc]=, Median of the geometric distance posterior, in Vizier is =I/352/gedr3dis=.
 
 #+name: read-gaia-distance-table
 #+BEGIN_SRC python
