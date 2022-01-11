@@ -1777,20 +1777,25 @@ Number total of objects is, 1041
 
 + Making a plot with the red-shift distribution for the galaxies:
 
-#+BEGIN_SRC python :results file :noweb yes 
+#+BEGIN_SRC python :results output :results file :noweb yes 
    <<simbad-data-final>>  
    df_galaxies = pd.concat([df[m1], df[m2], df[m3], df[m4], df[m5], df[m13], df[m14], 
                  df[m15], df[m18], df[m19], df[m20], df[m24], df[m31], df[m38], 
                        df[m40], df[m47], df[m52], df[m58]]) 
    
    z = df_galaxies["redshift"] 
+   
+   m_z = z <= 0.02
+   low_z_g = df_galaxies[m_z]
+   print("Number of galaxies:", len(df_galaxies))
+   print("Number of galaxis z < 0.02:", len(low_z_g))
 
-   pltfile = 'Final-list/dist-redshift-galaxies.pdf'
+   pltfile = 'paper/Figs/dist-redshift-galaxies.pdf'
    with sns.axes_style("ticks"):
        # Bar diagram
        fig, ax1 = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
        plt.xlabel(r"Redshift, $z$", fontsize=33)
-       plt.ylabel(r"Counts", fontsize=33)
+       plt.ylabel(r"# of sources", fontsize=33)
        plt.tick_params(axis='x', labelsize=33) 
        plt.tick_params(axis='y', labelsize=33)
        z = [x for x in z]
@@ -1799,18 +1804,21 @@ Number total of objects is, 1041
        ax1.axvline(x=0.02, c = "k", ls='--') #colors='k')#, linestyles='-', label='g', data=None)
         
        bbox_props = dict(boxstyle="round", fc="w", ec="0.9", alpha=0.9, pad=0.5)
-       ax1.annotate(r"$z = 0.02$", xy=(0.08, 1.9), alpha=0.9, size=16.0,
-                   xytext=(0.1, 170), textcoords='offset points', ha='right', va='bottom', 
+       ax1.annotate(r"$z = 0.02$", xy=(0.08, 1.5), alpha=0.9, size=16.0,
+                   xytext=(0.1, 200), textcoords='offset points', ha='right', va='bottom', 
                                                       bbox=bbox_props, zorder=100)
-       ax1.axvline(x=0.306, c = "k", ls='--')
-       ax1.annotate(r"$z = 0.02$", xy=(0.08, 1.9), alpha=0.9, size=16.0,
-                   xytext=(0.1, 170), textcoords='offset points', ha='right', va='bottom', 
+       ax1.axvline(x=0.306, c = "b", ls='--')
+       ax1.annotate(r"$z = 0.306$", xy=(0.32, 1.5), alpha=0.9, size=16.0,
+                   xytext=(0.1, 200), textcoords='offset points', ha='right', va='bottom', 
                                                       bbox=bbox_props, zorder=100)
-       ax1.axvline(x=0.376, c = "k", ls='--') 
-       ax1.annotate(r"$z = 0.02$", xy=(0.08, 1.9), alpha=0.9, size=16.0,
-                   xytext=(0.1, 170), textcoords='offset points', ha='right', va='bottom', 
+       ax1.axvline(x=0.376, c = "b", ls='--') 
+       ax1.annotate(r"$z = 0.376$", xy=(0.42, 1.5), alpha=0.9, size=16.0,
+                   xytext=(0.1, 200), textcoords='offset points', ha='right', va='bottom', 
                                                       bbox=bbox_props, zorder=100)
-       ax1.set(xlim=[-0.05, 0.5])
+
+       ax1.fill(0.306, 0.376)
+       ax1.axvspan(0.306, 0.376, alpha=0.06, color='k')
+       ax1.set(xlim=[-0.05, 0.45])
        #ax.legend(loc='upper left')
        ymax = ax1.get_ybound()[1]
        sns.despine()
@@ -1820,12 +1828,25 @@ Number total of objects is, 1041
 #+END_SRC
 
 #+RESULTS:
-[[file:None]]
+[[file:Index(['Field', 'ID', 'RA', 'DEC', 'FWHM', 'ISOarea', 'KRON_RADIUS', 'MU_MAX',
+       'nDet_PStotal', 'PhotoFlagDet', 'u_PStotal', 'J0378_PStotal',
+       'J0395_PStotal', 'J0410_PStotal', 'J0430_PStotal', 'g_PStotal',
+       'J0515_PStotal', 'r_PStotal', 'J0660_PStotal', 'i_PStotal',
+       'J0861_PStotal', 'z_PStotal', 'e_u_PStotal', 'e_J0378_PStotal',
+       'e_J0395_PStotal', 'e_J0410_PStotal', 'e_J0430_PStotal', 'e_g_PStotal',
+       'e_J0515_PStotal', 'e_r_PStotal', 'e_J0660_PStotal', 'e_i_PStotal',
+       'e_J0861_PStotal', 'e_z_PStotal', 'main_id', 'ra_x', 'dec_x',
+       'coo_err_maj', 'coo_err_min', 'coo_err_angle', 'nbref', 'ra_sexa',
+       'dec_sexa', 'main_type', 'other_types', 'radvel', 'redshift', 'sp_type',
+       'morph_type', 'plx', 'pmra', 'pmdec', 'size_maj', 'size_min',
+       'size_angle', 'B', 'V', 'R_x', 'J', 'H', 'K', 'u', 'g', 'r_xa', 'i',
+       'z', 'angDist'],
+      dtype='object')
+Number of galaxies: 631
+Number of galaxis z < 0.02: 358
+]]
 
-#+END_SRC
 
-#+RESULTS:
-[[file:None]]
 
 ** Getting more parameters
 
