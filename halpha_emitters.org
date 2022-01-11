@@ -1760,7 +1760,7 @@ Merging the old table and the new one:
       dtype='object')
 Number total of objects is, 1041
 
-+ Getting only simbad sorces.
++ Getting only simbad sources.
 
 #+BEGIN_SRC python :return filename :results file :noweb yes
   <<simbad-data-final>>
@@ -1774,6 +1774,58 @@ Number total of objects is, 1041
 #+RESULTS:
 [[file:Final-list/QSO-simbad-final.csv]]
 
+
++ Making a plot with the red-shift distribution for the galaxies:
+
+#+BEGIN_SRC python :results file :noweb yes 
+   <<simbad-data-final>>  
+   df_galaxies = pd.concat([df[m1], df[m2], df[m3], df[m4], df[m5], df[m13], df[m14], 
+                 df[m15], df[m18], df[m19], df[m20], df[m24], df[m31], df[m38], 
+                       df[m40], df[m47], df[m52], df[m58]]) 
+   
+   z = df_galaxies["redshift"] 
+
+   pltfile = 'Final-list/dist-redshift-galaxies.pdf'
+   with sns.axes_style("ticks"):
+       # Bar diagram
+       fig, ax1 = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
+       plt.xlabel(r"Redshift, $z$", fontsize=33)
+       plt.ylabel(r"Counts", fontsize=33)
+       plt.tick_params(axis='x', labelsize=33) 
+       plt.tick_params(axis='y', labelsize=33)
+       z = [x for x in z]
+       sns.distplot(z,norm_hist=False, kde=False, ax=ax1,
+                 bins=100, color='g', kde_kws={"shade": True})
+       ax1.axvline(x=0.02, c = "k", ls='--') #colors='k')#, linestyles='-', label='g', data=None)
+        
+       bbox_props = dict(boxstyle="round", fc="w", ec="0.9", alpha=0.9, pad=0.5)
+       ax1.annotate(r"$z = 0.02$", xy=(0.08, 1.9), alpha=0.9, size=16.0,
+                   xytext=(0.1, 170), textcoords='offset points', ha='right', va='bottom', 
+                                                      bbox=bbox_props, zorder=100)
+       ax1.axvline(x=0.306, c = "k", ls='--')
+       ax1.annotate(r"$z = 0.02$", xy=(0.08, 1.9), alpha=0.9, size=16.0,
+                   xytext=(0.1, 170), textcoords='offset points', ha='right', va='bottom', 
+                                                      bbox=bbox_props, zorder=100)
+       ax1.axvline(x=0.376, c = "k", ls='--') 
+       ax1.annotate(r"$z = 0.02$", xy=(0.08, 1.9), alpha=0.9, size=16.0,
+                   xytext=(0.1, 170), textcoords='offset points', ha='right', va='bottom', 
+                                                      bbox=bbox_props, zorder=100)
+       ax1.set(xlim=[-0.05, 0.5])
+       #ax.legend(loc='upper left')
+       ymax = ax1.get_ybound()[1]
+       sns.despine()
+       plt.tight_layout()
+       plt.savefig(pltfile)
+  
+#+END_SRC
+
+#+RESULTS:
+[[file:None]]
+
+#+END_SRC
+
+#+RESULTS:
+[[file:None]]
 
 ** Getting more parameters
 
