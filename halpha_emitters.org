@@ -733,13 +733,17 @@ Making the distributing of colors =r - J0060=, =r - i= and =r=  for each group.
   plt.ylabel(r"Density", fontsize=33)
   plt.tick_params(axis='x', labelsize=33) 
   plt.tick_params(axis='y', labelsize=33)
-  r_j0660blue = [x for x in table_blue["r - J0660"]]
-  r_j0660red = [x for x in table_red["r - J0660"]]
-  g = sns.distplot(r_j0660blue, 
+  # r_j0660blue = [x for x in table_blue["r - J0660"]]
+  # r_j0660red = [x for x in table_red["r - J0660"]]
+  r_j0660blue = table_blue["r_PStotal"] - table_blue["J0660_PStotal"]
+  r_j0660red =  table_red["r_PStotal"] - table_red["J0660_PStotal"]
+  r_j0660blue_ = [x for x in r_j0660blue]
+  r_j0660red_ = [x for x in r_j0660red]
+  g = sns.distplot(r_j0660blue_, 
 		 norm_hist=True, kde=True, ax=ax1,
 		 bins=40, hist_kws=dict(color='b'),
 		 label = "Blue sources")
-  g = sns.distplot(r_j0660red, 
+  g = sns.distplot(r_j0660red_, 
 		 norm_hist=True, kde=True, ax=ax1,
 		 bins=40, hist_kws=dict(color='r'),
 		 label = "Red sources")
@@ -757,13 +761,17 @@ Making the distributing of colors =r - J0060=, =r - i= and =r=  for each group.
   plt.ylabel(r"Density", fontsize=33)
   plt.tick_params(axis='x', labelsize=33) 
   plt.tick_params(axis='y', labelsize=33)
-  r_iblue = [x for x in table_blue["r - i"]]
-  r_ired = [x for x in table_red["r - i"]]
-  sns.distplot(r_iblue, 
+  # r_iblue = [x for x in table_blue["r - i"]]
+  # r_ired = [x for x in table_red["r - i"]]
+  r_iblue = table_blue["r_PStotal"] - table_blue["i_PStotal"]
+  r_ired = table_red["r_PStotal"] - table_red["i_PStotal"]
+  r_iblue_ = [x for x in r_iblue]
+  r_ired_ = [x for x in r_ired]
+  sns.distplot(r_iblue_, 
 	norm_hist=True, kde=True, ax=ax2,
 	bins=40, hist_kws=dict(range=[-3.0, 3.0], color='b')
 		)
-  sns.distplot(r_ired, 
+  sns.distplot(r_ired_, 
 	norm_hist=True, kde=True, ax=ax2,
 	bins=40, hist_kws=dict(range=[-3.0, 3.0], color='r'),
 		label="Red")
@@ -781,8 +789,8 @@ Making the distributing of colors =r - J0060=, =r - i= and =r=  for each group.
   plt.ylabel(r"Density", fontsize=33)
   plt.tick_params(axis='x', labelsize=33) 
   plt.tick_params(axis='y', labelsize=33)
-  rblue = [x for x in table_blue["R_PStotal"]]
-  rred = [x for x in table_red["R_PStotal"]]
+  rblue = [x for x in table_blue["r_PStotal"]]
+  rred = [x for x in table_red["r_PStotal"]]
   sns.distplot(rblue, 
   norm_hist=True, kde=True, ax=ax3,
 	bins=20, hist_kws=dict(color='b'),
@@ -1768,11 +1776,15 @@ Number total of objects is, 1041
   # Saving subtables (QSO)
   filename = "Final-list/QSO-simbad-final.csv"
   df_qso.to_csv(filename, index = False)
+
+  # Saving subtables (CV)
+  filename = "Final-list/CV-simbad-final.csv"
+  df_cv.to_csv(filename, index = False)
   
 #+END_SRC
 
 #+RESULTS:
-[[file:Final-list/QSO-simbad-final.csv]]
+[[file:Final-list/CV-simbad-final.csv]]
 
 
 + Making a plot with the red-shift distribution for the galaxies:
@@ -1908,6 +1920,10 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
   df_qso = pd.read_csv("GAIA-QSO-simbad-final.csv")
 #+END_SRC
 
+#+name: cv-read-gaia-table
+#+BEGIN_SRC python
+  df_cv = pd.read_csv("GAIA-CV-simbad-final.csv")
+#+END_SRC
 
 #+name: gaia-match
 #+BEGIN_SRC python :results output
@@ -1921,6 +1937,7 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
 
   <<read-gaia-table>>
   <<qso-read-gaia-table>>
+  <<cv-read-gaia-table>>
 
   lgd_kws = {'frameon': True, 'fancybox': True, 'shadow': True}
 
@@ -1950,8 +1967,16 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
   bp_rpmag_qso = df_qso["bp_rp"]
   colors = ["cerulean",]
   colors = sns.xkcd_palette(colors)
+
+  # CV
+  Gmag_cv = df_cv["phot_g_mean_mag"]
+  bp_rpmag_cv = df_cv["bp_rp"]
+  colors1 = ["pale yellow"]
+  colors1 = sns.xkcd_palette(colors1)
   
 #+END_SRC
+
+#+RESULTS: gaia-match
 
 
 #+BEGIN_SRC python :return pltfile :results file 
@@ -1959,12 +1984,14 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
   <<gaia-match>>
   
   pltfile = 'color-mag-gaia.pdf'
+  pltfile = 'color-mag-gaia.jpg'
   sns.set_style('ticks')
   fig = plt.figure(figsize=(6, 7))
   ax = fig.add_subplot(111)
   
   ax.scatter(x, y, c=z, s=50, edgecolor=['none'])
-  #ax.scatter(bp_rpmag_qso, Gmag_qso, c = colors, edgecolor=['black'], alpha = 0.4, s = 50)
+  ax.scatter(bp_rpmag_qso, Gmag_qso, c = colors, edgecolor=['black'], alpha = 0.4, s = 50)
+  ax.scatter(bp_rpmag_cv, Gmag_cv, c = colors1, edgecolor=['black'], alpha = 0.9, s = 50)
   #plt.scatter(bp_rpmag, Gmag, alpha=0.8)
   plt.xlabel(r'$G_{BP} - G_{RP}$')
   plt.ylabel(r'$G$')
@@ -1977,7 +2004,7 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
 #+END_SRC
 
 #+RESULTS:
-[[file:Final-list/color-mag-gaia.pdf]]
+[[file:Final-list/color-mag-gaia.jpg]]
 
 
 #+BEGIN_SRC python :return pltfile :results file :results output
@@ -2020,6 +2047,12 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
   colors = ["cerulean",]
   colors = sns.xkcd_palette(colors)
 
+  # CV
+  Gmag_cv_abs = df_cv["phot_g_mean_mag"] + 5*np.log10(np.array(df_cv["parallax"] / 1000.)) + 5
+  bp_rpmag_cv = df_cv["bp_rp"]
+  colors1 = ["pale yellow",]
+  colors1 = sns.xkcd_palette(colors1)
+
   pltfile = 'color-mag_abs-gaia.pdf'
   sns.set_style('ticks')
   fig = plt.figure(figsize=(6, 7))
@@ -2027,6 +2060,7 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
   
   ax.scatter(x, y, c=z, s=50, edgecolor=['none'])
   ax.scatter(bp_rpmag_qso, Gmag_qso_abs, c = colors, edgecolor=['black'], alpha = 0.4, s = 50)
+  ax.scatter(bp_rpmag_cv, Gmag_cv_abs, c = colors1, edgecolor=['black'], alpha = 0.9, s = 50)
   #plt.scatter(bp_rpmag, Gmag_abs, alpha=0.8)
   plt.xlabel(r'$G_{BP} - G_{RP}$')
   plt.ylabel(r'$M_G + A_G$')
@@ -2045,7 +2079,6 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
   
   <<gaia-match>>
   
-
   # removing inf or nan values
   col = ["parallax"] 
   df_new = df[col] 
@@ -2099,6 +2132,37 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
   df_qso_dis = pd.read_csv("GAIA-QSO-distance-simbad-final.csv")
 #+END_SRC
 
+#+name: cv-read-gaia-distance-table
+#+BEGIN_SRC python
+  df_cv_dis = pd.read_csv("GAIA-CV-distance-simbad-final.csv")
+#+END_SRC
+
++ Number of known QSO with < 4.0 kpc.
+
+#+BEGIN_SRC python :results output
+  import pandas as pd
+  import numpy as np
+  <<qso-read-gaia-distance-table>>
+  <<qso-read-gaia-table>>
+  d_qso = np.array(df_qso_dis["rpgeo"]) / 1000.
+  d_qso_para = 1 / df_qso["parallax"] 
+
+  mask1 = d_qso <= 4.0
+  mask2 = (d_qso_para >= 0.0) & (d_qso_para <= 4.0)
+
+  d_baler_4 = d_qso[mask1]
+  d_para_4 = d_qso_para[mask2]
+   
+  print("Number with QSO dist Bailer:", len(d_qso))
+  print("Number of QSO dist Bailer < 4:", len(d_baler_4))
+  print("Number of QSO dist para < 4:", len(d_para_4))
+#+END_SRC
+
+#+RESULTS:
+: Number with QSO dist Bailer: 195
+: Number of QSO dist Bailer < 4: 51
+: Number of QSO dist para < 4: 43
+
 #+name: gaia-match-distance
 #+BEGIN_SRC python :results output
   import numpy as np
@@ -2108,28 +2172,29 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
   import pandas as pd
   import seaborn as sns
   from scipy.stats import gaussian_kde
-
+  
   <<read-gaia-distance-table>>
   <<qso-read-gaia-distance-table>>
-
+  <<cv-read-gaia-distance-table>>
+  
   lgd_kws = {'frameon': True, 'fancybox': True, 'shadow': True}
-
+  
   # removing inf or nan values
   col = ["phot_g_mean_mag", "bp_rp"] 
   df_new = df_dis[col] 
   df_new1 =  df_new.dropna()
-
+  
   # G-mag
   Gmag = np.array(df_new1["phot_g_mean_mag"]) 
   
   # Color
   #cbp_rpmag = df["phot_bp_mean_mag"] - df["phot_rp_mean_mag"]
   bp_rpmag = np.array(df_new1["bp_rp"])
-
+  
   # Calculate the point density
   xy = np.vstack([bp_rpmag, Gmag])
   z = gaussian_kde(xy)(xy)
-
+  
   # Sort the points by density, so that the densest points are plotted last
   idx = z.argsort()
   x, y, z = bp_rpmag[idx], Gmag[idx], z[idx]
@@ -2183,13 +2248,15 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
   colors = ["cerulean",]
   colors = sns.xkcd_palette(colors)
 
-  pltfile = 'color-mag_abs-gaia-distance.pdf'
+ 
+  pltfile = 'color-mag_abs-gaia-distance.jpg'
   sns.set_style('ticks')
   fig = plt.figure(figsize=(6, 7))
   ax = fig.add_subplot(111)
   
   ax.scatter(x, y, c=z, s=50, edgecolor=['none'])
   ax.scatter(bp_rpmag_qso, Gmag_qso_abs, c = colors, edgecolor=['black'], alpha = 0.4, s = 50)
+  #ax.scatter(bp_rpmag_cv, Gmag_cv_abs, c = colors1, edgecolor=['black'], alpha = 0.9, s = 50)
   #plt.scatter(bp_rpmag, Gmag_abs, alpha=0.8)
   plt.xlabel(r'$G_{BP} - G_{RP}$')
   plt.ylabel(r'$M_G + A_G$')
@@ -2200,6 +2267,8 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
   fig.savefig(pltfile)     
   
 #+END_SRC
+
+#+RESULTS:
 
 #+BEGIN_SRC python :return pltfile :results file :results output
   
@@ -2279,20 +2348,18 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
   
   d_qso = df_qso_new1["rgeo"] / 1000.
   
-  pltfile = 'dist-distance-Bailer-gaia.pdf'
+  pltfile = 'dist-distance-Bailer-gaia.jpg'
   with sns.axes_style("ticks"):
     # Bar diagram
     fig, ax1 = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
     plt.xlabel(r"$D(Kpc)$", fontsize=33)
-    plt.ylabel(r"Density", fontsize=33)
+    plt.ylabel(r"Number", fontsize=33)
     plt.tick_params(axis='x', labelsize=33) 
     plt.tick_params(axis='y', labelsize=33)
     d = [x for x in d]
-    sns.distplot(d,norm_hist=True, kde=True, ax=ax1,
+    sns.distplot(d,norm_hist=False, kde=False, ax=ax1,
 		 bins=30, color='r', label = r"All H_${\alpha}$ emitters")
-    d_qso = [x for x in d_qso]
-    sns.distplot(d_qso, norm_hist=True, kde=True, ax=ax1,
-		 bins=30, color='b', label = r"Known QSO in H_${\alpha}$ emitters list")
+  
   
     ax1.set(xlim=[-1, 15])
     ax1.legend(loc='upper right')
@@ -2300,6 +2367,27 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
     sns.despine()
     plt.tight_layout()
     plt.savefig(pltfile)
+  
+  pltfile1 = 'dist-distance-Bailer-gaia-qso.jpg'
+  with sns.axes_style("ticks"):
+    # Bar diagram
+    fig, ax2 = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
+    plt.xlabel(r"$D(Kpc)$", fontsize=33)
+    plt.ylabel(r"Number", fontsize=33)
+    plt.tick_params(axis='x', labelsize=33) 
+    plt.tick_params(axis='y', labelsize=33)
+    d = [x for x in d]
+   
+    d_qso = [x for x in d_qso]
+    sns.distplot(d_qso, norm_hist=False, kde=False, ax=ax2,
+		 bins=30, color='b', label = r"Known QSO in H_${\alpha}$ emitters list")
+  
+    ax2.set(xlim=[-1, 15])
+    ax2.legend(loc='upper right')
+    ymax = ax1.get_ybound()[1]
+    sns.despine()
+    plt.tight_layout()
+    plt.savefig(pltfile1)
   
 #+END_SRC
 
