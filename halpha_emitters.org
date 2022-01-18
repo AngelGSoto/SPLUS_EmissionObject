@@ -809,13 +809,24 @@ Making the distributing of colors =r - J0060=, =r - i= and =r=  for each group.
 #+END_SRC  
 
 #+RESULTS:
-[[file:paper/Figs/distribution_r-group.pdf]]
+[[file:]]
 
 For the color =r - i= we got the expected results. I have used normalized hist because
 Before we do, another point to note is that, when the subsets have unequal
 numbers of observations, comparing their distributions in terms of counts
 may not be ideal. One solution is to normalize the counts using the stat parameter:
-    
+
+The y-axis in a density plot is the probability density function for the kernel 
+density estimation. However, we need to be careful to specify this is a probability 
+density and not a probability. The difference is the probability density is the 
+probability per unit on the x-axis. To convert to an actual probability, we need 
+to find the area under the curve for a specific interval on the x-axis. Somewhat 
+confusingly, because this is a probability density and not a probability, 
+the y-axis can take values greater than one. The only requirement of the density 
+plot is that the total area under the curve integrates to one. I generally tend 
+to think of the y-axis on a density plot as a value only for relative comparisons 
+between different categories. 
+
 ** SIMBAD
 I made cross-match with SIMBAD.
 So, working with the SIMBAD sample.
@@ -1961,7 +1972,6 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
   idx = z.argsort()
   x, y, z = bp_rpmag[idx], Gmag[idx], z[idx]
   
- 
   # QSO
   Gmag_qso = df_qso["phot_g_mean_mag"]
   bp_rpmag_qso = df_qso["bp_rp"]
@@ -2121,6 +2131,7 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
 
 *** GAIA distance from Bailer-Jones et al. 2021
     I used  =rgeo= =[pc]=, Median of the geometric distance posterior, in Vizier is =I/352/gedr3dis=.
+    But I discovered that =rpgeo= =[pc]=, median photogeotric  distance is better.
 
 #+name: read-gaia-distance-table
 #+BEGIN_SRC python
@@ -2134,7 +2145,7 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
 
 #+name: cv-read-gaia-distance-table
 #+BEGIN_SRC python
-  df_cv_dis = pd.read_csv("GAIA-CV-distance-simbad-final.csv")
+  df_cv_dis = pd.read_csv("GAIA-CV-distance-simbad-final-all.csv")
 #+END_SRC
 
 + Number of known QSO with < 4.0 kpc.
@@ -2147,7 +2158,7 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
   d_qso = np.array(df_qso_dis["rpgeo"]) / 1000.
   d_qso_para = 1 / df_qso["parallax"] 
 
-  mask1 = d_qso <= 4.0
+  mask1 = d_qso < 4.0
   mask2 = (d_qso_para >= 0.0) & (d_qso_para <= 4.0)
 
   d_baler_4 = d_qso[mask1]
@@ -2161,7 +2172,7 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
 #+RESULTS:
 : Number with QSO dist Bailer: 195
 : Number of QSO dist Bailer < 4: 51
-: Number of QSO dist para < 4: 43
+: Number of QSO dist para < 4: 52
 
 #+name: gaia-match-distance
 #+BEGIN_SRC python :results output
@@ -2215,12 +2226,12 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
   # Absolute magnitude
 
   # removing inf or nan values
-  col = ["rgeo", "phot_g_mean_mag", "bp_rp"] 
+  col = ["rpgeo", "phot_g_mean_mag", "bp_rp"] 
   df_new = df_dis[col] 
   df_new1 =  df_new.dropna()
 
   # G-mag
-  Gmag_abs = np.array(df_new1["phot_g_mean_mag"]) - 5*np.log10(np.array(df_new1["rgeo"])) + 5
+  Gmag_abs = np.array(df_new1["phot_g_mean_mag"]) - 5*np.log10(np.array(df_new1["rpgeo"])) + 5
   
   # Color
   bp_rpmag = np.array(df_new1["bp_rp"])  
@@ -2243,12 +2254,11 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
   x, y, z = bp_rp[idx], G_abs[idx], z[idx]
 
   # QSO
-  Gmag_qso_abs = df_qso_dis["phot_g_mean_mag"] - 5*np.log10(np.array(df_qso_dis["rgeo"])) + 5
+  Gmag_qso_abs = df_qso_dis["phot_g_mean_mag"] - 5*np.log10(np.array(df_qso_dis["rpgeo"])) + 5
   bp_rpmag_qso =  df_qso_dis["bp_rp"]
   colors = ["cerulean",]
   colors = sns.xkcd_palette(colors)
 
- 
   pltfile = 'color-mag_abs-gaia-distance.jpg'
   sns.set_style('ticks')
   fig = plt.figure(figsize=(6, 7))
@@ -2269,6 +2279,7 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
 #+END_SRC
 
 #+RESULTS:
+[[file:Final-list]]
 
 #+BEGIN_SRC python :return pltfile :results file :results output
   
@@ -2277,12 +2288,168 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
   # Absolute magnitude
 
   # removing inf or nan values
-  col = ["rgeo", "phot_g_mean_mag", "bp_rp"] 
+  col = ["rpgeo", "phot_g_mean_mag", "phot_bp_mean_mag", "phot_rp_mean_mag", "bp_rp"] 
   df_new = df_dis[col] 
   df_new1 =  df_new.dropna()
 
   # G-mag
-  d = np.array(df_new1["rgeo"])
+  Gmag_abs = np.array(df_new1["phot_g_mean_mag"]) - 5*np.log10(np.array(df_new1["rpgeo"])) + 5
+  
+  # Color
+  bp_rpmag = np.array(df_new1["bp_rp"])  
+
+  # Creating new pandas table
+  data = {'G_abs':Gmag_abs,
+          'bp_rp':bp_rpmag}
+  df_result = pd.DataFrame(data)
+  
+  df_result_new = df_result.dropna()
+  
+  G_abs = np.array(df_result_new["G_abs"])
+  bp_rp = np.array(df_result_new["bp_rp"])
+  # Calculate the point density
+  xy = np.vstack([bp_rp, G_abs])
+  z = gaussian_kde(xy)(xy)
+
+  # Sort the points by density, so that the densest points are plotted last
+  idx = z.argsort()
+  x, y, z = bp_rp[idx], G_abs[idx], z[idx]
+
+  # QSO
+  d_qso = np.array(df_qso_dis["rpgeo"]) / 1000.
+
+  mask1 = d_qso <= 4.0
+  mask2 = d_qso > 4.0
+    
+  # < 4 kpc
+  Gmag_qso_abs1 = df_qso_dis["phot_g_mean_mag"][mask1] - 5*np.log10(np.array(df_qso_dis["rpgeo"][mask1])) + 5
+  bp_rpmag_qso1 =  df_qso_dis["bp_rp"][mask1]
+  colors1 = ["cerulean",]
+  colors1 = sns.xkcd_palette(colors1)
+  
+  # > 4 kpc
+  Gmag_qso_abs2 = df_qso_dis["phot_g_mean_mag"][mask2] - 5*np.log10(np.array(df_qso_dis["rpgeo"][mask2])) + 5
+  bp_rpmag_qso2 =  df_qso_dis["bp_rp"][mask2]
+  colors2 = ["light purple",]
+  colors2 = sns.xkcd_palette(colors2) 
+
+  # CV
+  Gmag_cv_abs = df_cv_dis["phot_g_mean_mag"] - 5*np.log10(np.array(df_cv_dis["rpgeo"])) + 5
+  bp_rpmag_cv =  df_cv_dis["bp_rp"]
+  colors3 = ["pale yellow",]
+  colors3 = sns.xkcd_palette(colors3) 
+    
+  pltfile = 'color-mag_abs-gaia-distance-cut.jpg'
+  sns.set_style('ticks')
+  fig = plt.figure(figsize=(6, 7))
+  ax = fig.add_subplot(111)
+  
+  ax.scatter(x, y, c=z, s=40, edgecolor=['none'])
+  ax.scatter(bp_rpmag_qso1, Gmag_qso_abs1, c = colors1, edgecolor=['black'], alpha = 0.7, s = 50, zorder=3, label = r"QSOs (D $\leq$ 4 kpc)")
+  ax.scatter(bp_rpmag_qso2, Gmag_qso_abs2, c = colors2, edgecolor=['black'], alpha = 0.7, s = 50, label = "QSOs (D > 4 kpc)")
+  ax.scatter(bp_rpmag_cv, Gmag_cv_abs, c = colors3, edgecolor=['black'], alpha = 0.8, s = 50, zorder=4, label = "CV")
+  #ax.scatter(bp_rpmag_cv, Gmag_cv_abs, c = colors1, edgecolor=['black'], alpha = 0.9, s = 50)
+  #plt.scatter(bp_rpmag, Gmag_abs, alpha=0.8)
+  plt.xlabel(r'$G_{BP} - G_{RP}$')
+  plt.ylabel(r'$M_G + A_G$')
+  #ax.set_xlim(-30.0, 390.0)
+  #ax.set_ylim(-90.0, 90.0)
+  ax.legend(prop={'family': 'monospace', 'size': 'x-small'}, **lgd_kws)
+  plt.gca().invert_yaxis()
+  fig.savefig(pltfile)     
+  
+#+END_SRC
+
++ Now make the same plot using all sample with GAIA match.
+
+#+BEGIN_SRC python :return pltfile :results file :results output
+  
+  <<gaia-match-distance>>
+  
+  # Absolute magnitude
+
+  # removing inf or nan values
+  col = ["rpgeo", "phot_g_mean_mag", "phot_bp_mean_mag", "phot_rp_mean_mag", "bp_rp"] 
+  df_new = df_dis[col] 
+  df_new1 =  df_new.dropna()
+
+  # G-mag
+  Gmag_abs = np.array(df_new1["phot_g_mean_mag"]) - 5*np.log10(np.array(df_new1["rpgeo"])) + 5
+  
+  # other mag
+  bp = np.array(df_new1["phot_bp_mean_mag"]) 
+  rp = np.array(df_new1["phot_rp_mean_mag"])
+  
+  # Color
+  #bp_rpmag = np.array(df_new1["bp_rp"])  
+  bp_rpmag = bp - rp
+
+  # distance kpc
+  d = df_new1["rpgeo"] / 1000.
+
+  # Creating new pandas table
+  data = {'G_abs':Gmag_abs,
+          'bp_rp':bp_rpmag,
+           'd':d}
+
+ 
+  df_result = pd.DataFrame(data)
+  
+  df_result_new = df_result.dropna()
+  
+  # mask with distance
+  mask1 = df_result_new["d"] <= 4.0
+  mask2 = df_result_new["d"] > 4.0
+   
+  # d < 4 kpc
+  G_abs1 = np.array(df_result_new["G_abs"][mask1])
+  bp_rp1 = np.array(df_result_new["bp_rp"][mask1])
+  colors1 = ["bright blue",]
+  colors1 = sns.xkcd_palette(colors1)
+  
+  # d > 4 kpc
+  G_abs2 = np.array(df_result_new["G_abs"][mask2])
+  bp_rp2 = np.array(df_result_new["bp_rp"][mask2])
+  colors2 = ["pale green",]
+  colors2 = sns.xkcd_palette(colors2)
+
+  pltfile = 'color-mag_abs-gaia-distance-classify.jpg'
+  sns.set_style('ticks')
+  fig = plt.figure(figsize=(6, 7))
+  ax = fig.add_subplot(111)
+  
+  ax.scatter(bp_rp1, G_abs1, c = colors1, edgecolor=['black'], alpha = 0.7, s = 50, zorder=3, label = r"H$\alpha$ emitters with D $\leq$ 4 kpc")
+  ax.scatter(bp_rp2, G_abs2, c = colors2, edgecolor=['black'], alpha = 0.7, s = 50, label = r"H$\alpha$ emitters  with D > 4 kpc")
+ 
+  #ax.scatter(bp_rpmag_cv, Gmag_cv_abs, c = colors1, edgecolor=['black'], alpha = 0.9, s = 50)
+  #plt.scatter(bp_rpmag, Gmag_abs, alpha=0.8)
+  plt.xlabel(r'$G_{BP} - G_{RP}$')
+  plt.ylabel(r'$M_G + A_G$')
+  #ax.set_xlim(-30.0, 390.0)
+  #ax.set_ylim(-90.0, 90.0)
+  ax.legend(prop={'family': 'monospace', 'size': 'x-small'}, **lgd_kws)
+  plt.gca().invert_yaxis()
+  fig.savefig(pltfile)    
+
+#+END_SRC
+
+#+RESULTS:
+[[file:Final-list]]
+
+
+#+BEGIN_SRC python :return pltfile :results file :results output
+  
+  <<gaia-match-distance>>
+  
+  # Absolute magnitude
+
+  # removing inf or nan values
+  col = ["rpgeo", "phot_g_mean_mag", "bp_rp"] 
+  df_new = df_dis[col] 
+  df_new1 =  df_new.dropna()
+
+  # G-mag
+  d = np.array(df_new1["rpgeo"])
   
   # Color
   bp_rpmag = np.array(df_new1["bp_rp"])  
@@ -2305,7 +2472,7 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
   x, y, z = bp_rp[idx], d_final[idx], z[idx]
 
   # QSO
-  d_qso = np.array(df_qso_dis["rgeo"]) / 1000.
+  d_qso = np.array(df_qso_dis["rpgeo"]) / 1000.
   bp_rpmag_qso =  df_qso_dis["bp_rp"]
   colors = ["cerulean",]
   colors = sns.xkcd_palette(colors)
@@ -2336,17 +2503,17 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
   <<gaia-match-distance>>
   
   # removing inf or nan values
-  col = ["rgeo"] 
+  col = ["rpgeo"] 
   df_new = df_dis[col] 
   df_new1 =  df_new.dropna()
   
-  d = df_new1["rgeo"] / 1000.
+  d = df_new1["rpgeo"] / 1000.
   
   # QSOs from simbad
   df_qso_new = df_qso_dis[col] 
   df_qso_new1 =  df_qso_new.dropna()
   
-  d_qso = df_qso_new1["rgeo"] / 1000.
+  d_qso = df_qso_new1["rpgeo"] / 1000.
   
   pltfile = 'dist-distance-Bailer-gaia.jpg'
   with sns.axes_style("ticks"):
@@ -2357,8 +2524,12 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
     plt.tick_params(axis='x', labelsize=33) 
     plt.tick_params(axis='y', labelsize=33)
     d = [x for x in d]
-    sns.distplot(d,norm_hist=False, kde=False, ax=ax1,
+    sns.distplot(d,norm_hist=True, kde=True, ax=ax1,
 		 bins=30, color='r', label = r"All H_${\alpha}$ emitters")
+
+    d_qso = [x for x in d_qso]
+    sns.distplot(d_qso, norm_hist=True, kde=True, ax=ax1,
+		 bins=30, color='b', label = r"Known QSO in H_${\alpha}$ emitters list")
   
   
     ax1.set(xlim=[-1, 15])
@@ -2393,4 +2564,48 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
 
 #+RESULTS:
 [[file:Final-list]]
+
+- Ploting the sample with negative parallax GAIA:
+
+#+BEGIN_SRC python :return pltfile :results file :results output
+  
+  <<gaia-match>>
+  
+  d_qso = 1 / df_qso["parallax"] 
+  mask = (d_qso > 0.0) & (d_qso <= 4.0)
+  mask1 = d_qso < 0.0
+  
+ 
+  # QSO
+  Gmag_qso = df_qso["phot_g_mean_mag"][mask]
+  bp_rpmag_qso = df_qso["bp_rp"][mask]
+  colors = ["cerulean",]
+  colors = sns.xkcd_palette(colors)
+  
+  # QSO with negative parallax 
+  Gmag_qso1 = df_qso["phot_g_mean_mag"][mask1]
+  bp_rpmag_qso1 = df_qso["bp_rp"][mask1]
+  colors1 = ["pale yellow",]
+  colors1 = sns.xkcd_palette(colors1)
+  
+  
+  #pltfile = 'color-mag-gaia-QSOdist.pdf'
+  pltfile = 'color-mag-gaia-QSOdist.jpg'
+  sns.set_style('ticks')
+  fig = plt.figure(figsize=(6, 7))
+  ax = fig.add_subplot(111)
+  
+  #ax.scatter(x, y, c=z, s=50, edgecolor=['none'])
+  ax.scatter(bp_rpmag_qso, Gmag_qso, c = colors, edgecolor=['black'], alpha = 0.7, s = 50, zorder=3, label="QSO (d < 4 kpc)")
+  ax.scatter(bp_rpmag_qso1, Gmag_qso1, c = colors1, edgecolor=['black'], alpha = 0.9, s = 50, label="QSO with negative parallax")
+  #plt.scatter(bp_rpmag, Gmag, alpha=0.8)
+  plt.xlabel(r'$G_{BP} - G_{RP}$')
+  plt.ylabel(r'$G$')
+  ax.set_xlim(-0.8, 3.4)
+  ax.set_ylim(13, 22.3)
+  ax.legend(prop={'family': 'monospace', 'size': 'x-small'}, **lgd_kws)
+  plt.gca().invert_yaxis()
+  fig.savefig(pltfile)     
+  
+#+END_SRC
 
