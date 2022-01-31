@@ -1809,9 +1809,12 @@ Number total of objects is, 1041
    z = df_galaxies["redshift"] 
    
    m_z = z <= 0.02
+   h_z = z > 0.02
    low_z_g = df_galaxies[m_z]
+   high_z_g = df_galaxies[h_z]
    print("Number of galaxies:", len(df_galaxies))
    print("Number of galaxis z < 0.02:", len(low_z_g))
+   print("Number of galaxis z > 0.02:", len(high_z_g))
 
    pltfile = 'paper/Figs/dist-redshift-galaxies.pdf'
    with sns.axes_style("ticks"):
@@ -1824,17 +1827,17 @@ Number total of objects is, 1041
        z = [x for x in z]
        sns.distplot(z,norm_hist=False, kde=False, ax=ax1,
                  bins=100, color='g', kde_kws={"shade": True})
-       ax1.axvline(x=0.02, c = "k", ls='--') #colors='k')#, linestyles='-', label='g', data=None)
+       ax1.axvline(x=0.02, c = "k", ls='-') #colors='k')#, linestyles='-', label='g', data=None)
         
        bbox_props = dict(boxstyle="round", fc="w", ec="0.9", alpha=0.9, pad=0.5)
        ax1.annotate(r"$z = 0.02$", xy=(0.08, 1.5), alpha=0.9, size=16.0,
                    xytext=(0.1, 200), textcoords='offset points', ha='right', va='bottom', 
                                                       bbox=bbox_props, zorder=100)
-       ax1.axvline(x=0.306, c = "b", ls='--')
+       ax1.axvline(x=0.306, c = "k", ls='--')
        ax1.annotate(r"$z = 0.306$", xy=(0.32, 1.5), alpha=0.9, size=16.0,
                    xytext=(0.1, 200), textcoords='offset points', ha='right', va='bottom', 
                                                       bbox=bbox_props, zorder=100)
-       ax1.axvline(x=0.376, c = "b", ls='--') 
+       ax1.axvline(x=0.376, c = "k", ls=':') 
        ax1.annotate(r"$z = 0.376$", xy=(0.42, 1.5), alpha=0.9, size=16.0,
                    xytext=(0.1, 200), textcoords='offset points', ha='right', va='bottom', 
                                                       bbox=bbox_props, zorder=100)
@@ -1849,26 +1852,6 @@ Number total of objects is, 1041
        plt.savefig(pltfile)
   
 #+END_SRC
-
-#+RESULTS:
-[[file:Index(['Field', 'ID', 'RA', 'DEC', 'FWHM', 'ISOarea', 'KRON_RADIUS', 'MU_MAX',
-       'nDet_PStotal', 'PhotoFlagDet', 'u_PStotal', 'J0378_PStotal',
-       'J0395_PStotal', 'J0410_PStotal', 'J0430_PStotal', 'g_PStotal',
-       'J0515_PStotal', 'r_PStotal', 'J0660_PStotal', 'i_PStotal',
-       'J0861_PStotal', 'z_PStotal', 'e_u_PStotal', 'e_J0378_PStotal',
-       'e_J0395_PStotal', 'e_J0410_PStotal', 'e_J0430_PStotal', 'e_g_PStotal',
-       'e_J0515_PStotal', 'e_r_PStotal', 'e_J0660_PStotal', 'e_i_PStotal',
-       'e_J0861_PStotal', 'e_z_PStotal', 'main_id', 'ra_x', 'dec_x',
-       'coo_err_maj', 'coo_err_min', 'coo_err_angle', 'nbref', 'ra_sexa',
-       'dec_sexa', 'main_type', 'other_types', 'radvel', 'redshift', 'sp_type',
-       'morph_type', 'plx', 'pmra', 'pmdec', 'size_maj', 'size_min',
-       'size_angle', 'B', 'V', 'R_x', 'J', 'H', 'K', 'u', 'g', 'r_xa', 'i',
-       'z', 'angDist'],
-      dtype='object')
-Number of galaxies: 631
-Number of galaxis z < 0.02: 358
-]]
-
 
 
 ** Getting more parameters
@@ -2163,16 +2146,74 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
 
   d_baler_4 = d_qso[mask1]
   d_para_4 = d_qso_para[mask2]
+  df_qso_dis = df_qso_dis[mask1]
    
   print("Number with QSO dist Bailer:", len(d_qso))
   print("Number of QSO dist Bailer < 4:", len(d_baler_4))
+  print("QSO dist para < 4:", df_qso_dis)
   print("Number of QSO dist para < 4:", len(d_para_4))
 #+END_SRC
 
 #+RESULTS:
-: Number with QSO dist Bailer: 195
-: Number of QSO dist Bailer < 4: 51
-: Number of QSO dist para < 4: 52
+#+begin_example
+Number with QSO dist Bailer: 195
+Number of QSO dist Bailer < 4: 51
+QSO dist para < 4:            Field_1                       ID_1  ...  angDist_x  Separation
+2    STRIPE82-0059  iDR3.STRIPE82-0059.038992  ...   0.566643    0.065479
+18   STRIPE82-0026  iDR3.STRIPE82-0026.037373  ...   0.113735    0.001844
+34   STRIPE82-0148  iDR3.STRIPE82-0148.001139  ...   0.232503    0.007212
+42    SPLUS-s24s63   iDR3.SPLUS-s24s63.042079  ...   0.125154    0.002383
+44    SPLUS-s25s10   iDR3.SPLUS-s25s10.029368  ...   0.201177    0.000794
+46    SPLUS-n01s23   iDR3.SPLUS-n01s23.038457  ...   0.233618    0.001082
+47    SPLUS-n02n22   iDR3.SPLUS-n02n22.059209  ...   0.142526    0.008874
+52   STRIPE82-0007  iDR3.STRIPE82-0007.021121  ...   0.181081    0.013351
+57   STRIPE82-0020  iDR3.STRIPE82-0020.053566  ...   0.214332    0.007772
+58   STRIPE82-0025  iDR3.STRIPE82-0025.031694  ...   0.100877    0.002831
+66   STRIPE82-0068  iDR3.STRIPE82-0068.006406  ...   0.060903    0.007206
+67   STRIPE82-0069  iDR3.STRIPE82-0069.058305  ...   0.086811    0.013725
+69   STRIPE82-0088  iDR3.STRIPE82-0088.084531  ...   0.184650    0.152283
+70   STRIPE82-0106  iDR3.STRIPE82-0106.052252  ...   0.170349    0.008704
+74   STRIPE82-0143  iDR3.STRIPE82-0143.016256  ...   0.151043    0.004418
+76   STRIPE82-0152  iDR3.STRIPE82-0152.022237  ...   0.184347    0.009439
+84    SPLUS-s23s47   iDR3.SPLUS-s23s47.008417  ...   0.168306    0.004188
+99   STRIPE82-0018  iDR3.STRIPE82-0018.064634  ...   0.184620    0.008528
+100  STRIPE82-0020  iDR3.STRIPE82-0020.062391  ...   0.510505    0.002964
+104  STRIPE82-0028  iDR3.STRIPE82-0028.012953  ...   0.168322    0.013831
+105  STRIPE82-0029  iDR3.STRIPE82-0029.026431  ...   0.157528    0.000837
+106  STRIPE82-0032  iDR3.STRIPE82-0032.003058  ...   0.426510    0.007891
+110  STRIPE82-0042  iDR3.STRIPE82-0042.016294  ...   0.126869    0.010938
+111  STRIPE82-0044  iDR3.STRIPE82-0044.002332  ...   0.153183    0.007341
+117  STRIPE82-0062  iDR3.STRIPE82-0062.010390  ...   0.191612    0.014489
+122  STRIPE82-0081  iDR3.STRIPE82-0081.034915  ...   0.117840    0.002038
+123  STRIPE82-0081  iDR3.STRIPE82-0081.053377  ...   0.169321    0.008718
+130  STRIPE82-0151  iDR3.STRIPE82-0151.013776  ...   0.189094    0.006743
+140   SPLUS-s23s20   iDR3.SPLUS-s23s20.028661  ...   0.321053    0.027919
+142   SPLUS-s24s10   iDR3.SPLUS-s24s10.009259  ...   0.193704    0.013043
+143   SPLUS-s24s10   iDR3.SPLUS-s24s10.013024  ...   0.205006    0.010667
+147   SPLUS-s24s70   iDR3.SPLUS-s24s70.037609  ...   0.200823    0.012105
+156   SPLUS-n02n27   iDR3.SPLUS-n02n27.026395  ...   0.231241    0.007546
+157   SPLUS-n02s21   iDR3.SPLUS-n02s21.038093  ...   0.293812    0.043273
+158   SPLUS-n03s21   iDR3.SPLUS-n03s21.031094  ...   0.195212    0.008589
+161  STRIPE82-0002  iDR3.STRIPE82-0002.030464  ...   0.139954    0.003905
+164  STRIPE82-0017  iDR3.STRIPE82-0017.024243  ...   0.255920    0.003983
+165  STRIPE82-0026  iDR3.STRIPE82-0026.006093  ...   0.162860    0.004288
+167  STRIPE82-0035  iDR3.STRIPE82-0035.022844  ...   0.144779    0.012272
+171   SPLUS-n03s23   iDR3.SPLUS-n03s23.033092  ...   0.177323    0.041208
+173  STRIPE82-0008  iDR3.STRIPE82-0008.034263  ...   0.150893    0.044824
+176  STRIPE82-0058  iDR3.STRIPE82-0058.035027  ...   0.196080    0.067941
+177  STRIPE82-0142  iDR3.STRIPE82-0142.034401  ...   0.245332    0.026299
+179   SPLUS-s23s20   iDR3.SPLUS-s23s20.009264  ...   0.115496    0.000992
+180   SPLUS-n02n27   iDR3.SPLUS-n02n27.022071  ...   0.073249    0.019058
+181   SPLUS-n02s19   iDR3.SPLUS-n02s19.000577  ...   0.267068    0.025793
+183  STRIPE82-0004  iDR3.STRIPE82-0004.031191  ...   0.238220    0.009249
+184  STRIPE82-0104  iDR3.STRIPE82-0104.027921  ...   0.102429    0.002602
+190   SPLUS-s19s33   iDR3.SPLUS-s19s33.032618  ...   0.236020    0.005759
+191  STRIPE82-0053  iDR3.STRIPE82-0053.044359  ...   0.231527    0.004083
+192   SPLUS-s21s10   iDR3.SPLUS-s21s10.048904  ...   0.179287    0.010906
+
+[51 rows x 172 columns]
+Number of QSO dist para < 4: 52
+#+end_example
 
 #+name: gaia-match-distance
 #+BEGIN_SRC python :results output
@@ -2418,8 +2459,8 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
   fig = plt.figure(figsize=(6, 7))
   ax = fig.add_subplot(111)
   
-  ax.scatter(bp_rp1, G_abs1, c = colors1, edgecolor=['black'], alpha = 0.7, s = 50, zorder=3, label = r"H$\alpha$ emitters with D $\leq$ 4 kpc")
-  ax.scatter(bp_rp2, G_abs2, c = colors2, edgecolor=['black'], alpha = 0.7, s = 50, label = r"H$\alpha$ emitters  with D > 4 kpc")
+  ax.scatter(bp_rp1, G_abs1, c = colors1, edgecolor=['black'], alpha = 0.7, s = 40, zorder=5, label = r"H$\alpha$ emitters with D $\leq$ 4 kpc")
+  ax.scatter(bp_rp2, G_abs2, c = colors2, edgecolor=['black'], alpha = 0.5, s = 30, zorder=4, label = r"H$\alpha$ emitters  with D > 4 kpc")
  
   #ax.scatter(bp_rpmag_cv, Gmag_cv_abs, c = colors1, edgecolor=['black'], alpha = 0.9, s = 50)
   #plt.scatter(bp_rpmag, Gmag_abs, alpha=0.8)
@@ -2609,3 +2650,130 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
   
 #+END_SRC
 
+* Analizing the spectra
+
+** SDSS
+
+#+BEGIN_SRC python :return pltfile :results file :results output
+
+import astropy.coordinates as coord
+import astropy.units as u
+from astropy.io import ascii
+from astropy.table import Table, QTable
+from astropy.coordinates import SkyCoord 
+import numpy as np
+from astropy.io import fits
+import matplotlib.pyplot as plt
+import argparse
+import sys
+import os
+from astropy.visualization import hist
+from astroML.datasets import fetch_imaging_sample, fetch_sdss_S82standards
+from astroML.crossmatch import crossmatch_angular
+from collections import OrderedDict
+import glob
+import json
+import seaborn as sn
+
+pattern = "iDR3_n4/SDSS-spectra-all-again/*.fits"
+file_fits = glob.glob(pattern)
+
+shape = (len(file_fits), 4)
+
+inffits = []
+for name_fit in file_fits:
+    hdulist = fits.open(name_fit)
+    c = SkyCoord(ra=float(hdulist[0].header["PLUG_RA"])*u.degree, dec=float(hdulist[0].header["PLUG_DEC"])*u.degree) 
+    inffits.append('SDSSJ{0}{1}'.format(c.ra.to_string(u.hour, sep='', precision=2, pad=True), c.dec.to_string(sep='', precision=1, alwayssign=True, pad=True)))
+    inffits.append(float(hdulist[0].header["PLUG_RA"]))
+    inffits.append(float(hdulist[0].header["PLUG_DEC"]))
+    inffits.append(float(hdulist[2].data['Z']))
+
+XX_fits = np.array(inffits).reshape(shape)
+print("Data shape:", XX_fits.shape)
+
+# Tables with all information 
+tab = Table(XX_fits, names=('ID', 'RA', 'DEC', 'Redshift'), meta={'name': 'first table'}, dtype=('S', 'S', 'f8', 'f8'))
+
+#How many are the local universe
+liml_z = tab["Redshift"] <= 0.02
+limu_z = tab["Redshift"] > 0.02
+
+print("Number the objects with z < 0.02:", len(tab[liml_z]))
+print("Number the objects with z > 0.02:", len(tab[limu_z]))
+
+tab.write("iDR3_n4/SDSS-spectra-all-again/spectra-information.ecsv", format="ascii.ecsv", overwrite=True)
+tab.write("iDR3_n4/SDSS-spectra-all-again/spectra-information.dat", format="ascii.commented_header", overwrite=True)
+
+#+END_SRC
+
+#+RESULTS:
+[[file:Data shape: (369, 4)
+Number the objects with z < 0.02: 163
+Number the objects with z > 0.02: 206
+]]
+
+With this have that only 163 objects are from the local universe.
+
+** LAMOST
+
+#+BEGIN_SRC python :return pltfile :results file :results output
+
+import astropy.coordinates as coord
+import astropy.units as u
+from astropy.io import ascii
+from astropy.table import Table, QTable
+from astropy.coordinates import SkyCoord 
+import numpy as np
+from astropy.io import fits
+import matplotlib.pyplot as plt
+import argparse
+import sys
+import os
+from astropy.visualization import hist
+from astroML.datasets import fetch_imaging_sample, fetch_sdss_S82standards
+from astroML.crossmatch import crossmatch_angular
+from collections import OrderedDict
+import glob
+import json
+import seaborn as sn
+
+pattern = "iDR3_n4/LAMOST-spectra-all/*.fits"
+file_fits = glob.glob(pattern)
+
+shape = (len(file_fits), 4)
+
+inffits = []
+for name_fit in file_fits:
+    hdulist = fits.open(name_fit)
+    c = SkyCoord(ra=float(hdulist[0].header["RA"])*u.degree, dec=float(hdulist[0].header["DEC"])*u.degree) 
+    inffits.append('LAMOST{0}{1}'.format(c.ra.to_string(u.hour, sep='', precision=2, pad=True), c.dec.to_string(sep='', precision=1, alwayssign=True, pad=True)))
+    inffits.append(float(hdulist[0].header["RA"]))
+    inffits.append(float(hdulist[0].header["DEC"]))
+    inffits.append(float(hdulist[0].header['Z']))
+
+XX_fits = np.array(inffits).reshape(shape)
+print("Data shape:", XX_fits.shape)
+
+# Tables with all information 
+tab = Table(XX_fits, names=('ID', 'RA', 'DEC', 'Redshift'), meta={'name': 'first table'}, dtype=('S', 'S', 'f8', 'f8'))
+
+#How many are the local universe
+liml_z = tab["Redshift"] <= 0.02
+limu_z = tab["Redshift"] > 0.02
+
+print("Number the objects with z < 0.02:", len(tab[liml_z]))
+print("Number the objects with z > 0.02:", len(tab[limu_z]))
+
+tab.write("iDR3_n4/LAMOST-spectra-all/spectra-information-lamost.ecsv", format="ascii.ecsv", overwrite=True)
+tab.write("iDR3_n4/LAMOST-spectra-all/spectra-information-lamost.dat", format="ascii.commented_header", overwrite=True)
+
+#+END_SRC
+
+#+RESULTS:
+[[file:Data shape: (106, 4)
+Number the objects with z < 0.02: 77
+Number the objects with z > 0.02: 29
+]]
+
+Here 77 objets are form the local universe.
