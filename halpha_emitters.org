@@ -796,11 +796,11 @@ Making the distributing of colors =r - J0060=, =r - i= and =r=  for each group.
   rblue = [x for x in table_blue["r_PStotal"]]
   rred = [x for x in table_red["r_PStotal"]]
   sns.distplot(rblue, 
-  norm_hist=True, kde=True, ax=ax3,
+  norm_hist=False, kde=False, ax=ax3,
 	bins=20, hist_kws=dict(color='b'),
 		label = "Blue sources")
-  sns.distplot(rred, 
-	norm_hist=True, kde=True, ax=ax3,
+  sns.distplot(rred,
+	norm_hist=False, kde=False, ax=ax3,
 	bins=20, hist_kws=dict(color='r'),
 		label = "Red sources")
   #ax3.set(xlim=[-0.7, 1.8])
@@ -813,7 +813,7 @@ Making the distributing of colors =r - J0060=, =r - i= and =r=  for each group.
 #+END_SRC  
 
 #+RESULTS:
-[[file:]]
+[[file:paper/Figs/distribution_r-group.pdf]]
 
 For the color =r - i= we got the expected results. I have used normalized hist because
 Before we do, another point to note is that, when the subsets have unequal
