@@ -18,7 +18,7 @@ import colours
 
 
 #Read de files
-pattern = "Figs/Figs-lamost/spec*.pdf"
+pattern = "Figs/Figs-lamost-final/spec*.pdf"
 file_list = glob.glob(pattern)
 
 # Number of objects

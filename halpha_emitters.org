@@ -796,11 +796,11 @@ Making the distributing of colors =r - J0060=, =r - i= and =r=  for each group.
   rblue = [x for x in table_blue["r_PStotal"]]
   rred = [x for x in table_red["r_PStotal"]]
   sns.distplot(rblue, 
-  norm_hist=False, kde=False, ax=ax3,
+  norm_hist=True, kde=True, ax=ax3,
 	bins=20, hist_kws=dict(color='b'),
 		label = "Blue sources")
   sns.distplot(rred,
-	norm_hist=False, kde=False, ax=ax3,
+	norm_hist=True, kde=True, ax=ax3,
 	bins=20, hist_kws=dict(color='r'),
 		label = "Red sources")
   #ax3.set(xlim=[-0.7, 1.8])
@@ -1645,6 +1645,7 @@ Merging the old table and the new one:
   m56 = df['main_type'] == 'Unknown'
   m57 = df['main_type'] == 'Candidate_EB*'
   m58 = df['main_type'] == 'Seyfert'
+  m59 = df['main_type'] == 'PulsV*'
   
   # Making the tables with individual object classes
   df_agn = pd.concat([df[m1], df[m2], df[m58]])
@@ -1686,7 +1687,7 @@ Merging the old table and the new one:
   df_nova = df[m51]
   df_bclg = df[m52]
   df_glcl = df[m53]
-  df_v = df[m54]
+  df_v = pd.concat([df[m54], df[m59]])
   df_tran = df[m55]
   df_unk = df[m56]
   
@@ -1781,7 +1782,10 @@ Merging the old table and the new one:
        'size_angle', 'B', 'V', 'R_x', 'J', 'H', 'K', 'u', 'g', 'r_xa', 'i',
        'z', 'angDist'],
       dtype='object')
-Number total of objects is, 1041
+Number total of objects is, 1042
+]]
+
+
 
 + Getting only simbad sources.
 
@@ -2784,7 +2788,7 @@ Here 77 objets are form the local universe.
 
 ** SIMBAD
 
- I took out the objects in SIMAB table that have SDSS and Lamost spectra. the final file is:
+ I took out the objects in SIMBAD table that have SDSS and Lamost spectra. The final file is:
 
 : spectra-information-lamost-idsplus-non-spectra.csv
 
@@ -2835,3 +2839,13 @@ Number the objects with z > 0.02: 168
 #+end_example
 
 + In total 206+33+168=407 objects have with high redshift (SDSS, LAMOST, SIMBAD). 
+
+** The final tables
+
+I create the final tables with information:
+
+: python ../programs/final-table-allparameter.py 
+
+Gtting the STAR clasification:
+
+: Notebook/Star-galaxy-database 
