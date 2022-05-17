@@ -728,8 +728,8 @@ Making the distributing of colors =r - J0060=, =r - i= and =r=  for each group.
   sns.set_color_codes()
   ROOT_PATH = Path("paper/Figs")
   
-  table_blue = Table.read("iDR3_n4/Blue0-Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-Final.ecsv", format="ascii.ecsv")
-  table_red = Table.read("iDR3_n4/Red1-Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-Final.ecsv", format="ascii.ecsv")
+  table_blue = Table.read("iDR3_n4/Blue0-Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-Final-newColors.ecsv", format="ascii.ecsv")
+  table_red = Table.read("iDR3_n4/Red1-Good-LD-Halpha-DR3_noFlag_merge-takeoutbad-Final-newColors.ecsv", format="ascii.ecsv")
   
   # Bar diagram
   fig1, ax1 = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
@@ -756,7 +756,7 @@ Making the distributing of colors =r - J0060=, =r - i= and =r=  for each group.
   ymax = ax1.get_ybound()[1]
   sns.despine()
   plt.tight_layout()
-  filename1="paper/Figs/distribution-Halpha-group.pdf"
+  filename1="paper/Figs/distribution-Halpha-group-newColor.pdf"
   plt.savefig(filename1)
   ##########################
   # Distribution r - i color
@@ -773,18 +773,18 @@ Making the distributing of colors =r - J0060=, =r - i= and =r=  for each group.
   r_ired_ = [x for x in r_ired]
   sns.distplot(r_iblue_, 
 	norm_hist=True, kde=True, ax=ax2,
-	bins=40, hist_kws=dict(range=[-3.0, 3.0], color='b')
+	bins=50, hist_kws=dict(range=[-3.0, 3.0], color='b')
 		)
   sns.distplot(r_ired_, 
 	norm_hist=True, kde=True, ax=ax2,
-	bins=40, hist_kws=dict(range=[-3.0, 3.0], color='r'),
+	bins=50, hist_kws=dict(range=[-3.0, 3.0], color='r'),
 		label="Red")
-  ax2.set(xlim=[-2.0, 2.5])
+  ax2.set(xlim=[-1.8, 2.3])
   #ax2.legend(loc='upper right')
   ymax = ax2.get_ybound()[1]
   sns.despine()
   plt.tight_layout()
-  filename2= "paper/Figs/distribution-ri-group.pdf"
+  filename2= "paper/Figs/distribution-ri-group-newColor.pdf"
   plt.savefig(filename2)
   #########################
   # Distribution  r-mag
@@ -807,13 +807,13 @@ Making the distributing of colors =r - J0060=, =r - i= and =r=  for each group.
   ax3.legend(loc='upper left', fontsize=22)
   sns.despine()
   plt.tight_layout()
-  filename3="paper/Figs/distribution_r-group.pdf"
+  filename3="paper/Figs/distribution_r-group-newColor.pdf"
   plt.savefig(filename3)
   
 #+END_SRC  
 
 #+RESULTS:
-[[file:paper/Figs/distribution_r-group.pdf]]
+[[file:paper/Figs/distribution_r-group-newColor.pdf]]
 
 For the color =r - i= we got the expected results. I have used normalized hist because
 Before we do, another point to note is that, when the subsets have unequal
@@ -1861,6 +1861,106 @@ Number total of objects is, 1042
   
 #+END_SRC
 
+*** Ploting the (r - z) vs (g - r) diagram 
+
+#+BEGIN_SRC python :results output :results file :noweb yes 
+   <<simbad-data-final>>
+
+   AGN = pd.concat([df[m1], df[m2], df[m15], df[m24], df[m19], df[m47]])
+   gal = pd.concat([df[m14], df[m3], df[m40], df[m38], df[m20]])
+   seyfert = pd.concat([df[m15], df[m24], df[m58]])
+   
+   
+   pltfile = 'paper/Figs/diagram-ri-rj660-simbad.jpg'
+   with sns.axes_style("ticks"):
+       # Bar diagram
+       fig, ax1 = plt.subplots(1, 1, figsize=(7, 6), sharex=True)
+       plt.xlabel(r"$r - i$", fontsize=25)
+       plt.ylabel(r"$r - J0660$", fontsize=25)
+       plt.tick_params(axis='x', labelsize=25) 
+       plt.tick_params(axis='y', labelsize=25)
+      
+       ax1.scatter(df_cv["r_PStotal"] - df_cv["i_PStotal"],  df_cv["r_PStotal"] - df_cv["J0660_PStotal"], c = "red", edgecolor=['black'], s = 40, zorder=5, label="CV")
+       ax1.scatter(AGN["r_PStotal"] - AGN["i_PStotal"], AGN["r_PStotal"] - AGN["J0660_PStotal"],  c = "blue", edgecolor=['black'], alpha = 0.9, s = 40, label = "AGN")
+       ax1.scatter(df_hii["r_PStotal"] - df_hii["i_PStotal"], df_hii["r_PStotal"] - df_hii["J0660_PStotal"],  c = "yellow", edgecolor=['black'], alpha = 0.9, s = 40, zorder= 6, label = "HII regions")
+       ax1.scatter(df_pn["r_PStotal"] - df_pn["i_PStotal"], df_pn["r_PStotal"] - df_pn["J0660_PStotal"],  c = "green", edgecolor=['black'], alpha = 0.9, s = 40, label = "PN")
+       ax1.scatter(df_qso["r_PStotal"] - df_qso["i_PStotal"], df_qso["r_PStotal"] - df_qso["J0660_PStotal"],  c = "pink", edgecolor=['black'], alpha = 0.9, s = 40, label = "QSO")
+       ax1.scatter(gal["r_PStotal"] - gal["i_PStotal"], gal["r_PStotal"] - gal["J0660_PStotal"],  c = "purple", edgecolor=['black'], alpha = 0.9, s = 40, zorder=4, label = "EMG")
+       ax1.scatter(df_sn["r_PStotal"] - df_sn["i_PStotal"], df_sn["r_PStotal"] - df_sn["J0660_PStotal"],  c = "brown", edgecolor=['black'], alpha = 0.9, s = 40, zorder=4, label = "Seyfert")
+       ax1.set(xlim=[-3., 3.5])
+       ax1.set(ylim=[-1.0, 3.0])
+       ax1.legend(loc='upper left')
+       #ymax = ax1.get_ybound()[1]
+       sns.despine()
+       plt.tight_layout()
+       plt.savefig(pltfile)
+
+#+END_SRC
+
+#+RESULTS:
+[[file:Index(['Field', 'ID', 'RA', 'DEC', 'FWHM', 'ISOarea', 'KRON_RADIUS', 'MU_MAX',
+       'nDet_PStotal', 'PhotoFlagDet', 'u_PStotal', 'J0378_PStotal',
+       'J0395_PStotal', 'J0410_PStotal', 'J0430_PStotal', 'g_PStotal',
+       'J0515_PStotal', 'r_PStotal', 'J0660_PStotal', 'i_PStotal',
+       'J0861_PStotal', 'z_PStotal', 'e_u_PStotal', 'e_J0378_PStotal',
+       'e_J0395_PStotal', 'e_J0410_PStotal', 'e_J0430_PStotal', 'e_g_PStotal',
+       'e_J0515_PStotal', 'e_r_PStotal', 'e_J0660_PStotal', 'e_i_PStotal',
+       'e_J0861_PStotal', 'e_z_PStotal', 'main_id', 'ra_x', 'dec_x',
+       'coo_err_maj', 'coo_err_min', 'coo_err_angle', 'nbref', 'ra_sexa',
+       'dec_sexa', 'main_type', 'other_types', 'radvel', 'redshift', 'sp_type',
+       'morph_type', 'plx', 'pmra', 'pmdec', 'size_maj', 'size_min',
+       'size_angle', 'B', 'V', 'R_x', 'J', 'H', 'K', 'u', 'g', 'r_xa', 'i',
+       'z', 'angDist'],
+      dtype='object')
+]]
+[[file:Index(['Field', 'ID', 'RA', 'DEC', 'FWHM', 'ISOarea', 'KRON_RADIUS', 'MU_MAX',
+       'nDet_PStotal', 'PhotoFlagDet', 'u_PStotal', 'J0378_PStotal',
+       'J0395_PStotal', 'J0410_PStotal', 'J0430_PStotal', 'g_PStotal',
+       'J0515_PStotal', 'r_PStotal', 'J0660_PStotal', 'i_PStotal',
+       'J0861_PStotal', 'z_PStotal', 'e_u_PStotal', 'e_J0378_PStotal',
+       'e_J0395_PStotal', 'e_J0410_PStotal', 'e_J0430_PStotal', 'e_g_PStotal',
+       'e_J0515_PStotal', 'e_r_PStotal', 'e_J0660_PStotal', 'e_i_PStotal',
+       'e_J0861_PStotal', 'e_z_PStotal', 'main_id', 'ra_x', 'dec_x',
+       'coo_err_maj', 'coo_err_min', 'coo_err_angle', 'nbref', 'ra_sexa',
+       'dec_sexa', 'main_type', 'other_types', 'radvel', 'redshift', 'sp_type',
+       'morph_type', 'plx', 'pmra', 'pmdec', 'size_maj', 'size_min',
+       'size_angle', 'B', 'V', 'R_x', 'J', 'H', 'K', 'u', 'g', 'r_xa', 'i',
+       'z', 'angDist'],
+      dtype='object')
+]]
+[[file:Index(['Field', 'ID', 'RA', 'DEC', 'FWHM', 'ISOarea', 'KRON_RADIUS', 'MU_MAX',
+       'nDet_PStotal', 'PhotoFlagDet', 'u_PStotal', 'J0378_PStotal',
+       'J0395_PStotal', 'J0410_PStotal', 'J0430_PStotal', 'g_PStotal',
+       'J0515_PStotal', 'r_PStotal', 'J0660_PStotal', 'i_PStotal',
+       'J0861_PStotal', 'z_PStotal', 'e_u_PStotal', 'e_J0378_PStotal',
+       'e_J0395_PStotal', 'e_J0410_PStotal', 'e_J0430_PStotal', 'e_g_PStotal',
+       'e_J0515_PStotal', 'e_r_PStotal', 'e_J0660_PStotal', 'e_i_PStotal',
+       'e_J0861_PStotal', 'e_z_PStotal', 'main_id', 'ra_x', 'dec_x',
+       'coo_err_maj', 'coo_err_min', 'coo_err_angle', 'nbref', 'ra_sexa',
+       'dec_sexa', 'main_type', 'other_types', 'radvel', 'redshift', 'sp_type',
+       'morph_type', 'plx', 'pmra', 'pmdec', 'size_maj', 'size_min',
+       'size_angle', 'B', 'V', 'R_x', 'J', 'H', 'K', 'u', 'g', 'r_xa', 'i',
+       'z', 'angDist'],
+      dtype='object')
+]]
+[[file:Index(['Field', 'ID', 'RA', 'DEC', 'FWHM', 'ISOarea', 'KRON_RADIUS', 'MU_MAX',
+       'nDet_PStotal', 'PhotoFlagDet', 'u_PStotal', 'J0378_PStotal',
+       'J0395_PStotal', 'J0410_PStotal', 'J0430_PStotal', 'g_PStotal',
+       'J0515_PStotal', 'r_PStotal', 'J0660_PStotal', 'i_PStotal',
+       'J0861_PStotal', 'z_PStotal', 'e_u_PStotal', 'e_J0378_PStotal',
+       'e_J0395_PStotal', 'e_J0410_PStotal', 'e_J0430_PStotal', 'e_g_PStotal',
+       'e_J0515_PStotal', 'e_r_PStotal', 'e_J0660_PStotal', 'e_i_PStotal',
+       'e_J0861_PStotal', 'e_z_PStotal', 'main_id', 'ra_x', 'dec_x',
+       'coo_err_maj', 'coo_err_min', 'coo_err_angle', 'nbref', 'ra_sexa',
+       'dec_sexa', 'main_type', 'other_types', 'radvel', 'redshift', 'sp_type',
+       'morph_type', 'plx', 'pmra', 'pmdec', 'size_maj', 'size_min',
+       'size_angle', 'B', 'V', 'R_x', 'J', 'H', 'K', 'u', 'g', 'r_xa', 'i',
+       'z', 'angDist'],
+      dtype='object')
+]]
+
+
+
 
 ** Getting more parameters
 
@@ -2122,7 +2222,7 @@ I made croasstch mached with EDR GAIA. All in  [[file:Final-list]].
 
 *** GAIA distance from Bailer-Jones et al. 2021
     I used  =rgeo= =[pc]=, Median of the geometric distance posterior, in Vizier is =I/352/gedr3dis=.
-    But I discovered that =rpgeo= =[pc]=, median photogeotric  distance is better.
+    But I discovered that =rpgeo= =[pc]=, median photogeotric distance is better.
 
 #+name: read-gaia-distance-table
 #+BEGIN_SRC python
@@ -2849,3 +2949,71 @@ I create the final tables with information:
 Gtting the STAR clasification:
 
 : Notebook/Star-galaxy-database 
+
+** New color-color diagram
+
+: EV = 0.0: x: 0.018073588174977603 y: -1.1509435891718687
+: EV = 0.7: x: 0.8779161171076658 y: -0.41957855918471043
+
+** Abstract IAU conference
+
+In the way to map 9000 deg$^2$ of the Southern hemisphere in twelve photometric bands with an 0.8-m telescope, 
+S-PLUS project will have covered 9300 deg2 of the Southern skies by
+the time it is completed. S-PLUS has a crucial feature: images over the whole area taken in the Halpha narrow-band. The Halpha
+transition provides a superb tool for the study of a number of important astrophysical processes and, in particular, it allows the
+classification of different types of astrophysical sources. Here we explore the S-PLUS data release 3, which covers 2000 deg2,
+including the Stripe-82 area, to highlight the potential of the survey for finding Halpha emitters using the (r - J0660) versus (r-i) 
+color-color diagram and in distinguishing the red from the blue sources based on the (r - z) versus (g - r) diagram. Unsupervised clustering
+machine learning approach reveals two distinct populations: one with an intense blue continuum and another one with a red
+continuum. The hierarchical agglomerative clustering algorithm (HAC) was compared with the hierarchical density-based cluster
+selection (HDBSCAN) in order to reinforce the robustness of the red and blue populations’ classification. By adopting a so-called
+“soft” clustering approach, we assigned the probability of each emitter belonging to a given population, blue or red. We use synthetic 
+and observed spectra to emphasize the potential of color-color diagrams in distinguishing several classes of Halpha emission-line emitters 
+that include blue compact galaxies, star-forming galaxies, planetary nebulae, H II regions, young stellar objects, symbiotic stellar systems, 
+cataclysmic variables, and quasars. In summary, the method described in detail in this paper is shown to be an efficient tool to find new emitters and to
+classify them, using multi-color data.
+
+* STARS
+
+We decided focusing on point sources. It makes more sense to find the stellar locus with 3 arcsec
+aperture. 
+
+I ran the script. The improved one.
+
+: python ../../programs/Selecting_Halpha_objects-v2.py DR3-SPLUS-PStotal-STAR-r16
+
++ I ran a LDA to clean the sample. Maybe would be a better idea to use a RF algorithm.
+
+: lda-outliers.py
+
++ I created a algorithm to make the latex with the images a S-spectra of the objects.
+
+: python ../plots-emitters-latex-v2.py Good-Halpha-DR3-SPLUS-PStotal-STAR-20r21-v2.ecsv
+
++ Crating PDF files with all figures.
+
+: table-plots-18r20.tex
+: plots-information.tex
+
+Then, visually cleaned the sample, both the good and bad classification made by LDA.
+And I merged all the tables with magnitude bin.
+
+I eliminate the duplicate objects using the data base (=splusIDflag = 0=). See the jupyter:
+
+: duplicate-sources.ipynb
+
+Getting all parameters from database:
+: match-splus-database-v2.py
+
+And the repeat ID:
+
+: python eliminate-repeat.py 
+
+Final list after combined the old remaining objects with new one:
+: Halpha-DR3_PStotal-STAR_merge-clean-duplicate-unique-final.ecsv
+
+I wrote a python routine to make a PDF with the images and spectra of the final list.
+
+: plots-emitters-latex-v4.py
+: table-plots-Halpha-emitters-final.tex
+: plot-information-final.tex

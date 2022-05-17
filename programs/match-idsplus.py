@@ -28,11 +28,11 @@ id1 = tab["ID"]
 id2 = tab_id["ID"]
 mask = np.array([source in id2 for source in id1])
 
-# Save the final file
-asciifile = file1.replace(".ecsv", "-Final.ecsv")
+# Save the final file (ASCII)
+asciifile = file1.replace(".ecsv", "-good.ecsv")
 tab[mask].write(asciifile, format="ascii.ecsv", overwrite=True)
 
 # Save dataframe
-asciifile_df = file1.replace(".ecsv", "-Final.csv")
+file_df = file1.replace(".ecsv", "-good.csv")
 df = (tab[mask].to_pandas())
-df.to_csv(asciifile_df, index=False)
+df.to_csv(file_df, index=False)
