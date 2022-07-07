@@ -1,0 +1,681 @@
+#+TITLE: Halpha-emitters-stars
+* Find  SPLUS Halpha Emitters
+:PROPERTIES:
+:ID:       
+:END:
+
+* Emission point sources
+
+#+name: simbad-data-final
+#+BEGIN_SRC python :tangle /programs/simbad-data-final.py
+  
+  import numpy as np
+  from sklearn import metrics
+  import pandas as pd
+  from astropy.table import Table
+  import seaborn as sns
+  import matplotlib.pyplot as plt
+  from matplotlib.font_manager import FontProperties
+  from sklearn.metrics import mean_squared_error
+  from astropy.modeling import models, fitting
+  import argparse
+  import sys
+  import os
+  from pathlib import Path
+  ROOT_PATH = Path("paper/Figs")
+  
+  df = pd.read_csv("iDR3_n4/Star-v3/Halpha-DR3_PStotal-STAR_total-clean-Final-simbad.csv")
+  print(df.columns)
+  
+  # MASKs
+  m1 = df['main_type'] == 'PN'
+  m2 = df['main_type'] == 'Galaxy'
+  m3 = df['main_type'] == 'CataclyV*'
+  m4 = df['main_type'] == 'Seyfert_1'
+  m5 = df['main_type'] == 'Star'
+  m6 = df['main_type'] == 'CV*_Candidate'
+  m7 = df['main_type'] == 'EB*'
+  m8 = df['main_type'] == 'RRLyr'
+  m9 = df['main_type'] == 'AGN'
+  m11 = df['main_type'] == 'QSO'
+  m12 = df['main_type'] == 'Unknown_Candidate'
+  m14 = df['main_type'] == 'AGN_Candidate'
+  m15 = df['main_type'] == 'EB*_Candidate'
+  m16 = df['main_type'] == 'QSO_Candidate'
+  m18 = df['main_type'] == 'X'
+  m19 = df['main_type'] == 'RRLyr_Candidate'
+  m20 = df['main_type'] == 'WD*'
+  m21 = df['main_type'] == 'EmG'
+  m22 = df['main_type'] == 'Blue'
+  m23 = df['main_type'] == 'Transient'
+  m24 = df['main_type'] == 'Radio'
+  m26 = df['main_type'] == 'V*'
+  m27 = df['main_type'] == 'UV'
+  m28 = df['main_type'] == 'WD*_Candidate'
+  m29 = df['main_type'] == 'Radio(cm)'
+  m30 = df['main_type'] == 'low-mass*'
+  m31 = df['main_type'] == 'PM*'
+  m32 = df['main_type'] == 'lensImage_Candidate'
+  m33 = df['main_type'] == 'SN'
+  m34 = df['main_type'] == 'Nova'
+  
+  # Making the tables with individual object classes
+  df_PN = df[m1]
+  df_gal = pd.concat([df[m2], df[m21]])
+  df_cv = pd.concat([df[m3], df[m6]]) 
+  df_Seyfert1 = df[m4] 
+  df_star = df[m5]
+  df_eb = pd.concat([df[m7], df[m15]])
+  df_rrly = pd.concat([df[m8], df[m19]])
+  df_agn = pd.concat([df[m9], df[m14]])
+  df_qso = pd.concat([df[m11], df[m16]])
+  df_unk = df[m12]
+  df_x = df[m18]
+  df_wd = pd.concat([df[m20], df[m28]])
+  df_blue = df[m22]
+  df_trans = df[m23]
+  df_radio = pd.concat([df[m24], df[m29]])
+  df_v = df[m26]
+  df_uv = df[m27]
+  df_low = df[m30]
+  df_PM = df[m31]
+  df_len = df[m32]
+  df_sn = df[m33]
+  df_nova = df[m34]
+  
+#+END_SRC
+
+#+RESULTS: simbad-data-final
+: None
+
+#+BEGIN_SRC python :return filejson_resu :results file :noweb yes :results output
+  import json
+  <<simbad-data-final>>
+  dict_class = {"PN": len(df_PN),
+		"Gal": len(df_gal),
+		"CV": len(df_cv),
+		"Seyfert1": len(df_Seyfert1),
+		"Star": len(df_star),
+		"EB": len(df_eb),
+		"RR Lyr": len(df_rrly),
+		"Agn": len(df_agn),
+		"QSO": len(df_qso),
+		"Unknown": len(df_unk),
+		"X": len(df_x),
+		"WD": len(df_wd),
+		"Blue": len(df_blue),
+		"Transient": len(df_trans),
+		"Radio": len(df_radio),
+		"V*": len(df_v),
+		"UV": len(df_uv),
+		"Low M*": len(df_low),
+		"PM": len(df_PM),
+		"Possible lens Image": len(df_len),
+		"SN": len(df_sn),
+		"Nova": len(df_nova)}
+
+  n_total = []
+  for key, value in dict_class.items():
+      n_total.append(value)
+  print("Number total of objects is,", np.sum(n_total))
+
+  filejson_resu = "iDR3_n4/Star-v3/simbad-final.json"
+  with open(filejson_resu, "w") as f:
+      json.dump(dict_class, f, indent=2)
+  
+#+END_SRC
+
+#+RESULTS:
+[[file:Index(['Field', 'ID', 'RA', 'DEC', 'FWHM', 'ISOarea', 'KRON_RADIUS', 'MU_MAX',
+       'nDet_PStotal', 'PhotoFlagDet', 'CLASS_STAR', 'u_PStotal',
+       'J0378_PStotal', 'J0395_PStotal', 'J0410_PStotal', 'J0430_PStotal',
+       'g_PStotal', 'J0515_PStotal', 'r_PStotal', 'J0660_PStotal', 'i_PStotal',
+       'J0861_PStotal', 'z_PStotal', 'e_u_PStotal', 'e_J0378_PStotal',
+       'e_J0395_PStotal', 'e_J0410_PStotal', 'e_J0430_PStotal', 'e_g_PStotal',
+       'e_J0515_PStotal', 'e_r_PStotal', 'e_J0660_PStotal', 'e_i_PStotal',
+       'e_J0861_PStotal', 'e_z_PStotal', 'r - i', 'r - J0660', 'e(r - i)',
+       'e(r - J0660)', 'P(GoodPho)', 'P(BadPho)', 'main_id', 'ra_x', 'dec_x',
+       'coo_err_maj', 'coo_err_min', 'coo_err_angle', 'nbref', 'ra_sexa',
+       'dec_sexa', 'coo_qual', 'coo_bibcode', 'main_type', 'other_types',
+       'radvel', 'radvel_err', 'redshift', 'redshift_err', 'sp_type',
+       'morph_type', 'plx', 'plx_err', 'pmra', 'pmdec', 'pm_err_maj',
+       'pm_err_min', 'pm_err_pa', 'size_maj', 'size_min', 'size_angle', 'B',
+       'V', 'R_x', 'J', 'H', 'K', 'u', 'g', 'r_xa', 'i', 'z', 'angDist'],
+      dtype='object')
+Number total of objects is, 417
+]]
+
+** Some distributions
+
+#+BEGIN_SRC python :return filename1 :return filename2 :return filename3 :results file
+  import matplotlib.pyplot as plt
+  from matplotlib.colors import PowerNorm
+  from astropy import units as u
+  from astropy.coordinates import SkyCoord
+  from astropy.wcs import WCS
+  import pandas as pd
+  import numpy as np
+  from astropy.table import Table
+  import seaborn as sns
+  import argparse
+  import sys
+  import os
+  import glob
+  import json
+  import matplotlib.patches as mpatches
+  from scipy.stats import gaussian_kde
+  from pathlib import Path
+  from scipy.cluster.hierarchy import dendrogram, linkage
+  import scipy.cluster.hierarchy as shc
+  sns.set_color_codes()
+  ROOT_PATH = Path("paper/Figs")
+  
+  table_blue = Table.read("iDR3_n4/Star-v3/Blue1-Halpha-DR3_PStotal-STAR_total-clean-Final.ecsv", format="ascii.ecsv")
+  table_red = Table.read("iDR3_n4/Star-v3/Red0-Halpha-DR3_PStotal-STAR_total-clean-Final.ecsv", format="ascii.ecsv")
+  
+  # Bar diagram
+  fig1, ax1 = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
+  plt.xlabel(r"$r - J0660$", fontsize=33)
+  plt.ylabel(r"Density", fontsize=33)
+  plt.tick_params(axis='x', labelsize=33) 
+  plt.tick_params(axis='y', labelsize=33)
+  # r_j0660blue = [x for x in table_blue["r - J0660"]]
+  # r_j0660red = [x for x in table_red["r - J0660"]]
+  r_j0660blue = table_blue["r_PStotal"] - table_blue["J0660_PStotal"]
+  r_j0660red =  table_red["r_PStotal"] - table_red["J0660_PStotal"]
+  r_j0660blue_ = [x for x in r_j0660blue]
+  r_j0660red_ = [x for x in r_j0660red]
+  g = sns.distplot(r_j0660blue_, 
+		 norm_hist=True, kde=True, ax=ax1,
+		 bins=40, hist_kws=dict(color='b'),
+		 label = "Blue sources")
+  g = sns.distplot(r_j0660red_, 
+		 norm_hist=True, kde=True, ax=ax1,
+		 bins=40, hist_kws=dict(color='r'),
+		 label = "Red sources")
+  ax1.set(xlim=[-1.0, 4.1])
+  #ax1.legend(loc='upper right', fontsize=18)
+  ymax = ax1.get_ybound()[1]
+  sns.despine()
+  plt.tight_layout()
+  filename1="paper/Figs2/distribution-Halpha-group.pdf"
+  plt.savefig(filename1)
+  ##########################
+  # Distribution r - i color
+  fig2, ax2 = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
+  plt.xlabel(r"$r - i$", fontsize=33)
+  plt.ylabel(r"Density", fontsize=33)
+  plt.tick_params(axis='x', labelsize=33) 
+  plt.tick_params(axis='y', labelsize=33)
+  # r_iblue = [x for x in table_blue["r - i"]]
+  # r_ired = [x for x in table_red["r - i"]]
+  r_iblue = table_blue["r_PStotal"] - table_blue["i_PStotal"]
+  r_ired = table_red["r_PStotal"] - table_red["i_PStotal"]
+  r_iblue_ = [x for x in r_iblue]
+  r_ired_ = [x for x in r_ired]
+  sns.distplot(r_iblue_, 
+	norm_hist=True, kde=True, ax=ax2,
+	bins=50, hist_kws=dict(range=[-3.0, 3.0], color='b')
+		)
+  sns.distplot(r_ired_, 
+	norm_hist=True, kde=True, ax=ax2,
+	bins=50, hist_kws=dict(range=[-3.0, 3.0], color='r'),
+		label="Red")
+  ax2.set(xlim=[-1.8, 2.3])
+  #ax2.legend(loc='upper right')
+  ymax = ax2.get_ybound()[1]
+  sns.despine()
+  plt.tight_layout()
+  filename2= "paper/Figs2/distribution-ri-group.pdf"
+  plt.savefig(filename2)
+  #########################
+  # Distribution  r-mag
+  fig3, ax3 = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
+  plt.xlabel(r"$r$", fontsize=33)
+  plt.ylabel(r"Density", fontsize=33)
+  plt.tick_params(axis='x', labelsize=33) 
+  plt.tick_params(axis='y', labelsize=33)
+  rblue = [x for x in table_blue["r_PStotal"]]
+  rred = [x for x in table_red["r_PStotal"]]
+  sns.distplot(rblue, 
+  norm_hist=True, kde=True, ax=ax3,
+	bins=20, hist_kws=dict(color='b'),
+		label = "Blue sources")
+  sns.distplot(rred,
+	norm_hist=True, kde=True, ax=ax3,
+	bins=20, hist_kws=dict(color='r'),
+		label = "Red sources")
+  ax3.set(xlim=[14, 22.2])
+  ax3.legend(loc='upper left', fontsize=22)
+  sns.despine()
+  plt.tight_layout()
+  filename3="paper/Figs2/distribution_r-group.pdf"
+  plt.savefig(filename3)
+  
+#+END_SRC  
+
+#+RESULTS:
+[[file:paper/Figs2/distribution_r-group.pdf]]
+
+
+*** Sources for paper
+
+Example of emission line object for Figure 3:
+
+
+- STRIPE82-0061 iDR3.STRIPE82-0061.047759 (42.22020967186947 -0.3450287643994487). Redshift (z) = 0.009
+
+Objects for Figure 11:
+
+- SPLUS-s29s46-072842 -> PN.
+- STRIPE82-0070-026450
+- STRIPE82-0102-040352
+- STRIPE82-0103-089600
+- STRIPE82-0056-038512
+- STRIPE82-0131-050516
+
+*** Scripts
+
+     I improving the script that make the s-spectra
+     + When we want the s-spectra the just an object:
+       : python ../../../../../../new-programs/photo-spectra-splusdr3-PStotal-id-DR3.py Halpha-DR3-SPLUS-PStotal-STAR-20r21 --Object iDR3.STRIPE82-0061.047759 --debug
+
+     + All the objects in the table:
+       : python ../../../../../../new-programs/photo-spectra-splusdr3-PStotal-id-DR3.py Halpha-DR3-SPLUS-PStotal-STAR-20r21 --debug
+
+** Redshift distribution for galaxies
+   
++ Making a plot with the red-shift distribution for the galaxies:
+
+#+BEGIN_SRC python :results output :results file :noweb yes 
+   <<simbad-data-final>>  
+   df_galaxies = pd.concat([df[m2], df[m4], df[m9], df[m14], df[m21]]) 
+   
+   z = df_galaxies["redshift"] 
+   
+   m_z = z <= 0.02
+   h_z = z > 0.02
+   low_z_g = df_galaxies[m_z]
+   high_z_g = df_galaxies[h_z]
+   print("Number of galaxies:", len(df_galaxies))
+   print("Number of galaxis z < 0.02:", len(low_z_g))
+   print("Number of galaxis z > 0.02:", len(high_z_g))
+
+   pltfile = 'paper/Figs2/dist-redshift-galaxies.pdf'
+   with sns.axes_style("ticks"):
+       # Bar diagram
+       fig, ax1 = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
+       plt.xlabel(r"Redshift, $z$", fontsize=33)
+       plt.ylabel(r"# of sources", fontsize=33)
+       plt.tick_params(axis='x', labelsize=33) 
+       plt.tick_params(axis='y', labelsize=33)
+       z = [x for x in z]
+       sns.distplot(z,norm_hist=False, kde=False, ax=ax1,
+                 bins=300, color='g', kde_kws={"shade": True})
+       ax1.axvline(x=0.02, c = "k", ls='-') #colors='k')#, linestyles='-', label='g', data=None)
+        
+       bbox_props = dict(boxstyle="round", fc="w", ec="0.9", alpha=0.9, pad=0.5)
+       ax1.annotate(r"$z = 0.02$", xy=(0.08, 1.5), alpha=0.9, size=16.0,
+                   xytext=(0.1, 200), textcoords='offset points', ha='right', va='bottom', 
+                                                      bbox=bbox_props, zorder=100)
+       ax1.axvline(x=0.306, c = "k", ls='--')
+       ax1.annotate(r"$z = 0.306$", xy=(0.32, 1.5), alpha=0.9, size=16.0,
+                   xytext=(0.1, 200), textcoords='offset points', ha='right', va='bottom', 
+                                                      bbox=bbox_props, zorder=100)
+       ax1.axvline(x=0.376, c = "k", ls=':') 
+       ax1.annotate(r"$z = 0.376$", xy=(0.42, 1.5), alpha=0.9, size=16.0,
+                   xytext=(0.1, 200), textcoords='offset points', ha='right', va='bottom', 
+                                                      bbox=bbox_props, zorder=100)
+
+       ax1.fill(0.306, 0.376)
+       ax1.axvspan(0.306, 0.376, alpha=0.06, color='k')
+       ax1.set(xlim=[-0.05, 0.45])
+       #ax.legend(loc='upper left')
+       ymax = ax1.get_ybound()[1]
+       sns.despine()
+       plt.tight_layout()
+       plt.savefig(pltfile)
+  
+#+END_SRC
+
+** Redshift distribution for QSOs
+   
++ Making a plot with the red-shift distribution for the qsos:
+
+#+BEGIN_SRC python :results output :results file :noweb yes 
+   <<simbad-data-final>>  
+   df_qso = pd.concat([df[m11], df[m16]]) 
+   
+   z = df_qso["redshift"] 
+   
+   m_z = z <= 0.02
+   h_z = z > 0.02
+   low_z_g = df_qso[m_z]
+   high_z_g = df_qso[h_z]
+   print("Number of galaxies:", len(df_qso))
+   print("Number of galaxis z < 0.02:", len(low_z_g))
+   print("Number of galaxis z > 0.02:", len(high_z_g))
+
+   pltfile = 'paper/Figs2/dist-redshift-qso.pdf'
+   with sns.axes_style("ticks"):
+       # Bar diagram
+       fig, ax1 = plt.subplots(1, 1, figsize=(10, 6), sharex=True)
+       plt.xlabel(r"Redshift, $z$", fontsize=33)
+       plt.ylabel(r"# of sources", fontsize=33)
+       plt.tick_params(axis='x', labelsize=33) 
+       plt.tick_params(axis='y', labelsize=33)
+       z = [x for x in z]
+       sns.distplot(z,norm_hist=False, kde=False, ax=ax1,
+                 bins=100, color='g', kde_kws={"shade": True})
+       ax1.axvline(x=0.02, c = "k", ls='-') #colors='k')#, linestyles='-', label='g', data=None)
+        
+       bbox_props = dict(boxstyle="round", fc="w", ec="0.9", alpha=0.9, pad=0.5)
+       ax1.annotate(r"$z = 0.02$", xy=(0.08, 1.5), alpha=0.9, size=16.0,
+                   xytext=(0.1, 200), textcoords='offset points', ha='right', va='bottom', 
+                                                      bbox=bbox_props, zorder=100)
+       ax1.axvline(x=0.306, c = "k", ls='--')
+       ax1.annotate(r"$z = 0.306$", xy=(0.32, 1.5), alpha=0.9, size=16.0,
+                   xytext=(0.1, 200), textcoords='offset points', ha='right', va='bottom', 
+                                                      bbox=bbox_props, zorder=100)
+       ax1.axvline(x=0.376, c = "k", ls=':') 
+       ax1.annotate(r"$z = 0.376$", xy=(0.42, 1.5), alpha=0.9, size=16.0,
+                   xytext=(0.1, 200), textcoords='offset points', ha='right', va='bottom', 
+                                                      bbox=bbox_props, zorder=100)
+
+       ax1.fill(0.306, 0.376)
+       ax1.axvspan(0.306, 0.376, alpha=0.06, color='k')
+       #ax1.set(xlim=[-0.05, 0.45])
+       #ax.legend(loc='upper left')
+       ymax = ax1.get_ybound()[1]
+       sns.despine()
+       plt.tight_layout()
+       plt.savefig(pltfile)
+  
+#+END_SRC
+
+
+* [#A] Analizing the spectra
+
+** SDSS
+
+#+BEGIN_SRC python :return pltfile :results file :results output
+
+import astropy.coordinates as coord
+import astropy.units as u
+from astropy.io import ascii
+from astropy.table import Table, QTable
+from astropy.coordinates import SkyCoord 
+import numpy as np
+from astropy.io import fits
+import matplotlib.pyplot as plt
+import argparse
+import sys
+import os
+from astropy.visualization import hist
+from astroML.datasets import fetch_imaging_sample, fetch_sdss_S82standards
+from astroML.crossmatch import crossmatch_angular
+from collections import OrderedDict
+import glob
+import json
+import seaborn as sn
+
+pattern = "iDR3_n4/Star-v3/SDSS-spectra/*.fits"
+file_fits = glob.glob(pattern)
+
+shape = (len(file_fits), 4)
+
+inffits = []
+for name_fit in file_fits:
+    hdulist = fits.open(name_fit)
+    c = SkyCoord(ra=float(hdulist[0].header["PLUG_RA"])*u.degree, dec=float(hdulist[0].header["PLUG_DEC"])*u.degree) 
+    inffits.append('SDSSJ{0}{1}'.format(c.ra.to_string(u.hour, sep='', precision=2, pad=True), c.dec.to_string(sep='', precision=1, alwayssign=True, pad=True)))
+    inffits.append(float(hdulist[0].header["PLUG_RA"]))
+    inffits.append(float(hdulist[0].header["PLUG_DEC"]))
+    inffits.append(float(hdulist[2].data['Z']))
+
+XX_fits = np.array(inffits).reshape(shape)
+print("Data shape:", XX_fits.shape)
+
+# Tables with all information 
+tab = Table(XX_fits, names=('ID', 'RA', 'DEC', 'Redshift'), meta={'name': 'first table'}, dtype=('S', 'S', 'f8', 'f8'))
+
+#How many are the local universe
+liml_z = tab["Redshift"] <= 0.02
+limu_z = tab["Redshift"] > 0.02
+
+print("Number the objects with z < 0.02:", len(tab[liml_z]))
+print("Number the objects with z > 0.02:", len(tab[limu_z]))
+
+tab.write("iDR3_n4/Star-v3/SDSS-spectra/spectra-information.ecsv", format="ascii.ecsv", overwrite=True)
+tab.write("iDR3_n4/Star-v3/SDSS-spectra/spectra-information.dat", format="ascii.commented_header", overwrite=True)
+
+#+END_SRC
+
+#+RESULTS:
+[[file:Data shape: (166, 4)
+Number the objects with z < 0.02: 26
+Number the objects with z > 0.02: 140
+]]
+
+With this have that only 26 objects are from the local universe.
+
+** LAMOST
+
+#+BEGIN_SRC python :return pltfile :results file :results output
+
+import astropy.coordinates as coord
+import astropy.units as u
+from astropy.io import ascii
+from astropy.table import Table, QTable
+from astropy.coordinates import SkyCoord 
+import numpy as np
+from astropy.io import fits
+import matplotlib.pyplot as plt
+import argparse
+import sys
+import os
+from astropy.visualization import hist
+from astroML.datasets import fetch_imaging_sample, fetch_sdss_S82standards
+from astroML.crossmatch import crossmatch_angular
+from collections import OrderedDict
+import glob
+import json
+import seaborn as sn
+
+pattern = "iDR3_n4/Star-v3/Lamots-spectra/*.fits"
+file_fits = glob.glob(pattern)
+
+shape = (len(file_fits), 4)
+
+inffits = []
+for name_fit in file_fits:
+    hdulist = fits.open(name_fit)
+    c = SkyCoord(ra=float(hdulist[0].header["RA"])*u.degree, dec=float(hdulist[0].header["DEC"])*u.degree) 
+    inffits.append('LAMOST{0}{1}'.format(c.ra.to_string(u.hour, sep='', precision=2, pad=True), c.dec.to_string(sep='', precision=1, alwayssign=True, pad=True)))
+    inffits.append(float(hdulist[0].header["RA"]))
+    inffits.append(float(hdulist[0].header["DEC"]))
+    inffits.append(float(hdulist[0].header['Z']))
+
+XX_fits = np.array(inffits).reshape(shape)
+print("Data shape:", XX_fits.shape)
+
+# Tables with all information 
+tab = Table(XX_fits, names=('ID', 'RA', 'DEC', 'Redshift'), meta={'name': 'first table'}, dtype=('S', 'S', 'f8', 'f8'))
+
+#How many are the local universe
+liml_z = tab["Redshift"] <= 0.02
+limu_z = tab["Redshift"] > 0.02
+
+print("Number the objects with z < 0.02:", len(tab[liml_z]))
+print("Number the objects with z > 0.02:", len(tab[limu_z]))
+
+tab.write("iDR3_n4/Star-v3/Lamots-spectra/spectra-information-lamost.ecsv", format="ascii.ecsv", overwrite=True)
+tab.write("iDR3_n4/Star-v3/Lamots-spectra/spectra-information-lamost.dat", format="ascii.commented_header", overwrite=True)
+
+#+END_SRC
+
+#+RESULTS:
+[[file:Data shape: (61, 4)
+Number the objects with z < 0.02: 28
+Number the objects with z > 0.02: 33
+]]
+
+Here 28 objets are from the local universe.
+
+** Match
+
+   We need to include in the table of SDSS and Lamost the ID SPLUs.
+   
+#+name: match-code
+#+BEGIN_SRC python :results output
+  
+  def tables(table1, table2):
+      import numpy as np
+      from astropy.table import Table, vstack, Column, MaskedColumn
+      import astropy.coordinates as coord
+  
+      #Using ll-stars-arcs-simbad-047.ecsv on which was used a searched radi of 0.47 arcsec
+      tab1 = Table.read(table1, format="ascii.ecsv")
+  
+      print("Number of sources:", len(tab1))
+  
+      # Read the table with the arcs
+      tab2 = Table.read(table2, format='ascii.ecsv')
+
+      print("Number of sources with spectra:", len(tab2))
+
+      tab1['coord'] = coord.SkyCoord(ra=tab1['RA'], dec=tab1['DEC'],
+				     unit=('deg', 'deg'))
+  
+      cols = ['ID', 'RA', 'DEC', 'Sep'] 
+  
+      tab2['coord'] = coord.SkyCoord(ra=tab2['RA'], dec=tab2['DEC'],
+					 unit=('deg', 'deg'))
+      seps = []
+      for arcs in tab1:
+          sep = arcs['coord'].separation(tab2['coord']).arcsec
+          sepmin_i = sep.argmin()
+          seps.append(sep[sepmin_i])
+      tab1["Sep"] = seps
+      m = np.array(seps) <= 2.0
+
+      return tab1[m][cols]
+  
+#+END_SRC
+
+#+RESULTS: match-code
+
+#+BEGIN_SRC python :results output :noweb yes 
+	<<match-code>>  
+	tab = tables("iDR3_n4/Star-v3/Halpha-DR3_PStotal-STAR_total-clean-Final.ecsv",
+		     "iDR3_n4/Star-v3/SDSS-spectra/spectra-information.ecsv")
+	print("Number the objects with match:", len(tab))
+	tab.write('iDR3_n4/Star-v3/SDSS-spectra/spectra-information-id.ecsv', format='ascii.ecsv',
+		  overwrite=True)
+#+END_SRC
+
+#+RESULTS:
+: Number of sources: 3187
+: Number of sources with spectra: 166
+: Number the objects with match: 166
+
+#+BEGIN_SRC python :results output :noweb yes 
+    <<match-code>>  
+    tab = tables("iDR3_n4/Star-v3/Halpha-DR3_PStotal-STAR_total-clean-Final.ecsv",
+		 "iDR3_n4/Star-v3/Lamots-spectra/spectra-information-lamost.ecsv")
+    print("Number the objects with match:", len(tab))
+    tab.write('iDR3_n4/Star-v3/Lamots-spectra/spectra-information-lamost-id.ecsv', format='ascii.ecsv',
+	      overwrite=True)
+#+END_SRC
+
+#+RESULTS:
+: Number of sources: 3187
+: Number of sources with spectra: 61
+: Number the objects with match: 48
+
+The real number of spectra is 48.
+
+** SIMBAD
+
+From the SIMBAD table I need take out the SDSS and Lamost list.
+
+#+BEGIN_SRC python :results output
+  import numpy as np
+  import pandas as pd
+  from astropy.table import Table, vstack, Column, MaskedColumn
+  
+  # Table 1
+  df = pd.read_csv("iDR3_n4/Star-v3/Halpha-DR3_PStotal-STAR_total-clean-Final-simbad.csv")
+  # Converting pandas into astropy
+  tab = Table.from_pandas(df)
+  
+  # Tables SDSS and LAMOST
+  tab_sdss = Table.read("iDR3_n4/Star-v3/SDSS-spectra/spectra-information-id.ecsv", format="ascii.ecsv")
+  tab_lamost = Table.read("iDR3_n4/Star-v3/Lamots-spectra/spectra-information-lamost-id.ecsv", format="ascii.ecsv")
+  # Join
+  tab_final = vstack([tab_sdss, tab_lamost])
+  
+  # Making mask and applying
+  idd1 = []
+  for i in tab:
+      if i["ID"].endswith(" '"):
+	id1 = i["ID"].split("b'")[-1].split(" ")[0]
+	idd1.append(id1)
+      else:
+	id1 = i["ID"].split("b'")[-1].split("'")[0]
+	idd1.append(id1)
+  
+  idd2 = []
+  for i in tab_final:
+      if i["ID"].endswith(" '"):
+	id2 = i["ID"].split("b'")[-1].split(" ")[0]
+	idd2.append(id2)
+      else:
+	id2 = i["ID"].split("b'")[-1].split("'")[0]
+	idd2.append(id2)
+  
+  mask = np.array([not source in idd2 for source in idd1])
+  print("Number of simbad objecs:", len(tab))
+  print("Number of spectra objecs:", len(tab_final))
+  print("Number of reamainder objects:", len(tab[mask]))
+  tab[mask].write("iDR3_n4/Star-v3/Halpha-DR3_PStotal-STAR_total-clean-Final-simbad-nonspectra.ecsv", format="ascii.ecsv", overwrite=True)
+  
+  
+#+END_SRC
+
+#+RESULTS:
+: Number of simbad objecs: 417
+: Number of spectra objecs: 214
+: Number of reamainder objects: 257
+   
+ I took out the objects in SIMBAD table that have SDSS and Lamost spectra. The final file is:
+
+: iDR3_n4/Star-v3/Halpha-DR3_PStotal-STAR_total-clean-Final-simbad-nonspectra.ecsv
+
+Now we count the objects by redshift range.
+
+#+BEGIN_SRC python :results output
+  from astropy.table import Table, vstack
+  import pandas as pd
+  from pathlib import Path
+  import numpy as np
+
+
+  ROOT_PATH = Path("paper/Figs")
+  
+  tab = Table.read("iDR3_n4/Star-v3/Halpha-DR3_PStotal-STAR_total-clean-Final-simbad-nonspectra.ecsv", format="ascii.ecsv")
+  print(tab.columns)
+
+  #How many are the local universe
+  liml_z = tab["redshift"] <= 0.02
+  limu_z = tab["redshift"] > 0.02
+
+  print("Number the objects:", len(tab))
+  print("Number the objects with z < 0.02:", len(tab[liml_z]))
+  print("Number the objects with z > 0.02:", len(tab[limu_z]))
+
+#+END_SRC
+
+#+RESULTS:
+
++ In total 206+33+168=407 objects have with high redshift (SDSS, LAMOST, SIMBAD). 
