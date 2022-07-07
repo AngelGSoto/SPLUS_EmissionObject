@@ -683,3 +683,117 @@ Now we count the objects by redshift range.
 : Number the objects with z > 0.02: 127
 
 + In total 206+33+168=407 objects have with high redshift (SDSS, LAMOST, SIMBAD). 
+
+** Comparing HAC and HDBSCAN
+
+#+name: read-tables
+#+BEGIN_SRC python :results output
+  
+  from astropy.table import Table, vstack
+  import pandas as pd
+  from pathlib import Path
+  import numpy as np
+  
+  # HAC
+  tab_hac_blue = Table.read("iDR3_n4/Star-v3/Blue1-Halpha-DR3_PStotal-STAR_total-clean-Final.ecsv", format="ascii.ecsv")
+  tab_hac_red = Table.read("iDR3_n4/Star-v3/Red0-Halpha-DR3_PStotal-STAR_total-clean-Final.ecsv", format="ascii.ecsv")
+  
+  # HDBSCAN
+  tab_hdbscan = Table.read("iDR3_n4/Star-v3/Halpha-DR3_PStotal-STAR_total-clean-Final-hdbscan.ecsv", format="ascii.ecsv")
+  
+  mask0 = tab_hdbscan["Label"] == 0
+  mask1 = tab_hdbscan["Label"] == 1
+  
+  tab_hdbscan_blue = tab_hdbscan[mask1]
+  tab_hdbscan_red = tab_hdbscan[mask0]
+#+END_SRC
+
+#+name: make-porcentages
+#+BEGIN_SRC python :results output
+  
+  def getPercent(first, second, integer = False):
+     percent =  (second * 100) / float(first)
+    
+     if integer:
+	 return int(percent)
+     return percent
+  
+#+END_SRC
+
++ Analyzing for blue sources 
+  
+#+BEGIN_SRC python :results output :noweb yes
+  <<read-tables>>
+  # Making mask and applying
+  idd1 = []
+  for i in tab_hac_blue:
+      if i["ID"].endswith(" '"):
+	id1 = i["ID"].split("b'")[-1].split(" ")[0]
+	idd1.append(id1)
+      else:
+	id1 = i["ID"].split("b'")[-1].split("'")[0]
+	idd1.append(id1)
+  
+  idd2 = []
+  for i in tab_hdbscan_blue:
+      if i["ID"].endswith(" '"):
+	id2 = i["ID"].split("b'")[-1].split(" ")[0]
+	idd2.append(id2)
+      else:
+	id2 = i["ID"].split("b'")[-1].split("'")[0]
+	idd2.append(id2)
+  
+  mask = np.array([source in idd2 for source in idd1])
+  print("Number of HAC blue objecs:", len(tab_hac_blue))
+  print("Number of HDBSCAN blue objecs:", len(tab_hdbscan_blue))
+  print("Number objects in commom:", len(tab_hac_blue[mask]))
+  
+  <<make-porcentages>>
+  print("% ->", getPercent(len(tab_hdbscan_blue), len(tab_hac_blue[mask])))
+  
+#+END_SRC
+
+#+RESULTS:
+: Number of HAC blue objecs: 1951
+: Number of HDBSCAN blue objecs: 1362
+: Number objects in commom: 1191
+: % -> 87.44493392070484
+ 
++ Analyzing for red sources 
+
+#+BEGIN_SRC python :results output :noweb yes
+  <<read-tables>>
+  # Making mask and applying
+  idd1 = []
+  for i in tab_hac_red:
+      if i["ID"].endswith(" '"):
+	id1 = i["ID"].split("b'")[-1].split(" ")[0]
+	idd1.append(id1)
+      else:
+	id1 = i["ID"].split("b'")[-1].split("'")[0]
+	idd1.append(id1)
+  
+  idd2 = []
+  for i in tab_hdbscan_red:
+      if i["ID"].endswith(" '"):
+	id2 = i["ID"].split("b'")[-1].split(" ")[0]
+	idd2.append(id2)
+      else:
+	id2 = i["ID"].split("b'")[-1].split("'")[0]
+	idd2.append(id2)
+  
+  mask = np.array([source in idd2 for source in idd1])
+  print("Number of HAC blue objecs:", len(tab_hac_red))
+  print("Number of HDBSCAN blue objecs:", len(tab_hdbscan_red))
+  print("Number objects in commom:", len(tab_hac_red[mask]))
+  
+  <<make-porcentages>>
+  print("% ->", getPercent(len(tab_hdbscan_red), len(tab_hac_red[mask])))
+  
+#+END_SRC
+
+#+RESULTS:
+: Number of HAC blue objecs: 918
+: Number of HDBSCAN blue objecs: 107
+: Number objects in commom: 107
+: % -> 100.0
