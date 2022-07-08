@@ -113,12 +113,13 @@
 		"Possible lens Image": len(df_len),
 		"SN": len(df_sn),
 		"Nova": len(df_nova)}
-
+  
   n_total = []
   for key, value in dict_class.items():
       n_total.append(value)
   print("Number total of objects is,", np.sum(n_total))
-
+  print("CV and CV candidates: %d" %  len(df[m3]), len(df[m6]))
+  
   filejson_resu = "iDR3_n4/Star-v3/simbad-final.json"
   with open(filejson_resu, "w") as f:
       json.dump(dict_class, f, indent=2)
@@ -143,7 +144,9 @@
        'V', 'R_x', 'J', 'H', 'K', 'u', 'g', 'r_xa', 'i', 'z', 'angDist'],
       dtype='object')
 Number total of objects is, 417
+CV and CV candidates: 22 7
 ]]
+
 
 ** Some distributions
 
@@ -720,7 +723,7 @@ Now we count the objects by redshift range.
   
 #+END_SRC
 
-+ Analyzing for blue sources 
+*** Analyzing for blue sources 
   
 #+BEGIN_SRC python :results output :noweb yes
   <<read-tables>>
@@ -753,42 +756,69 @@ Now we count the objects by redshift range.
   
 #+END_SRC
 
+
+
 #+RESULTS:
 : Number of HAC blue objecs: 1951
 : Number of HDBSCAN blue objecs: 1362
 : Number objects in commom: 1191
 : % -> 87.44493392070484
- 
-+ Analyzing for red sources 
 
+**** QSOs in blue sources
+
+#+BEGIN_SRC python :results output :noweb yes
+  
+  import pandas as pd
+  
+  df = pd.read_csv("iDR3_n4/Star-v3/Blue1-Halpha-DR3_PStotal-STAR_total-clean-Final-simbad.csv")
+  
+  m1 = (df['main_type'] == 'QSO')
+  m2 =  (df['main_type'] == 'QSO_Candidate')
+  df_qso = pd.concat([df[m1], df[m2]])
+  
+  #procentage
+  <<read-tables>>
+  print("Number of HAC blue objecs:", len(tab_hac_blue))
+  print("Number of QSO =>", len(df_qso))
+  <<make-porcentages>>
+  print("% ->", getPercent(len(tab_hac_blue), len(df_qso)))
+  #+END_SRC
+
+#+RESULTS:
+: Number of HAC blue objecs: 1951
+: Number of QSO => 180
+: % -> 9.226037929267042
+  
+*** Analyzing for red sources 
+  
 #+BEGIN_SRC python :results output :noweb yes
   <<read-tables>>
   # Making mask and applying
   idd1 = []
   for i in tab_hac_red:
       if i["ID"].endswith(" '"):
-	id1 = i["ID"].split("b'")[-1].split(" ")[0]
-	idd1.append(id1)
+	  id1 = i["ID"].split("b'")[-1].split(" ")[0]
+	  idd1.append(id1)
       else:
-	id1 = i["ID"].split("b'")[-1].split("'")[0]
-	idd1.append(id1)
+	  id1 = i["ID"].split("b'")[-1].split("'")[0]
+	  idd1.append(id1)
   
-  idd2 = []
-  for i in tab_hdbscan_red:
-      if i["ID"].endswith(" '"):
-	id2 = i["ID"].split("b'")[-1].split(" ")[0]
-	idd2.append(id2)
-      else:
-	id2 = i["ID"].split("b'")[-1].split("'")[0]
-	idd2.append(id2)
+   idd2 = []
+   for i in tab_hdbscan_red:
+       if i["ID"].endswith(" '"):
+	   id2 = i["ID"].split("b'")[-1].split(" ")[0]
+	   idd2.append(id2)
+       else:
+	   id2 = i["ID"].split("b'")[-1].split("'")[0]
+	   idd2.append(id2)
   
-  mask = np.array([source in idd2 for source in idd1])
-  print("Number of HAC blue objecs:", len(tab_hac_red))
-  print("Number of HDBSCAN blue objecs:", len(tab_hdbscan_red))
-  print("Number objects in commom:", len(tab_hac_red[mask]))
+   mask = np.array([source in idd2 for source in idd1])
+   print("Number of HAC blue objecs:", len(tab_hac_red))
+   print("Number of HDBSCAN blue objecs:", len(tab_hdbscan_red))
+   print("Number objects in commom:", len(tab_hac_red[mask]))
   
-  <<make-porcentages>>
-  print("% ->", getPercent(len(tab_hdbscan_red), len(tab_hac_red[mask])))
+   <<make-porcentages>>
+   print("% ->", getPercent(len(tab_hdbscan_red), len(tab_hac_red[mask])))
   
 #+END_SRC
 
